@@ -2,6 +2,7 @@
 <html>
 <head>
 <Title> RCH 3rd Floor </title>
+  <!--<script src="http://code.jquery.com/jquery-2.2.0.js"/>-->
   <script type="text/javascript">
 
 function FindPosition(oElement)
@@ -46,6 +47,14 @@ function GetCoordinates(e)
   document.getElementById("x").innerHTML = PosX;
   document.getElementById("y").innerHTML = PosY;
 
+  var table = document.getElementById("coordinatesTable");
+  var row = table.insertRow(1);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  cell1.innerHTML = PosX;
+  cell2.innerHTML = PosY;
+  cell3.innerHTML = document.getElementById("Room").value;
 }
 
 
@@ -64,9 +73,16 @@ myImg.onmousedown = GetCoordinates;
 
 
 <form action= "" method="post" >
-Room Number: <input type="text" name="RoomNum" value=" "><br>
+Room Number: <input id="Room" type="text" name="RoomNum" value=" "><br>
 <p>X:<span id="x" name="x_cor"></span></p>
 <p>Y:<span id="y" name="y_cor"></span></p>
+<table id="coordinatesTable">
+  <tr>
+    <td>X coordinate</td>
+    <td>Y coordinate</td>
+    <td>Room Number</td>
+  </tr>
+</table>
 <input type="submit" name="submit"value="submit"><br>
 </form>
 

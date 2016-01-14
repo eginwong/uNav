@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<div id="container"></div>
+	<style>
+#container {
+    background: url('http://i65.tinypic.com/9ppchv.png');
+    background-size: 100% 100%;
+}
+
+</style>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+$(document).ready(function() {
+    $("#container").click(function(e) {
+        e.preventDefault();
+        var x = e.pageX - this.offsetLeft;
+        var y = e.pageY - this.offsetTop;
+        var img = $('<img>');
+        img.css('top', y);
+        img.css('left', x);
+        img.attr('src', 'http://i65.tinypic.com/9ppchv.png');
+        img.appendTo('#container');
+    })
+});
+</script>
+</head>
+<body>	
+</body>
+</html>
+
