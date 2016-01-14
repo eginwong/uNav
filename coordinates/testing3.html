@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<Title> RCH 3rd Floor </title>
+  <script type="text/javascript">
+
+function FindPosition(oElement)
+{
+  if(typeof( oElement.offsetParent ) != "undefined")
+  {
+    for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+    {
+      posX += oElement.offsetLeft;
+      posY += oElement.offsetTop;
+    }
+      return [ posX, posY ];
+    }
+    else
+    {
+      return [ oElement.x, oElement.y ];
+    }
+}
+function GetCoordinates(e)
+{
+  var PosX = 0;
+  var PosY = 0;
+  var ImgPos;
+  ImgPos = FindPosition(myImg);
+  if (!e) var e = window.event;
+  if (e.pageX || e.pageY)
+  {
+    PosX = e.pageX;
+    PosY = e.pageY;
+  }
+  else if (e.clientX || e.clientY)
+    {
+      PosX = e.clientX + document.body.scrollLeft
+        + document.documentElement.scrollLeft;
+      PosY = e.clientY + document.body.scrollTop
+        + document.documentElement.scrollTop;
+    }
+  PosX = PosX - ImgPos[0];
+  PosY = PosY - ImgPos[1];
+ 
+
+  document.getElementById("x").innerHTML = PosX;
+  document.getElementById("y").innerHTML = PosY;
+
+}
+
+
+</script>
+</head>
+
+<body>
+<!--<img id="myImgId" alt="" src="http://i65.tinypic.com/9ppchv.png" width="400" height="300" />
+  //-->
+<img src="http://i65.tinypic.com/9ppchv.png" id="myImgId" />
+<script type="text/javascript">
+var myImg = document.getElementById("myImgId");
+myImg.onmousedown = GetCoordinates;
+
+</script>
+
+
+<form action= "" method="post" >
+Room Number: <input type="text" name="RoomNum" value=" "><br>
+<p>X:<span id="x" name="x_cor"></span></p>
+<p>Y:<span id="y" name="y_cor"></span></p>
+<input type="submit" name="submit"value="submit"><br>
+</form>
+
+<?php
+if{
+  isset($_POST["submit"])
+$txt = $_POST["RoomNum"].' - '.$_POST["x_cor"].' - '.$_POST["y_cor"];
+$file = fopen("file:///Users/astorwong/Desktop/test.txt","a+");
+fwrite($file,$txt);
+print_r(error_get_last());
+}
+?>
+</body>
+</html>
+
+
+
+
+
+
+
