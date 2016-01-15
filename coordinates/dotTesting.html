@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<div id="container"></div>
-	<style>
+	<!--<<div id="container"></div>
+	style>
 #container {
-    background: url('http://i65.tinypic.com/9ppchv.png');
+    background-image: url('http://i65.tinypic.com/9ppchv.png');
     background-size: 100% 100%;
 }
-
-</style>
-<head>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script>
-$(document).ready(function() {
-    $("#container").click(function(e) {
-        e.preventDefault();
-        var x = e.pageX - this.offsetLeft;
-        var y = e.pageY - this.offsetTop;
-        var img = $('<img>');
-        img.css('top', y);
-        img.css('left', x);
-        img.attr('src', 'http://i65.tinypic.com/9ppchv.png');
-        img.appendTo('#container');
+</style>//-->
+ //<img src="http://i65.tinypic.com/9ppchv.png" id="testimg" />
+ <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+        $("imImgId").click(function (ev) {
+        mouseX = ev.pageX;
+        mouseY = ev.pageY
+        //alert(mouseX + ' ' + mouseY);
+        var color = '#FF0000';
+        var size = '10px';
+        $("body").append(
+            $('<div></div>')
+                .css('position', 'absolute')
+                .css('top', mouseY + 'px')
+                .css('left', mouseX + 'px')
+                .css('width', size)
+                .css('height', size)
+                .css('background-color', color)
+        );
     })
-});
 </script>
 </head>
 <body>	

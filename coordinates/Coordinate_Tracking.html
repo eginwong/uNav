@@ -2,7 +2,7 @@
 <html>
 <head>
 <Title> RCH 3rd Floor </title>
-  <!--<script src="http://code.jquery.com/jquery-2.2.0.js"/>-->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
   <script type="text/javascript">
 
 function FindPosition(oElement)
@@ -55,22 +55,28 @@ function GetCoordinates(e)
   cell1.innerHTML = PosX;
   cell2.innerHTML = PosY;
   cell3.innerHTML = document.getElementById("Room").value;
-}
+  var color = '#FF0000';
+  var size = '10px';
 
-
+  $("body").append(
+      $('<div></div>')
+          .css('position', 'absolute')
+          .css('top', PosY + 'px')
+          .css('left', PosX + 'px')
+          .css('width', size)
+          .css('height', size)
+          .css('background-color', color)
+        );
+    }
 </script>
 </head>
 
 <body>
-<!--<img id="myImgId" alt="" src="http://i65.tinypic.com/9ppchv.png" width="400" height="300" />
-  //-->
 <img src="http://i65.tinypic.com/9ppchv.png" id="myImgId" />
 <script type="text/javascript">
 var myImg = document.getElementById("myImgId");
 myImg.onmousedown = GetCoordinates;
-
 </script>
-
 
 <form action= "" method="post" >
 Room Number: <input id="Room" type="text" name="RoomNum" value=" "><br>
@@ -86,15 +92,6 @@ Room Number: <input id="Room" type="text" name="RoomNum" value=" "><br>
 <input type="submit" name="submit"value="submit"><br>
 </form>
 
-<?php
-if{
-  isset($_POST["submit"])
-$txt = $_POST["RoomNum"].' - '.$_POST["x_cor"].' - '.$_POST["y_cor"];
-$file = fopen("file:///Users/astorwong/Desktop/test.txt","a+");
-fwrite($file,$txt);
-print_r(error_get_last());
-}
-?>
 </body>
 </html>
 
