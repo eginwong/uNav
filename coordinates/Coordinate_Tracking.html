@@ -1,103 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-<Title> RCH 3rd Floor </title>
-  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript">
+  <Title> RCH 3rd Floor </title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
 
-function FindPosition(oElement)
-{
-  if(typeof( oElement.offsetParent ) != "undefined")
-  {
-    for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+    function FindPosition(oElement)
     {
-      posX += oElement.offsetLeft;
-      posY += oElement.offsetTop;
+      if(typeof( oElement.offsetParent ) != "undefined")
+      {
+        for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+        {
+          posX += oElement.offsetLeft;
+          posY += oElement.offsetTop;
+        }
+        return [ posX, posY ];
+      }
+      else
+      {
+        return [ oElement.x, oElement.y ];
+      }
     }
-      return [ posX, posY ];
-    }
-    else
+
+    function GetCoordinates(e)
     {
-      return [ oElement.x, oElement.y ];
-    }
-}
-function GetCoordinates(e)
-{
-  var PosX = 0;
-  var PosY = 0;
-  var ImgPos;
-  ImgPos = FindPosition(myImg);
-  if (!e) var e = window.event;
-  if (e.pageX || e.pageY)
-  {
-    PosX = e.pageX;
-    PosY = e.pageY;
-  }
-  else if (e.clientX || e.clientY)
-    {
-      PosX = e.clientX + document.body.scrollLeft
+      var PosX = 0;
+      var PosY = 0;
+      var ImgPos;
+      ImgPos = FindPosition(myImg);
+      if (!e) var e = window.event;
+      if (e.pageX || e.pageY)
+      {
+        PosX = e.pageX;
+        PosY = e.pageY;
+      }
+      else if (e.clientX || e.clientY)
+      {
+        PosX = e.clientX + document.body.scrollLeft
         + document.documentElement.scrollLeft;
-      PosY = e.clientY + document.body.scrollTop
+        PosY = e.clientY + document.body.scrollTop
         + document.documentElement.scrollTop;
+      }
+      PosX = PosX - ImgPos[0];
+      PosY = PosY - ImgPos[1];
+
+      document.getElementById("x").innerHTML = PosX;
+      document.getElementById("y").innerHTML = PosY;
+
+      var table = document.getElementById("coordinatesTable");
+      var row = table.insertRow(1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      cell1.innerHTML = PosX;
+      cell2.innerHTML = PosY;
+      var roomNum = prompt("What's the room number?")
+      if (roomNum != null) {
+        cell3.innerHTML = roomNum;
+      }
+      var color = '#FF0000';
+      var size = '10px';
+
+      $("body").append(
+        $('<div></div>')
+        .css('position', 'absolute')
+        .css('top', PosY + 'px')
+        .css('left', PosX + 'px')
+        .css('width', size)
+        .css('height', size)
+        .css('background-color', color)
+      );
     }
-  PosX = PosX - ImgPos[0];
-  PosY = PosY - ImgPos[1];
- 
+    </script>
+  </head>
 
-  document.getElementById("x").innerHTML = PosX;
-  document.getElementById("y").innerHTML = PosY;
+  <body>
+    <img src="http://i65.tinypic.com/9ppchv.png" id="myImgId" />
+    <script type="text/javascript">
+    var myImg = document.getElementById("myImgId");
+    myImg.onmousedown = GetCoordinates;
+    </script>
 
-  var table = document.getElementById("coordinatesTable");
-  var row = table.insertRow(1);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  cell1.innerHTML = PosX;
-  cell2.innerHTML = PosY;
-  cell3.innerHTML = document.getElementById("Room").value;
-  var color = '#FF0000';
-  var size = '10px';
+    <br>
+    <p>X:<span id="x" name="x_cor"></span></p>
+    <p>Y:<span id="y" name="y_cor"></span></p>
+    <table id="coordinatesTable">
+      <tr>
+        <td>X coordinate</td>
+        <td>Y coordinate</td>
+        <td>Room Number</td>
+      </tr>
+    </table>
 
-  $("body").append(
-      $('<div></div>')
-          .css('position', 'absolute')
-          .css('top', PosY + 'px')
-          .css('left', PosX + 'px')
-          .css('width', size)
-          .css('height', size)
-          .css('background-color', color)
-        );
-    }
-</script>
-</head>
-
-<body>
-<img src="http://i65.tinypic.com/9ppchv.png" id="myImgId" />
-<script type="text/javascript">
-var myImg = document.getElementById("myImgId");
-myImg.onmousedown = GetCoordinates;
-</script>
-
-<form action= "" method="post" >
-Room Number: <input id="Room" type="text" name="RoomNum" value=" "><br>
-<p>X:<span id="x" name="x_cor"></span></p>
-<p>Y:<span id="y" name="y_cor"></span></p>
-<table id="coordinatesTable">
-  <tr>
-    <td>X coordinate</td>
-    <td>Y coordinate</td>
-    <td>Room Number</td>
-  </tr>
-</table>
-<input type="submit" name="submit"value="submit"><br>
-</form>
-
-</body>
-</html>
-
-
-
-
-
-
-
+  </body>
+  </html>
