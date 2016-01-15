@@ -77,27 +77,27 @@ if __name__ == "__main__":
     print("Vertices of graph:")
     print(graph.vertices())
 
-    print("Edges of graph:")
-    print(graph.edges())
-
-    print("Add vertex:")
-    graph.add_vertex("z")
-
-    print("Vertices of graph:")
-    print(graph.vertices())
-
-    print("Add an edge:")
-    graph.add_edge({"a","z"})
-
-    print("Vertices of graph:")
-    print(graph.vertices())
-
-    print("Edges of graph:")
-    print(graph.edges())
-
-    print('Adding an edge {"y","x"} with new vertices:')
-    graph.add_edge({"y","x"})
-    print("Vertices of graph:")
-    print(graph.vertices())
-    print("Edges of graph:")
-    print(graph.edges())
+    # print("Edges of graph:")
+    # print(graph.edges())
+    # #
+    # # print("Add vertex:")
+    # # graph.add_vertex("z")
+    #
+    # print("Vertices of graph:")
+    # print(graph.vertices())
+    #
+    # print("Add an edge:")
+    # graph.add_edge({"a","z"})
+    #
+    # print("Vertices of graph:")
+    # print(graph.vertices())
+    #
+    # print("Edges of graph:")
+    # print(graph.edges())
+    #
+    # print('Adding an edge {"y","x"} with new vertices:')
+    # graph.add_edge({"y","x"})
+    # print("Vertices of graph:")
+    # print(graph.vertices())
+    # print("Edges of graph:")
+    # print(graph.edges())
