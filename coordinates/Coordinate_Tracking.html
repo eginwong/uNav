@@ -86,24 +86,25 @@
   </head>
 
   <body>
-    <img src="https://raw.githubusercontent.com/eginwong/uNav/master/coordinates/RCH_1stFloor.png?token=AL68V4BnmSOS3RRCqHMcZTmgdH3NyewHks5WomtVwA%3D%3D" id="myImgId" />
-    <button id="export" data-export="export">Export</button>
+    <img src="https://github.com/eginwong/uNav/blob/master/Waterloo%20Floor%20Plans/RCH_1stFloor.png?raw=true" id="myImgId" />
+    <div style="background-color:#E8E8E8">
+      <br><button id="export" data-export="export">Export</button><br>
 
-    <script type="text/javascript">
-    var myImg = document.getElementById("myImgId");
-    myImg.onmousedown = GetCoordinates;
-    </script>
+      <script type="text/javascript">
+        var myImg = document.getElementById("myImgId");
+        myImg.onmousedown = GetCoordinates;
+      </script>
 
-    <br>
-    <p hidden="">X:<span id="x" name="x_cor"></span></p>
-    <p hidden="">Y:<span id="y" name="y_cor"></span></p>
-    <table id="coordinatesTable">
-      <tr>
-        <th>X coordinate</th>
-        <th>Y coordinate</th>
-        <th>Room Number</th>
-      </tr>
-    </table>
-
+      <br>
+      <p hidden="">X:<span id="x" name="x_cor"></span></p>
+      <p hidden="">Y:<span id="y" name="y_cor"></span></p>
+      <table border=1 id="coordinatesTable">
+        <tr>
+          <th>X coordinate</th>
+          <th>Y coordinate</th>
+          <th>Room Number</th>
+        </tr>
+      </table>
+  </div>
   </body>
   </html>
