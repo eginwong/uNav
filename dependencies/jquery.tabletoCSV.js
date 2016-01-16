@@ -1,10 +1,10 @@
 jQuery.fn.tableToCSV = function() {
-    
+
     var clean_text = function(text){
         text = text.replace(/"/g, '""');
         return '"'+text+'"';
     };
-    
+
 	$(this).each(function(){
 			var table = $(this);
 			var caption = $(this).find('caption').text();
@@ -33,7 +33,7 @@ jQuery.fn.tableToCSV = function() {
 			download_link.href = uri;
 			var ts = new Date().getTime();
 			if(caption==""){
-				download_link.download = ts+".csv";
+				download_link.download = "export"+ts+".csv";
 			} else {
 				download_link.download = caption+"-"+ts+".csv";
 			}
@@ -41,5 +41,5 @@ jQuery.fn.tableToCSV = function() {
 			download_link.click();
 			document.body.removeChild(download_link);
 	});
-    
+
 };

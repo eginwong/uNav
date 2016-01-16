@@ -5,82 +5,27 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
     <script src="../dependencies/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
 
-    <script type="text/javascript">
-
-    function FindPosition(oElement)
-    {
-      if(typeof( oElement.offsetParent ) != "undefined")
-      {
-        for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
-        {
-          posX += oElement.offsetLeft;
-          posY += oElement.offsetTop;
-        }
-        return [ posX, posY ];
-      }
-      else
-      {
-        return [ oElement.x, oElement.y ];
-      }
-    }
-
-    function GetCoordinates(e)
-    {
-      var PosX = 0;
-      var PosY = 0;
-      var ImgPos;
-      ImgPos = FindPosition(myImg);
-      if (!e) var e = window.event;
-      if (e.pageX || e.pageY)
-      {
-        PosX = e.pageX;
-        PosY = e.pageY;
-      }
-      else if (e.clientX || e.clientY)
-      {
-        PosX = e.clientX + document.body.scrollLeft
-        + document.documentElement.scrollLeft;
-        PosY = e.clientY + document.body.scrollTop
-        + document.documentElement.scrollTop;
-      }
-      PosX = PosX - ImgPos[0];
-      PosY = PosY - ImgPos[1];
-
-      document.getElementById("x").innerHTML = PosX;
-      document.getElementById("y").innerHTML = PosY;
-
-      var table = document.getElementById("coordinatesTable");
-      var row = table.insertRow(1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      cell1.innerHTML = PosX;
-      cell2.innerHTML = PosY;
-      var roomNum = prompt("What's the room number?")
-      if (roomNum != null) {
-        cell3.innerHTML = roomNum;
-      }
-      var color = '#FF0000';
-      var size = '5px';
-
-      $("body").append(
-        $('<div></div>')
-        .css('position', 'absolute')
-        .css('top', PosY + 'px')
-        .css('left', PosX + 'px')
-        .css('width', size)
-        .css('height', size)
-        .css('background-color', color)
-      );
-    }
-    </script>
+    <script src="../dependencies/pos.js" type="text/javascript"></script>
+    <script src="../dependencies/import.js" type="text/javascript"></script>
+    <script src="../dependencies/jquery.csvToTable.js" type="text/javascript"></script>
 
     <script>
         $(function(){
             $("#export").click(function(){
                 $("#coordinatesTable").tableToCSV();
             });
-        });
+
+            $("#import").click(function(){
+                makeTable("export.csv");
+            });
+
+          });
+    </script>
+
+    <script>
+      $(function() {
+        $('#CSVTable').CSVToTable('export.csv');
+      });
     </script>
 
   </head>
@@ -88,7 +33,9 @@
   <body>
     <img src="https://github.com/eginwong/uNav/blob/master/Waterloo%20Floor%20Plans/RCH_1stFloor.png?raw=true" id="myImgId" />
     <div style="background-color:#E8E8E8">
-      <br><button id="export" data-export="export">Export</button><br>
+      <!--Hit this button to export current coordinates to CSV.-->
+      <br><button id="export" data-export="export">Export</button>
+      <button id="import">Import</button><br>
 
       <script type="text/javascript">
         var myImg = document.getElementById("myImgId");
@@ -105,6 +52,7 @@
           <th>Room Number</th>
         </tr>
       </table>
+      <table id="CSVTable"></table>
   </div>
   </body>
   </html>
