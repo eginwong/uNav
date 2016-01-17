@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+
+function lineDistance( point1, point2 )
+{
+  var xs = 0;
+  var ys = 0;
+ 
+  xs = point2.x - point1.x;
+  xs = xs * xs;
+ 
+  ys = point2.y - point1.y;
+  ys = ys * ys;
+ 
+  return Math.sqrt( xs + ys );
+}
+</script>
+</head>
+<body>
+
+
+<svg>
+  <path d="M446 639
+   L406 639
+   L204 639
+   L203 578
+   L116 578"
+    stroke="red" stroke-width="2" fill="none" />
+</svg> 
+
+ 
+</body>
+</html>
