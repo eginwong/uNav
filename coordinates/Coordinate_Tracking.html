@@ -42,18 +42,15 @@ body{text-align: center;background: #f2f6f8;}
 
   <body>
     <div id="container">
-      <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId" class ="backImg" 
+      <img src="../Waterloo Floor Plans/RCH_01FLR.png" 
+      id="myImgId" 
       style="position: absolute; left: 0px; top:0px; z-index: 2;">
+      <script type="text/javascript">
+      var myImg = document.getElementById("myImgId");
+      myImg.onmousedown = GetCoordinates;
+      </script>
 
-    <!-- <path d="M446, 10000
-    L406 639
-    L204 649
-    L203 578
-    L116 578"
-     stroke="red" stroke-width="2" fill="none" style="position: absolute; left: 0px; top:0px; z-index: 1;"/>
- -->
-
-  <canvas id="myCanvas" width="1174" height="840"></canvas>
+<canvas id="myCanvas" width="1174" height="840"></canvas>
     <script>
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
@@ -67,14 +64,12 @@ body{text-align: center;background: #f2f6f8;}
 
     </script>
   </div>
+
     <div style="background-color:#E8E8E8">
       <!--Hit this button to export current coordinates to CSV.-->
       <br><button id="export" data-export="export">Export</button>
 
-      <script type="text/javascript">
-      var myImg = document.getElementById("myImgId");
-      myImg.onmousedown = GetCoordinates;
-      </script>
+      
 
       <br>
       <p hidden="">X:<span id="x" name="x_cor"></span></p>
