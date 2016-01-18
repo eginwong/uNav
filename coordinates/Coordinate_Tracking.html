@@ -13,7 +13,9 @@
       });
 
       $("#import").click(function(){
-        makeTable("export.csv");
+        document.getElementById("import").style.display = 'block';
+        this.style.display = 'none';
+        ImportCoordinates();
       });
 
     });
@@ -41,10 +43,19 @@ body{text-align: center;background: #f2f6f8;}
   </head>
 
   <body>
+<<<<<<< HEAD
     <div id="container">
       <img src="../Waterloo Floor Plans/RCH_01FLR.png" 
       id="myImgId" 
       style="position: absolute; left: 0px; top:0px; z-index: 2;">
+=======
+    <img src="https://github.com/eginwong/uNav/blob/master/Waterloo%20Floor%20Plans/RCH_01FLR.png?raw=true" id="myImgId"/>
+    <div style="background-color:#E8E8E8">
+      <!--Hit this button to export current coordinates to CSV.-->
+      <br><button id="export" data-export="export">Export</button>
+      <button id="import">Import</button>
+
+>>>>>>> 50db087d792a132067e1fdf1c4e6074f54bf4f5d
       <script type="text/javascript">
       var myImg = document.getElementById("myImgId");
       myImg.onmousedown = GetCoordinates;
@@ -80,9 +91,37 @@ body{text-align: center;background: #f2f6f8;}
           <th>Y coordinate</th>
           <th>Room Number</th>
         </tr>
+        <tr>
+          <td>207</td>
+          <td>510</td>
+          <td>107</td>
+        </tr>
+        <tr>
+          <td>104</td>
+          <td>506</td>
+          <td>106</td>
+        </tr>
+        <tr>
+          <td>106</td>
+          <td>390</td>
+          <td>109</td>
+        </tr>
+        <tr>
+          <td>304</td>
+          <td>192</td>
+          <td>110</td>
+        </tr>
+        <tr>
+          <td>337</td>
+          <td>446</td>
+          <td>108</td>
+        </tr>
       </table>
       <table id="CSVTable"></table>
     </div>
+<<<<<<< HEAD
 </svg>
+=======
+>>>>>>> 50db087d792a132067e1fdf1c4e6074f54bf4f5d
   </body>
   </html>

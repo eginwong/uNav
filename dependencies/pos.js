@@ -64,3 +64,24 @@ function GetCoordinates(e)
     .css('background-color', color)
   );
 }
+
+function ImportCoordinates()
+{
+  var color = '#FF0000';
+  var size = '5px';
+
+  var table = document.getElementById("coordinatesTable");
+  for (var i = 1, row; row = table.rows[i]; i++) {
+     PosX = row.cells[0].innerHTML;
+     PosY = row.cells[1].innerHTML;
+     $("body").append(
+       $('<div></div>')
+       .css('position', 'absolute')
+       .css('top', PosY + 'px')
+       .css('left', PosX + 'px')
+       .css('width', size)
+       .css('height', size)
+       .css('background-color', color)
+     );
+   }
+}
