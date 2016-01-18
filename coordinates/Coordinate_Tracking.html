@@ -18,11 +18,55 @@
 
     });
     </script>
+<style>
+body{text-align: center;background: #f2f6f8;}
+.backImg{position:absolute;z-index:1;}
 
+#container{
+    display:inline-block;
+    width:1174px; 
+    height:840px;
+    margin: 0 auto; 
+    background: black; 
+    position:relative; 
+    border:5px solid black; 
+    border-radius: 10px; 
+    box-shadow: 0 5px 50px #333}
+
+#myCanvas{
+    position:relative;
+    z-index:20;
+}
+</style>
   </head>
 
   <body>
-    <img src="https://github.com/eginwong/uNav/blob/master/Waterloo%20Floor%20Plans/RCH_01FLR.png?raw=true" id="myImgId" />
+    <div id="container">
+      <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId" class ="backImg" 
+      style="position: absolute; left: 0px; top:0px; z-index: 2;">
+
+    <!-- <path d="M446, 10000
+    L406 639
+    L204 649
+    L203 578
+    L116 578"
+     stroke="red" stroke-width="2" fill="none" style="position: absolute; left: 0px; top:0px; z-index: 1;"/>
+ -->
+
+  <canvas id="myCanvas" width="1174" height="840"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      context.beginPath(446, 639);
+      context.lineWidth ="5";
+      context.strokeStyle="red";
+      context.moveTo(204, 649);
+      context.lineTo(203, 578);
+      context.stroke();
+
+    </script>
+  </div>
     <div style="background-color:#E8E8E8">
       <!--Hit this button to export current coordinates to CSV.-->
       <br><button id="export" data-export="export">Export</button>
@@ -44,7 +88,6 @@
       </table>
       <table id="CSVTable"></table>
     </div>
-
-
+</svg>
   </body>
   </html>
