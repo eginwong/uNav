@@ -20,7 +20,7 @@ function GetCoordinates(e)
   var PosX = 0;
   var PosY = 0;
   var ImgPos;
-  ImgPos = FindPosition(myImg);
+  ImgPos = FindPosition(container);
   if (!e) var e = window.event;
   if (e.pageX || e.pageY)
   {
@@ -54,15 +54,11 @@ function GetCoordinates(e)
   var color = '#FF0000';
   var size = '5px';
 
-  $("body").append(
-    $('<div></div>')
-    .css('position', 'absolute')
-    .css('top', PosY + 'px')
-    .css('left', PosX + 'px')
-    .css('width', size)
-    .css('height', size)
-    .css('background-color', color)
-  );
+  var canvas = document.getElementById("myCanvas");
+  var context = canvas.getContext("2d");
+  context.fillStyle="#FF0000";
+  context.fillRect( PosX, PosY, 5, 5 );
+
 }
 
 function ImportCoordinates()
@@ -74,14 +70,10 @@ function ImportCoordinates()
   for (var i = 1, row; row = table.rows[i]; i++) {
      PosX = row.cells[0].innerHTML;
      PosY = row.cells[1].innerHTML;
-     $("body").append(
-       $('<div></div>')
-       .css('position', 'absolute')
-       .css('top', PosY + 'px')
-       .css('left', PosX + 'px')
-       .css('width', size)
-       .css('height', size)
-       .css('background-color', color)
-     );
+
+     var canvas = document.getElementById("myCanvas");
+     var context = canvas.getContext("2d");
+     context.fillStyle="#FF0000";
+     context.fillRect( PosX, PosY, 5, 5 );
    }
 }
