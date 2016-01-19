@@ -8,7 +8,6 @@ try:
 except:
     raise
 
-import dataStructure as dS
 import networkx as nx
 
 # Define class for all navigation nodes.

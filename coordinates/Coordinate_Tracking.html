@@ -1,115 +1,113 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-<head>
-  <Title> RCH 3rd Floor </title>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
-    <script src="../dependencies/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
+  <head>
+    <Title> RCH 3rd Floor <Title>
+      <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+      <script src="../dependencies/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
 
-    <script src="../dependencies/pos.js" type="text/javascript"></script>
-    <script>
-    $(function(){
-      $("#export").click(function(){
-        $("#coordinatesTable").tableToCSV();
+      <script src="../dependencies/pos.js" type="text/javascript"></script>
+      <script>
+      $(function(){
+        $("#export").click(function(){
+          $("#coordinatesTable").tableToCSV();
+        });
+
+        $("#import").click(function(){
+          document.getElementById("import").style.display = 'block';
+          this.style.display = 'none';
+          ImportCoordinates();
+        });
+
+        $("#container").click(function(){
+          var container = document.getElementById("container");
+          container.onmousedown = GetCoordinates;
+        });
+
       });
+      </script>
 
-      $("#import").click(function(){
-        document.getElementById("import").style.display = 'block';
-        this.style.display = 'none';
-        ImportCoordinates();
-      });
+      <script type="text/javascript">
+        // var myImg = document.getElementById("myImgId");
+        // myImg.onmousedown = GetCoordinates;
+      </script>
 
-      $("#container").click(function(){
-        var container = document.getElementById("container");
-        container.onmousedown = GetCoordinates;
-      });
+      <style>
+        body{background: #f2f6f8;}
+        .backImg{position:absolute;z-index:1;}
 
-    });
-    </script>
+        #container{
+          display:inline-block;
+          width:1174px;
+          height:840px;
+          margin: 0 auto;
+          background: black;
+          position:relative;}
 
-    <script type="text/javascript">
-      // var myImg = document.getElementById("myImgId");
-      // myImg.onmousedown = GetCoordinates;
-    </script>
+          #myCanvas{
+            position:relative;
+            z-index:20;
+          }
+        </style>
+  </head>
 
-    <style>
-      body{background: #f2f6f8;}
-      .backImg{position:absolute;z-index:1;}
+  <body>
+    <div id="container">
+      <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId"
+      style="position: absolute; left: 0px; top:0px; z-index: 2;">
+      <canvas id="myCanvas" width="1174" height="840"></canvas>
+      <script>
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
 
-      #container{
-        display:inline-block;
-        width:1174px;
-        height:840px;
-        margin: 0 auto;
-        background: black;
-        position:relative;}
+        context.beginPath(446, 639);
+        context.lineWidth ="5";
+        context.strokeStyle="red";
+        context.moveTo(204, 649);
+        context.lineTo(203, 578);
+        context.stroke();
+      </script>
+    </div>
 
-        #myCanvas{
-          position:relative;
-          z-index:20;
-        }
-      </style>
-    </head>
+    <div style="background-color:#E8E8E8">
+      <!--Hit this button to export current coordinates to CSV.-->
+      <br><button id="export" data-export="export">Export</button>
+      <button id="import">Import</button>
 
-    <body>
-      <div id="container">
-        <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId"
-        style="position: absolute; left: 0px; top:0px; z-index: 2;">
-
-          <canvas id="myCanvas" width="1174" height="840"></canvas>
-          <script>
-          var canvas = document.getElementById('myCanvas');
-          var context = canvas.getContext('2d');
-
-          context.beginPath(446, 639);
-          context.lineWidth ="5";
-          context.strokeStyle="red";
-          context.moveTo(204, 649);
-          context.lineTo(203, 578);
-          context.stroke();
-
-          </script>
-        </div>
-
-        <div style="background-color:#E8E8E8">
-          <!--Hit this button to export current coordinates to CSV.-->
-          <br><button id="export" data-export="export">Export</button>
-          <button id="import">Import</button>
-
-          <br>
-          <p hidden="">X:<span id="x" name="x_cor"></span></p>
-          <p hidden="">Y:<span id="y" name="y_cor"></span></p>
-          <table border=1 id="coordinatesTable">
-            <tr>
-              <th>X coordinate</th>
-              <th>Y coordinate</th>
-              <th>Room Number</th>
-            </tr>
-            <tr>
-              <td>207</td>
-              <td>510</td>
-              <td>107</td>
-            </tr>
-            <tr>
-              <td>104</td>
-              <td>506</td>
-              <td>106</td>
-            </tr>
-            <tr>
-              <td>106</td>
-              <td>390</td>
-              <td>109</td>
-            </tr>
-            <tr>
-              <td>304</td>
-              <td>192</td>
-              <td>110</td>
-            </tr>
-            <tr>
-              <td>337</td>
-              <td>446</td>
-              <td>108</td>
-            </tr>
-          </table>
-        </div>
-      </body>
-      </html>
+      <br>
+      <p hidden="">X:<span id="x" name="x_cor"></span></p>
+      <p hidden="">Y:<span id="y" name="y_cor"></span></p>
+      <table border=1 id="coordinatesTable">
+        <tr>
+          <th>X coordinate</th>
+          <th>Y coordinate</th>
+          <th>Room Number</th>
+        </tr>
+        <tr>
+          <td>207</td>
+          <td>510</td>
+          <td>107</td>
+        </tr>
+        <tr>
+          <td>104</td>
+          <td>506</td>
+          <td>106</td>
+        </tr>
+        <tr>
+          <td>106</td>
+          <td>390</td>
+          <td>109</td>
+        </tr>
+        <tr>
+          <td>304</td>
+          <td>192</td>
+          <td>110</td>
+        </tr>
+        <tr>
+          <td>337</td>
+          <td>446</td>
+          <td>108</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
