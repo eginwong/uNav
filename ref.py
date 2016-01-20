@@ -9,6 +9,7 @@ except:
     raise
 
 import networkx as nx
+import numpy as numpy
 
 # Define class for all navigation nodes.
 # Ensure that there is both x- and y- coordinates, a flag for visibility
@@ -16,14 +17,16 @@ import networkx as nx
 # Properties are details of the node.
 class navNode(object):
     def __init__(self, x, y, nodeType, visible, properties):
-        self.x = x
-        self.y = y
+        self.coordinates = numpy.array((x,y))
         self.nodeType = nodeType
         self.visible = visible
         self.properties = properties
 
     def __repr__(self):
-        return '#%s' % (self.properties,)
+        return '#%s' % (self.properties)
+
+def distWeight(A, B):
+    return numpy.linalg.norm(A.coordinates - B.coordinates)
 
 if __name__ == "__main__":
     SLC = navNode(0, 0, "room", True, "SLC")
@@ -33,26 +36,19 @@ if __name__ == "__main__":
     CPH = navNode(10, -5, "room", True, "CPH")
     E2 = navNode(12, -5, "room", True, "E2")
 
-    # print a.x
-    # print a.y
-    # print a.properties
-    # if (a.visible):
-    #     print a.visible
-    #     print a.nodeType
-
     G=nx.Graph()
 
-    G.add_edge(SLC, PAC, weight=0.6)
-    G.add_edge(SLC, CIF, weight=0.1)
-    G.add_edge(CIF, OPT, weight=0.1)
-    G.add_edge(CIF, CPH, weight=0.7)
-    G.add_edge(CIF, E2, weight=0.9)
-    G.add_edge(SLC, OPT, weight=0.3)
+    G.add_edge(SLC, PAC, weight=(distWeight(SLC, PAC)))
+    G.add_edge(SLC, CIF, weight=(distWeight(SLC, CIF)))
+    G.add_edge(CIF, OPT, weight=(distWeight(CIF, OPT)))
+    G.add_edge(CIF, CPH, weight=(distWeight(CIF, CPH)))
+    G.add_edge(CIF, E2, weight=(distWeight(CIF, E2)))
+    G.add_edge(SLC, OPT, weight=(distWeight(SLC, OPT)))
 
     print G.edges()
     print (nx.astar_path(G, SLC, OPT))
     print (nx.astar_path_length(G, SLC, OPT))
-    #
+
     elarge=[(u,v) for (u,v,d) in G.edges(data=True) if d['weight'] >0.5]
     esmall=[(u,v) for (u,v,d) in G.edges(data=True) if d['weight'] <=0.5]
     #
