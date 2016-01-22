@@ -2,7 +2,7 @@
   "type": "Feature",
   "geometry": {
     "type": "Point",
-    "coordinates": [0,0,1]
+    "coordinates": [-80.544370,43.474248,1]
   },
   "properties": {
     "name": "null island"
