@@ -1,125 +1,120 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-  <head>
-    <Title> RCH 3rd Floor </Title>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-      <script src="../dependencies/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
-      <script src="../dependencies/jquery.csv.js"></script>
-      <script src="../dependencies/pos.js" type="text/javascript"></script>
+<head>
+  <Title> RCH 3rd Floor </Title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="../dependencies/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../dependencies/jquery.csv.js"></script>
+  <script src="../dependencies/pos.js" type="text/javascript"></script>
 
-      <script>
-      $(function(){
-        $("#export").click(function(){
-          $("#coordinatesTable").tableToCSV();
-        });
+  <script>
+  $(function(){
+    $("#export").click(function(){
+      $("#coordinatesTable").tableToCSV();
+    });
 
-        $("#import").click(function(){
-          document.getElementById("import").style.display = 'block';
-          this.style.display = 'none';
-          ImportCoordinates();
-        });
+    $("#import").click(function(){
+      document.getElementById("import").style.display = 'block';
+      this.style.display = 'none';
+      ImportCoordinates();
+    });
 
-        $("#container").click(function(){
-          var container = document.getElementById("container");
-          checkTable();
-          container.onmousedown = GetCoordinates;
-        });
+    $("#container").click(function(){
+      var container = document.getElementById("container");
+      checkTable();
+      container.onmousedown = GetCoordinates;
+    });
 
-      });
-      </script>
+  });
+  </script>
 
-      <script>
-        $(document).ready(function() {
-          if(isAPIAvailable()) {
-            $('#files').bind('change', handleFileSelect);
-          }
-        });
+  <script>
+  $(document).ready(function() {
+    if(isAPIAvailable()) {
+      $('#files').bind('change', handleFileSelect);
+    }
+  });
 
-        function isAPIAvailable() {
-          // Check for the various File API support.
-          if (window.File && window.FileReader && window.FileList && window.Blob) {
-            // Great success! All the File APIs are supported.
-            return true;
-          } else {
-            // source: File API availability - http://caniuse.com/#feat=fileapi
-            // source: <output> availability - http://html5doctor.com/the-output-element/
-            document.writeln('The HTML5 APIs used in this form are only available in the following browsers:<br />');
-            // 6.0 File API & 13.0 <output>
-            document.writeln(' - Google Chrome: 13.0 or later<br />');
-            // 3.6 File API & 6.0 <output>
-            document.writeln(' - Mozilla Firefox: 6.0 or later<br />');
-            // 10.0 File API & 10.0 <output>
-            document.writeln(' - Internet Explorer: Not supported (partial support expected in 10.0)<br />');
-            // ? File API & 5.1 <output>
-            document.writeln(' - Safari: Not supported<br />');
-            // ? File API & 9.2 <output>
-            document.writeln(' - Opera: Not supported');
-            return false;
-          }
+  function isAPIAvailable() {
+    // Check for the various File API support.
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      // Great success! All the File APIs are supported.
+      return true;
+    } else {
+      // source: File API availability - http://caniuse.com/#feat=fileapi
+      // source: <output> availability - http://html5doctor.com/the-output-element/
+      document.writeln('The HTML5 APIs used in this form are only available in the following browsers:<br />');
+      // 6.0 File API & 13.0 <output>
+      document.writeln(' - Google Chrome: 13.0 or later<br />');
+      // 3.6 File API & 6.0 <output>
+      document.writeln(' - Mozilla Firefox: 6.0 or later<br />');
+      // 10.0 File API & 10.0 <output>
+      return false;
+    }
+  }
+
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+    var file = files[0];
+
+    // read the file metadata
+    var output = ''
+    output += '<span style="font-weight:bold;">' + escape(file.name) + '</span><br />\n';
+    output += ' - LastModified: ' + (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a') + '<br />\n';
+
+    // read the file contents
+    printTable(file);
+
+    // post the results
+    $('#list').append(output);
+    $('#files').css(this.style.display = 'none');
+  }
+
+  function checkTable() {
+    var count = $('#coordinatesTable tr').length;
+    if (count <= 0) {
+      $('#coordinatesTable').append("<tr><th>X coordinate</th><th>Y coordinate</th><th>Room Number</th></tr>");
+    }
+  }
+
+  function printTable(file) {
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(event){
+      var csv = event.target.result;
+      var data = $.csv.toArrays(csv);
+      var html = '';
+      checkTable();
+      for(var row in data) {
+        html += '<tr>\r\n';
+        for(var item in data[row]) {
+          html += '<td>' + data[row][item] + '</td>\r\n';
         }
+        html += '</tr>\r\n';
+      }
+      $('#coordinatesTable').append(html);
+    };
+    reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+  }
+  </script>
 
-        function handleFileSelect(evt) {
-          var files = evt.target.files; // FileList object
-          var file = files[0];
+  <style>
+  body{background: #f2f6f8;}
+  .backImg{position:absolute;z-index:1;}
 
-          // read the file metadata
-          var output = ''
-              output += '<span style="font-weight:bold;">' + escape(file.name) + '</span><br />\n';
-              output += ' - LastModified: ' + (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a') + '<br />\n';
+  #container{
+    display:inline-block;
+    width:1174px;
+    height:840px;
+    margin: 0 auto;
+    background: black;
+    position:relative;}
 
-          // read the file contents
-          printTable(file);
-
-          // post the results
-          $('#list').append(output);
-          $('#files').css(this.style.display = 'none');
-        }
-
-        function checkTable() {
-          var count = $('#coordinatesTable tr').length;
-          if (count <= 0) {
-            $('#coordinatesTable').append("<tr><th>X coordinate</th><th>Y coordinate</th><th>Room Number</th></tr>");
-          }
-        }
-
-        function printTable(file) {
-          var reader = new FileReader();
-          reader.readAsText(file);
-          reader.onload = function(event){
-            var csv = event.target.result;
-            var data = $.csv.toArrays(csv);
-            var html = '';
-            checkTable();
-            for(var row in data) {
-              html += '<tr>\r\n';
-              for(var item in data[row]) {
-                html += '<td>' + data[row][item] + '</td>\r\n';
-              }
-              html += '</tr>\r\n';
-            }
-            $('#coordinatesTable').append(html);
-          };
-          reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
-        }
-      </script>
-
-      <style>
-        body{background: #f2f6f8;}
-        .backImg{position:absolute;z-index:1;}
-
-        #container{
-          display:inline-block;
-          width:1174px;
-          height:840px;
-          margin: 0 auto;
-          background: black;
-          position:relative;}
-
-          #myCanvas{
-            position:relative;
-            z-index:20;
-          }
-        </style>
+    #myCanvas{
+      position:relative;
+      z-index:20;
+    }
+    </style>
   </head>
 
   <body>
@@ -128,129 +123,129 @@
       style="position: absolute; left: 0px; top:0px; z-index: 2;">
       <canvas id="myCanvas" width="1174" height="840"></canvas>
       <script>
-        var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext('2d');
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
 
-        context.beginPath(0,0);
-        context.lineWidth ="5";
-        context.strokeStyle="red";
-        context.moveTo(122,578);//120_stair
-        context.lineTo(215,578);//119a_hallway
-        context.lineTo(215,628);//105
-        context.lineTo(405,628);//105_128
-        context.lineTo(436,628);//128
-        context.lineTo(436,652);//128_104
-        context.stroke();
-
-        context.moveTo(436,628);//128
-        context.lineTo(469,628);//128_103
-        context.lineTo(632,628);//103
-        context.lineTo(632,602);//103door_119hallway
-        context.lineTo(632,644);//103_1
-        context.lineTo(725,644);//103A
-
-        context.moveTo(632,644);//103_1
-        context.lineTo(632,554);//119d_hallway
-        context.lineTo(735,554);//199e_hallway
-        context.lineTo(735,595);//126Washroom
-
-        context.moveTo(632,554);//119d_hallway
-        context.lineTo(505,554);//119c_hallway
-
-        context.moveTo(735,554);//119e_hallway
-        context.lineTo(838,554);//101_119hallway
-        context.lineTo(838,458);//101
-        context.lineTo(838,313);//101_122hallway
-        context.lineTo(742,313);//122e_hallway
-
-        context.moveTo(735,554);//119e_hallway
-        context.lineTo(735,535);//102door_119hallway
-        context.lineTo(735,512);//102
-        context.lineTo(735,490);//102_102A
-        context.lineTo(735,448);//102A
-
-        context.moveTo(735,448);//102A
-        context.lineTo(735,377);//113
-        context.lineTo(735,399);//113_102A
-
-        context.moveTo(735,377);//113
-        context.lineTo(735,313);//122d2_hallway
-
-        context.moveTo(742,294);//125Washroom
-        context.lineTo(742,313);//122e_hallway
-        context.lineTo(735,313);//122d2_hallway
-        context.lineTo(730,313);//122d1_hallway
-        context.lineTo(700,313);//122d_hallway
-        context.lineTo(700,367);//118
-
-        context.moveTo(700,313);//122d_hallway
-        context.lineTo(632,313);//122c_hallway
-        context.lineTo(505,313);//122b3_hallway
-
-        context.moveTo(456,628);//128_1
-        context.lineTo(456,593);//128door_119hallway
-        context.lineTo(456,554);//119b_hallway
-        context.lineTo(456,529);//119b1_hallway
-        context.lineTo(427,529);//108door_119hallway
-
-        context.moveTo(456,554);//119B_HALLWAY
-        context.lineTo(505,554);//119C_HALLWAY
-        context.lineTo(505,452);//123
-        context.lineTo(505,313);//122b3_hallway
-
-        context.moveTo(215,578);//119a_hallway
-        context.lineTo(215,554);//119a1_hallway
-        context.lineTo(215,506);//107
-        context.lineTo(215,479);//107_108A
-        context.lineTo(215,432);//108A
-        context.lineTo(228,432);//108A_108
-
-        context.moveTo(215,554);//119a1_hallway
-        context.lineTo(456,554);//119b_hallway
-
-        context.moveTo(215,432);//108A
-        context.lineTo(215,384);//108B
-
-        context.moveTo(215,554);//199a1_hallway
-        context.lineTo(173,554);//106
-
-        context.moveTo(116,313);//121_stair
-        context.lineTo(215,313);//122a1_hallway
-        context.lineTo(215,338);//122a_hallway
-        context.lineTo(103,338);//109
-
-        context.moveTo(215,384);//108B
-        context.lineTo(215,313);//122a1_hallway
-        context.lineTo(215,263);//110
-        context.lineTo(404,263);//127_110
-        context.lineTo(434,263);//127
-
-        context.moveTo(215,313);//122a1_hallway
-        context.lineTo(434,313);//122b_hallway
-        context.lineTo(434,263);//127
-        context.lineTo(434,236);//127_111
-
-        context.moveTo(434,313);//122b_hallway
-        context.lineTo(462,313);//122b2_hallway
-        context.lineTo(505,313);//122b3_hallway
-
-        context.moveTo(462,313);//122b2_hallway
-        context.lineTo(462,363);//122b2a_hallway
-        context.lineTo(427,363);//108_122hallway
-
-        context.moveTo(434,263);//127
-        context.lineTo(468,263);//127_112
-        context.lineTo(632,263);//112
-        context.lineTo(632,238);//112_2
-        context.lineTo(726,238);//112A
-
-        context.moveTo(632,263);//112
-        context.lineTo(632,313);//122c_hallway
-
-        context.moveTo(434,236);//127_111
-        context.lineTo(434,186);//111
-        context.lineTo(434,69);//111A
-        context.stroke();
+      // context.beginPath(0,0);
+      // context.lineWidth ="5";
+      // context.strokeStyle="red";
+      // context.moveTo(122,578);//120_stair
+      // context.lineTo(215,578);//119a_hallway
+      // context.lineTo(215,628);//105
+      // context.lineTo(405,628);//105_128
+      // context.lineTo(436,628);//128
+      // context.lineTo(436,652);//128_104
+      // context.stroke();
+      //
+      // context.moveTo(436,628);//128
+      // context.lineTo(469,628);//128_103
+      // context.lineTo(632,628);//103
+      // context.lineTo(632,602);//103door_119hallway
+      // context.lineTo(632,644);//103_1
+      // context.lineTo(725,644);//103A
+      //
+      // context.moveTo(632,644);//103_1
+      // context.lineTo(632,554);//119d_hallway
+      // context.lineTo(735,554);//199e_hallway
+      // context.lineTo(735,595);//126Washroom
+      //
+      // context.moveTo(632,554);//119d_hallway
+      // context.lineTo(505,554);//119c_hallway
+      //
+      // context.moveTo(735,554);//119e_hallway
+      // context.lineTo(838,554);//101_119hallway
+      // context.lineTo(838,458);//101
+      // context.lineTo(838,313);//101_122hallway
+      // context.lineTo(742,313);//122e_hallway
+      //
+      // context.moveTo(735,554);//119e_hallway
+      // context.lineTo(735,535);//102door_119hallway
+      // context.lineTo(735,512);//102
+      // context.lineTo(735,490);//102_102A
+      // context.lineTo(735,448);//102A
+      //
+      // context.moveTo(735,448);//102A
+      // context.lineTo(735,377);//113
+      // context.lineTo(735,399);//113_102A
+      //
+      // context.moveTo(735,377);//113
+      // context.lineTo(735,313);//122d2_hallway
+      //
+      // context.moveTo(742,294);//125Washroom
+      // context.lineTo(742,313);//122e_hallway
+      // context.lineTo(735,313);//122d2_hallway
+      // context.lineTo(730,313);//122d1_hallway
+      // context.lineTo(700,313);//122d_hallway
+      // context.lineTo(700,367);//118
+      //
+      // context.moveTo(700,313);//122d_hallway
+      // context.lineTo(632,313);//122c_hallway
+      // context.lineTo(505,313);//122b3_hallway
+      //
+      // context.moveTo(456,628);//128_1
+      // context.lineTo(456,593);//128door_119hallway
+      // context.lineTo(456,554);//119b_hallway
+      // context.lineTo(456,529);//119b1_hallway
+      // context.lineTo(427,529);//108door_119hallway
+      //
+      // context.moveTo(456,554);//119B_HALLWAY
+      // context.lineTo(505,554);//119C_HALLWAY
+      // context.lineTo(505,452);//123
+      // context.lineTo(505,313);//122b3_hallway
+      //
+      // context.moveTo(215,578);//119a_hallway
+      // context.lineTo(215,554);//119a1_hallway
+      // context.lineTo(215,506);//107
+      // context.lineTo(215,479);//107_108A
+      // context.lineTo(215,432);//108A
+      // context.lineTo(228,432);//108A_108
+      //
+      // context.moveTo(215,554);//119a1_hallway
+      // context.lineTo(456,554);//119b_hallway
+      //
+      // context.moveTo(215,432);//108A
+      // context.lineTo(215,384);//108B
+      //
+      // context.moveTo(215,554);//199a1_hallway
+      // context.lineTo(173,554);//106
+      //
+      // context.moveTo(116,313);//121_stair
+      // context.lineTo(215,313);//122a1_hallway
+      // context.lineTo(215,338);//122a_hallway
+      // context.lineTo(103,338);//109
+      //
+      // context.moveTo(215,384);//108B
+      // context.lineTo(215,313);//122a1_hallway
+      // context.lineTo(215,263);//110
+      // context.lineTo(404,263);//127_110
+      // context.lineTo(434,263);//127
+      //
+      // context.moveTo(215,313);//122a1_hallway
+      // context.lineTo(434,313);//122b_hallway
+      // context.lineTo(434,263);//127
+      // context.lineTo(434,236);//127_111
+      //
+      // context.moveTo(434,313);//122b_hallway
+      // context.lineTo(462,313);//122b2_hallway
+      // context.lineTo(505,313);//122b3_hallway
+      //
+      // context.moveTo(462,313);//122b2_hallway
+      // context.lineTo(462,363);//122b2a_hallway
+      // context.lineTo(427,363);//108_122hallway
+      //
+      // context.moveTo(434,263);//127
+      // context.lineTo(468,263);//127_112
+      // context.lineTo(632,263);//112
+      // context.lineTo(632,238);//112_2
+      // context.lineTo(726,238);//112A
+      //
+      // context.moveTo(632,263);//112
+      // context.lineTo(632,313);//122c_hallway
+      //
+      // context.moveTo(434,236);//127_111
+      // context.lineTo(434,186);//111
+      // context.lineTo(434,69);//111A
+      // context.stroke();
       </script>
     </div>
 
@@ -273,4 +268,4 @@
       </table>
     </div>
   </body>
-</html>
+  </html>

@@ -10,7 +10,8 @@
         1]
     },
     "properties": {
-      "name": "RCH Room?"
+      "name": "RCH Room?",
+      "utility": "WC"
     }
   },
   {
@@ -24,7 +25,23 @@
       ]
     },
     "properties": {
-      "name": "RCH Hall"
+      "name": "RCH Hall",
+      "utility": "Stair"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -80.54049253463748,
+        43.47035091238628,
+        1
+      ]
+    },
+    "properties": {
+      "name": "RCH Hall",
+      "utility": "Hallway"
     }
   }]
 }
