@@ -2,9 +2,26 @@
   "type": "Feature",
   "geometry": {
     "type": "Point",
-    "coordinates": [-80.544370,43.474248,1]
+    "coordinates": [
+      -80.54081976413727,
+      43.47036064518963,
+      1]
   },
   "properties": {
-    "name": "null island"
+    "name": "RCH Room?"
   }
-}
+},
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -80.54049253463745,
+      43.47035091238624,
+      1
+    ]
+  },
+  "properties": {
+    "name": "RCH Hall"
+  }
+},
