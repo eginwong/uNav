@@ -67,6 +67,9 @@ function initMap() {
   ];
 
   map.setOptions({styles: styles});
+  //Think about using different json files for different features, so that it's easier to toggle some on or off.
+  // var countyLayer = new google.maps.Data();
+  // var stateLayer = new google.maps.Data();
 
   map.data.setStyle(function(feature) {
     console.log(feature);
