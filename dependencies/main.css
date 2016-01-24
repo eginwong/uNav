@@ -1,0 +1,17 @@
+<style>
+  body{background: #f2f6f8;}
+  .backImg{position:absolute;z-index:1;}
+
+  #container{
+    display:inline-block;
+    width:1174px;
+    height:840px;
+    margin: 0 auto;
+    background: black;
+    position:relative;}
+
+  #myCanvas{
+    position:relative;
+    z-index:20;
+  }
+</style>
