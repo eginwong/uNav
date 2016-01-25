@@ -1,64 +1,982 @@
-
-[
-  {x:'834', y:'329', name:"RCH 122H7"},
-  {x:'734', y:'325', name:"RCH 122H6"},
-  {x:'703', y:'328', name:"RCH 122H5"},
-  {x:'639', y:'328', name:"RCH 122H4"},
-  {x:'506', y:'326', name:"RCH 122H3"},
-  {x:'427', y:'326', name:"RCH 122H2"},
-  {x:'212', y:'318', name:"RCH 122H1"},
-  {x:'834', y:'560', name:"RCH 109H6"},
-  {x:'733', y:'561', name:"RCH 119H5"},
-  {x:'633', y:'565', name:"RCH 119H4"},
-  {x:'510', y:'561', name:"RCH 119H3"},
-  {x:'460', y:'556', name:"RCH 119H2"},
-  {x:'215', y:'563', name:"RCH 119H1"},
-  {x:'210', y:'510', name:"RCH 107"},
-  {x:'862', y:'632', name:"RCH 116E1"},
-  {x:'952', y:'718', name:"RCH 115E1"},
-  {x:'951', y:'166', name:"RCH 114E1"},
-  {x:'862', y:'260', name:"RCH 124E1"},
-  {x:'506', y:'350', name:"RCH 123E2"},
-  {x:'507', y:'536', name:"RCH 123E1"},
-  {x:'429', y:'366', name:"RCH 108E2"},
-  {x:'428', y:'522', name:"RCH 108E1"},
-  {x:'460', y:'589', name:"RCH 123E1"},
-  {x:'436', y:'653', name:"RCH 104E1"},
-  {x:'633', y:'602', name:"RCH 103E2"},
-  {x:'471', y:'629', name:"RCH 103E1"},
-  {x:'402', y:'625', name:"RCH 105E2"},
-  {x:'204', y:'600', name:"RCH 105E1"},
-  {x:'183', y:'573', name:"RCH 120E1"},
-  {x:'187', y:'548', name:"RCH 106E1"},
-  {x:'182', y:'344', name:"RCH 109E1"},
-  {x:'635', y:'283', name:"RCH 112E2"},
-  {x:'470', y:'262', name:"RCH 112E1"},
-  {x:'438', y:'235', name:"RCH 111E1"},
-  {x:'404', y:'262', name:"RCH 110E2"},
-  {x:'210', y:'278', name:"RCH 110E1"},
-  {x:'118', y:'574', name:"RCH 120S"},
-  {x:'950', y:'758', name:"RCH 115"},
-  {x:'902', y:'705', name:"RCH 116"},
-  {x:'860', y:'442', name:"RCH 101"},
-  {x:'949', y:'133', name:"RCH 114"},
-  {x:'900', y:'191', name:"RCH 124"},
-  {x:'701', y:'365', name:"RCH 118"},
-  {x:'732', y:'514', name:"RCH 102"},
-  {x:'732', y:'376', name:"RCH 113"},
-  {x:'690', y:'510', name:"RCH 117"},
-  {x:'738', y:'615', name:"RCH 126"},
-  {x:'573', y:'700', name:"RCH 103"},
-  {x:'437', y:'723', name:"RCH 104"},
-  {x:'308', y:'696', name:"RCH 105"},
-  {x:'439', y:'626', name:"RCH 128"},
-  {x:'337', y:'446', name:"RCH 108"},
-  {x:'512', y:'446', name:"RCH 123"},
-  {x:'738', y:'278', name:"RCH 125"},
-  {x:'574', y:'192', name:"RCH 112"},
-  {x:'440', y:'170', name:"RCH 111"},
-  {x:'438', y:'266', name:"RCH 127"},
-  {x:'304', y:'193', name:"RCH 110"},
-  {x:'118', y:'314', name:"RCH 121S"},
-  {x:'106', y:'390', name:"RCH 109"},
-  {x:'106', y:'504', name:"RCH 106"}
-]
+{
+  "type": "FeatureCollection",
+  "features":
+  [
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id":"122H7",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          834,
+          329,
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "122H6",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          734,
+          325
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "122H5",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          703,
+          328
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "122H4",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          639,
+          328
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "122H3",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          506,
+          326
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "122H2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          427,
+          326
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "122H1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          212,
+          318
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "109H6",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          834,
+          560
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "119H5",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          733,
+          561
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "119H4",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          633,
+          565
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "119H3",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          510,
+          561
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "119H2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          460,
+          556
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Hallway",
+        "id": "119H1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          215,
+          563
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": ,
+        "id": "107",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          210,
+          510
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "116E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          862,
+          632
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "115E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          952,
+          718
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "114E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          951,
+          166
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "124E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          862,
+          260
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "123E2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          506,
+          350
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "123E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          507,
+          536
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "108E2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          429,
+          366
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "108E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          428,
+          522
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "123E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          460,
+          589
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "104E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          436,
+          653
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "103E2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          633,
+          602
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "103E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          471,
+          629
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "105E2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          402,
+          625
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "105E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          204,
+          600
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "120E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          183,
+          573
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "106E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          187,
+          548
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "109E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          182,
+          344
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "112E2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          635,
+          283
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "112E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          470,
+          262
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "111E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          438,
+          235
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "110E2",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          404,
+          262
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "110E1",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          210,
+          278
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Stairs",
+        "id": "120S",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          118,
+          574
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "115",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          950,
+          758
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "116",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          902,
+          705
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "101",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          860,
+          442
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "114",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          949,
+          133
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "124",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          900,
+          191
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "118",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          701,
+          365
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "102",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          732,
+          514
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "113",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          732,
+          376
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Elevator",
+        "id": "117",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          690,
+          510
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "WC",
+        "id": "126",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          738,
+          615
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "103",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          573,
+          700
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "104",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          437,
+          723
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "105",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          308,
+          696
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "128",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          439,
+          626
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Lab",
+        "id": "108",
+        "name":"Helix Lab"
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          337,
+          446
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "123",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          512,
+          446
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "WC",
+        "id": "125",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          738,
+          278
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "112",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          574,
+          192
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "111",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          440,
+          170
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "127",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          438,
+          266
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "110",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          304,
+          193
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility": "Stairs",
+        "id": "121S",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          118,
+          314
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "109",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          106,
+          390
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "building_code":"RCH",
+        "utility":,
+        "id": "106",
+        "name":""
+      },
+      "geometry":{
+        "type":"Point",
+        "coordinates":[
+          106,
+          504
+        ]
+      }
+    }
+  ]
+}
