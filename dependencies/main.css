@@ -1,17 +1,24 @@
 <style>
   body{background: #f2f6f8;}
   .backImg{position:absolute;z-index:1;}
-
+  #myImgId{
+    position: absolute; left: 0px; top:0px; z-index: 2;
+    width: auto;
+    height:842px;
+  }
   #container{
     display:inline-block;
     width:1174px;
-    height:840px;
+    height:842px;
     margin: 0 auto;
     background: black;
     position:relative;}
 
-  #myCanvas{
-    position:relative;
-    z-index:20;
-  }
+  #wrapper{position:relative;}
+  #myCanvas{position:absolute; z-index:20;}
+  #canvas1{position:absolute; z-index:20;}
+  #canvas2{position:absolute; z-index:20; visibility: hidden;}
+  #canvas3{position:absolute; z-index:20; visibility: hidden;}
+  #canvas4{position:absolute; z-index:20; visibility: hidden;}
+  #canvas5{position:absolute; z-index:20; visibility: hidden;}
 </style>

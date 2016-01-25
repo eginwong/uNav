@@ -11,38 +11,73 @@
 
 <body>
   <div id="container">
-    <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId"
-    style="position: absolute; left: 0px; top:0px; z-index: 2;">
-    <canvas id="myCanvas" width="1174" height="840"></canvas>
+    <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId">
+    <div id=wrapper>
+      <canvas id="canvas1" width="1174" height="800"></canvas>
+      <canvas id="canvas2" width=1174 height=800></canvas>
+      <canvas id="canvas3" width=1174 height=800></canvas>
+      <canvas id="canvas4" width=1174 height=800></canvas>
+      <canvas id="canvas5" width=1174 height=800></canvas>
+    </div>
   </div>
 
   <div style="background-color:#E8E8E8">
     <!--Hit this button to export current coordinates to CSV.-->
     <div id="inputs" class="clearfix">
-      <button id="export" data-export="export">Export</button>
-      <button id="import">Import</button>
-      <button id="draw" onclick="drawLine('122H7', '122H6')">Draw Line</button>
-      <input type="file" id="files" name="files[]" multiple />
-      <!-- For building selection from UWAPI. -->
       <select id="sel">
       </select>
     </div>
 
     <div>
       <!-- This div is for showing the markers on and off from the json file. -->
-      <input type="button" id="markers_toggle" value="Show Markers" />
+      <input type="button" id="markers_toggle" value="Show Hallways" />
     </div>
     <output id="list">
     </output>
   </div>
+
   <script>
   $(function(){
+    // all
+    var canvas1 = document.getElementById("canvas1");
+    // hallways
+    var canvas2 = document.getElementById("canvas2");
+    // stairs
+    var canvas3 = document.getElementById("canvas3");
+    // WC
+    var canvas4 = document.getElementById("canvas4");
+    // Elevator
+    var canvas5 = document.getElementById("canvas5");
+    var context1 = canvas1.getContext("2d");
+    var context2 = canvas2.getContext("2d");
+    var context3 = canvas3.getContext("2d");
+    var context4 = canvas4.getContext("2d");
+    var context5 = canvas5.getContext("2d");
     var nodes = $.getJSON( "https://raw.githubusercontent.com/eginwong/uNav/master/coordinates/room_nodes.json?token=AGViNaqNCV-Xe1RPLB_1Gy8sIgc0UHW7ks5WrtQNwA%3D%3D", function(data) {
-    });
-    console.log(JSON.parse(nodes.responseText));
+      $.each(data.features, function(i, option) {
+        context1.fillStyle="#FF0000";
+        context1.fillRect( option.geometry.coordinates[0], option.geometry.coordinates[1], 5, 5 );
+        if(option.properties.utility == "Hallway") {
+          context2.fillStyle="#FF0000";
+          context2.fillRect( option.geometry.coordinates[0], option.geometry.coordinates[1], 10, 10 );
+        }
+        else if(option.properties.utility == "Stairs") {
+          context3.fillStyle="#00FFFF";
+          context3.fillRect( option.geometry.coordinates[0], option.geometry.coordinates[1], 10, 10 );
+        }
+        else if(option.properties.utility == "WC") {
+          context4.fillStyle="#0000FF";
+          context4.fillRect( option.geometry.coordinates[0], option.geometry.coordinates[1], 10, 10 );
+        }
+        else if(option.properties.utility == "Elevator") {
+          context5.fillStyle="#F000FF";
+          context5.fillRect( option.geometry.coordinates[0], option.geometry.coordinates[1], 10, 10 );
+        }
+      });
+    })
   });
   function drawLine(p1, p2) {
-    var canvas = document.getElementById('myCanvas');
+    var canvas1 = document.getElementById('canvas1');
     var context = canvas.getContext('2d');
     context.lineWidth ="5";
     context.strokeStyle="red";
@@ -62,21 +97,46 @@
     // context.stroke();
   }
   // This function will show or hide markers depending on utility and options passed.
-  function show_hide(str, mode){
-
+  function show_hide(canvasnum){
+    for (i=1; i < 6;i++) {
+      if (i == canvasnum) {
+        var canvas = document.getElementById('canvas'+i);
+        var context = canvas.getContext('2d');
+        canvas.style.visibility='visible';
+      }
+      else{
+        var canvas = document.getElementById('canvas'+i);
+        var context = canvas.getContext('2d');
+        canvas.style.visibility='hidden';
+      }
+    }
   }
 
   $("#markers_toggle").on('click', firstClick)
   function firstClick() {
-    $("#markers_toggle").prop('value', 'Hide Markers');
-    // show_hide();
-    $("#markers_toggle").off('click').on('click', secondClick)
+    $("#markers_toggle").prop('value', 'Show Stairs');
+    show_hide(2);
+    $("#markers_toggle").off('click').on('click', secondClick);
   }
-
   function secondClick() {
-    $("#markers_toggle").prop('value', 'Show Markers');
-    // show_hide();
-    $("#markers_toggle").off('click').on('click', firstClick)
+    $("#markers_toggle").prop('value', 'Show Washrooms');
+    show_hide(3);
+    $("#markers_toggle").off('click').on('click', thirdClick);
+  }
+  function thirdClick() {
+    $("#markers_toggle").prop('value', 'Show Elevators');
+    show_hide(4);
+    $("#markers_toggle").off('click').on('click', fourthClick);
+  }
+  function fourthClick() {
+    $("#markers_toggle").prop('value', 'Show All');
+    show_hide(5);
+    $("#markers_toggle").off('click').on('click', fifthClick);
+  }
+  function fifthClick() {
+    $("#markers_toggle").prop('value', 'Show Hallways');
+    show_hide(1);
+    $("#markers_toggle").off('click').on('click', firstClick);
   }
   </script>
 </body>
