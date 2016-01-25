@@ -20,8 +20,10 @@
       var context = canvas.getContext('2d');
       context.lineWidth ="5";
       context.strokeStyle="red";
-      var jqxhr = $.getJSON( "https://raw.githubusercontent.com/eginwong/uNav/master/geojson_ex.json?token=AGViNf2Dc0xvxTq2dPBIKQBqovSHPlInks5Wq6zMwA%3D%3D", function(data) {
-        console.log(data.features[0].properties);
+      var jqxhr = $.getJSON( "https://raw.githubusercontent.com/eginwong/uNav/master/coordinates/room_nodes.json?token=AGViNZ3CC3Nvi23CMC0jFfbxcO1M5naDks5WrlLlwA%3D%3D", function(data) {
+        // var jqxhr = $.getJSON( "https://raw.githubusercontent.com/eginwong/uNav/master/geojson_ex.json?token=AGViNf2Dc0xvxTq2dPBIKQBqovSHPlInks5Wq6zMwA%3D%3D", function(data) {
+        console.log(data);
+        // console.log(data.features[0].properties);
       });
       // $.each(arrayCoord, function(i, coord) {
       //   if (i == 0) {
@@ -42,7 +44,10 @@
       <button id="export" data-export="export">Export</button>
       <button id="import">Import</button>
       <button id="draw" onclick="drawLine('RCH 122H7', 'RCH 122H6')">Draw Line</button>
-      <!-- <input type="file" id="files" name="files[]" multiple /> -->
+      <input type="file" id="files" name="files[]" multiple />
+      <!-- For building selection from UWAPI. -->
+      <select id="sel">
+      </select>
     </div>
     <output id="list">
     </output>

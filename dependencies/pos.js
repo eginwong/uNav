@@ -68,14 +68,14 @@ function ImportCoordinates()
 
   var table = document.getElementById("coordinatesTable");
   for (var i = 1, row; row = table.rows[i]; i++) {
-     PosX = row.cells[0].innerHTML;
-     PosY = row.cells[1].innerHTML;
+    PosX = row.cells[0].innerHTML;
+    PosY = row.cells[1].innerHTML;
 
-     var canvas = document.getElementById("myCanvas");
-     var context = canvas.getContext("2d");
-     context.fillStyle="#FF0000";
-     context.fillRect( PosX, PosY, 5, 5 );
-   }
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+    context.fillStyle="#FF0000";
+    context.fillRect( PosX, PosY, 5, 5 );
+  }
 }
 
 $(function(){
@@ -101,6 +101,12 @@ $(document).ready(function() {
   if(isAPIAvailable()) {
     $('#files').bind('change', handleFileSelect);
   }
+  var uw_buildings = $.getJSON( "https://api.uwaterloo.ca/v2/buildings/list.geojson?key=2a7eb4185520ceff7b74992e7df4f55e", function(data) {
+    $.each(data.features, function(i, option) {
+      if(i != 0) {
+        $('#sel').append($('<option/>').attr("value", option.properties.building_code).text(option.properties.building_code));
+      }});
+  })
 });
 
 function isAPIAvailable() {
