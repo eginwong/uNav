@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script type="text/javascript">
+function mailIt() {
+var elms=document.forms[0].elements;
+var q='Dear '+elms.name.value+'&#37;0AYour '+elms.comment.value+' in bla bla ...';
+document.forms[0].action='mailto:astorcswong@gmail.com?cc='+elms.email.value+'&subject=uNav Contact Us&body=' + q;
+document.forms[0].submit();
+}
+</script>
+
+<style type="text/css">
+label {display:block;}
+</style>
+
+</head>
+<body>
+  <h>Contact uNav!</h>
+  <p>Please fill out the form below and one of our team members will be in touch shortly!</p>
+<form action="#" method="post" onsubmit="mailIt(); return false;" enctype="text/plain">
+<div>
+          <label>Name: <input type="text" name="name"> </label>
+          <br>
+          <label>Your Email: <input type="text" name="email"></label>
+          <br>
+          <label>What is the reason for your contact?
+            <select name ="Reason">
+            <option value="TechSupport">Technical Support</option>
+            <option value="Info">Product Information</option>
+            <option value="Others">Others</option>
+            </select>
+          </label>
+          <br>
+          <label>Your comment: 
+          <textarea rows="10" cols="50" name="comment"></textarea></label>
+          <br>
+          <button type="Submit">Submit</button>
+</div>
+</form>
+</body>
+</html>
