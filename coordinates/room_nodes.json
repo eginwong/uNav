@@ -14,7 +14,7 @@
         "type":"Point",
         "coordinates":[
           834,
-          329,
+          329
         ]
       }
     },
@@ -214,7 +214,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility": ,
+        "utility": "",
         "id": "107",
         "name":""
       },
@@ -230,7 +230,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "116E1",
         "name":""
       },
@@ -246,7 +246,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "115E1",
         "name":""
       },
@@ -262,7 +262,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "114E1",
         "name":""
       },
@@ -278,7 +278,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "124E1",
         "name":""
       },
@@ -294,7 +294,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "123E2",
         "name":""
       },
@@ -310,7 +310,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "123E1",
         "name":""
       },
@@ -326,7 +326,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "108E2",
         "name":""
       },
@@ -342,7 +342,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "108E1",
         "name":""
       },
@@ -358,7 +358,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "123E1",
         "name":""
       },
@@ -374,7 +374,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "104E1",
         "name":""
       },
@@ -390,7 +390,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "103E2",
         "name":""
       },
@@ -406,7 +406,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "103E1",
         "name":""
       },
@@ -422,7 +422,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "105E2",
         "name":""
       },
@@ -438,7 +438,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "105E1",
         "name":""
       },
@@ -454,7 +454,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "120E1",
         "name":""
       },
@@ -470,7 +470,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "106E1",
         "name":""
       },
@@ -486,7 +486,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "109E1",
         "name":""
       },
@@ -502,7 +502,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "112E2",
         "name":""
       },
@@ -518,7 +518,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "112E1",
         "name":""
       },
@@ -534,7 +534,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "111E1",
         "name":""
       },
@@ -550,7 +550,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "110E2",
         "name":""
       },
@@ -566,7 +566,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "110E1",
         "name":""
       },
@@ -598,7 +598,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "115",
         "name":""
       },
@@ -614,7 +614,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "116",
         "name":""
       },
@@ -630,7 +630,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "101",
         "name":""
       },
@@ -646,7 +646,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "114",
         "name":""
       },
@@ -662,7 +662,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "124",
         "name":""
       },
@@ -678,7 +678,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "118",
         "name":""
       },
@@ -694,7 +694,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "102",
         "name":""
       },
@@ -710,7 +710,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "113",
         "name":""
       },
@@ -758,7 +758,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "103",
         "name":""
       },
@@ -774,7 +774,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "104",
         "name":""
       },
@@ -790,7 +790,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "105",
         "name":""
       },
@@ -806,7 +806,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "128",
         "name":""
       },
@@ -838,7 +838,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "123",
         "name":""
       },
@@ -870,7 +870,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "112",
         "name":""
       },
@@ -886,7 +886,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "111",
         "name":""
       },
@@ -902,7 +902,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "127",
         "name":""
       },
@@ -918,7 +918,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "110",
         "name":""
       },
@@ -950,7 +950,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "109",
         "name":""
       },
@@ -966,7 +966,7 @@
       "type":"Feature",
       "properties":{
         "building_code":"RCH",
-        "utility":,
+        "utility":"",
         "id": "106",
         "name":""
       },
