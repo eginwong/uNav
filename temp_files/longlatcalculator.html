@@ -1,9 +1,14 @@
 <html>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
+/*
+The function compute calculates the corrected latitude and longitude points from the RCH 1st floor coordinates.
+The numbers can be adjusted as necessary.
+*/
 function compute() {
   var x = document.getElementById("longitude").value;
   var y = document.getElementById("latitude").value;
+  // Based on RCH 1st floor anchor points from the gejson_ex.json.
   var long = (-80.54104249 + 0.000000605*x);
   var lat = (43.46818015 + 0.00000339*y);
   var output = ''

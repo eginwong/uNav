@@ -13,6 +13,7 @@
   <div id="container">
     <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId">
     <div id=wrapper>
+      <!-- Adding 5 different canvases for each layer of the json utilities. -->
       <canvas id="canvas1" width="1174" height="800"></canvas>
       <canvas id="canvas2" width=1174 height=800></canvas>
       <canvas id="canvas3" width=1174 height=800></canvas>
@@ -22,7 +23,7 @@
   </div>
 
   <div style="background-color:#E8E8E8">
-    <!--Hit this button to export current coordinates to CSV.-->
+    <!-- Demoing UW API link -->
     <div id="inputs" class="clearfix">
       <select id="sel">
       </select>
@@ -48,11 +49,14 @@
     var canvas4 = document.getElementById("canvas4");
     // Elevator
     var canvas5 = document.getElementById("canvas5");
+    // Adding context variables as necessary to draw on the canvas.
     var context1 = canvas1.getContext("2d");
     var context2 = canvas2.getContext("2d");
     var context3 = canvas3.getContext("2d");
     var context4 = canvas4.getContext("2d");
     var context5 = canvas5.getContext("2d");
+
+    // Connecting to JSON from github for geojson coordinates on RCH1stfloor.
     var nodes = $.getJSON( "https://raw.githubusercontent.com/eginwong/uNav/master/coordinates/room_nodes.json?token=AGViNaqNCV-Xe1RPLB_1Gy8sIgc0UHW7ks5WrtQNwA%3D%3D", function(data) {
       $.each(data.features, function(i, option) {
         context1.fillStyle="#FF0000";
@@ -76,6 +80,8 @@
       });
     })
   });
+
+  // Function DrawLine for drawing edges onto the map. To be worked out later.
   function drawLine(p1, p2) {
     var canvas1 = document.getElementById('canvas1');
     var context = canvas.getContext('2d');
@@ -112,6 +118,7 @@
     }
   }
 
+  // Whole javascript switch click going on here to show different prompts for each utility.
   $("#markers_toggle").on('click', firstClick)
   function firstClick() {
     $("#markers_toggle").prop('value', 'Show Stairs');

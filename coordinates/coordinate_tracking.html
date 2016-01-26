@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <Title> RCH 3rd Floor </Title>
+  <Title> RCH 1st Floor </Title>
+  <!-- All dem script calls. -->
   <link rel="stylesheet" type="text/css" href="../dependencies/main.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script src="../dependencies/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
@@ -14,6 +15,8 @@
     <img src="../Waterloo Floor Plans/RCH_01FLR.png" id="myImgId"
     style="position: absolute; left: 0px; top:0px; z-index: 2;">
     <canvas id="myCanvas" width="1174" height="840"></canvas>
+
+    <!-- In Progress -->
     <script>
     function drawLine(p1, p2) {
       var canvas = document.getElementById('myCanvas');
@@ -52,6 +55,7 @@
     <output id="list">
     </output>
     <br>
+    <!-- This makes the x and y coordinate mapping possible, even if hidden. -->
     <p hidden="">X:<span id="x" name="x_cor"></span></p>
     <p hidden="">Y:<span id="y" name="y_cor"></span></p>
     <table border id="coordinatesTable">

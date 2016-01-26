@@ -1,56 +1,56 @@
 <!DOCTYPE HTML>
 <head>
-<title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<script type="text/javascript">
-function mailIt() {
-// var elms=document.forms[0].elements;
+  <script type="text/javascript">
+  function mailIt() {
+    // var elms=document.forms[0].elements;
 
-// //var q='Dear '+elms.name.value+'&#37;0AYour '+elms.comment.value+' in bla bla ...';
+    // //var q='Dear '+elms.name.value+'&#37;0AYour '+elms.comment.value+' in bla bla ...';
 
-// document.forms[0].action='mailto:astorcswong@gmail.com?cc='+elms.email.value+'&subject=uNav '+elms.Reason.value+'&body=Dear '+elms.name.value+'&#37;0AYour '+elms.comment.value+' in bla bla ...';
+    // document.forms[0].action='mailto:astorcswong@gmail.com?cc='+elms.email.value+'&subject=uNav '+elms.Reason.value+'&body=Dear '+elms.name.value+'&#37;0AYour '+elms.comment.value+' in bla bla ...';
 
-// document.forms[0].submit();
+    // document.forms[0].submit();
 
- var link = "mailto:astorcswong@gmail.com"
-             + "?cc=" +escape(document.getElementById('email').value)
-             + "&subject= uNav "+ escape(document.getElementById('Reason').value)
-             + "&body=Your Name: "+ escape(document.getElementById('name').value)+
-             "%0AReason to Contact: "+ escape(document.getElementById('Reason').value)+
-             "%0AComments: "+ escape(document.getElementById('comment').value);
+    var link = "mailto:astorcswong@gmail.com"
+    + "?cc=" +escape(document.getElementById('email').value)
+    + "&subject= uNav "+ escape(document.getElementById('Reason').value)
+    + "&body=Your Name: "+ escape(document.getElementById('name').value)+
+    "%0AReason to Contact: "+ escape(document.getElementById('Reason').value)+
+    "%0AComments: "+ escape(document.getElementById('comment').value);
 
     window.location.href = link;
-}
-</script>
+  }
+  </script>
 
-<style type="text/css">
-label {display:block;}
-</style>
+  <style type="text/css">
+  label {display:block;}
+  </style>
 
 </head>
 <body>
   <h>Contact uNav!</h>
   <p>Please fill out the form below and one of our team members will be in touch shortly!</p>
-<form action="#" method="post" onsubmit="mailIt(); return false;">
-<div>
-          <label>Name: <input type="text" id="name"> </label>
-          <br>
-          <label>Your Email: <input type="text" id="email"></label>
-          <br>
-          <label>What is the reason for your contact?
-            <select id ="Reason">
-            <option value="TechSupport">Technical Support</option>
-            <option value="Info">Product Information</option>
-            <option value="Others">Others</option>
-            </select>
-          </label>
-          <br>
-          <label>Your comment: 
-          <textarea rows="10" cols="50" id="comment"></textarea></label>
-          <br>
-          <button type="submit">Submit</button>
-</div>
-</form>
-</body>
-</html>
+  <form action="#" method="post" onsubmit="mailIt(); return false;">
+    <div>
+      <label>Name: <input type="text" id="name"> </label>
+      <br>
+      <label>Your Email: <input type="text" id="email"></label>
+      <br>
+      <label>What is the reason for your contact?
+        <select id ="Reason">
+          <option value="TechSupport">Technical Support</option>
+          <option value="Info">Product Information</option>
+          <option value="Others">Others</option>
+        </select>
+      </label>
+      <br>
+      <label>Your comment:
+        <textarea rows="10" cols="50" id="comment"></textarea></label>
+        <br>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </body>
+  </html>
