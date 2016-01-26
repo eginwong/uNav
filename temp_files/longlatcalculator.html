@@ -1,0 +1,19 @@
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+function compute() {
+  var x = document.getElementById("longitude").value;
+  var y = document.getElementById("latitude").value;
+  var long = (-80.54104249 + 0.000000605*x);
+  var lat = (43.46818015 + 0.00000339*y);
+  var output = ''
+  output += '<span style="font-weight:bold;">'+long+',<br>'+lat+'</span><br />\n';
+  $("#response").html(output);
+}
+</script>
+x: <input type="number" id="longitude">
+y: <input type="number" id="latitude">
+<button onClick="compute()">Compute</button>
+<br><br>longitude, latitude<br>
+<output id="response"></output>
+</html>

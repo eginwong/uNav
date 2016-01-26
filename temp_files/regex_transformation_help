@@ -1,2 +1,9 @@
 
 {\n"type":"Feature",\n"properties":{\n"building_code":"RCH"\n},\n"geometry":{\n"type":"Point",\n"coordinates":[\n$1\n]\n}\n}
+
+
+each longitude relative to the x is 0.000000605. so + 1 is 0.000000605.
+each latitude relative to the y is 0.00000339. so + 1 is 0.00000339.
+
+−80.54104249 0
+43.46818015

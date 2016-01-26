@@ -589,8 +589,8 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          118,
-          574
+          -80.540971,
+          43.470126
         ]
       }
     },
@@ -749,8 +749,8 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          738,
-          615
+          -80.540596,
+          43.470265
         ]
       }
     },
@@ -861,7 +861,7 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          738,
+          -80.540596,
           278
         ]
       }
@@ -877,7 +877,7 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          574,
+          43.470126,
           192
         ]
       }
@@ -941,7 +941,7 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          118,
+          -80.540971,
           314
         ]
       }
