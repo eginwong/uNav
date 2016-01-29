@@ -1,0 +1,90 @@
+//https://github.com/devenbhooshan/graph.js
+
+Questions:
+
+//Good references for implementation
+http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
+
+1. Node - how to define?
+2. Which heuristic? Try Manhattan, Euclidian, Diagonal.
+
+
+Definitions:
+g = cost to get to this node from starting node
+h = cost to get from this node to final node (estimated) via heuristic.
+f = g + h
+
+http://www.untoldentertainment.com/blog/2010/08/20/introduction-to-a-a-star-pathfinding-in-actionscript-3-as3-2/
+
+Provide a starting node and an destination node
+Add the starting node to our open list (which should have been empty)
+Start our search loop:
+a. Pick the node currently in the open list with the lowest cost – we will call this node the current node. When we first run the loop this will obviously be our starting node.
+b. If the current node is the same as the destination then we are done and we can move on to step 5.
+c. Check every directly connected node. In a tile based world this would be up to 8 tiles. For our implementation we will provide a function that determines all the connected nodes. For each node that is connected:
+i. If the node is not traversable (you can’t move to it because it Is occupied or for some other reason) or the node is already in the open list or in the closed list we can skip and move on to the next node in the list of connected nodes. Otherwise continue to ii.
+ii. Calculate the cost of that node.
+iii. Set the current node as the parentNode.
+iv. Add the node to the open list.
+d. Add the current node to the closed list.
+Now return to step 3 (loop again) with the newly updated open list. (The loop should keep running until it hits the destination node)
+We have found the destination node (hurrah!) Now we create a list of nodes that will be our path list and we will add the destination node to that list.
+Add the parent node of the destination node to the path list.
+Add the parent of the previous node to the path list, we will continue to do this until we have added our starting node.
+
+
+public interface INode
+{
+	function get f():Number;
+	function get g():Number;
+	function get h():Number;
+	function get x():Number;
+	function get y():Number;
+	function get parentNode():INode;
+	function get traversable():Boolean;
+	function set f(value:Number):void;
+	function set g(value:Number):void;
+	function set h(value:Number):void;
+	function set parentNode(value:INode):void;
+	function set traversable(value:Boolean):void;
+}
+
+public class Pathfinder
+{
+	public static var heuristic:Function = Pathfinder.diagonalHeuristic;
+
+
+
+	while (currentNode != destinationNode) {
+		connectedNodes = connectedNodeFunction( currentNode );
+		l = connectedNodes.length;
+		for (i = 0; i < l; ++i) {
+			testNode = connectedNodes[i];
+			if (testNode == currentNode || testNode.travesable == false) continue;
+			g = currentNode.g  + travelCost;
+			h = heuristic( testNode, destinationNode, travelCost);
+			f = g + h;
+			if ( Pathfinder.isOpen(testNode, openNodes) || Pathfinder.isClosed( testNode, closedNodes) )	{
+				if(testNode.f > f)
+				{
+
+					testNode.f = f;
+					testNode.g = g;
+					testNode.h = h;
+					testNode.parentNode = currentNode;
+				}
+			}else {
+				testNode.f = f;
+				testNode.g = g;
+				testNode.h = h;
+				testNode.parentNode = currentNode;
+				openNodes.push(testNode);
+			}
+		}
+		closedNodes.push( currentNode );
+		if (openNodes.length == 0) {
+			return null;
+		}
+		openNodes.sortOn('f', Array.NUMERIC);
+		currentNode = openNodes.shift() as INode;
+	}
