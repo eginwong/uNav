@@ -46,6 +46,24 @@ var obj2 = {
   }
 };
 
+var obj3 =     {
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -80.540973,
+      43.470131,
+      1
+    ]
+  },
+  "properties": {
+    "building_code": "RCH",
+    "id": "120S",
+    "utility": "Stairs",
+    "name":""
+  }
+};
+
 function Graphnode (obj){
   // *** fields ***
   this._id = obj.properties.building_code + obj.properties.id;
@@ -65,7 +83,7 @@ function Graph () {
   this._nodes = [];       // each item in the list will be a Graphnode
   this._nodeCount = 0;
   this._edgeCount = 0;
-  this._adjacency = {};
+  this._adjacency = [];
 }
 
 Graph.prototype = {
@@ -97,9 +115,10 @@ Graph.prototype = {
     --this._nodeCount;
   },
 
-//can't append. not sure how to design the best way.
   addEdge: function(node1, node2) {
     //check if node exists
+    var edgeAdd = true;
+    var insert = false;
     if (!this.exists(node1) || !this.exists(node2)) {
       console.log("undefined node");
     }
@@ -107,29 +126,65 @@ Graph.prototype = {
       // calculate and store distance
       var weight = manhattan(node1,node2);
       if(!this.exists(this._adjacency[node1._id])){
-        this._adjacency[node1._id] = {"id": node2._id, "weight": weight};
+        this._adjacency[node1._id] = [{"id": node2._id, "weight": weight}];
+        insert = true;
       }
       else {
-        this._adjacency[node1._id].push({"id": node2._id, "weight": weight});
+        //check if that id already exists
+        var index;
+        $.each(this._adjacency[node1._id], function (ind, val) {
+          if(node2._id == val.id) {
+            index = ind;
+          }
+        });
+
+        if(index > -1){
+          this._adjacency[node1._id].splice(index, 1);
+          this._adjacency[node1._id].splice(index, 0, {"id": node2._id, "weight": weight});
+          insert = true;
+          edgeAdd = false;
+        }
+        if (!insert) {
+          this._adjacency[node1._id].push({"id": node2._id, "weight": weight});
+        }
       }
+      //reset vars for next node.
+      insert = false;
+      index = -1;
 
       if(!this.exists(this._adjacency[node2._id])){
-        this._adjacency[node2._id] = {"id": node1._id, "weight": weight};
+        this._adjacency[node2._id] = [{"id": node1._id, "weight": weight}];
       }
       else {
-        this._adjacency[node2._id].push({"id": node1._id, "weight": weight});
+        //check if that id already exists
+        $.each(this._adjacency[node2._id], function (ind, val) {
+          if(node1._id == val.id) {
+            index = ind;
+          }
+        });
+
+        if(index > -1){
+          this._adjacency[node2._id].splice(index, 1);
+          this._adjacency[node2._id].splice(index, 0, {"id": node1._id, "weight": weight});
+          insert = true;
+          //redundant but makes the code clearer
+          edgeAdd = false;
+        }
+        if (!insert) {
+          this._adjacency[node2._id].push({"id": node1._id, "weight": weight});
+        }
       }
     }
-    ++this._edgeCount;
+    if(edgeAdd){++this._edgeCount;}
   },
 
-//not working as of yet
+  //not working as of yet
   dropEdge: function(node1, node2) {
     if (!this.exists(node1) || !this.exists(node2)) {
       console.log("undefined node");
     }
     else{
-      if(!this.exists(this._adjacency[node1._id])){
+      if(this.exists(this._adjacency[node1._id])){
         this._adjacency[node1._id] = {"id": node2._id, "weight": weight};
       }
       else {
@@ -174,9 +229,11 @@ function diagonal(source, dest) {
 var g = new Graph();
 g.addNode(obj);
 g.addNode(obj2);
+g.addNode(obj3);
 // g.dropNode("RCH122H7")
 console.log(g._nodeCount);
 g.addEdge(g._nodes[0], g._nodes[1]);
+g.addEdge(g._nodes[0], g._nodes[2]);
 console.log(g.adjacent(g._nodes[0]));
 // console.log(manhattan(g._nodes[0],g._nodes[1]));
 // console.log(euclidean(g._nodes[0],g._nodes[1]));
