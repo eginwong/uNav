@@ -17,6 +17,7 @@ function Graphnode (obj){
   this._f;
   this._g;
   this._h;
+  this._parentNode;
 
   // *** methods ***
 
@@ -39,16 +40,16 @@ Graph.prototype = {
   addNode: function(node) {
     var newName = node.properties.building_code + node.properties.id;
     var check = true;
-    console.log(newName);
-    for (var i=0; i< this._nodes.length; i++) {
-      if(this._nodes[i]._id == newName){
+    $.each(this._nodes, function(ind, val) {
+      if(val._id == newName){
         console.log("this node has already been added");
         check = false;
       }
-    }
+    });
     if(check) {this._nodes.push(new Graphnode(node));++this._nodeCount;}
   },
 
+//*****Delete all edges associated with this.
   dropNode: function(id) {
     for(var i=this._nodes.length-1; i>=0; i--) {
       if( this._nodes[i]._id == id) {
@@ -57,6 +58,7 @@ Graph.prototype = {
       }
     }
     --this._nodeCount;
+
   },
 
   addEdge: function(node1, node2) {
@@ -68,9 +70,8 @@ Graph.prototype = {
     }
     else {
       // calculate and store distance
-      var weight = manhattan(node1,node2);
       if(!this.exists(this._adjacency[node1._id])){
-        this._adjacency[node1._id] = [{"id": node2._id, "weight": weight}];
+        this._adjacency[node1._id] = [{"id": node2._id}];
         insert = true;
       }
       else {
@@ -84,12 +85,12 @@ Graph.prototype = {
 
         if(index > -1){
           this._adjacency[node1._id].splice(index, 1);
-          this._adjacency[node1._id].splice(index, 0, {"id": node2._id, "weight": weight});
+          this._adjacency[node1._id].splice(index, 0, {"id": node2._id});
           insert = true;
           edgeAdd = false;
         }
         if (!insert) {
-          this._adjacency[node1._id].push({"id": node2._id, "weight": weight});
+          this._adjacency[node1._id].push({"id": node2._id});
         }
       }
       //reset vars for next node.
@@ -97,7 +98,7 @@ Graph.prototype = {
       index = -1;
 
       if(!this.exists(this._adjacency[node2._id])){
-        this._adjacency[node2._id] = [{"id": node1._id, "weight": weight}];
+        this._adjacency[node2._id] = [{"id": node1._id}];
       }
       else {
         //check if that id already exists
@@ -163,20 +164,4 @@ Graph.prototype = {
   adjacent: function(node){
     return this._adjacency[node._id];
   }
-}
-
-//Heurisitic Definitions
-function manhattan(source, dest) {
-  return (Math.abs(source._x - dest._x) + Math.abs(source._y - dest._y));
-}
-
-function euclidean(source, dest) {
-  return Math.sqrt(Math.pow(source._x - dest._x, 2) + Math.pow(source._y - dest._y, 2));
-}
-
-//Chebyshev's algorithm, D2=D=1
-function diagonal(source, dest) {
-  var dx = Math.abs(source._x - dest._x);
-  var dy = Math.abs(source._y - dest._y);
-  return ((dx + dy) - Math.min(dx,dy));
 }
