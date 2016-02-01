@@ -83,7 +83,7 @@ function Graph () {
   this._nodes = [];       // each item in the list will be a Graphnode
   this._nodeCount = 0;
   this._edgeCount = 0;
-  this._adjacency = [];
+  this._adjacency = {};
 }
 
 Graph.prototype = {
@@ -184,22 +184,36 @@ Graph.prototype = {
       console.log("undefined node");
     }
     else{
-      if(this.exists(this._adjacency[node1._id])){
-        this._adjacency[node1._id] = {"id": node2._id, "weight": weight};
-      }
-      else {
-        // this._adjacency[node1._id].push{"id": node2._id, "weight": weight};
-      }
+      var index;
+      var edgeDrop = false;
+      $.each(this._adjacency[node1._id], function (ind, val) {
+        if(node2._id == val.id) {
+          index = ind;
+        }
+      });
 
-      if(!this.exists(this._adjacency[node2._id])){
-        this._adjacency[node2._id] = {"id": node1._id, "weight": weight};
+      if(index > -1){
+        this._adjacency[node1._id].splice(index, 1);
+        edgeDrop = true;
+        console.log("edge1 has been dropped");
       }
-      else {
-        // this._adjacency[node2._id].push{"id": node1._id, "weight": weight};
+      //reseting vars, although redundant for edgeDrop.
+      index = -1;
+      edgeDrop = false;
+
+      $.each(this._adjacency[node2._id], function (ind, val) {
+        if(node1._id == val.id) {
+          index = ind;
+        }
+      });
+
+      if(index > -1){
+        this._adjacency[node2._id].splice(index, 1);
+        edgeDrop = true;
+        console.log("edge2 has been dropped");
       }
+      if(edgeDrop){--this._edgeCount;}
     }
-
-    --this._edgeCount;
   },
 
   adjacent: function(node){
@@ -223,7 +237,6 @@ function diagonal(source, dest) {
   return ((dx + dy) - Math.min(dx,dy));
 }
 
-
 // let's do some testing!
 
 var g = new Graph();
@@ -234,6 +247,7 @@ g.addNode(obj3);
 console.log(g._nodeCount);
 g.addEdge(g._nodes[0], g._nodes[1]);
 g.addEdge(g._nodes[0], g._nodes[2]);
+// g.dropEdge(g._nodes[0], g._nodes[2]);
 console.log(g.adjacent(g._nodes[0]));
 // console.log(manhattan(g._nodes[0],g._nodes[1]));
 // console.log(euclidean(g._nodes[0],g._nodes[1]));
