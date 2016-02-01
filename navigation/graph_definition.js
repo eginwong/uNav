@@ -1,68 +1,12 @@
 'use strict'
 //Requires jQuery
 /*
-2. Add functions to add nodes/setnodes, add eges, set edges.
-
-4. test out graph object
-5. define heuristics
 6. start on a star
 */
 
 // Graph will always be undirected, as per our requirements.
 
 // Graph needs x, y, name, f, g, h, connected nodes,
-
-var obj = {
-  "type":"Feature",
-  "properties":{
-    "building_code":"RCH",
-    "utility": "Hallway",
-    "id":"122H7",
-    "name":""
-  },
-  "geometry":{
-    "type":"Point",
-    "coordinates":[
-      -80.54053791999999,
-      43.469295460000005
-    ]
-  }
-};
-
-var obj2 = {
-  "type":"Feature",
-  "properties":{
-    "building_code":"RCH",
-    "utility": "Hallway",
-    "id": "122H6",
-    "name":""
-  },
-  "geometry":{
-    "type":"Point",
-    "coordinates":[
-      -80.54059842,
-      43.469295460000005
-    ]
-  }
-};
-
-var obj3 =     {
-  "type": "Feature",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [
-      -80.540973,
-      43.470131,
-      1
-    ]
-  },
-  "properties": {
-    "building_code": "RCH",
-    "id": "120S",
-    "utility": "Stairs",
-    "name":""
-  }
-};
 
 function Graphnode (obj){
   // *** fields ***
@@ -236,19 +180,3 @@ function diagonal(source, dest) {
   var dy = Math.abs(source._y - dest._y);
   return ((dx + dy) - Math.min(dx,dy));
 }
-
-// let's do some testing!
-
-var g = new Graph();
-g.addNode(obj);
-g.addNode(obj2);
-g.addNode(obj3);
-// g.dropNode("RCH122H7")
-console.log(g._nodeCount);
-g.addEdge(g._nodes[0], g._nodes[1]);
-g.addEdge(g._nodes[0], g._nodes[2]);
-// g.dropEdge(g._nodes[0], g._nodes[2]);
-console.log(g.adjacent(g._nodes[0]));
-// console.log(manhattan(g._nodes[0],g._nodes[1]));
-// console.log(euclidean(g._nodes[0],g._nodes[1]));
-// console.log(diagonal(g._nodes[0],g._nodes[1]));

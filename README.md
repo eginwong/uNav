@@ -15,9 +15,9 @@ Killed the demo today for PUM 1 with medium fidelity. Got to crank it and figure
 For GeoJSON, should we use multipoints or should we use a combination of [points](http://geojson.org/geojson-spec.html#positions)
  instead?
 
-2. Are we deploying via some web server? Running locally? Throwing python scripts online? Chucking python scripts entirely?
+~~2. Are we deploying via some web server? Running locally? Throwing python scripts online? Chucking python scripts entirely?
 [A* for JS](http://www.briangrinstead.com/blog/astar-search-algorithm-in-javascript)
-Note: Python got chucked. Have to properly apply A* in JavaScript.
+Note: Python got chucked. Have to properly apply A* in JavaScript.~~
 
 ###January 7, 2016
 
