@@ -957,8 +957,8 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          106,
-          390
+          -80.541037,
+          43.470225
         ]
       }
     },
@@ -973,8 +973,8 @@
       "geometry":{
         "type":"Point",
         "coordinates":[
-          106,
-          504
+          -80.541000,
+          43.470168
         ]
       }
     }
