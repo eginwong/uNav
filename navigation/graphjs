@@ -1,6 +1,3 @@
-function astar(g,source,dest){
-
-}
 //Good references for implementation
 http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 
@@ -26,46 +23,3 @@ http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 // We have found the destination node (hurrah!) Now we create a list of nodes that will be our path list and we will add the destination node to that list.
 // Add the parent node of the destination node to the path list.
 // Add the parent of the previous node to the path list, we will continue to do this until we have added our starting node.
-//
-//
-
-//
-// public class Pathfinder
-// {
-// 	public static var heuristic:Function = Pathfinder.diagonalHeuristic;
-//
-//
-//
-// 	while (currentNode != destinationNode) {
-// 		connectedNodes = connectedNodeFunction( currentNode );
-// 		l = connectedNodes.length;
-// 		for (i = 0; i < l; ++i) {
-// 			testNode = connectedNodes[i];
-// 			if (testNode == currentNode || testNode.travesable == false) continue;
-// 			g = currentNode.g  + travelCost;
-// 			h = heuristic( testNode, destinationNode, travelCost);
-// 			f = g + h;
-// 			if ( Pathfinder.isOpen(testNode, openNodes) || Pathfinder.isClosed( testNode, closedNodes) )	{
-// 				if(testNode.f > f)
-// 				{
-//
-// 					testNode.f = f;
-// 					testNode.g = g;
-// 					testNode.h = h;
-// 					testNode.parentNode = currentNode;
-// 				}
-// 			}else {
-// 				testNode.f = f;
-// 				testNode.g = g;
-// 				testNode.h = h;
-// 				testNode.parentNode = currentNode;
-// 				openNodes.push(testNode);
-// 			}
-// 		}
-// 		closedNodes.push( currentNode );
-// 		if (openNodes.length == 0) {
-// 			return null;
-// 		}
-// 		openNodes.sortOn('f', Array.NUMERIC);
-// 		currentNode = openNodes.shift() as INode;
-// 	}
