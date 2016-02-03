@@ -8,7 +8,7 @@ http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 //
 // http://www.untoldentertainment.com/blog/2010/08/20/introduction-to-a-a-star-pathfinding-in-actionscript-3-as3-2/
 //
-// Provide a starting node and an destination node
+// Provide a starting node and an destination nodes
 // Add the starting node to our open list (which should have been empty)
 // Start our search loop:
 // a. Pick the node currently in the open list with the lowest cost – we will call this node the current node. When we first run the loop this will obviously be our starting node.
@@ -19,7 +19,6 @@ http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 // iii. Set the current node as the parentNode.
 // iv. Add the node to the open list.
 // d. Add the current node to the closed list.
-// Now return to step 3 (loop again) with the newly updated open list. (The loop should keep running until it hits the destination node)
 // We have found the destination node (hurrah!) Now we create a list of nodes that will be our path list and we will add the destination node to that list.
 // Add the parent node of the destination node to the path list.
 // Add the parent of the previous node to the path list, we will continue to do this until we have added our starting node.

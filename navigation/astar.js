@@ -3,7 +3,7 @@ function aStar (graph, src, sink){
     // initializing all the variables.
     var openNodes = new BinaryHeap(function(x){return x;});
     var closedNodes = [];
-    var currentNode; var destNode; var testNode;
+    var startNode; var currentNode; var destNode; var testNode;
     $.each(graph._nodes, function(ind, val) {
       if(val._id == src){
         currentNode = graph._nodes[ind];
@@ -17,33 +17,39 @@ function aStar (graph, src, sink){
       }
     });
 
+    //get starting node
+    startNode = currentNode;
+
     var connectedNodes;
     var g; var h; var f;
     var l = graph._nodes.length;
 
-    // while (currentNode != destNode) {
-    connectedNodes = findConnectedNodes(graph, currentNode._id );
-    l = connectedNodes.length;
-    for (var i = 0; i < l; ++i) {
-      $.each(graph._nodes, function(ind, val) {
-        if(val._id == connectedNodes[i].id){
-          testNode = graph._nodes[ind];
-        }
-      });
-      console.log(testNode);
-      if (graph._adjacency[testNode._id].length > 0) {
-        //***** figure out what's wrong with f,g,h
-        g = currentNode._g;
-        h = manhattan(testNode, destNode);
-        f = g + h;
-        console.log("The value for f is " + f);
-        if ( $.inArray(testNode, openNodes) > -1 || $.inArray(testNode, closedNodes) > -1)	{
-          if(testNode._f > f)
-          {
-            testNode._f = f;
-            testNode._g = g;
-            testNode._h = h;
-            testNode._parentNode = currentNode;
+    while (currentNode != destNode) {
+      console.log("The current node is: " + currentNode._id);
+      connectedNodes = findConnectedNodes(graph, currentNode._id);
+      l = connectedNodes.length;
+      for (var i = 0; i < l; ++i) {
+        $.each(graph._nodes, function(ind, val) {
+          if(val._id == connectedNodes[i].id){
+            testNode = graph._nodes[ind];
+          }
+        });
+        console.log("The testnode is: " + testNode._id);
+        // technically any node you connect to will be greater than 0, as there has to be one edge to connect to there.
+        // However, your destination node may only have one edge connecting to it too. >_<
+        if (graph._adjacency[testNode._id].length > 0) {
+          g = currentNode._g + manhattan(currentNode, testNode);
+          h = manhattan(testNode, destNode);
+          f = g + h;
+          console.log("The value for f is " + f);
+          if ( $.inArray(testNode, openNodes) > -1 || $.inArray(testNode, closedNodes) > -1)	{
+            if(testNode._f > f)
+            {
+              testNode._f = f;
+              testNode._g = g;
+              testNode._h = h;
+              testNode._parentNode = currentNode;
+            }
           }
           else {
             testNode._f = f;
@@ -54,16 +60,19 @@ function aStar (graph, src, sink){
           }
         }
       }
+      closedNodes.push( currentNode );
+      if (openNodes.length == 0) {
+        return null;
+      }
+      currentNode = openNodes.pop();
     }
-
-    // 		} <-- for
-    // 		closedNodes.push( currentNode );
-    // 		if (openNodes.length == 0) {
-    // 			return null;
-    // 		}
-    // 		openNodes.sortOn('f', Array.NUMERIC);
-    // 		currentNode = openNodes.shift() as INode;
-    // }
+    var dist;
+    console.log("Your path from " + startNode._id + " to " + destNode._id + " is: ");
+    $.each(buildPath(startNode, destNode), function (ind, val){
+      console.log(val._id + ", ");
+      dist = val._f;
+    });
+    console.log("with distance: " + dist);
   }
   else {
     console.log("your nodes don't exist");
@@ -73,6 +82,17 @@ function aStar (graph, src, sink){
 function findConnectedNodes(graph, nodeID)
 {
   return graph._adjacency[nodeID];
+}
+
+function buildPath(source, dest){
+	var path = [];
+	var node = dest;
+	path.push(node);
+	while (node != source) {
+		node = node._parentNode;
+		path.unshift( node );
+	}
+	return path;
 }
 
 //Heurisitic Definitions

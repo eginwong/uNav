@@ -1,12 +1,7 @@
 'use strict'
 //Requires jQuery
-/*
-6. start on a star
-*/
 
 // Graph will always be undirected, as per our requirements.
-
-// Graph needs x, y, name, f, g, h, connected nodes,
 
 function Graphnode (obj){
   // *** fields ***
@@ -18,13 +13,9 @@ function Graphnode (obj){
   this._g;
   this._h;
   this._parentNode;
-
-  // *** methods ***
-
 };
 
 function Graph () {
-  // *** fields ***
   this._nodes = [];       // each item in the list will be a Graphnode
   this._nodeCount = 0;
   this._edgeCount = 0;
@@ -51,13 +42,28 @@ Graph.prototype = {
 
 //*****Delete all edges associated with this.
   dropNode: function(id) {
-    for(var i=this._nodes.length-1; i>=0; i--) {
-      if( this._nodes[i]._id == id) {
-        this._nodes.splice(i,1);
-        console.log("the node is removed.");
+    var target;
+    $.each(this._nodes, function(ind, val) {
+      console.log(ind);
+      console.log(val);
+      if(val._id == id){
+        target = val;
       }
+    });
+    if(this._adjacency[target._id] == 'undefined') {
+      console.log("node not defined for edges");
     }
-    --this._nodeCount;
+    // var removeArray = ;
+    // console.log(removeArray);
+
+    // for(var i=this._nodes.length-1; i>=0; i--) {
+    //   if( this._nodes[i]._id == id) {
+    //     this._nodes.splice(i,1);
+    //     console.log("the node is removed.");
+    //   }
+    // }
+    // --this._nodeCount;
+
 
   },
 
@@ -110,20 +116,19 @@ Graph.prototype = {
 
         if(index > -1){
           this._adjacency[node2._id].splice(index, 1);
-          this._adjacency[node2._id].splice(index, 0, {"id": node1._id, "weight": weight});
+          this._adjacency[node2._id].splice(index, 0, {"id": node1._id});
           insert = true;
           //redundant but makes the code clearer
           edgeAdd = false;
         }
         if (!insert) {
-          this._adjacency[node2._id].push({"id": node1._id, "weight": weight});
+          this._adjacency[node2._id].push({"id": node1._id});
         }
       }
     }
     if(edgeAdd){++this._edgeCount;}
   },
 
-  //not working as of yet
   dropEdge: function(node1, node2) {
     if (!this.exists(node1) || !this.exists(node2)) {
       console.log("undefined node");
