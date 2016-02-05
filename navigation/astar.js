@@ -4,6 +4,7 @@ function aStar (graph, src, sink){
     var openNodes = new BinaryHeap(function(x){return x;});
     var closedNodes = [];
     var startNode; var currentNode; var destNode; var testNode;
+
     $.each(graph._nodes, function(ind, val) {
       if(val._id == src){
         currentNode = graph._nodes[ind];
@@ -24,7 +25,8 @@ function aStar (graph, src, sink){
     var g; var h; var f;
     var l = graph._nodes.length;
 
-    while (currentNode != destNode) {
+    while (currentNode != destNode && currentNode != undefined) {
+      console.log(currentNode);
       console.log("The current node is: " + currentNode._id);
       connectedNodes = findConnectedNodes(graph, currentNode._id);
       l = connectedNodes.length;
@@ -68,11 +70,17 @@ function aStar (graph, src, sink){
     }
     var dist;
     console.log("Your path from " + startNode._id + " to " + destNode._id + " is: ");
-    $.each(buildPath(startNode, destNode), function (ind, val){
-      console.log(val._id + ", ");
-      dist = val._f;
-    });
-    console.log("with distance: " + dist);
+    var path = buildPath(startNode, destNode);
+    if (path.length == 0){
+      console.log("No path was available.");
+    }
+    else{
+      $.each(path, function (ind, val){
+        console.log(val._id + ", ");
+        dist = val._f;
+      });
+      console.log("with distance: " + dist);
+    }
   }
   else {
     console.log("your nodes don't exist");
@@ -85,14 +93,17 @@ function findConnectedNodes(graph, nodeID)
 }
 
 function buildPath(source, dest){
-	var path = [];
-	var node = dest;
-	path.push(node);
-	while (node != source) {
-		node = node._parentNode;
-		path.unshift( node );
-	}
-	return path;
+  var path = [];
+  var node = dest;
+  path.push(node);
+  while (node != source) {
+    node = node._parentNode;
+    if(node == undefined){
+      return [];
+    }
+    path.unshift( node );
+  }
+  return path;
 }
 
 //Heurisitic Definitions

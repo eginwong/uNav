@@ -24,54 +24,75 @@ function Graph () {
 
 Graph.prototype = {
 
+  // Check if node exists.
   exists: function(node){
-    return (typeof node === 'undefined') ? false: true;
+    return (typeof node == 'undefined') ? false: true;
   },
 
-  addNode: function(node) {
+  retr: function(id) {
+    var index;
+    $.each(this._nodes, function(ind, val) {
+      if(val._id === id){
+        index = ind;
+      }
+    });
+    return this._nodes[index];
+  },
+
+  adjacent: function(node){
+    return this._adjacency[node._id];
+  },
+
+  addNode: function(graph, node) {
     var newName = node.properties.building_code + node.properties.id;
-    var check = true;
-    $.each(this._nodes, function(ind, val) {
-      if(val._id == newName){
+    var obj = graph.retr(node);
+    if (obj != undefined){
+      if(obj._id == newName){
         console.log("this node has already been added");
-        check = false;
       }
-    });
-    if(check) {this._nodes.push(new Graphnode(node));++this._nodeCount;}
-  },
-
-//*****Delete all edges associated with this.
-  dropNode: function(id) {
-    var target;
-    $.each(this._nodes, function(ind, val) {
-      console.log(ind);
-      console.log(val);
-      if(val._id == id){
-        target = val;
-      }
-    });
-    if(this._adjacency[target._id] == 'undefined') {
-      console.log("node not defined for edges");
     }
-    // var removeArray = ;
-    // console.log(removeArray);
-
-    // for(var i=this._nodes.length-1; i>=0; i--) {
-    //   if( this._nodes[i]._id == id) {
-    //     this._nodes.splice(i,1);
-    //     console.log("the node is removed.");
-    //   }
-    // }
-    // --this._nodeCount;
-
-
+    else {
+      this._nodes.push(new Graphnode(node));
+      ++this._nodeCount;
+    }
   },
 
-  addEdge: function(node1, node2) {
+  dropNode: function(graph, id) {
+    var target = graph.retr(id);
+
+    if(target){
+      // Removing connected edges.
+      var removeArray = this._adjacency[target._id].slice();
+      if(removeArray == undefined) {
+        console.log("Node does not have defined edges.");
+      }
+      else{
+        $.each(removeArray, function(ind, val){
+          graph.dropEdge(graph, target._id, val.id);
+        });
+        delete this._adjacency[target._id];
+      }
+      // for actually removing the node.
+      for(var i=this._nodes.length-1; i>=0; i--) {
+        if( this._nodes[i]._id == id) {
+          this._nodes.splice(i,1);
+          console.log("the node is removed.");
+        }
+      };
+      --this._nodeCount;
+    }
+    else {
+      console.log("This node doesn't exist");
+    }
+  },
+
+  addEdge: function(graph, id1, id2) {
     //check if node exists
     var edgeAdd = true;
     var insert = false;
-    if (!this.exists(node1) || !this.exists(node2)) {
+    var node1 = graph.retr(id1);
+    var node2 = graph.retr(id2);
+    if (node1 == undefined || node2 == undefined) {
       console.log("undefined node");
     }
     else {
@@ -129,8 +150,10 @@ Graph.prototype = {
     if(edgeAdd){++this._edgeCount;}
   },
 
-  dropEdge: function(node1, node2) {
-    if (!this.exists(node1) || !this.exists(node2)) {
+  dropEdge: function(graph, id1, id2) {
+    var node1 = graph.retr(id1);
+    var node2 = graph.retr(id2);
+    if (node1 == undefined || node2 == undefined) {
       console.log("undefined node");
     }
     else{
@@ -165,8 +188,4 @@ Graph.prototype = {
       if(edgeDrop){--this._edgeCount;}
     }
   },
-
-  adjacent: function(node){
-    return this._adjacency[node._id];
-  }
 }

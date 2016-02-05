@@ -85,18 +85,19 @@ var obj4 = {
 
 
 var g = new Graph();
-g.addNode(obj);
-g.addNode(obj2);
-g.addNode(obj3);
-g.addNode(obj4);
-// g.dropNode("RCH122H6");
-console.log("The node count is " + g._nodeCount);
-g.addEdge(g._nodes[0], g._nodes[1]);
-g.addEdge(g._nodes[1], g._nodes[2]);
-g.addEdge(g._nodes[3], g._nodes[2]);
-// g.dropEdge(g._nodes[0], g._nodes[2]);
-console.log("The adjacent nodes to RCH122H7 are: " + g.adjacent(g._nodes[0]));
-console.log("Performing A* on RCH120S to RCH122H7")
-aStar(g, "RCH120S", "RCH122H7");
+g.addNode(g, obj);
+g.addNode(g, obj2);
+g.addNode(g, obj3);
+g.addNode(g, obj4);
+// console.log("The node count is " + g._nodeCount);
+g.addEdge(g, "RCH122H7", "RCH122H6");
+g.addEdge(g, "RCH122H6", "RCH120S");
+g.addEdge(g, "RCH10000", "RCH120S");
+g.dropNode(g, "RCH122H6");
+
+// g.dropEdge(g, "RCH122H7", "RCH122H6");
+// console.log("The adjacent nodes to RCH122H7 are: " + g.adjacent(g._nodes[0]));
+// console.log("Performing A* on RCH120S to RCH122H7")
+// aStar(g, "RCH120S", "RCH122H7");
 </script>
 </html>
