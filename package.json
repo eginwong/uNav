@@ -1,0 +1,28 @@
+{
+  "name": "unav",
+  "version": "1.0.0",
+  "description": "FYDP for Management Engineering 2015-2016.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eginwong/uNav.git"
+  },
+  "keywords": [
+    "fydp",
+    "map",
+    "navigation"
+  ],
+  "author": "motaz alashhab, anuja chokshi, astor wong, eric wong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eginwong/uNav/issues"
+  },
+  "homepage": "https://github.com/eginwong/uNav#readme",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "express": "^4.13.4"
+  }
+}
