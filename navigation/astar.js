@@ -1,5 +1,7 @@
 function aStar (graph, src, sink){
-  if(graph.exists(src) && graph.exists(sink)){
+  //finished result to return.
+  var fin;
+  if(graph.retr(src) && graph.retr(sink)){
     // initializing all the variables.
     var openNodes = new BinaryHeap(function(x){return x;});
     var closedNodes = [];
@@ -73,16 +75,24 @@ function aStar (graph, src, sink){
     var path = buildPath(startNode, destNode);
     if (path.length == 0){
       console.log("No path was available.");
+      return fin;
     }
     else{
+      var resultArray = [];
       $.each(path, function (ind, val){
-        console.log(val._id + ", ");
+        resultArray.push(val._id);
         dist = val._f;
       });
       console.log("with distance: " + dist);
+      fin = {
+        "path": resultArray,
+        "dist": dist
+      };
+      return fin;
     }
   }
   else {
+    return fin;
     console.log("your nodes don't exist");
   }
 }
