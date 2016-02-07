@@ -1,0 +1,76 @@
+.scope{
+
+	padding: 10px;
+	/*background: url(http://www.cst.uwaterloo.ca/DSS/images/uw_map_big.jpg);*/
+	background-repeat: no-repeat;
+	background-size: 1680px 860px;
+	background-position: center center;
+	background-attachment: fixed;
+}
+
+.home{
+    
+    opacity: 0.9;
+
+}
+
+form{
+	width:360px;
+	margin:0 auto;
+	padding-bottom: 20px;
+
+}
+.search { 
+	
+	margin:3px; 
+	
+	border: 6px;
+}
+
+.rounded { 
+	border-radius:15px; 
+	-moz-border-radius:15px; 
+	-webkit-border-radius:15px; 
+}
+
+.portfolio_description {
+    position:absolute;
+    width:100%;
+    top:0;
+    background-color:rgba(255, 255, 255, 0.5);
+}
+
+.background {
+	font-size: 200px;
+}
+
+#container {
+  position: relative;
+}
+#image {
+  position: relative;
+  height: 1200px;
+  width: 1900px;
+  left: 0;
+  top: 0;
+}
+#text {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 37px;
+  font-weight: bold;
+  left: 800px;
+  top: 200px;
+}
+
+#text2 {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  left: 850px;
+  top: 250px;
+  padding-top: 10px;
+}
