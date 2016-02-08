@@ -1,3 +1,7 @@
+body {
+  font-size: 100%;
+}
+
 .scope{
 
 	padding: 10px;
@@ -44,9 +48,11 @@ form{
 
 #container {
   position: relative;
+ 
 }
 #image {
   position: relative;
+
   /*height: 1200px;
   width: 1900px;*/
   height: 100%;
@@ -54,23 +60,9 @@ form{
   left: 0;
   top: 0;
 }
-#text {
-  z-index: 100;
-  position: relative;
-  color: white;
-  font-size: 37px;
-  font-weight: bold;
-  left: 800px;
-  top: 200px;
-}
 
-#text2 {
-  z-index: 100;
-  position: relative;
-  color: white;
-  font-size: 30px;
-  font-weight: bold;
-  left: 800px;
-  top: 250px;
-  padding-top: 10px;
+.first {
+  font-size: 55px;
+  height: 100%;
+  width: 100%;
 }
