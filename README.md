@@ -1,5 +1,13 @@
 # uNav
 
+###Installation
+
+'''sh
+$ npm install
+$ cd front_end
+$ grunt serve
+'''
+
 ###January 29, 2016
 Need to figured out a way to store all the image (in an array?) and swap simultaneously when user reach a certain location (stairs) to go to the next floor.
 
