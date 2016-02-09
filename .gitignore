@@ -1,1 +1,6 @@
-.DS\_Store
+.DS_Store
+npm-debug.log
+node_modules
+dist
+.tmp
+bower_components

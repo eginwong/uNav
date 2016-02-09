@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html ng-app="uNav">
+
+  <head>
+    <title>uNav</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="css/app.css"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="scripts/app.js"></script>
+
+  </head>
+
+<body ng-controller="mainController"  class="scope" style="background-image: url({{ bgimg }})">
+  <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Welcome to uNav</a>
+        </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#home"><i class="fahome"></i> Home</a></li>
+                    <li><a href="#search"><i class="fasearch"></i> Search</a></li>
+                    <li><a href="#nearyou"><i class="fanearyou"></i> Near You</a></li>
+                </ul>
+      </div>
+  </nav>
+
+    <div id="main">
+    <div ng-view></div>
+    </div>
+
+</body>
+
+</html>
+<!--
+<html>
+ <head>
+    <title>uNav</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="main.css"></script>
+  </head>
+
+
+  <header>
+    <div class="nav navbar-nav" id="nav">
+      <ul>
+        <li class="home"><a class="active" href="#">Search</a></li>
+        <li class="about"><a href="#">Near You</a></li>
+        <li class="news"><a href="#">About</a></li>
+        <li class="contact"><a href="#">Settings</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+
+<div class="search">
+  <form action="http://www.example.com/search.php">
+    <input type="text" name="search" placeholder="Where would you like to go?" size="45">
+    <input type="submit" value="Search Here">
+  </form>
+</div>
+
+
+<div class="wrapper">
+   <img src="http://www.cst.uwaterloo.ca/DSS/images/uw_map_big.jpg" class="img-responsive" alt="Cinque Terre" width="1903" height="936">
+  <div class="overlay">
+    <h2>uNav</h2>
+    <p>Find Yourself.</p>
+  </div>
+</div>
+
+</html>
+ -->
