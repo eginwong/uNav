@@ -1,21 +1,14 @@
 {
   "name": "uNav",
-  "private": true,
+  "version": "0.0.1",
   "dependencies": {
-    "bootstrap-sass": "~3.3.5",
-    "modernizr": "~2.8.3"
-  },
-  "overrides": {
-    "bootstrap-sass": {
-      "main": [
-        "assets/stylesheets/_bootstrap.scss",
-        "assets/fonts/bootstrap/*",
-        "assets/javascripts/bootstrap.js"
-      ]
-    }
-  },
-  "devDependencies": {
-    "chai": "~3.4.2",
-    "mocha": "~2.3.4"
+    "angular": "~1.5.0",
+    "jquery": ">=2.1.1",
+    "bootstrap": "~3.2.0",
+    "angular-ui": "~0.4.0",
+    "angular-route": "latest",
+    "angular-bootstrap": "~0.11.2",
+    "angular-ui-utils": "~0.1.1",
+    "font-awesome": "latest"
   }
 }

@@ -1,0 +1,60 @@
+{
+  "type": "FeatureCollection",
+  "features": [ {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -80.541075,
+        43.470272,
+        1]
+      },
+      "properties": {
+        "name": "RCH 121S",
+        "utility": "Stairs"
+      }
+    },
+    {  "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.540973,
+          43.470131,
+          1
+        ]
+      },
+      "properties": {
+        "name": "RCH 120S",
+        "utility": "Stairs"
+      }
+    },
+    {  "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.540690,
+          43.470413,
+          1
+        ]
+      },
+      "properties": {
+        "name": "RCH 125WC",
+        "utility": "Washroom"
+      }
+    },
+    {  "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.540587,
+          43.470271, 
+          1
+        ]
+      },
+      "properties": {
+        "name": "RCH 126WC",
+        "utility": "Washroom"
+      }
+    }
+  ]
+}
