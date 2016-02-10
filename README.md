@@ -4,8 +4,12 @@
 
 ```sh
 $ npm install
-$ node index.js
+$ nodemon index.js
 ```
+
+###February 10, 2016
+Rewrote/ported codebase into nodejs and npm. No longer using grunt but that may change in the future. The application can now be deployed onto heroku.
+
 
 ###February 8, 2016
 Also destroyed the PUM2 demo today.
