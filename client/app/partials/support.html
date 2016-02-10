@@ -1,25 +1,11 @@
-<!DOCTYPE HTML>
-<head>
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
   <script type="text/javascript">
   function mailIt() {
-    // var elms=document.forms[0].elements;
-
-    // //var q='Dear '+elms.name.value+'&#37;0AYour '+elms.comment.value+' in bla bla ...';
-
-    // document.forms[0].action='mailto:astorcswong@gmail.com?cc='+elms.email.value+'&subject=uNav '+elms.Reason.value+'&body=Dear '+elms.name.value+'&#37;0AYour '+elms.comment.value+' in bla bla ...';
-
-    // document.forms[0].submit();
-
     var link = "mailto:astorcswong@gmail.com"
     + "?cc=" +escape(document.getElementById('email').value)
     + "&subject= uNav "+ escape(document.getElementById('Reason').value)
     + "&body=Your Name: "+ escape(document.getElementById('name').value)+
     "%0AReason to Contact: "+ escape(document.getElementById('Reason').value)+
     "%0AComments: "+ escape(document.getElementById('comment').value);
-
     window.location.href = link;
   }
   </script>
@@ -30,7 +16,7 @@
 
 </head>
 <body>
-  <h>Contact uNav!</h>
+  <h1>Contact uNav!</h1>
   <p>Please fill out the form below and one of our team members will be in touch shortly!</p>
   <form action="#" method="post" onsubmit="mailIt(); return false;">
     <div>
