@@ -6,6 +6,8 @@
 $ npm install
 $ nodemon index.js
 ```
+###February 11, 2016
+Added API capability to node server through express. It's phenomenal. Returning parsed buildings at the moment, but will have to think about how to search through that array of arrays to return the exact data I want (which is what?).
 
 ###February 10, 2016
 Rewrote/ported codebase into nodejs and npm. No longer using grunt but that may change in the future. The application can now be deployed onto heroku.
