@@ -17,10 +17,11 @@
     "bower": "^1.7.7",
     "grunt-cli": "^0.1.13",
     "express": "^4.10.0",
-    "nodemon": "^1.2.1",
+    "nodemon": "latest",
     "angular": "^1.5.0",
     "jquery": ">=2.1.1",
-    "bootstrap": "^3.2.0"
+    "bootstrap": "^3.2.0",
+    "body-parser": "latest"
   },
   "scripts": {
     "postinstall": "bower install",

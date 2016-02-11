@@ -39,6 +39,7 @@ uNav.controller('mainController', function($scope) {
 
 uNav.controller('searchController', function($scope) {
   $scope.message = 'search';
+  // throw this to the backend so you don't have to keep querying each time! 
   var uw_buildings = $.getJSON("https://api.uwaterloo.ca/v2/buildings/list.geojson?key=2a7eb4185520ceff7b74992e7df4f55e", function(data) {
     var results = [];
     $.each(data.features, function(i, option) {
