@@ -9,6 +9,7 @@
     "angular-route": "latest",
     "angular-bootstrap": "~0.11.2",
     "angular-ui-utils": "~0.1.1",
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "chosen": "^1.4.2"
   }
 }

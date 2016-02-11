@@ -39,6 +39,25 @@ uNav.controller('mainController', function($scope) {
 
 uNav.controller('searchController', function($scope) {
   $scope.message = 'search';
+  var uw_buildings = $.getJSON("https://api.uwaterloo.ca/v2/buildings/list.geojson?key=2a7eb4185520ceff7b74992e7df4f55e", function(data) {
+    var results = [];
+    $.each(data.features, function(i, option) {
+      if(i != 0) {
+        results.push([option.properties.building_code, option.properties.building_name]);
+      }
+    });
+    //sort!
+    results.sort(function(a,b){
+      return a[0].localeCompare(b[0]);
+    });
+    $.each(results, function(ind, val){
+      $('#rooms').append($('<option/>').attr("value", val[0]).text(val[0] + " - " + val[1]));
+    });
+    $(".chosen-select").chosen({
+      no_results_text: "Oops, nothing found!",
+      width: "95%"
+    });
+  });
 });
 
 uNav.controller('nearyouController', function($scope) {
