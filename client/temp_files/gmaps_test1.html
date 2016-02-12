@@ -77,20 +77,20 @@
       switch (feature.getProperty('utility')) {
         case "Stairs":
         var icon = {
-          url: "../images/stairs.jpg",
+          url: "demos/stairs.jpg",
           scaledSize: new google.maps.Size(25, 25)
         };
         return {icon:icon};
         case "WC":
         var icon = {
-          url: "../images/WC.jpg",
+          url: "demos/WC.jpg",
           scaledSize: new google.maps.Size(25, 25)
         };
         return {icon: icon};
         case "Hallway":
       }
     });
-    map.data.loadGeoJson('https://raw.githubusercontent.com/eginwong/uNav/master/coordinates/room_nodes_geo.json?token=AGViNQrziYeamO_tG6Xfl6OjfOu-m5qOks5WuNO9wA%3D%3D');
+    map.data.loadGeoJson('/api/demo2/');
   }
   // Sets the map on all markers in the array.
   function setMapOnAll(map) {

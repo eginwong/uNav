@@ -26,19 +26,15 @@ http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 
 Plan:
 
-Keep the data generation separate from the other files?
-
-the jquery csv and jquerytable to csv are outside.
-
 look at changeimage and see if it'll be used.
 Start writing up edges or teach Astor how to do it.
 
 
-Look at cleaning up the frontend demo codes as well
-
 Figure out how to do search and how to return the required path to the front end
 -define what each function will do.
 
+
+Look at cleaning up the frontend demo codes as well - demo2.html
 Load up geojson on startup and into the graph.
 Integrate - astar into app.js as api call
 refer to binary heap and graph definition javascripts

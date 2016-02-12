@@ -15,7 +15,6 @@ router.route('/buildings')
 
 // get example
 .get(function(req, res) {
-  var fs = require('fs');
   if (!fs.existsSync("./uwapi_results.json")) {
     request('https://api.uwaterloo.ca/v2/buildings/list.geojson?key=2a7eb4185520ceff7b74992e7df4f55e', function (error, response, body) {
       var BuildingResults = [];
@@ -44,6 +43,28 @@ router.route('/buildings')
       res.send(data);
     })
   }
+});
+
+router.route('/demo1')
+
+.get(function(req, res){
+  fs.readFile('data/coordinates/room_nodes.json', 'utf8', function (err,data) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(data);
+  })
+});
+
+router.route('/demo2')
+
+.get(function(req, res){
+  fs.readFile('data/coordinates/room_nodes_geo.json', 'utf8', function (err,data) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(data);
+  })
 });
 
 // post example

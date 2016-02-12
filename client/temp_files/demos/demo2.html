@@ -1,8 +1,10 @@
 <html>
-<script src="../js/jquery-2.0.3.min.js"></script>
-<script src="../js/binary_heap.js"></script>
-<script src="../js/graph_definition.js"></script>
-<script src="../js/astar.js"></script>
+<script src="../../libs/jquery/dist/jquery.min.js"></script>
+
+<!-- Convert into api calls -->
+<script src="../../../server/binary_heap.js"></script>
+<script src="../../../server/graph_definition.js"></script>
+<script src="../../../server/astar.js"></script>
 
 <style>
 .container {
@@ -125,7 +127,7 @@ $(function(){
     g.addNode(g, obj4);
     $( "#codesnip" ).append('g.addNode(g, obj);<br>g.addNode(g, obj2);</br>g.addNode(g, obj3);</br>g.addNode(g, obj4);<br>');
     $("#out").html(show(g));
-    $("#idea").prop('src', '../images/demo2/g_1.png');
+    $("#idea").prop('src', 'demo2/g_1.png');
     $("#toggle").off('click').on('click', secondClick);
   }
 
@@ -137,7 +139,7 @@ $(function(){
     g.addEdge(g, "RCH10000", "RCH122H6");
     $( "#codesnip" ).append('g.addEdge(g, "RCH122H7", "RCH122H6");<br>g.addEdge(g, "RCH122H6", "RCH120S");<br>g.addEdge(g, "RCH10000", "RCH120S");<br>g.addEdge(g, "RCH10000", "RCH122H6");<br>');
     $("#out").html(show(g));
-    $("#idea").prop('src', '../images/demo2/g_2.png');
+    $("#idea").prop('src', 'demo2/g_2.png');
 
     $("#toggle").off('click').on('click', thirdClick);
   }
@@ -147,7 +149,7 @@ $(function(){
     g.dropEdge(g, "RCH10000", "RCH120S");
     $( "#codesnip" ).append('g.dropEdge(g, "RCH10000", "RCH120S");<br>');
     $("#out").html(show(g));
-    $("#idea").prop('src', '../images/demo2/g_3.png');
+    $("#idea").prop('src', 'demo2/g_3.png');
 
     $("#toggle").off('click').on('click', fourthClick);
   }
@@ -157,7 +159,7 @@ $(function(){
     g.dropNode(g, "RCH10000");
     $( "#codesnip" ).append('g.dropNode(g, "RCH10000");<br>');
     $("#out").html(show(g));
-    $("#idea").prop('src', '../images/demo2/g_4.png');
+    $("#idea").prop('src', 'demo2/g_4.png');
 
     $("#toggle").off('click').on('click', fifthClick);
   }
@@ -184,7 +186,7 @@ $(function(){
     $("#toggle").prop('value', 'Start Adventure!');
     $( "#codesnip" ).html("<p>var g = new Graph();</p>");
     $("#out").html("<p>This is the state of the graph.</p>");
-    $("#idea").prop('src', '../images/demo2/g_0.png');
+    $("#idea").prop('src', 'demo2/g_0.png');
 
     $("#toggle").off('click').on('click', seventhClick);
   }
@@ -224,7 +226,7 @@ $(function(){
   <h1>Demo - February 8, 2016</h1>
   <input type="button" id="toggle" value="Start Adventure!"/>
 
-  <img id="idea" src="../images/demo2/g_0.png" style="text-align: center">
+  <img id="idea" src="demo2/g_0.png" style="text-align: center">
   <div class="container">
     <div class="content_output" id="out">
       <p>This is the state of the graph.</p>
