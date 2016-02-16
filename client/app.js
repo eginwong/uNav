@@ -1,34 +1,32 @@
-var uNav = angular.module('uNav', ['ui', 'ui.utils', 'ngRoute', 'ui.bootstrap']);
-uNav.config(function($routeProvider) {
-  $routeProvider
+var uNav = angular.module('uNav', ['ui', 'ui.utils', 'ngRoute', 'ui.bootstrap']).
+config(function($routeProvider, $locationProvider) {
+  $locationProvider.hashPrefix('');
+  $routeProvider.
+  when('/home', { templateUrl : 'app/partials/home.html', controller  : 'mainController'}).
+  when('/search', {templateUrl : 'app/partials/search.html', controller  : 'searchController'}).
+  when('/navigation', {templateUrl : 'app/partials/navigation.html', controller  : 'navController'}).
+  when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
+  when('/about', { templateUrl : 'app/partials/about.html'}).
+  when('/support', { templateUrl : 'app/partials/support.html'})
+});
 
-  // route for the home page
-  .when('/home', {
-    templateUrl : 'app/partials/home.html',
-    controller  : 'mainController'
-  })
+uNav.service('sharedProperties', function() {
+  var stringValue = 'test string value';
+  var objectValue = {
+    data: 'test object value'
+  };
 
-  // route for the about page
-  .when('/search', {
-    templateUrl : 'app/partials/search.html',
-    controller  : 'searchController'
-  })
-
-  // route for the nearyou page
-  .when('/nearyou', {
-    templateUrl : 'app/partials/nearyou.html',
-    controller  : 'nearyouController'
-  })
-
-  .when('/about', {
-    templateUrl : 'app/partials/about.html',
-    controller  : 'aboutController'
-  })
-
-  .when('/support', {
-    templateUrl : 'app/partials/support.html',
-    controller  : 'supportController'
-  });
+  return {
+    getString: function() {
+      return stringValue;
+    },
+    setString: function(value) {
+      stringValue = value;
+    },
+    getObject: function() {
+      return objectValue;
+    }
+  }
 });
 
 // create the controller and inject Angular's $scope
@@ -37,7 +35,7 @@ uNav.controller('mainController', function($scope) {
   $scope.message = 'home';
 });
 
-uNav.controller('searchController', function($scope) {
+uNav.controller('searchController', function($scope, $location, sharedProperties) {
   $scope.message = 'search';
   // throw this to the backend so you don't have to keep querying each time!
   var uw_buildings = $.getJSON('/api/buildings/', function(data) {
@@ -52,16 +50,20 @@ uNav.controller('searchController', function($scope) {
       width: "95%"
     });
   });
+
+  // Store value in between controllers. And redirect to new page.
+  $('#rooms').change(function() {
+    sharedProperties.setString($("#rooms option:selected").val());
+    $location.path('/navigation');
+    $scope.$apply();
+  });
 });
 
 uNav.controller('nearyouController', function($scope) {
   $scope.message = 'nearyou';
 });
-
-uNav.controller('aboutController', function($scope) {
-  $scope.message = 'about';
-});
-
-uNav.controller('supportController', function($scope) {
-  $scope.message = 'support';
+uNav.controller('navController', function($scope, sharedProperties) {
+  $scope.message = 'navigation';
+  var mapImage = sharedProperties.getString();
+  $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
 });
