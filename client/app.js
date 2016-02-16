@@ -41,6 +41,7 @@ uNav.controller('searchController', function($scope) {
   $scope.message = 'search';
   // throw this to the backend so you don't have to keep querying each time!
   var uw_buildings = $.getJSON('/api/buildings/', function(data) {
+    $('#rooms').append($('<option/>').attr("value", "").text(""));
     $.each(data, function(i, val) {
       if(i != 0) {
         $('#rooms').append($('<option/>').attr("value", val[0]).text(val[0] + " - " + val[1]));

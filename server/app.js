@@ -4,6 +4,14 @@ var server = require('http').Server(app);
 var request = require('request');
 var fs = require("fs");
 
+// For navigation
+var astar = require('./astar.js');
+var graphDef = require('./graph_definition.js');
+
+var g = new graphDef();
+
+console.log(g);
+
 var router = express.Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
@@ -56,16 +64,23 @@ router.route('/demo1')
   })
 });
 
-router.route('/demo2')
+router.route('/demo3')
 
 .get(function(req, res){
   fs.readFile('data/coordinates/room_nodes_geo.json', 'utf8', function (err,data) {
     if (err) {
       res.send(err);
     }
+    // sorting alphabetically
+    // var life = JSON.parse(data);
+    // life.features.sort(function(a,b){
+    //   return (a.properties.id).localeCompare(b.properties.id);
+    // });
+    // res.send(JSON.stringify(life));
     res.send(data);
   })
 });
+
 
 // post example
 // // create a bear (accessed at POST http://localhost:8080/api/bears)

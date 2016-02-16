@@ -3,19 +3,9 @@
 
 // Graph will always be undirected, as per our requirements.
 
-function Graphnode (obj){
-  // *** fields ***
-  this._id = obj.properties.building_code + obj.properties.id;
-  this._data = obj;
-  this._x = obj.geometry.coordinates[0];
-  this._y = obj.geometry.coordinates[1];
-  this._f;
-  this._g;
-  this._h;
-  this._parentNode;
-};
+var GraphNode = require('./graphnode_definition.js');
 
-function Graph () {
+function Graph() {
   this._nodes = [];       // each item in the list will be a Graphnode
   this._nodeCount = 0;
   this._edgeCount = 0;
@@ -48,11 +38,10 @@ Graph.prototype = {
     var obj = graph.retr(node);
     if (obj != undefined){
       if(obj._id == newName){
-        console.log("this node has already been added");
       }
     }
     else {
-      this._nodes.push(new Graphnode(node));
+      this._nodes.push(new GraphNode(node));
       ++this._nodeCount;
     }
   },
@@ -76,7 +65,6 @@ Graph.prototype = {
       for(var i=this._nodes.length-1; i>=0; i--) {
         if( this._nodes[i]._id == id) {
           this._nodes.splice(i,1);
-          console.log("the node is removed.");
         }
       };
       --this._nodeCount;
@@ -168,7 +156,6 @@ Graph.prototype = {
       if(index > -1){
         this._adjacency[node1._id].splice(index, 1);
         edgeDrop = true;
-        console.log("edge1 has been dropped");
       }
       //reseting vars, although redundant for edgeDrop.
       index = -1;
@@ -183,9 +170,10 @@ Graph.prototype = {
       if(index > -1){
         this._adjacency[node2._id].splice(index, 1);
         edgeDrop = true;
-        console.log("edge2 has been dropped");
       }
       if(edgeDrop){--this._edgeCount;}
     }
   },
 }
+
+module.exports = Graph;

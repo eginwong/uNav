@@ -2,116 +2,13 @@
 <script src="../../libs/jquery/dist/jquery.min.js"></script>
 
 <!-- Convert into api calls -->
+<link rel="stylesheet" type="text/css" href="demo2.css">
 <script src="../../../server/binary_heap.js"></script>
 <script src="../../../server/graph_definition.js"></script>
 <script src="../../../server/astar.js"></script>
 
-<style>
-.container {
-  height: auto;
-  overflow: hidden;
-}
-
-.code  {
-  background: #e8f6fe;
-  /* the next props are meant to keep this block independent from the other floated one */
-  width: auto;
-  overflow: hidden;
-}
-
-.content_output {
-  width: 500px;
-  float: right;
-  background: #aafed6;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: 200px;
-}
-</style>
 
 <script>
-// let's do some testing!
-// var heap = new BinaryHeap(function(x){return x;});
-// var life = [10, 3, 4, 8, 2, 9, 7, 1, 2, 6, 5];
-// for (var i = 0; i < life.length;++i) {
-//   heap.push(i);
-// }
-// heap.remove(2);
-// while (heap.size() > 0)
-//   console.log((heap.pop()));
-
-var obj = {
-  "type":"Feature",
-  "properties":{
-    "building_code":"RCH",
-    "utility": "Hallway",
-    "id":"122H7",
-    "name":""
-  },
-  "geometry":{
-    "type":"Point",
-    "coordinates":[
-      -80.54053791999999,
-      43.469295460000005
-    ]
-  }
-};
-
-var obj2 = {
-  "type":"Feature",
-  "properties":{
-    "building_code":"RCH",
-    "utility": "Hallway",
-    "id": "122H6",
-    "name":""
-  },
-  "geometry":{
-    "type":"Point",
-    "coordinates":[
-      -80.54059842,
-      43.469295460000005
-    ]
-  }
-};
-
-var obj3 = {
-  "type": "Feature",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [
-      -80.540973,
-      43.470131,
-      1
-    ]
-  },
-  "properties": {
-    "building_code": "RCH",
-    "id": "120S",
-    "utility": "Stairs",
-    "name":""
-  }
-};
-
-var obj4 = {
-  "type":"Feature",
-  "properties":{
-    "building_code":"RCH",
-    "utility": "Hallway",
-    "id": "10000",
-    "name":"Decoy"
-  },
-  "geometry":{
-    "type":"Point",
-    "coordinates":[
-      1,
-      43
-    ]
-  }
-};
 
 var g;
 

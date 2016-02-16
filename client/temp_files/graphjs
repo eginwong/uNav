@@ -29,12 +29,28 @@ Plan:
 look at changeimage and see if it'll be used.
 Start writing up edges or teach Astor how to do it.
 
-
-Figure out how to do search and how to return the required path to the front end
--define what each function will do.
-
-
-Look at cleaning up the frontend demo codes as well - demo2.html
 Load up geojson on startup and into the graph.
-Integrate - astar into app.js as api call
-refer to binary heap and graph definition javascripts
+
+finish up with integrating backend functionality to front end and finish cleaning up the code.
+
+return json objects to frontend in node
+
+@me: use google maps for now with api for waypoints and look into if you can superimpose a map, from qgis on there.
+
+geolocation services and return that to user
+
+define api endpoints for all the points in node (define which ones)
+
+
+
+
+
+WHAT DO I NEED FOR FUNCTIONING PROTOTYPE?
+
+-passing input from one screen to another (from choosing building)
+-take two inputs as your A* algorithm
+  Integrate - astar into app.js as api call
+-create all the Edges
+-return a path to the front end
+-display a path in the front end through some sort of mapping
+-when you select a location, a marker shows up where it is, with directions + path. Ensure to disable hallways
