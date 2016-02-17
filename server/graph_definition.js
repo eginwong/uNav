@@ -21,11 +21,11 @@ Graph.prototype = {
 
   retr: function(id) {
     var index;
-    $.each(this._nodes, function(ind, val) {
-      if(val._id === id){
-        index = ind;
+    for(var i = 0; i < this._nodes.length; i++){
+      if(this._nodes[i] === id) {
+        index = i;
       }
-    });
+    }
     return this._nodes[index];
   },
 
@@ -56,9 +56,11 @@ Graph.prototype = {
         console.log("Node does not have defined edges.");
       }
       else{
-        $.each(removeArray, function(ind, val){
-          graph.dropEdge(graph, target._id, val.id);
-        });
+        for (var i = 0; i < removeArray.length; i++)
+        {
+          graph.dropEdge(graph, target._id, removeArray[i].id);
+
+        }
         delete this._adjacency[target._id];
       }
       // for actually removing the node.
@@ -92,12 +94,11 @@ Graph.prototype = {
       else {
         //check if that id already exists
         var index;
-        $.each(this._adjacency[node1._id], function (ind, val) {
-          if(node2._id == val.id) {
-            index = ind;
+        for (var i = 0; i < this._adjacency[node1._id].length; i++){
+          if(node2._id == this._adjacency[node1._id][i].id) {
+            index = i;
           }
-        });
-
+        }
         if(index > -1){
           this._adjacency[node1._id].splice(index, 1);
           this._adjacency[node1._id].splice(index, 0, {"id": node2._id});
@@ -117,11 +118,11 @@ Graph.prototype = {
       }
       else {
         //check if that id already exists
-        $.each(this._adjacency[node2._id], function (ind, val) {
-          if(node1._id == val.id) {
-            index = ind;
+        for (var i = 0; i < this._adjacency[node2._id].length; i) {
+          if(node1._id == this._adjacency[node2._id][i].id) {
+            index = i;
           }
-        });
+        }
 
         if(index > -1){
           this._adjacency[node2._id].splice(index, 1);
@@ -147,11 +148,11 @@ Graph.prototype = {
     else{
       var index;
       var edgeDrop = false;
-      $.each(this._adjacency[node1._id], function (ind, val) {
-        if(node2._id == val.id) {
-          index = ind;
+      for (var i = 0; this._adjacency[node1._id].length; i++){
+        if(node2._id == this._adjacency[node1._id][i].id) {
+          index = i;
         }
-      });
+      }
 
       if(index > -1){
         this._adjacency[node1._id].splice(index, 1);
@@ -161,11 +162,11 @@ Graph.prototype = {
       index = -1;
       edgeDrop = false;
 
-      $.each(this._adjacency[node2._id], function (ind, val) {
-        if(node1._id == val.id) {
-          index = ind;
+      for (var i = 0; this._adjacency[node2._id].length; i++){
+        if(node1._id == this._adjacency[node2._id][i].id) {
+          index = i;
         }
-      });
+      }
 
       if(index > -1){
         this._adjacency[node2._id].splice(index, 1);

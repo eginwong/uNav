@@ -9,8 +9,12 @@ var astar = require('./astar.js');
 var graphDef = require('./graph_definition.js');
 
 var g = new graphDef();
-
-console.log(g);
+fs.readFile('data/coordinates/room_nodes_geo.json', 'utf8', function (err,data) {
+  var life = JSON.parse(data);
+  for (var ind in life.features) {
+   g.addNode(g, life.features[ind]);
+  }
+});
 
 var router = express.Router();              // get an instance of the express Router
 
@@ -81,7 +85,11 @@ router.route('/demo3')
   })
 });
 
+router.route('/graph')
 
+.get(function(req,res){
+    res.send(JSON.stringify(g));
+})
 // post example
 // // create a bear (accessed at POST http://localhost:8080/api/bears)
 // .POST(function(req, res) {

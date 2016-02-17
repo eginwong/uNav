@@ -26,12 +26,7 @@ http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 
 Plan:
 
-look at changeimage and see if it'll be used.
 Start writing up edges or teach Astor how to do it.
-
-Load up geojson on startup and into the graph.
-
-finish up with integrating backend functionality to front end and finish cleaning up the code.
 
 return json objects to frontend in node
 
@@ -39,15 +34,10 @@ return json objects to frontend in node
 
 geolocation services and return that to user
 
-define api endpoints for all the points in node (define which ones)
-
-
-
 
 
 WHAT DO I NEED FOR FUNCTIONING PROTOTYPE?
 
--passing input from one screen to another (from choosing building)
 -take two inputs as your A* algorithm
   Integrate - astar into app.js as api call
 -create all the Edges
