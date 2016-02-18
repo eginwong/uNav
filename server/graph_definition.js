@@ -60,6 +60,7 @@ Graph.prototype = {
     var node1 = graph._nodes[id1];
     var node2 = graph._nodes[id2];
     if (node1 == undefined || node2 == undefined) {
+      console.log(id1 + " and " + id2);
       console.log("undefined node");
     }
     else {

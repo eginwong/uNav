@@ -5,7 +5,7 @@ var request = require('request');
 var fs = require("fs");
 
 // For navigation
-var astar = require('./astar.js');
+var algo = require('./astar.js');
 var graphDef = require('./graph_definition.js');
 
 var g = new graphDef();
@@ -14,9 +14,13 @@ fs.readFile('data/coordinates/room_nodes_geo.json', 'utf8', function (err,data) 
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
-  console.log(g);
+  fs.readFile('data/coordinates/edges_RCH01.json', 'utf8', function (err,data2) {
+    var edges = JSON.parse(data2);
+    for (var ind in edges.vals) {
+      g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
+    }
+  });
 });
-
 
 
 var router = express.Router();              // get an instance of the express Router
@@ -91,15 +95,17 @@ router.route('/demo3')
 router.route('/graph')
 
 .get(function(req,res){
-  console.log("received call");
-  fs.readFile('data/coordinates/edges_RCH01.json', 'utf8', function (err,data2) {
-    var edges = JSON.parse(data2);
-    for (var ind in edges.vals) {
-      g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
-    }
-    res.send(JSON.stringify(g));
-  });
+  res.send(JSON.stringify(g));
 })
+
+router.route('/astar/:src/:sink')
+//
+// // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+.get(function(req, res) {
+  res.send(JSON.stringify(algo.aStar(g, req.params.src, req.params.sink)));
+});
+
+
 // post example
 // // create a bear (accessed at POST http://localhost:8080/api/bears)
 // .POST(function(req, res) {
@@ -115,18 +121,6 @@ router.route('/graph')
 //         res.json({ message: 'Bear created!' });
 //     });
 //
-// });
-
-
-// router.route('/bears/:bear_id')
-//
-// // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
-// .get(function(req, res) {
-//   Bear.findById(req.params.bear_id, function(err, bear) {
-//     if (err)
-//     res.send(err);
-//     res.json(bear);
-//   });
 // });
 
 // REGISTER OUR ROUTES -------------------------------
