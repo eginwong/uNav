@@ -23,16 +23,16 @@ form{
 	padding-bottom: 20px;
 
 }
-.search { 
-	
-	margin:3px; 
+.search {
+
+	margin:3px;
 	border: 6px;
 }
 
-.rounded { 
-	border-radius:15px; 
-	-moz-border-radius:15px; 
-	-webkit-border-radius:15px; 
+.rounded {
+	border-radius:15px;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
 }
 
 .portfolio_description {
@@ -48,7 +48,7 @@ form{
 
 #container {
   position: relative;
- 
+
 }
 #image {
   position: relative;
@@ -66,3 +66,5 @@ form{
   height: 100%;
   width: 100%;
 }
+
+.angular-google-map-container { height: 500px;  }

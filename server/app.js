@@ -42,7 +42,7 @@ router.route('/buildings')
 
         for (var ind in inBuildings.features) {
           if (ind != 0) {
-            BuildingResults.push([inBuildings.features[ind].properties.building_code, inBuildings.features[ind].properties.building_name]);
+            BuildingResults.push([inBuildings.features[ind].properties.building_code, inBuildings.features[ind].properties.building_name, inBuildings.features[ind].geometry.coordinates]);
           }
         }
       }
@@ -96,6 +96,28 @@ router.route('/graph')
 
 .get(function(req,res){
   res.send(JSON.stringify(g));
+})
+
+router.route('/graph/rooms')
+
+.get (function(req,res){
+  var rooms = [];
+  var hold;
+  function asyncFind(_callback){
+    for (var key in g._nodes) {
+      hold = g._nodes[key]._data.properties.utility
+      if(hold != "Hallway" && hold != "Entrance"){
+        rooms.push(key.substr(0,3) + " " + key.substr(3));
+      }
+    }
+    _callback();
+  }
+
+  // call first function and pass in a callback function which
+  // first function runs when it has completed
+  asyncFind(function() {
+    res.send(JSON.stringify(rooms));
+  });
 })
 
 router.route('/astar/:src/:sink')

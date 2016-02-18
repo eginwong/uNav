@@ -28,8 +28,6 @@ Plan:
 
 Start writing up edges or teach Astor how to do it.
 
-return json objects to frontend in node
-
 @me: use google maps for now with api for waypoints and look into if you can superimpose a map, from qgis on there.
 
 geolocation services and return that to user
@@ -38,10 +36,6 @@ geolocation services and return that to user
 
 WHAT DO I NEED FOR FUNCTIONING PROTOTYPE?
 
-Fix edges/node definition due to performance issues. Change the nodes in the graph into dictionaries
 
--take two inputs as your A* algorithm
-  Integrate - astar into app.js as api call
--return a path to the front end
 -display a path in the front end through some sort of mapping
--when you select a location, a marker shows up where it is, with directions + path. Ensure to disable hallways
+-when you select a location, a marker shows up where it is, with directions + path.

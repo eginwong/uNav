@@ -54,7 +54,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "103E1",
         "name": ""
       },
@@ -70,7 +70,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "103E2",
         "name": ""
       },
@@ -102,7 +102,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "104E1",
         "name": ""
       },
@@ -134,7 +134,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "105E1",
         "name": ""
       },
@@ -150,7 +150,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "105E2",
         "name": ""
       },
@@ -182,7 +182,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "106E1",
         "name": ""
       },
@@ -230,7 +230,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "108E1",
         "name": ""
       },
@@ -246,7 +246,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "108E2",
         "name": ""
       },
@@ -278,7 +278,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "109E1",
         "name": ""
       },
@@ -326,7 +326,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "110E1",
         "name": ""
       },
@@ -342,7 +342,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "110E2",
         "name": ""
       },
@@ -374,7 +374,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "111E1",
         "name": ""
       },
@@ -407,7 +407,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "112E1",
         "name": ""
       },
@@ -423,7 +423,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "112E2",
         "name": ""
       },
@@ -471,7 +471,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "114E1",
         "name": ""
       },
@@ -503,7 +503,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "115E1",
         "name": ""
       },
@@ -535,7 +535,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "116E1",
         "name": ""
       },
@@ -663,7 +663,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "120E1",
         "name": ""
       },
@@ -855,7 +855,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "124E1",
         "name": ""
       },
@@ -935,7 +935,7 @@
       "type": "Feature",
       "properties": {
         "building_code": "RCH",
-        "utility": "",
+        "utility": "Entrance",
         "id": "128E1",
         "name": ""
       },
