@@ -38,9 +38,10 @@ geolocation services and return that to user
 
 WHAT DO I NEED FOR FUNCTIONING PROTOTYPE?
 
+Fix edges/node definition due to performance issues. Change the nodes in the graph into dictionaries
+
 -take two inputs as your A* algorithm
   Integrate - astar into app.js as api call
--create all the Edges
 -return a path to the front end
 -display a path in the front end through some sort of mapping
 -when you select a location, a marker shows up where it is, with directions + path. Ensure to disable hallways

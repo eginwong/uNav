@@ -33,6 +33,7 @@
         ]
       }
     },
+
     {
       "type": "Feature",
       "properties": {
@@ -839,38 +840,6 @@
       "properties": {
         "building_code": "RCH",
         "utility": "",
-        "id": "123E1",
-        "name": ""
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -80.5407505,
-          43.4702449
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "building_code": "RCH",
-        "utility": "",
-        "id": "123E2",
-        "name": ""
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -80.5408106,
-          43.4703295
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "building_code": "RCH",
-        "utility": "",
         "id": "124",
         "name": ""
       },
@@ -978,6 +947,5 @@
         ]
       }
     }
-
   ]
 }
