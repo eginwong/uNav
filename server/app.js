@@ -9,7 +9,7 @@ var algo = require('./astar.js');
 var graphDef = require('./graph_definition.js');
 
 var g = new graphDef();
-fs.readFile('data/coordinates/room_nodes_geo.json', 'utf8', function (err,data) {
+fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
@@ -78,7 +78,7 @@ router.route('/demo1')
 router.route('/demo3')
 
 .get(function(req, res){
-  fs.readFile('data/coordinates/room_nodes_geo.json', 'utf8', function (err,data) {
+  fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) {
     if (err) {
       res.send(err);
     }
