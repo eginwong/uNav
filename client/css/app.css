@@ -66,3 +66,58 @@ form{
   height: 100%;
   width: 100%;
 }
+
+.button1 {
+  position:absolute;right:72%;top:50%;
+  background-color:transparent;
+  -moz-border-radius:19px;
+  -webkit-border-radius:19px;
+  border: none;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Verdana;
+  font-size:26px;
+  font-weight:bold;
+  padding:7px 24px;
+  text-decoration:none;
+}
+
+.button1:hover {
+  background-color:transparent;
+}
+
+.button1:active {
+  position:relative;
+  top:1px;
+}
+.button2 {
+  position:absolute;right:56%;top:50%;
+  background-color:transparent;
+  -moz-border-radius:19px;
+  -webkit-border-radius:19px;
+  border: none;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Verdana;
+  font-size:26px;
+  font-weight:bold;
+  padding:7px 24px;
+  text-decoration:none;
+}
+
+.button2:hover {
+  background-color:transparent;
+}
+
+.button2:active {
+  position:relative;
+  top:1px;
+}
+
+.button3 {
+  position:absolute;right:40%;top:50%;
+
+}
+.button4 {position:absolute;right:24%;top:50%;}
