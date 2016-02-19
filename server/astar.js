@@ -118,7 +118,7 @@ module.exports = {
       else{
         var resultArray = [];
         for (var i = 0; i < path.length; i++){
-          resultArray.push(path[i]._id);
+          resultArray.push(graph._nodes[path[i]._id]);
           dist = path[i]._f;
         }
         fin = {

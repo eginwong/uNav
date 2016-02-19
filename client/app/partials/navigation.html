@@ -1,37 +1,24 @@
 
-<style>
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-#map {
-  height: 100%;
-}
-#floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-}
-</style>
-
 <h2><center>Where would you like to go today?</center></h2>
 <div class="search">
-  <select id="srcNode" class="chosen-select specRooms" style="width:350px;" tabindex="1" data-placeholder="From ..."></select>
-  <select id="destNode" class="chosen-select specRooms" style="width:350px;" tabindex="1" data-placeholder="To ..."></select>
+  <select chosen responsive-chosen
+    no-results-text="'Could not find your location :('"
+    ng-model="src"
+    ng-change="update()"
+    ng-options="room for room in rooms">
+  </select>
+
+  <select chosen responsive-chosen
+    no-results-text="'Could not find your location :('"
+    ng-model="dest"
+    ng-change="update()"
+    ng-options="room for room in rooms">
+  </select>
 </div>
 
 <div id="targetLocation" align="center">
   <img id="buildingmap"/>
-<!-- google maps this or somethin -->
+  <!-- google maps this or somethin -->
 </div>
 
 <ui-gmap-google-map center='map.center' zoom='map.zoom' options='{styles: [{stylers: [{ hue: "#00ffe6" },{ saturation: -20 }]},{featureType: "road", elementType: "geometry", stylers: [{ lightness: 100 },{ visibility: "simplified" }]},{featureType: "road", elementType: "labels", stylers: [ { visibility: "off" } ]}]}'></ui-gmap-google-map>

@@ -2,7 +2,12 @@
 
 <h2><center>Where would you like to go today?</center></h2>
 <div class="search col-md-offset-10 col-lg-2">
-  <select id="rooms" class="chosen-select" data-placeholder="Select Your Options"></select>
+  <select chosen responsive-chosen
+    no-results-text="'Could not find your location :('"
+    ng-model="buildOfChoice"
+    ng-change="store()"
+    ng-options='build as (build[0] + " - " + build[1]) for build in buildings'>
+  </select>
 </div>
 
 <div id="CampusMap" align="center">

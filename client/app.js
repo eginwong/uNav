@@ -1,4 +1,4 @@
-var uNav = angular.module('uNav', ['ui', 'ui.utils', 'ngRoute', 'ui.bootstrap', 'uiGmapgoogle-maps']).
+var uNav = angular.module('uNav', ['ui', 'ui.utils', 'ngRoute', 'ui.bootstrap', 'uiGmapgoogle-maps', 'ngResource', 'localytics.directives']).
 config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   $locationProvider.hashPrefix('');
   $routeProvider.
@@ -14,7 +14,6 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
     v: '3.20', //defaults to latest 3.X anyhow
     libraries: 'weather,geometry,visualization'
   });
-
 });
 
 uNav.service('sharedProperties', function() {
@@ -42,53 +41,31 @@ uNav.controller('mainController', function($scope) {
   $scope.message = 'home';
 });
 
-uNav.controller('searchController', function($scope, $location, sharedProperties) {
+uNav.controller('searchController', function($scope, $resource, $location, sharedProperties) {
   $scope.message = 'search';
   // throw this to the backend so you don't have to keep querying each time!
-  $.getJSON('/api/buildings/', function(data) {
-    $('#rooms').append($('<option/>').attr("value", "").text(""));
-    $.each(data, function(i, val) {
-      if(i != 0) {
-        $('#rooms').append($('<option/>').attr("value", val[0]).text(val[0] + " - " + val[1]));
-      }
-    });
-    $(".chosen-select").chosen({
-      no_results_text: "Oops, nothing found!",
-      width: "95%"
-    });
-  });
+  $scope.buildings = $resource('/api/buildings').query();
 
   // Store value in between controllers. And redirect to new page.
-  $('#rooms').change(function() {
-    sharedProperties.setString($("#rooms option:selected").val());
+  $scope.store = function() {
+    sharedProperties.setString($scope.buildOfChoice[0]);
     $location.path('/navigation');
     $scope.$apply();
-  });
+  }
 });
 
 uNav.controller('nearyouController', function($scope) {
   $scope.message = 'nearyou';
 });
 
-uNav.controller('navController', function($scope, sharedProperties, uiGmapGoogleMapApi) {
+uNav.controller('navController', function($scope, $resource, sharedProperties, uiGmapGoogleMapApi) {
   // dynamically set the map based on which building we're grabbing it from - take from uwapi
   $scope.map = { center: { latitude: 43.47035091238624, longitude: -80.54049253463745 }, zoom: 20 };
   $scope.message = 'navigation';
   var mapImage = sharedProperties.getString();
   $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
 
-  $.getJSON('/api/graph/rooms', function(data) {
-    $('.specRooms').append($('<option/>').attr("value", "").text(""));
-    $.each(data, function(i, val) {
-      if(i != 0) {
-        $('.specRooms').append($('<option/>').attr("value", val).text(val));
-      }
-    });
-    $(".chosen-select").chosen({
-      no_results_text: "Oops, nothing found!",
-      width: "95%"
-    });
-  });
+  $scope.rooms = $resource('/api/graph/rooms').query();
 
   // Do stuff with your $scope.
   // Note: Some of the directives require at least something to be defined originally!
@@ -96,26 +73,28 @@ uNav.controller('navController', function($scope, sharedProperties, uiGmapGoogle
 
   // uiGmapGoogleMapApi is a promise.
   // The "then" callback function provides the google.maps object.
+  $scope.update = function() {
+    if($scope.src != undefined && $scope.dest != undefined){
+      alert($scope.src + " to " + $scope.dest);
+    }
+ }
+
   uiGmapGoogleMapApi.then(function(maps) {
-    //   map.data.setStyle(function(feature) {
-    //     console.log(feature);
-    //     switch (feature.getProperty('utility')) {
-    //       case "Stairs":
-    //       var icon = {
-    //         url: "demos/stairs.jpg",
-    //         scaledSize: new google.maps.Size(25, 25)
-    //       };
-    //       return {icon:icon};
-    //       case "WC":
-    //       var icon = {
-    //         url: "demos/WC.jpg",
-    //         scaledSize: new google.maps.Size(25, 25)
-    //       };
-    //       return {icon: icon};
-    //       case "Hallway":
-    //     }
-    //   });
-    //   map.data.loadGeoJson('/api/demo3/');
-    // }
+
   });
+});
+
+uNav.directive('chosen', function($timeout) {
+
+  var linker = function(scope, element, attr) {
+
+    $timeout(function () {
+      element.chosen();
+    }, 200, false);
+  };
+
+  return {
+    restrict: 'A',
+    link: linker
+  };
 });

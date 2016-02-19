@@ -105,7 +105,7 @@ router.route('/graph/rooms')
   var hold;
   function asyncFind(_callback){
     for (var key in g._nodes) {
-      hold = g._nodes[key]._data.properties.utility
+      hold = g._nodes[key]._data.utility
       if(hold != "Hallway" && hold != "Entrance"){
         rooms.push(key.substr(0,3) + " " + key.substr(3));
       }
