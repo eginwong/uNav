@@ -7,7 +7,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   when('/navigation', {templateUrl : 'app/partials/navigation.html', controller  : 'navController'}).
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
-  when('/support', { templateUrl : 'app/partials/support.html'});
+  when('/contact', { templateUrl : 'app/partials/contact.html'});
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyCYtcbfLrd9BGzJ8HPdvsxDEedBdh3F-z4',
@@ -15,6 +15,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
     libraries: 'weather,geometry,visualization'
   });
 });
+
 
 uNav.service('sharedProperties', function() {
   var stringValue = 'test string value';
@@ -202,3 +203,24 @@ uNav.controller('navController', function($scope, $resource, sharedProperties, u
       //       }]
       // };
 });
+
+uNav.directive('chosen', function($timeout) {
+
+  return {
+    restrict: 'A',
+    link: function(scope, element, attr) {
+        $timeout(function () {
+          element.chosen();
+        }, 200, false);
+      }
+    }
+});
+
+uNav.controller('nearyouController', ['$scope', function($scope) {
+    $scope.myFirstFunction = function(msg) {
+         alert(msg + '!!! first function call!');
+    };
+    $scope.mySecondFunction = function(msg) {
+         alert(msg + '!!! second function call!');
+    };
+}]);
