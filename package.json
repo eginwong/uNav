@@ -26,6 +26,6 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   }
 }

@@ -1,0 +1,30 @@
+{
+  "name": "AnimatedHeader",
+  "homepage": "https://github.com/codrops/AnimatedHeader",
+  "authors": [
+    "botelho <http://tympanus.net/codrops>"
+  ],
+  "description": "A fixed header that will animate its size on scroll. The inner elements will also adjust their size with a transition.",
+  "main": "js/cbpAnimatedHeader.min.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "classie": ">=1.0.1"
+  },
+  "_release": "be97aba6bd",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "be97aba6bdf98e212e885845393675ab1cd3f271"
+  },
+  "_source": "git://github.com/codrops/AnimatedHeader.git",
+  "_target": "*",
+  "_originalSource": "animatedheader",
+  "_direct": true
+}
