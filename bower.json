@@ -13,6 +13,6 @@
     "chosen": "^1.4.2",
     "angular-google-maps": "^2.3.2",
     "angular-chosen-localytics": "^1.0.7",
-    "angular-resource": "^1.5.0",
+    "angular-resource": "^1.5.0"
   }
 }
