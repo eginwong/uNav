@@ -6,36 +6,36 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <meta name="author" content=""> 
-
-   <title>Creative - Start Bootstrap Theme</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+  <meta name="author" content="">
 
     <!-- Custom Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
-
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
   <link rel="stylesheet" type="text/css" href="libs\bootstrap\dist\css\bootstrap.css"/>
   <link rel="stylesheet" href="libs\font-awesome\css/font-awesome.css"/>
   <link rel="stylesheet" href="libs\font-awesome\css/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="libs\angular-ui\build\angular-ui.css"/>
   <link rel="stylesheet" type="text/css" href="libs\chosen\chosen.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/app.css"/>
+<<<<<<< HEAD
   <link rel="stylesheet" type="text/css" href="css/creative.css"/>
   <script src="libs\angular\angular.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href='libs\angular-chosen-localytics\chosen-spinner.css'/>
   <link rel="image_src"  href="libs\angular-chosen-localytics\spinner.gif">
 
+=======
+
+  <link rel="stylesheet" type="text/css" href="css/creative.css"/>
+  <link rel="stylesheet" type="text/css" href='libs\angular-chosen-localytics\chosen-spinner.css'/>
+  <link rel="image_src"  href="libs\angular-chosen-localytics\spinner.gif">
+
+  <script src="libs\angular\angular.min.js"></script>
+>>>>>>> 5e317e83f76248982940805cff22df4e0cd0b9d0
 
   <script src="libs\jquery\dist\jquery.js"></script>
   <script src="libs\bootstrap\dist\js\bootstrap.min.js"></script>
@@ -44,7 +44,6 @@
   <script src="libs\jquery\dist\jquery.min.js"></script>
   <script src="libs\jquery\dist\jquery.easing.min.js"></script>
 
-  <script src="libs\angular\angular.min.js"></script>
   <script src='libs\lodash\dist\lodash.min.js'></script>
   <script src="libs\angular-resource\angular-resource.min.js"></script>
   <script src="libs\angular-bootstrap\ui-bootstrap.js"></script>
@@ -54,7 +53,6 @@
   <script src='libs\angular-simple-logger\dist\angular-simple-logger.min.js'></script>
   <script src='libs\angular-google-maps\dist\angular-google-maps.min.js'></script>
   <script src='libs\angular-chosen-localytics\chosen.js'></script>
-  <script src="app.js"></script>
 
   
 
@@ -73,9 +71,19 @@
     <script src="js/creative.js"></script>
 
 
+  <!-- For the angular app -->
+  <script src="app.js"></script>
+
 </head>
 
 <body id="page-top" ng-controller="mainController"  class="scope" style="background-image: url({{ bgimg }})">
+  <!-- For Anuja's UI -->
+  <script src="libs\jquery.easing\js\jquery.easing.min.js"></script>
+  <script src="libs\fittext\fittext.js"></script>
+  <script src="libs\wow\dist\wow.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-creative/1.0.2/js/creative.min.js"></script>
+  <!-- <script src="libs\AnimatedHeader\js\classie.js"></script>
+  <script src="libs\AnimatedHeader\js\cbpAnimatedHeader.min.js"></script> -->
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 
@@ -95,7 +103,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#home">Home</a>
+                        <a href="#/">Home</a>
                     </li>
                     <li>
                         <a href="#search">Search</a>
@@ -118,6 +126,7 @@
 
     <div id="main">
     <div ng-view></div>
+<<<<<<< HEAD
   </div> 
 
  
@@ -150,50 +159,10 @@
 
   <div id="main">
     <div ng-view></div>
-  </div>
-</body>
-<<<<<<< HEAD
- -->
-</html>
-<!--
-<html>
-<head>
-<title>uNav</title>
-<meta charset="utf-8"/>
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="main.css"></script>
-</head>
-
-
-<header>
-<div class="nav navbar-nav" id="nav">
-<ul>
-<li class="home"><a class="active" href="#">Search</a></li>
-<li class="about"><a href="#">Near You</a></li>
-<li class="news"><a href="#">About</a></li>
-<li class="contact"><a href="#">Settings</a></li>
-</ul>
-</div>
-</header>
-
-
-
-<div class="search">
-<form action="http://www.example.com/search.php">
-<input type="text" name="search" placeholder="Where would you like to go?" size="45">
-<input type="submit" value="Search Here">
-</form>
-</div>
-
-
-<div class="wrapper">
-<img src="http://www.cst.uwaterloo.ca/DSS/images/uw_map_big.jpg" class="img-responsive" alt="Cinque Terre" width="1903" height="936">
-<div class="overlay">
-<h2>uNav</h2>
-<p>Find Yourself.</p>
-</div>
-</div>
-
 =======
->>>>>>> eefb49565d8c9a6251a8b22a36a4c96ef0f1627d
-</html>
+>>>>>>> 5e317e83f76248982940805cff22df4e0cd0b9d0
+  </div>
+
+
+  </body>
+  </html>
