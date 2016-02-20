@@ -4,4 +4,3 @@ node_modules
 .tmp
 .git
 uwapi_results.json
-client/libs/
