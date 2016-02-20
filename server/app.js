@@ -4,6 +4,25 @@ var server = require('http').Server(app);
 var request = require('request');
 var fs = require("fs");
 
+// For navigation
+var algo = require('./astar.js');
+var graphDef = require('./graph_definition.js');
+
+var g = new graphDef();
+fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) {
+  var geo_nodes = JSON.parse(data);
+  for (var ind in geo_nodes.features) {
+    g.addNode(g, geo_nodes.features[ind]);
+  }
+  fs.readFile('data/coordinates/edges_RCH01.json', 'utf8', function (err,data2) {
+    var edges = JSON.parse(data2);
+    for (var ind in edges.vals) {
+      g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
+    }
+  });
+});
+
+
 var router = express.Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
@@ -23,7 +42,7 @@ router.route('/buildings')
 
         for (var ind in inBuildings.features) {
           if (ind != 0) {
-            BuildingResults.push([inBuildings.features[ind].properties.building_code, inBuildings.features[ind].properties.building_name]);
+            BuildingResults.push([inBuildings.features[ind].properties.building_code, inBuildings.features[ind].properties.building_name, inBuildings.features[ind].geometry.coordinates]);
           }
         }
       }
@@ -56,16 +75,58 @@ router.route('/demo1')
   })
 });
 
-router.route('/demo2')
+router.route('/demo3')
 
 .get(function(req, res){
-  fs.readFile('data/coordinates/room_nodes_geo.json', 'utf8', function (err,data) {
+  fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) {
     if (err) {
       res.send(err);
     }
+    // sorting alphabetically
+    // var life = JSON.parse(data);
+    // life.features.sort(function(a,b){
+    //   return (a.properties.id).localeCompare(b.properties.id);
+    // });
+    // res.send(JSON.stringify(life));
     res.send(data);
   })
 });
+
+router.route('/graph')
+
+.get(function(req,res){
+  res.send(JSON.stringify(g));
+})
+
+router.route('/graph/rooms')
+
+.get (function(req,res){
+  var rooms = [];
+  var hold;
+  function asyncFind(_callback){
+    for (var key in g._nodes) {
+      hold = g._nodes[key]._data.utility
+      if(hold != "Hallway" && hold != "Entrance"){
+        rooms.push(key.substr(0,3) + " " + key.substr(3));
+      }
+    }
+    _callback();
+  }
+
+  // call first function and pass in a callback function which
+  // first function runs when it has completed
+  asyncFind(function() {
+    res.send(JSON.stringify(rooms));
+  });
+})
+
+router.route('/astar/:src/:sink')
+//
+// // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+.get(function(req, res) {
+  res.send(JSON.stringify(algo.aStar(g, req.params.src, req.params.sink)));
+});
+
 
 // post example
 // // create a bear (accessed at POST http://localhost:8080/api/bears)
@@ -82,18 +143,6 @@ router.route('/demo2')
 //         res.json({ message: 'Bear created!' });
 //     });
 //
-// });
-
-
-// router.route('/bears/:bear_id')
-//
-// // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
-// .get(function(req, res) {
-//   Bear.findById(req.params.bear_id, function(err, bear) {
-//     if (err)
-//     res.send(err);
-//     res.json(bear);
-//   });
 // });
 
 // REGISTER OUR ROUTES -------------------------------

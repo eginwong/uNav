@@ -26,15 +26,16 @@ http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 
 Plan:
 
-look at changeimage and see if it'll be used.
 Start writing up edges or teach Astor how to do it.
 
+@me: use google maps for now with api for waypoints and look into if you can superimpose a map, from qgis on there.
 
-Figure out how to do search and how to return the required path to the front end
--define what each function will do.
+geolocation services and return that to user
 
 
-Look at cleaning up the frontend demo codes as well - demo2.html
-Load up geojson on startup and into the graph.
-Integrate - astar into app.js as api call
-refer to binary heap and graph definition javascripts
+
+WHAT DO I NEED FOR FUNCTIONING PROTOTYPE?
+
+
+-display a path in the front end through some sort of mapping
+-when you select a location, a marker shows up where it is, with directions + path.

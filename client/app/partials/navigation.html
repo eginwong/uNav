@@ -1,0 +1,24 @@
+
+<h2><center>Where would you like to go today?</center></h2>
+<div class="search">
+  <select chosen responsive-chosen
+    no-results-text="'Could not find your location :('"
+    ng-model="src"
+    ng-change="update()"
+    ng-options="room for room in rooms">
+  </select>
+
+  <select chosen responsive-chosen
+    no-results-text="'Could not find your location :('"
+    ng-model="dest"
+    ng-change="update()"
+    ng-options="room for room in rooms">
+  </select>
+</div>
+
+<div id="targetLocation" align="center">
+  <img id="buildingmap"/>
+  <!-- google maps this or somethin -->
+</div>
+
+<ui-gmap-google-map center='map.center' zoom='map.zoom' options='{styles: [{stylers: [{ hue: "#00ffe6" },{ saturation: -20 }]},{featureType: "road", elementType: "geometry", stylers: [{ lightness: 100 },{ visibility: "simplified" }]},{featureType: "road", elementType: "labels", stylers: [ { visibility: "off" } ]}]}'></ui-gmap-google-map>

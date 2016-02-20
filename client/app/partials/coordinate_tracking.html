@@ -3,7 +3,7 @@
 <head>
   <Title>Floor Mapping</Title>
   <!-- All dem script calls. -->
-  <link rel="stylesheet" type="text/css" href="../../css/demo1.css">
+  <link rel="stylesheet" type="text/css" href="../../temp_files/demos/demo1.css">
   <script src="../../libs/jquery/dist/jquery.min.js"></script>
   <script src="../../../server/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
   <script src="../../../server/jquery.csv.js"></script>
@@ -67,7 +67,9 @@
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
     context.fillStyle="#FF0000";
-    context.fillRect( PosX, PosY, 5, 5 );
+    context.font = "9px Arial";
+    context.fillText(row.cells[2].innerHTML, PosX-15,PosY);
+    // context.fillRect( PosX, PosY, 5, 5 );
 
   }
 
@@ -84,7 +86,9 @@
       var canvas = document.getElementById("myCanvas");
       var context = canvas.getContext("2d");
       context.fillStyle="#FF0000";
-      context.fillRect( PosX, PosY, 5, 5 );
+      context.font = "9px Arial";
+      context.fillText(row.cells[2].innerHTML, PosX-15,PosY);
+      // context.fillRect( PosX, PosY, 5, 5 );
     }
   }
 
@@ -159,33 +163,9 @@
 
 <body>
   <div id="container">
-    <img src="../../images/Waterloo Floor Plans/RCH_01FLR.png" id="myImgId"
+    <img src="../../images/Waterloo Floor Plans/E21.png" id="myImgId"
     style="position: absolute; left: 0px; top:0px; z-index: 2;">
     <canvas id="myCanvas" width="1174" height="840"></canvas>
-
-    <!-- In Progress -->
-    <script>
-    // function drawLine(p1, p2) {
-    //   var canvas = document.getElementById('myCanvas');
-    //   var context = canvas.getContext('2d');
-    //   context.lineWidth ="5";
-    //   context.strokeStyle="red";
-    //   // var jqxhr = $.getJSON( "https://raw.githubusercontent.com/eginwong/uNav/master/coordinates/room_nodes.json?token=AGViNZ3CC3Nvi23CMC0jFfbxcO1M5naDks5WrlLlwA%3D%3D", function(data) {
-    //   //   // var jqxhr = $.getJSON( "https://raw.githubusercontent.com/eginwong/uNav/master/geojson_ex.json?token=AGViNf2Dc0xvxTq2dPBIKQBqovSHPlInks5Wq6zMwA%3D%3D", function(data) {
-    //   //   console.log(data);
-    //   //   // console.log(data.features[0].properties);
-    //   // });
-    //   // $.each(arrayCoord, function(i, coord) {
-    //   //   if (i == 0) {
-    //   //     context.moveTo(coord.x,coord.y);//120_stair
-    //   //   }
-    //   //   else{
-    //   //     context.lineTo(coord.x,coord.y);//119a_hallway
-    //   //   }
-    //   // });
-    //   // context.stroke();
-    // }
-    </script>
   </div>
 
   <div style="background-color:#E8E8E8">

@@ -17,22 +17,15 @@ body {
 
 }
 
-form{
-	width:360px;
-	margin:0 auto;
-	padding-bottom: 20px;
-
-}
-.search { 
-	
-	margin:3px; 
+.search {
+	margin:3px;
 	border: 6px;
 }
 
-.rounded { 
-	border-radius:15px; 
-	-moz-border-radius:15px; 
-	-webkit-border-radius:15px; 
+.rounded {
+	border-radius:15px;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
 }
 
 .portfolio_description {
@@ -48,7 +41,7 @@ form{
 
 #container {
   position: relative;
- 
+
 }
 #image {
   position: relative;
@@ -67,6 +60,7 @@ form{
   width: 100%;
 }
 
+<<<<<<< HEAD
 .button1 {
   position:absolute;right:72%;top:50%;
   background-color:transparent;
@@ -121,3 +115,6 @@ form{
 
 }
 .button4 {position:absolute;right:24%;top:50%;}
+=======
+.angular-google-map-container { height: 500px;  }
+>>>>>>> eefb49565d8c9a6251a8b22a36a4c96ef0f1627d
