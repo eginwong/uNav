@@ -6,7 +6,6 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -14,10 +13,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
-
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
   <link rel="stylesheet" type="text/css" href="libs\bootstrap\dist\css\bootstrap.css"/>
   <link rel="stylesheet" href="libs\font-awesome\css/font-awesome.css"/>
   <link rel="stylesheet" type="text/css" href="libs\angular-ui\build\angular-ui.css"/>
@@ -44,13 +41,6 @@
   <script src='libs\angular-google-maps\dist\angular-google-maps.min.js'></script>
   <script src='libs\angular-chosen-localytics\chosen.js'></script>
 
-<!-- For Anuja's UI -->
-  <script src="libs\fittext.js"></script>
-  <script src="libs\jquery.easing\js\jquery.easing.min.js"></script>
-  <script src="libs\wow\dist\wow.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-creative/1.0.2/js/creative.min.js"></script>
-  <script src="libs\classie\classie.js"></script>
-  <script src="libs\AnimatedHeader\js\cbpAnimatedHeader.min.js"></script>
 
   <!-- For the angular app -->
   <script src="app.js"></script>
@@ -58,6 +48,13 @@
 </head>
 
 <body id="page-top" ng-controller="mainController"  class="scope" style="background-image: url({{ bgimg }})">
+  <!-- For Anuja's UI -->
+  <script src="libs\jquery.easing\js\jquery.easing.min.js"></script>
+  <script src="libs\fittext\fittext.js"></script>
+  <script src="libs\wow\dist\wow.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-creative/1.0.2/js/creative.min.js"></script>
+  <!-- <script src="libs\AnimatedHeader\js\classie.js"></script>
+  <script src="libs\AnimatedHeader\js\cbpAnimatedHeader.min.js"></script> -->
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 
@@ -77,7 +74,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#home">Home</a>
+                        <a href="#/">Home</a>
                     </li>
                     <li>
                         <a href="#search">Search</a>
@@ -101,7 +98,6 @@
     <div id="main">
     <div ng-view></div>
   </div>
-
 
 
   </body>
