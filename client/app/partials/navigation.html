@@ -1,30 +1,30 @@
 <div class="navdiv">
 </div>
 <h2><center>Where would you like to go today?</center></h2>
-<div class="search">
-  <select chosen responsive-chosen
-  no-results-text="'Could not find your location :('"
-  ng-model="src"
-  ng-change="update()"
-  ng-options="room for room in rooms">
+<!-- <div class="search">
+<select responsive-chosen
+no-results-text="'Could not find your location :('"
+ng-model="src"
+ng-change="update()"
+ng-options="room for room in rooms">
 </select>
 
-<select chosen responsive-chosen
-  no-results-text="'Could not find your location :('"
-  ng-model="dest"
-  ng-change="update()"
-  ng-options="room for room in rooms">
+<select responsive-chosen
+no-results-text="'Could not find your location :('"
+ng-model="dest"
+ng-change="update()"
+ng-options="room for room in rooms">
 </select>
-</div>
+</div> -->
 
 <div id="targetLocation" align="center">
   <img id="buildingmap"/>
-  <!-- google maps this or somethin -->
 </div>
-<!-- control="googlemap" options='map.options' events="map.events" -->
-<ui-gmap-google-map center='map.center' zoom='map.zoom' options='{styles: [{stylers: [{ hue: "#00ffe6" },{ saturation: -20 }]},{featureType: "road", elementType: "geometry", stylers: [{ lightness: 100 },{ visibility: "simplified" }]},{featureType: "road", elementType: "labels", stylers: [ { visibility: "off" } ]}]}'></ui-gmap-google-map>
-<!-- <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true"></ui-gmap-google-map> -->
-<!-- <ui-gmap-window coords="MapOptions.markers.selected.coords" show="windowOptions.show" options="windowOptions" closeClick="closeClick()">
-</ui-gmap-window> -->
-<!-- <ui-gmap-markers models="markers" idkey="markers.id" coords="'coords'" click="'onClick'" events="markers.events"></ui-gmap-markers> -->
-<!-- </ui-gmap-google-map> -->
+<ui-gmap-google-map center='map.center' zoom='map.zoom' options='{styles: [{stylers: [{ hue: "#00ffe6" },{ saturation: -20 }]},{featureType: "road", elementType: "geometry", stylers: [{ lightness: 100 },{ visibility: "simplified" }]},{featureType: "road", elementType: "labels", stylers: [ { visibility: "off" } ]}]}'>
+
+<!-- Fix this later. -->
+<!-- <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="map.options"> -->
+  <ui-gmap-window coords="MapOptions.markers.selected.coords" show="windowOptions.show" options="windowOptions" closeClick="closeClick()">
+  </ui-gmap-window>
+  <ui-gmap-markers models="markers" idkey="markers.id" coords="'coords'" click="'onClick'" events="markers.events"></ui-gmap-markers>
+</ui-gmap-google-map>

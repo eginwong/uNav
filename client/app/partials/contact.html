@@ -1,64 +1,64 @@
- <div class="navdiv">
-</div> 
-   <script type="text/javascript">
-  function mailIt() {
-    var link = "mailto:astorcswong@gmail.com"
-    + "?cc=" +escape(document.getElementById('email').value)
-    + "&subject= uNav "+ escape(document.getElementById('Reason').value)
-    + "&body=Your Name: "+ escape(document.getElementById('name').value)+
-    "%0AReason to Contact: "+ escape(document.getElementById('Reason').value)+
-    "%0AComments: "+ escape(document.getElementById('comment').value);
-    window.location.href = link;
-  }
-  </script>
+<div class="navdiv">
+</div>
+<script type="text/javascript">
+function mailIt() {
+  var link = "mailto:astorcswong@gmail.com"
+  + "?cc=" +escape(document.getElementById('email').value)
+  + "&subject= uNav "+ escape(document.getElementById('Reason').value)
+  + "&body=Your Name: "+ escape(document.getElementById('name').value)+
+  "%0AReason to Contact: "+ escape(document.getElementById('Reason').value)+
+  "%0AComments: "+ escape(document.getElementById('comment').value);
+  window.location.href = link;
+}
+</script>
 
-  <style type="text/css">
-  label {display:block;}
-  </style>
+<style type="text/css">
+label {display:block;}
+</style>
 
 </head>
 <body>
   <h2 class="section-heading"><center>Want to report an incident? Please fill out the form below.<center></h>
     <div class="contact">
-  <p><center>One of our team members will be in touch shortly.</center></p>
-  <form action="#" method="post" onsubmit="mailIt(); return false;">
-    <div>
-      <label>Name: <input type="text" id="name"> </label>
-      <br>
-      <label>Your Email: <input type="text" id="email"></label>
-      <br>
-      <label>What is the reason for your contact?
-        <select id ="Reason">
-          <option value="TechSupport">Technical Support</option>
-          <option value="Info">Product Information</option>
-          <option value="Others">Others</option>
-        </select>
-      </label>
-      <br>
-      <label>
-        <textarea rows="8" cols="40" id="comment"></textarea></label>
-        <br>
-        <button type="submit">Submit</button>
+      <p><center>One of our team members will be in touch shortly.</center></p>
+      <form action="#" method="post" onsubmit="mailIt(); return false;">
+        <div>
+          <label>Name: <input type="text" id="name"> </label>
+          <br>
+          <label>Your Email: <input type="text" id="email"></label>
+          <br>
+          <label>What is the reason for your contact?
+            <select id ="Reason">
+              <option value="TechSupport">Technical Support</option>
+              <option value="Info">Product Information</option>
+              <option value="Others">Others</option>
+            </select>
+          </label>
+          <br>
+          <label>
+            <textarea rows="8" cols="40" id="comment"></textarea></label>
+            <br>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
       </div>
-    </form>
-    </div>
-  </body>
-  </html>
+    </body>
+    </html>
 
     <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">For further inquiries:</h2>
-                    <hr class="primary">
-                    <p></p>
-                </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-2x wow bounceIn"></i>
-                    <p>123-456-6789</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-envelope-o fa-2x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">baddies@uwaterloo.ca</a></p>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <h2 class="section-heading">For further inquiries:</h2>
+          <hr class="primary">
+          <p></p>
         </div>
+        <div class="col-lg-4 col-lg-offset-2 text-center">
+          <i class="fa fa-phone fa-2x wow bounceIn"></i>
+          <p>123-456-6789</p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-envelope-o fa-2x wow bounceIn" data-wow-delay=".1s"></i>
+          <p><a href="mailto:your-email@your-domain.com">baddies@uwaterloo.ca</a></p>
+        </div>
+      </div>
+    </div>
