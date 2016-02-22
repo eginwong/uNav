@@ -9,6 +9,5 @@
   },
   "_source": "git://github.com/adactio/FitText.js.git",
   "_target": "*",
-  "_originalSource": "fittext",
-  "_direct": true
+  "_originalSource": "fittext"
 }
