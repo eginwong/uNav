@@ -58,8 +58,15 @@ uNav.controller('searchController', function($scope, $timeout, $resource, $locat
 
 });
 
-uNav.controller('nearyouController', function($scope) {
+uNav.controller('nearyouController', function($scope, $timeout, $location) {
   $scope.message = 'nearyou';
+
+  // $scope.enableEditor = function() {
+  //   $location.path('/about');
+  //   $timeout(function(empty) {
+  //     $scope.$apply();
+  //   },0);
+  // }
 });
 
 uNav.controller('navController', function($scope, $resource, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady) {
@@ -204,12 +211,4 @@ uNav.directive('chosen', function($timeout) {
     }
 });
 
-uNav.controller('nearyouController', ['$scope', function($scope) {
-    $scope.myFirstFunction = function(msg) {
-         alert(msg + '!!! first function call!');   
-    };
-    $scope.mySecondFunction = function(msg) {
-         alert(msg + '!!! second function call!');   
-    };
-}]);
 
