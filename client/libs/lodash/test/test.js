@@ -230,7 +230,7 @@
   var lodashStable = root.lodashStable;
   if (!lodashStable) {
     try {
-      lodashStable = load('../node_modules/lodash/index.js');
+      lodashStable = load('../node_modules/lodash/lodash.js');
     } catch (e) {
       console.log('Error: The stable lodash dev dependency should be at least a version behind master branch.');
       return;
@@ -364,7 +364,9 @@
     this.message = message;
   }
 
-  CustomError.prototype = lodashStable.create(Error.prototype);
+  CustomError.prototype = lodashStable.create(Error.prototype, {
+    'constructor': CustomError
+  });
 
   /**
    * Removes all own enumerable properties from a given object.
@@ -670,9 +672,9 @@
 
     if (isModularize && !(amd || isNpm)) {
       lodashStable.each([
-        'internal/baseEach',
-        'internal/isIndex',
-        'internal/isIterateeCall'
+        '_baseEach',
+        '_isIndex',
+        '_isIterateeCall'
       ], function(relPath) {
         var func = require(path.join(basePath, relPath)),
             funcName = path.basename(relPath);
@@ -1713,6 +1715,23 @@
       assert.deepEqual(bound(), [object, undefined, 'b', undefined]);
     });
 
+    QUnit.test('should use `_.placeholder` when set', function(assert) {
+      assert.expect(1);
+
+      if (!isModularize) {
+        var _ph = _.placeholder = {},
+            ph = _.bind.placeholder,
+            object = {},
+            bound = _.bind(fn, object, _ph, 'b', ph);
+
+        assert.deepEqual(bound('a', 'c'), [object, 'a', 'b', ph, 'c']);
+        delete _.placeholder;
+      }
+      else {
+        skipAssert(assert);
+      }
+    });
+
     QUnit.test('should create a function with a `length` of `0`', function(assert) {
       assert.expect(2);
 
@@ -1991,6 +2010,28 @@
       assert.deepEqual(bound('a'), ['a', 'b', undefined]);
       assert.deepEqual(bound('a', 'c', 'd'), ['a', 'b', 'c', 'd']);
       assert.deepEqual(bound(), [undefined, 'b', undefined]);
+    });
+
+    QUnit.test('should use `_.placeholder` when set', function(assert) {
+      assert.expect(1);
+
+      if (!isModularize) {
+        var object = {
+          'fn': function() {
+            return slice.call(arguments);
+          }
+        };
+
+        var _ph = _.placeholder = {},
+            ph = _.bindKey.placeholder,
+            bound = _.bindKey(object, 'fn', _ph, 'b', ph);
+
+        assert.deepEqual(bound('a', 'c'), ['a', 'b', ph, 'c']);
+        delete _.placeholder;
+      }
+      else {
+        skipAssert(assert);
+      }
     });
 
     QUnit.test('should ensure `new bound` is an instance of `object[key]`', function(assert) {
@@ -2662,10 +2703,18 @@
         assert.deepEqual(actual, { 'b': 1 });
       });
 
-      QUnit.test('`_.' + methodName + '` should create clone with the same `[[Prototype]]` as `value`', function(assert) {
+      QUnit.test('`_.' + methodName + '` should set the `[[Prototype]]` of a clone', function(assert) {
         assert.expect(1);
 
         assert.ok(func(new Foo) instanceof Foo);
+      });
+
+      QUnit.test('`_.' + methodName + '` should set the `[[Prototype]]` of a clone even when the `constructor` is incorrect', function(assert) {
+        assert.expect(1);
+
+        Foo.prototype.constructor = Object;
+        assert.ok(func(new Foo) instanceof Foo);
+        Foo.prototype.constructor = Foo;
       });
 
       QUnit.test('`_.' + methodName + '` should ensure `value` constructor is a function before using its `[[Prototype]]`', function(assert) {
@@ -3495,6 +3544,16 @@
       assert.deepEqual(_.create({}, new Foo), { 'a': 1, 'c': 3 });
     });
 
+    QUnit.test('should assign properties that shadow those of `prototype`', function(assert) {
+      assert.expect(1);
+
+      function Foo() {
+        this.a = 1;
+      }
+      var object = _.create(new Foo, { 'a': 1 });
+      assert.deepEqual(lodashStable.keys(object), ['a']);
+    });
+
     QUnit.test('should accept a falsey `prototype` argument', function(assert) {
       assert.expect(1);
 
@@ -3590,6 +3649,32 @@
       assert.deepEqual(curried(ph, 2)(1)(ph, 4)(3), [1, 2, 3, 4]);
       assert.deepEqual(curried(ph, ph, 3)(ph, 2)(ph, 4)(1), [1, 2, 3, 4]);
       assert.deepEqual(curried(ph, ph, ph, 4)(ph, ph, 3)(ph, 2)(1), [1, 2, 3, 4]);
+    });
+
+    QUnit.test('should persist placeholders', function(assert) {
+      assert.expect(1);
+
+      var curried = _.curry(fn),
+          ph = curried.placeholder,
+          actual = curried(ph, ph, ph, 'd')('a')(ph)('b')('c');
+
+      assert.deepEqual(actual, ['a', 'b', 'c', 'd']);
+    });
+
+    QUnit.test('should use `_.placeholder` when set', function(assert) {
+      assert.expect(1);
+
+      if (!isModularize) {
+        var curried = _.curry(fn),
+            _ph = _.placeholder = {},
+            ph = curried.placeholder;
+
+        assert.deepEqual(curried(1)(_ph, 3)(ph, 4), [1, ph, 3, 4]);
+        delete _.placeholder;
+      }
+      else {
+        skipAssert(assert);
+      }
     });
 
     QUnit.test('should provide additional arguments after reaching the target arity', function(assert) {
@@ -3723,6 +3808,32 @@
       assert.deepEqual(curried(3, ph)(4)(1, ph)(2), expected);
       assert.deepEqual(curried(ph, ph, 4)(ph, 3)(ph, 2)(1), expected);
       assert.deepEqual(curried(ph, ph, ph, 4)(ph, ph, 3)(ph, 2)(1), expected);
+    });
+
+    QUnit.test('should persist placeholders', function(assert) {
+      assert.expect(1);
+
+      var curried = _.curryRight(fn),
+          ph = curried.placeholder,
+          actual = curried('a', ph, ph, ph)('b')(ph)('c')('d');
+
+      assert.deepEqual(actual, ['a', 'b', 'c', 'd']);
+    });
+
+    QUnit.test('should use `_.placeholder` when set', function(assert) {
+      assert.expect(1);
+
+      if (!isModularize) {
+        var curried = _.curryRight(fn),
+            _ph = _.placeholder = {},
+            ph = curried.placeholder;
+
+        assert.deepEqual(curried(4)(2, _ph)(1, ph), [1, 2, ph, 4]);
+        delete _.placeholder;
+      }
+      else {
+        skipAssert(assert);
+      }
     });
 
     QUnit.test('should provide additional arguments after reaching the target arity', function(assert) {
@@ -7493,11 +7604,24 @@
     var args = (function() { return arguments; }(1, 2, 3)),
         func = _[methodName];
 
-    QUnit.test('`_.' + methodName + '` should return the intersection of the given arrays', function(assert) {
-      assert.expect(1);
+    QUnit.test('`_.' + methodName + '` should return the intersection of two arrays', function(assert) {
+      assert.expect(2);
+
+      var actual = func([1, 3, 2], [5, 2, 1, 4]);
+      assert.deepEqual(actual, [1, 2]);
+
+      actual = func([5, 2, 1, 4], [1, 3, 2]);
+      assert.deepEqual(actual, [2, 1]);
+    });
+
+    QUnit.test('`_.' + methodName + '` should return the intersection of multiple arrays', function(assert) {
+      assert.expect(2);
 
       var actual = func([1, 3, 2], [5, 2, 1, 4], [2, 1]);
       assert.deepEqual(actual, [1, 2]);
+
+      actual = func([5, 2, 1, 4], [2, 1], [1, 3, 2]);
+      assert.deepEqual(actual, [2, 1]);
     });
 
     QUnit.test('`_.' + methodName + '` should return an array of unique values', function(assert) {
@@ -10914,8 +11038,7 @@
       assert.expect(1);
 
       if (realm.object) {
-        var invoke = lodashStable.invokeMap || lodashStable.invoke,
-            props = invoke(typedArrays, 'toLowerCase');
+        var props = lodashStable.invokeMap(typedArrays, 'toLowerCase');
 
         var expected = lodashStable.map(props, function(key) {
           return realm[key] !== undefined;
@@ -14016,26 +14139,6 @@
       assert.deepEqual(actual, expected);
     });
 
-    QUnit.test('should not augment source objects', function(assert) {
-      assert.expect(6);
-
-      var source1 = { 'a': [{ 'a': 1 }] },
-          source2 = { 'a': [{ 'b': 2 }] },
-          actual = _.merge({}, source1, source2);
-
-      assert.deepEqual(source1.a, [{ 'a': 1 }]);
-      assert.deepEqual(source2.a, [{ 'b': 2 }]);
-      assert.deepEqual(actual.a, [{ 'a': 1, 'b': 2 }]);
-
-      var source1 = { 'a': [[1, 2, 3]] },
-          source2 = { 'a': [[3, 4]] },
-          actual = _.merge({}, source1, source2);
-
-      assert.deepEqual(source1.a, [[1, 2, 3]]);
-      assert.deepEqual(source2.a, [[3, 4]]);
-      assert.deepEqual(actual.a, [[3, 4, 3]]);
-    });
-
     QUnit.test('should deep clone array/typed-array/plain-object sources', function(assert) {
       assert.expect(1);
 
@@ -14060,6 +14163,26 @@
       });
 
       assert.deepEqual(actual, expected);
+    });
+
+    QUnit.test('should not augment source objects', function(assert) {
+      assert.expect(6);
+
+      var source1 = { 'a': [{ 'a': 1 }] },
+          source2 = { 'a': [{ 'b': 2 }] },
+          actual = _.merge({}, source1, source2);
+
+      assert.deepEqual(source1.a, [{ 'a': 1 }]);
+      assert.deepEqual(source2.a, [{ 'b': 2 }]);
+      assert.deepEqual(actual.a, [{ 'a': 1, 'b': 2 }]);
+
+      var source1 = { 'a': [[1, 2, 3]] },
+          source2 = { 'a': [[3, 4]] },
+          actual = _.merge({}, source1, source2);
+
+      assert.deepEqual(source1.a, [[1, 2, 3]]);
+      assert.deepEqual(source2.a, [[3, 4]]);
+      assert.deepEqual(actual.a, [[3, 4, 3]]);
     });
 
     QUnit.test('should merge plain-objects onto non plain-objects', function(assert) {
@@ -15804,9 +15927,9 @@
 
       var fn = function(a, b) { return [a, b]; },
           par = func(fn, 'a'),
-          expected = ['a', 'b'];
+          expected = isPartial ? ['a', 'b'] : ['b', 'a'];
 
-      assert.deepEqual(par('b'), isPartial ? expected : expected.reverse());
+      assert.deepEqual(par('b'), expected);
     });
 
     QUnit.test('`_.' + methodName + '` works when there are no partially applied arguments and the created function is invoked without additional arguments', function(assert) {
@@ -15840,6 +15963,23 @@
       } else {
         par = func(fn, ph, 'c', ph);
         assert.deepEqual(par('a', 'b', 'd'), ['a', 'b', 'c', 'd']);
+      }
+    });
+
+    QUnit.test('`_.' + methodName + '` should use `_.placeholder` when set', function(assert) {
+      assert.expect(1);
+
+      if (!isModularize) {
+        var _ph = _.placeholder = {},
+            fn = function() { return slice.call(arguments); },
+            par = func(fn, _ph, 'b', ph),
+            expected = isPartial ? ['a', 'b', ph, 'c'] : ['a', 'c', 'b', ph];
+
+        assert.deepEqual(par('a', 'c'), expected);
+        delete _.placeholder;
+      }
+      else {
+        skipAssert(assert);
       }
     });
 
@@ -18464,13 +18604,11 @@
     QUnit.test('should shuffle small collections', function(assert) {
       assert.expect(1);
 
-      var uniqBy = lodashStable.uniqBy || lodashStable.uniq;
-
       var actual = lodashStable.times(1000, function(assert) {
         return _.shuffle([1, 2]);
       });
 
-      assert.deepEqual(lodashStable.sortBy(uniqBy(actual, String), '0'), [[1, 2], [2, 1]]);
+      assert.deepEqual(lodashStable.sortBy(lodashStable.uniqBy(actual, String), '0'), [[1, 2], [2, 1]]);
     });
 
     QUnit.test('should treat number values for `collection` as empty', function(assert) {
@@ -23306,7 +23444,7 @@
 
   lodashStable.each(['unzip', 'zip'], function(methodName, index) {
     var func = _[methodName];
-    func = _.bind(index ? func.apply : func.call, func, null);
+    func = lodashStable.bind(index ? func.apply : func.call, func, null);
 
     var object = {
       'an empty array': [
