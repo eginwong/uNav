@@ -56,6 +56,20 @@
         "name": "RCH 126WC",
         "utility": "Washroom"
       }
+    },
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.540604,
+          43.470323, 
+          1
+        ]
+      },
+      "properties": {
+        "name": "RCH 117ELV",
+        "utility": "Elevator"
+      }
     }
   ]
 }
