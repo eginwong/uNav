@@ -2,20 +2,8 @@
 </div>
 <h2><center>Where would you like to go today?</center></h2>
 <div class="search">
-<select chosen responsive-chosen
-no-results-text="'Could not find your location :('"
-ng-model="src"
-ng-change="update()"
-ng-options="room for room in rooms">
-</select>
-
-<select chosen responsive-chosen
-no-results-text="'Could not find your location :('"
-ng-model="dest"
-ng-change="update()"
-ng-options="room for room in rooms">
-</select>
-</div>
+<select ng-model="src" id="roomSrc" class="chosen-select" no-results-text="'Could not find your location :('"></select>
+<select ng-model="dest" id="roomDest" class="chosen-select" no-results-text="'Could not find your location :('"></select>
 
 <div id="targetLocation" align="center">
   <img id="buildingmap"/>
