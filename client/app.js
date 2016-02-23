@@ -66,6 +66,7 @@ uNav.controller('searchController', function($scope, $timeout, $resource, $locat
   };
 });
 
+
 uNav.controller('nearyouController', ['$scope', function($scope) {
   $scope.message = 'nearyou';
 }]);

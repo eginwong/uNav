@@ -6,6 +6,12 @@
 
 html,
 body {
+ margin-top: 0px;
+ margin-right: 0px;
+ margin-bottom: 0px;
+ margin-left: 0px;
+}
+body {
   height: 100%;
   width: 100%;
 }
@@ -110,7 +116,7 @@ aside {
   color: #ffffff;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: 
 }
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
@@ -180,7 +186,7 @@ aside {
 .header-content {
   position: relative;
   width: 100%;
-  min-height: auto;
+  min-height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -195,6 +201,7 @@ aside {
   text-align: center;
   padding: 100px 15px 100px;
   width: 100%;
+  height: 100%;
 }
 .header-content .header-content-inner h1 {
   font-weight: 700;
