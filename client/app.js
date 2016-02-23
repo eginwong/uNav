@@ -36,7 +36,6 @@ uNav.service('sharedProperties', function() {
 });
 
 uNav.directive('chosen', function($timeout) {
-
   return {
     restrict: 'A',
     link: function(scope, element, attr) {
@@ -71,18 +70,57 @@ uNav.controller('nearyouController', ['$scope', function($scope) {
   $scope.message = 'nearyou';
 }]);
 
-uNav.controller('navController', function($scope, $resource, $timeout, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady) {
+uNav.factory('RoomService', function($q, $timeout, $http) {
+  return {
+    getID: function(id){
+      return $http.get('/api/graph/rooms/' + id)
+      .then(function(response) {
+        if (typeof response.data === 'object') {
+          return response.data;
+        } else {
+          // invalid response
+          return $q.reject(response.data);
+        }
+      }, function(response){
+        return $q.reject(response.data);
+      });
+    }
+  }
+});
+
+uNav.factory('DataService', function($q, $timeout, $http) {
+  return {
+    getThings: function(){
+      return $http.get('/api/graph/rooms')
+      .then(function(response) {
+        if (typeof response.data === 'object') {
+          return response.data;
+        } else {
+          // invalid response
+          return $q.reject(response.data);
+        }
+      }, function(response){
+        return $q.reject(response.data);
+      });
+    }
+  }
+});
+
+uNav.controller('navController', function($scope, $timeout, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady, DataService, RoomService) {
+
+
   // dynamically set the map based on which building we're grabbing it from - take from uwapi
   $scope.message = 'navigation';
   var mapImage = sharedProperties.getString();
   $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
 
-  $scope.rooms = $resource('/api/graph/rooms').query();
+  DataService.getThings().then(function(result){
+    $scope.rooms = result;
+  });
 
+  $scope.tally = 0;
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
-  // uiGmapGoogleMapApi is a promise.
-  // The "then" callback function provides the google.maps object.
 
   uiGmapGoogleMapApi.then(function (maps) {
     $scope.googlemap = {};
@@ -95,56 +133,85 @@ uNav.controller('navController', function($scope, $resource, $timeout, sharedPro
       pan: 1,
       options: $scope.mapOptions,
       markers: [],
-      events: {
-        click: function (map, eventName, originalEventArgs) {
-          var e = originalEventArgs[0];
-          var lat = e.latLng.lat(),lon = e.latLng.lng();
-          var marker = {
-            id: Date.now(),
-            coords: {
-              latitude: lat,
-              longitude: lon
-            }
-          };
-          $scope.map.markers.push(marker);
-          console.log($scope.map.markers);
-          $scope.$apply();
-        }
-      }
+      events: {}
     }
   });
+
+  $scope.windowOptions = {
+    visible: false,
+    content: "Frustration"
+  };
+
+  $scope.onClick = function() {
+    alert("Hello");
+    $scope.windowOptions.visible = !$scope.windowOptions.visible;
+  };
+
+  $scope.closeClick = function() {
+    $scope.windowOptions.visible = false;
+  };
 
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function (instances) {
     console.log(instances[0].map); // get the current map
   })
   .then(function () {
-    alert("Hello");
+    var map = $scope.map;
+    var mark = $scope.map.markers;
+    var infoWindow = document.getElementById("infowindow");
     $scope.$watchGroup(["src", "dest"], function(newVal, oldVal){
-        if($scope.src != undefined && $scope.dest != undefined){
-          alert($scope.src + " to " + $scope.dest);
-        }
-      })
-    // var map = $scope.map;
-    // $scope.update = function(map) {
-    //   if($scope.src != undefined){
-    //       $scope.srcNode = $resource('/api/graph/rooms/'+$scope.src).query();
-    //       var lat = $scope.srcNode.$promise.$then(function(){return $scope.srcNode._y});
-    //       var lon = $scope.srcNode.$promise.$then(function(){return $scope.srcNode._x});
-    //       var marker = {
-    //         id: Date.now(),
-    //         coords: {
-    //           latitude: lat,
-    //           longitude: lon
-    //         }
-    //       };
-    //       $scope.map.markers.push(marker);
-    //       console.log($scope.map.markers);
-    //       $scope.$apply();
-    //   }
-    //
-    //   // write a function for $scope.dest as well.
-    // }
+      if($scope.src != undefined) {
+        RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
+          $scope.srcNode = result;
+          var marker = {
+            id: 0,
+            coords: {
+              latitude: $scope.srcNode._y,
+              longitude: $scope.srcNode._x
+            }
+          };
+
+            for(var i = 0; i < mark.length; i++) {
+              if (mark[i].id == 0) {
+                mark.splice(i, 1);
+                break;
+              }
+            }
+            $scope.map.markers.push(marker);
+        })
+      }
+
+
+
+      // function createInfoWindow(marker, popupContent) {
+      //   google.maps.event.addListener(marker, 'click', function () {
+      //     infoWindow.setContent(popupContent);
+      //     infoWindow.open(pointMap.map, this);
+      //   });
+
+      if($scope.dest != undefined) {
+        RoomService.getID($scope.dest.replace(/\s+/g, '')).then(function(result){
+          $scope.destNode = result;
+          var marker = {
+            id: 1,
+            coords: {
+              latitude: $scope.destNode._y,
+              longitude: $scope.destNode._x
+            }
+          };
+          for(var i = 0; i < mark.length; i++) {
+            if (mark[i].id == 1) {
+              mark.splice(i, 1);
+              break;
+            }
+          }
+          $scope.map.markers.push(marker);
+        })
+      }
+      if($scope.src != undefined && $scope.dest != undefined){
+        alert($scope.src + " to " + $scope.dest);
+      }
+    })
   });
 
   //

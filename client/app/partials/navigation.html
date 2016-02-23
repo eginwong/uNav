@@ -2,14 +2,14 @@
 </div>
 <h2><center>Where would you like to go today?</center></h2>
 <div class="search">
-<select responsive-chosen
+<select chosen responsive-chosen
 no-results-text="'Could not find your location :('"
 ng-model="src"
 ng-change="update()"
 ng-options="room for room in rooms">
 </select>
 
-<select responsive-chosen
+<select chosen responsive-chosen
 no-results-text="'Could not find your location :('"
 ng-model="dest"
 ng-change="update()"
@@ -22,13 +22,10 @@ ng-options="room for room in rooms">
 </div>
 
       <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
-          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" ng-click="onClick()" idkey="m.id">
+            <ui-gmap-window id="infowindow" options="windowOptions" closeClick="closeClick()">
+            </ui-gmap-window>
+        </ui-gmap-marker>
       </ui-gmap-google-map>
 
 <!-- <a class="button" ng-click="findMe()" href="">Find me</a>-->
-
-<!-- Fix this later. -->
-  <!--<ui-gmap-window coords="MapOptions.markers.selected.coords" show="windowOptions.show" options="windowOptions" closeClick="closeClick()">
-  </ui-gmap-window>
-  <ui-gmap-markers ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-markers> -->
-  <!--<ui-gmap-markers models="markers" idkey="markers.id" coords="'coords'" ng-click="onClick()" events="markers.events"></ui-gmap-markers>
