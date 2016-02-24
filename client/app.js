@@ -82,12 +82,12 @@ uNav.factory('RoomService', function($q, $timeout, $http) {
   }
 });
 
-uNav.controller('navController', function($scope, $timeout, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady, RoomService) {
+uNav.controller('navController', function($scope, $timeout, sharedProperties, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
 
   // dynamically set the map based on which building we're grabbing it from - take from uwapi
   $scope.message = 'navigation';
   var mapImage = sharedProperties.getString();
-  $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
+  // $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
 
   $.get('/api/graph/rooms', function(obj){
     $.each(JSON.parse(obj), function (idx, val) {
@@ -116,7 +116,6 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, ui
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
   uiGmapGoogleMapApi.then(function (maps) {
-    $scope.googlemap = {};
     $scope.map = {
       center: {
         latitude: 43.47035091238624,
@@ -126,18 +125,25 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, ui
       pan: 1,
       options: $scope.mapOptions,
       markers: [],
-      events: {}
+      events: {},
+      control: {}
     }
   });
 
   $scope.windowOptions = {
     visible: false,
-    content: "Frustration"
   };
 
+  $scope.tally = 0;
   $scope.onClick = function() {
-    alert("Hello");
+    if($scope.tally > 0) {
+      $scope.windowOptions.visible = false;
+    }
+    var point = this.m;
+    $scope.windowOptions.content = '<b>' + point.name + '</b>: My latitude is: ' + point.coords.latitude + ' while my longitude is: ' + point.coords.longitude;
     $scope.windowOptions.visible = !$scope.windowOptions.visible;
+    $scope.tally++;
+    $scope.$apply();
   };
 
   $scope.closeClick = function() {
@@ -155,7 +161,8 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, ui
           coords: {
             latitude: $scope.srcNode._y,
             longitude: $scope.srcNode._x
-          }
+          },
+          name: $scope.src
         }
         for(var i = 0; i < mark.length; i++) {
           if (mark[i].id == 0) {
@@ -163,6 +170,7 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, ui
             break;
           }
         }
+        google.maps.event.addListener(marker, 'click', this.locationMarkerOnClick);
         $scope.map.markers.push(marker);
       })
     }
@@ -174,7 +182,8 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, ui
           coords: {
             latitude: $scope.destNode._y,
             longitude: $scope.destNode._x
-          }
+          },
+          name: $scope.dest
         }
         for(var i = 0; i < mark.length; i++) {
           if (mark[i].id == 1) {
@@ -182,27 +191,68 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, ui
             break;
           }
         }
+        google.maps.event.addListener(marker, 'click', this.locationMarkerOnClick);
         $scope.map.markers.push(marker);
       })
     }
   }
 
+  $scope.getDirections = function() {
+    if($scope.src != undefined && $scope.dest != undefined){
+      // instantiate google map objects for directions
+      $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
+        var leng = JSON.parse(obj).length;
+        var waypts = [];
+        $.each(JSON.parse(obj), function (idx, val) {
+          if (idx == 0 || idx == (leng - 1)){
+          }
+          else if(idx == leng) {
+            alert(val.dist);
+          }
+          else{
+            waypts.push({location: new google.maps.LatLng(val._y, val._x)});
+          }
+        })
+
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+        var directionsService = new google.maps.DirectionsService();
+        var geocoder = new google.maps.Geocoder();
+
+        console.log(waypts);
+        // directions object -- with defaults
+        $scope.directions = {
+          origin: new google.maps.LatLng($scope.srcNode._y, $scope.srcNode._x),
+          destination: new google.maps.LatLng($scope.destNode._y, $scope.destNode._x),
+          waypoints: waypts,
+          showList: false
+        }
+
+          var request = {
+            origin: $scope.directions.origin,
+            destination: $scope.directions.destination,
+            travelMode: google.maps.DirectionsTravelMode.WALKING
+          };
+          directionsService.route(request, function (response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+              directionsDisplay.setDirections(response);
+              directionsDisplay.setMap($scope.map.control.getGMap());
+              directionsDisplay.setPanel(document.getElementById('directionsList'));
+              $scope.directions.showList = true;
+            } else {
+              alert('Google route unsuccesfull!');
+            }
+          });
+      });
+
+
+    }
+    else{
+      alert("You are missing input.");
+    }
+  }
+
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function (instances) {
-    console.log(instances[0].map); // get the current map
-  })
-  .then(function () {
-    var infoWindow = document.getElementById("infowindow");
-
-    // function createInfoWindow(marker, popupContent) {
-    //   google.maps.event.addListener(marker, 'click', function () {
-    //     infoWindow.setContent(popupContent);
-    //     infoWindow.open(pointMap.map, this);
-    //   });
-
-    if($scope.src != undefined && $scope.dest != undefined){
-      alert($scope.src + " to " + $scope.dest);
-    }
   })
 
   //

@@ -2,18 +2,21 @@
 </div>
 <h2><center>Where would you like to go today?</center></h2>
 <div class="search">
-<select ng-model="src" id="roomSrc" class="chosen-select" no-results-text="'Could not find your location :('"></select>
-<select ng-model="dest" id="roomDest" class="chosen-select" no-results-text="'Could not find your location :('"></select>
+<select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select>
+<select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select>
+<button class="btn btn-primary" ng-click="getDirections()">Get Directions</button>
 
+<!--
 <div id="targetLocation" align="center">
   <img id="buildingmap"/>
-</div>
+</div> -->
 
-      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
-          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" ng-click="onClick()" idkey="m.id">
-            <ui-gmap-window id="infowindow" options="windowOptions" closeClick="closeClick()">
-            </ui-gmap-window>
-        </ui-gmap-marker>
-      </ui-gmap-google-map>
+<ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
+    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" click="onClick()" idkey="m.id" events="marker.events">
+      <ui-gmap-window id="marker-{{$index}}" options="windowOptions" closeClick="closeClick()"></ui-gmap-window>
+      </ui-gmap-marker>
+</ui-gmap-google-map>
+
+<div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div>
 
 <!-- <a class="button" ng-click="findMe()" href="">Find me</a>-->

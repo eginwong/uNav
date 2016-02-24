@@ -49,7 +49,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.03E+03",
+    "id":"103E1",
     "name":""
     }
   },
@@ -62,7 +62,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.03E+04",
+    "id":"103E2",
     "name":""
     }
   },
@@ -88,7 +88,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.04E+03",
+    "id":"104E1",
     "name":""
     }
   },
@@ -114,7 +114,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.05E+03",
+    "id":"105E1",
     "name":""
     }
   },
@@ -127,7 +127,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.05E+04",
+    "id":"105E2",
     "name":""
     }
   },
@@ -153,7 +153,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.06E+03",
+    "id":"106E1",
     "name":""
     }
   },
@@ -192,7 +192,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.08E+03",
+    "id":"108E1",
     "name":""
     }
   },
@@ -205,7 +205,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.08E+04",
+    "id":"108E2",
     "name":""
     }
   },
@@ -231,7 +231,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.09E+03",
+    "id":"109E1",
     "name":""
     }
   },
@@ -270,7 +270,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.10E+03",
+    "id":"110E1",
     "name":""
     }
   },
@@ -283,7 +283,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.10E+04",
+    "id":"110E2",
     "name":""
     }
   },
@@ -309,7 +309,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.11E+03",
+    "id":"111E1",
     "name":""
     }
   },
@@ -335,7 +335,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.12E+03",
+    "id":"112E1",
     "name":""
     }
   },
@@ -348,7 +348,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.12E+04",
+    "id":"112E2",
     "name":""
     }
   },
@@ -387,7 +387,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.14E+03",
+    "id":"114E1",
     "name":""
     }
   },
@@ -413,7 +413,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.15E+03",
+    "id":"115E1",
     "name":""
     }
   },
@@ -439,7 +439,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.16E+03",
+    "id":"116E1",
     "name":""
     }
   },
@@ -543,7 +543,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.20E+03",
+    "id":"120E1",
     "name":""
     }
   },
@@ -699,7 +699,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.24E+03",
+    "id":"124E1",
     "name":""
     }
   },
@@ -764,7 +764,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":"Entrance",
-    "id":"1.28E+03",
+    "id":"128E1",
     "name":""
     }
   }

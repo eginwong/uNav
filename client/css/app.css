@@ -115,3 +115,8 @@ body {
 }
 .button4 {position:absolute;right:24%;top:50%;}
 .angular-google-map-container { height: 500px;  }
+#map-canvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
