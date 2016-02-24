@@ -1,2 +1,87 @@
+<div class="navdiv">
+</div>
 
-<ui-gmap-google-map center='map.center' zoom='map.zoom' options='{styles: [{stylers: [{ hue: "#00ffe6" },{ saturation: -20 }]},{featureType: "road", elementType: "geometry", stylers: [{ lightness: 100 },{ visibility: "simplified" }]},{featureType: "road", elementType: "labels", stylers: [ { visibility: "off" } ]}]}'></ui-gmap-google-map>
+      <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Find What's Near You</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+<div class="search">
+
+<div id="wrapper" class="active">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Amenities 
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Washrooms</a>
+                </li>
+                <li>
+                    <a href="#">Water Fountains</a>
+                </li>
+                <li>
+                    <a href="#">Coffee</a>
+                </li>
+                <li>
+                    <a href="#">Stairs</a>
+                </li>
+                <li>
+                    <a href="#">Wheelchair Accessibility</a>
+                </li>
+                <li>
+                    <a href="#">Elevators</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+ <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <input type="button" data-name="show" value="Toggle" id="toggle">
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    
+   
+
+    </script>
+	<div id="targetLocation" align="center">
+  		<img id="buildingmap"/>
+	</div>
+
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
+          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+      </ui-gmap-google-map>
+
+
+
+
+<!-- <a class="button" ng-click="findMe()" href="">Find me</a>-->
+
+<!-- Fix this later. -->
+  <!--<ui-gmap-window coords="MapOptions.markers.selected.coords" show="windowOptions.show" options="windowOptions" closeClick="closeClick()">
+  </ui-gmap-window>
+  <ui-gmap-markers ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-markers> -->
+  <!--<ui-gmap-markers models="markers" idkey="markers.id" coords="'coords'" ng-click="onClick()" events="markers.events"></ui-gmap-markers>

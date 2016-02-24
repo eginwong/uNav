@@ -6,14 +6,21 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   when('/search', {templateUrl : 'app/partials/search.html', controller  : 'searchController'}).
   when('/navigation', {templateUrl : 'app/partials/navigation.html', controller  : 'navController'}).
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
+  when('/findnearyou', { templateUrl : 'app/partials/findnearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
   when('/contact', { templateUrl : 'app/partials/contact.html'});
+
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyCYtcbfLrd9BGzJ8HPdvsxDEedBdh3F-z4',
     v: '3.24', //defaults to latest 3.X anyhow
     libraries: 'weather,geometry,visualization'
   });
+});
+
+$("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("active");
 });
 
 uNav.service('sharedProperties', function() {
@@ -68,9 +75,96 @@ uNav.controller('searchController', function($scope, $timeout, $resource, $locat
 });
 
 
-uNav.controller('nearyouController', ['$scope', function($scope) {
+uNav.controller('nearyouController', function($scope, $timeout, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.message = 'nearyou';
-}]);
+  $scope.geolocationAvailable = navigator.geolocation ? true : false;
+
+  // uiGmapGoogleMapApi is a promise.
+  // The "then" callback function provides the google.maps object.
+
+  uiGmapGoogleMapApi.then(function (maps) {
+    $scope.googlemap = {};
+    $scope.map = {
+      center: {
+        latitude: 43.47035091238624,
+        longitude: -80.54049253463745
+      },
+      zoom: 20,
+      pan: 1,
+      options: $scope.mapOptions,
+      markers: [],
+      events: {
+        click: function (map, eventName, originalEventArgs) {
+          var e = originalEventArgs[0];
+          var lat = e.latLng.lat(),lon = e.latLng.lng();
+          var marker = {
+            id: Date.now(),
+            coords: {
+              latitude: lat,
+              longitude: lon
+            }
+          };
+          $scope.map.markers.push(marker);
+          console.log($scope.map.markers);
+          $scope.$apply();
+        }
+      }
+    }
+  });
+
+  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
+  .then(function (instances) {
+    console.log(instances[0].map); // get the current map
+  })
+  .then(function () {
+    
+    $scope.$watchGroup(["src", "dest"], function(newVal, oldVal){
+        if($scope.src != undefined && $scope.dest != undefined){
+          alert($scope.src + " to " + $scope.dest);
+        }
+      })
+
+  });
+
+  $scope.mapOptions = {
+    minZoom: 3,
+    zoomControl: false,
+    draggable: true,
+    navigationControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    disableDoubleClickZoom: false,
+    keyboardShortcuts: true,
+    markers: {
+      selected: {}
+    },
+    styles: [{
+      stylers: [
+        { hue: "#00ffe6" },
+        { saturation: -20 }
+      ]
+    },{
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }]
+  };
+});
+
+
+    
+
+
 
 uNav.controller('navController', function($scope, $resource, $timeout, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady) {
   // dynamically set the map based on which building we're grabbing it from - take from uwapi
