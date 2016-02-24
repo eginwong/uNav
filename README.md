@@ -6,6 +6,11 @@
 $ npm install
 $ nodemon index.js
 ```
+
+###February 24, 2016
+
+Added company e-mail 'unavfydp@gmail.com' for sending out support e-mails. Linked up to google maps for the most part. Can't use directions api because it defaults to where google has set their paths. We want to make our paths ourselves, so we will most likely go with drawing the polygon on the map without textual directions. :'(.
+
 ###February 11, 2016
 Added API capability to node server through express. It's phenomenal. Returning parsed buildings at the moment, but will have to think about how to search through that array of arrays to return the exact data I want (which is what?).
 
@@ -24,7 +29,7 @@ Need to figured out a way to store all the image (in an array?) and swap simulta
 
 Killed the demo today for PUM 1 with medium fidelity. Got to crank it and figure out how to do A* and how to store the nodes based on those libraries.
 
-1. Are we going to link up to googlemaps api?
+~~1. Are we going to link up to googlemaps api?~~
 
 ~~2. How are we going to do the UI? With CAD drawings~~
 

@@ -118,13 +118,12 @@ module.exports = {
       else{
         var resultArray = [];
         for (var i = 0; i < path.length; i++){
-          resultArray.push(graph._nodes[path[i]._id]);
-          dist = path[i]._f;
+          resultArray.push({id: path[i]._id, latitude: path[i]._y, longitude : path[i]._x});
+          if(i == path.length - 1){
+            resultArray.push({dist: path[i]._f});
+          }
         }
-        fin = {
-          "path": resultArray,
-          "dist": dist
-        };
+        fin = resultArray;
         return fin;
       }
     }

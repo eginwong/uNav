@@ -3,6 +3,11 @@ var app = express();
 var server = require('http').Server(app);
 var request = require('request');
 var fs = require("fs");
+var nodemailer = require('nodemailer');
+var bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 // For navigation
 var algo = require('./astar.js');
@@ -134,23 +139,23 @@ router.route('/astar/:src/:sink')
   res.send(JSON.stringify(algo.aStar(g, req.params.src, req.params.sink)));
 });
 
+router.route('/contact-form')
 
-// post example
-// // create a bear (accessed at POST http://localhost:8080/api/bears)
-// .POST(function(req, res) {
-//
-//     var bear = new Bear();      // create a new instance of the Bear model
-//     bear.name = req.body.name;  // set the bears name (comes from the request)
-//
-//     // save the bear and check for errors
-//     bear.save(function(err) {
-//         if (err)
-//             res.send(err);
-//
-//         res.json({ message: 'Bear created!' });
-//     });
-//
-// });
+.post(function(req,res){
+  var transporter = nodemailer.createTransport('smtps://unavfydp%40gmail.com:coconutwater@smtp.gmail.com');
+  var data = req.body;
+
+  transporter.sendMail({
+    from: 'unavfydp@gmail.com',
+    cc: data.contactEmail,
+    bcc: 'e.gin.wong@gmail.com',
+    to: 'unavfydp@gmail.com',
+    subject: 'Support Message: ' + data.contactReason + ' from ' + data.contactName,
+    text: data.contactMsg
+  })
+  res.json(data);
+});
+
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api

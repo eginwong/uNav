@@ -1,4 +1,4 @@
-var uNav = angular.module('uNav', ['ui', 'ui.utils', 'ngRoute', 'ui.bootstrap', 'uiGmapgoogle-maps', 'ngResource', 'localytics.directives']).
+var uNav = angular.module('uNav', ['ui', 'ui.utils', 'ngRoute', 'ui.bootstrap', 'uiGmapgoogle-maps', 'ngResource']).
 config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   $locationProvider.hashPrefix('');
   $routeProvider.
@@ -8,7 +8,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
   when('/findnearyou', { templateUrl : 'app/partials/findnearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
-  when('/contact', { templateUrl : 'app/partials/contact.html'});
+  when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
 
 
   uiGmapGoogleMapApiProvider.configure({
@@ -42,36 +42,28 @@ uNav.service('sharedProperties', function() {
   }
 });
 
-uNav.directive('chosen', function($timeout) {
-
-  return {
-    restrict: 'A',
-    link: function(scope, element, attr) {
-      $timeout(function () {
-        element.chosen();
-      }, 200, false);
-    }
-  }
-});
-
 // create the controller and inject Angular's $scope
 uNav.controller('mainController', function($scope) {
   // create a message to display in our view
 });
 
-uNav.controller('searchController', function($scope, $timeout, $resource, $location, sharedProperties) {
+uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, sharedProperties) {
   $scope.message = 'search';
 
-  // Store value in between controllers. And redirect to new page.
-  $scope.buildings = $resource('/api/buildings').query();
+  $.get('/api/buildings', function(obj){
+    $.each(JSON.parse(obj), function (idx, val) {
+      $("#buildingsInUW").append('<option value="' + val[0] + '">' + val[0] + ' - ' + val[1] + '</option>');
+    });
+    $("#buildingsInUW").chosen({ width: "95%" });
+  });
 
-  $scope.store = function() {
-    sharedProperties.setString($scope.buildOfChoice[0]);
+  $( "#buildingsInUW" ).change(function() {
+    sharedProperties.setString($("#buildingsInUW option:selected").val());
     $location.path('/navigation');
     $timeout(function(empty) {
       $scope.$apply();
     },0);
-  };
+  });
 });
 
 
@@ -166,21 +158,58 @@ uNav.controller('nearyouController', function($scope, $timeout, sharedProperties
 
 
 
-uNav.controller('navController', function($scope, $resource, $timeout, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady) {
+uNav.factory('RoomService', function($q, $timeout, $http) {
+  return {
+    getID: function(id){
+      return $http.get('/api/graph/rooms/' + id)
+      .then(function(response) {
+        if (typeof response.data === 'object') {
+          return response.data;
+        } else {
+          // invalid response
+          return $q.reject(response.data);
+        }
+      }, function(response){
+        return $q.reject(response.data);
+      });
+    }
+  }
+});
+
+uNav.controller('navController', function($scope, $timeout, sharedProperties, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
+
   // dynamically set the map based on which building we're grabbing it from - take from uwapi
   $scope.message = 'navigation';
   var mapImage = sharedProperties.getString();
-  $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
+  // $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
 
-  $scope.rooms = $resource('/api/graph/rooms').query();
+  $.get('/api/graph/rooms', function(obj){
+    $.each(JSON.parse(obj), function (idx, val) {
+      $("#roomSrc").append('<option value="' + val + '">' + val + '</option>');
+    });
+    $("#roomSrc").chosen({ width: "10%" });
+  });
+
+  $( "#roomSrc" ).change(function() {
+    $scope.src = $("#roomSrc option:selected").val()
+    $scope.plot("src");
+  });
+
+  $.get('/api/graph/rooms', function(obj){
+    $.each(JSON.parse(obj), function (idx, val) {
+      $("#roomDest").append('<option value="' + val + '">' + val + '</option>');
+    });
+    $("#roomDest").chosen({ width: "10%" });
+  });
+
+  $( "#roomDest" ).change(function() {
+    $scope.dest = $("#roomDest option:selected").val()
+    $scope.plot("dest");
+  });
 
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
-  // uiGmapGoogleMapApi is a promise.
-  // The "then" callback function provides the google.maps object.
-
   uiGmapGoogleMapApi.then(function (maps) {
-    $scope.googlemap = {};
     $scope.map = {
       center: {
         latitude: 43.47035091238624,
@@ -190,57 +219,130 @@ uNav.controller('navController', function($scope, $resource, $timeout, sharedPro
       pan: 1,
       options: $scope.mapOptions,
       markers: [],
-      events: {
-        click: function (map, eventName, originalEventArgs) {
-          var e = originalEventArgs[0];
-          var lat = e.latLng.lat(),lon = e.latLng.lng();
-          var marker = {
-            id: Date.now(),
-            coords: {
-              latitude: lat,
-              longitude: lon
-            }
-          };
-          $scope.map.markers.push(marker);
-          console.log($scope.map.markers);
-          $scope.$apply();
-        }
-      }
+      events: {},
+      control: {}
     }
   });
 
+  $scope.windowOptions = {
+    visible: false,
+  };
+
+  $scope.onClick = function() {
+    var point = this.m;
+    $scope.windowOptions.content = '<b>' + point.name + '</b>: My latitude is: ' + point.coords.latitude + ' while my longitude is: ' + point.coords.longitude;
+    $scope.windowOptions.visible = !$scope.windowOptions.visible;
+    $scope.$apply();
+  };
+
+  $scope.closeClick = function() {
+    $scope.windowOptions.visible = false;
+  };
+
+  $scope.plot = function (node) {
+    var map = $scope.map;
+    var mark = $scope.map.markers;
+    if (node == "src"){
+      RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
+        $scope.srcNode = result;
+        var marker = {
+          id: 0,
+          coords: {
+            latitude: $scope.srcNode._y,
+            longitude: $scope.srcNode._x
+          },
+          name: $scope.src
+        }
+        for(var i = 0; i < mark.length; i++) {
+          if (mark[i].id == 0) {
+            mark.splice(i, 1);
+            break;
+          }
+        }
+        google.maps.event.addListener(marker, 'click', this.locationMarkerOnClick);
+        $scope.map.markers.push(marker);
+      })
+    }
+    else if (node == "dest") {
+      RoomService.getID($scope.dest.replace(/\s+/g, '')).then(function(result){
+        $scope.destNode = result;
+        var marker = {
+          id: 1,
+          coords: {
+            latitude: $scope.destNode._y,
+            longitude: $scope.destNode._x
+          },
+          name: $scope.dest
+        }
+        for(var i = 0; i < mark.length; i++) {
+          if (mark[i].id == 1) {
+            mark.splice(i, 1);
+            break;
+          }
+        }
+        google.maps.event.addListener(marker, 'click', this.locationMarkerOnClick);
+        $scope.map.markers.push(marker);
+      })
+    }
+  }
+
+  $scope.getDirections = function() {
+    if($scope.src != undefined && $scope.dest != undefined){
+      // instantiate google map objects for directions
+      $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
+        var leng = JSON.parse(obj).length;
+        var waypts = [];
+        $.each(JSON.parse(obj), function (idx, val) {
+          if (idx == 0 || idx == (leng - 1)){
+          }
+          else if(idx == leng) {
+            alert(val.dist);
+          }
+          else{
+            waypts.push({location: new google.maps.LatLng(val._y, val._x)});
+          }
+        })
+
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+        var directionsService = new google.maps.DirectionsService();
+        var geocoder = new google.maps.Geocoder();
+
+        console.log(waypts);
+        // directions object -- with defaults
+        $scope.directions = {
+          origin: new google.maps.LatLng($scope.srcNode._y, $scope.srcNode._x),
+          destination: new google.maps.LatLng($scope.destNode._y, $scope.destNode._x),
+          waypoints: waypts,
+          showList: false
+        }
+
+        var request = {
+          origin: $scope.directions.origin,
+          destination: $scope.directions.destination,
+          travelMode: google.maps.DirectionsTravelMode.WALKING
+        };
+        directionsService.route(request, function (response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+            directionsDisplay.setMap($scope.map.control.getGMap());
+            directionsDisplay.setPanel(document.getElementById('directionsList'));
+            $scope.directions.showList = true;
+          } else {
+            alert('Google route unsuccesfull!');
+          }
+        });
+      });
+
+
+    }
+    else{
+      alert("You are missing input.");
+    }
+  }
+
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function (instances) {
-    console.log(instances[0].map); // get the current map
   })
-  .then(function () {
-    alert("Hello");
-    $scope.$watchGroup(["src", "dest"], function(newVal, oldVal){
-        if($scope.src != undefined && $scope.dest != undefined){
-          alert($scope.src + " to " + $scope.dest);
-        }
-      })
-    // var map = $scope.map;
-    // $scope.update = function(map) {
-    //   if($scope.src != undefined){
-    //       $scope.srcNode = $resource('/api/graph/rooms/'+$scope.src).query();
-    //       var lat = $scope.srcNode.$promise.$then(function(){return $scope.srcNode._y});
-    //       var lon = $scope.srcNode.$promise.$then(function(){return $scope.srcNode._x});
-    //       var marker = {
-    //         id: Date.now(),
-    //         coords: {
-    //           latitude: lat,
-    //           longitude: lon
-    //         }
-    //       };
-    //       $scope.map.markers.push(marker);
-    //       console.log($scope.map.markers);
-    //       $scope.$apply();
-    //   }
-    //
-    //   // write a function for $scope.dest as well.
-    // }
-  });
 
   //
   //
@@ -295,3 +397,23 @@ uNav.controller('navController', function($scope, $resource, $timeout, sharedPro
     }]
   };
 });
+
+uNav.controller('contactController', function ($scope, $http){
+
+  $scope.sendMail = function () {
+    var data = ({
+      contactName : $scope.contactName,
+      contactEmail : $scope.contactEmail,
+      contactReason : $scope.contactReason,
+      contactMsg : $scope.contactMsg
+    });
+    // Simple POST request example (passing data) :
+    $http.post('/api/contact-form', data).
+    success(function(data, status, headers, config) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.message = "Huzzah";
+      alert('Thanks for your message, ' + data.contactName + '. You Rock!');
+    });
+  }
+})

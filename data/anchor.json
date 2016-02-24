@@ -5,8 +5,8 @@
     "geometry": {
       "type": "Point",
       "coordinates": [
-         -80.540969,
-         43.470126,
+         -80.541083,
+         43.470274,
         1
         ]
       },
@@ -19,8 +19,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -80.541082,
-          43.470279, 
+          -80.540972,
+          43.470127, 
           1
         ]
       },
@@ -55,6 +55,21 @@
       "properties": {
         "name": "RCH 126WC",
         "utility": "Washroom"
+      }
+    },
+
+    {  "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.540604,
+          43.470323, 
+          1
+        ]
+      },
+      "properties": {
+        "name": "RCH 117ELV",
+        "utility": "Elevator"
       }
     }
   ]
