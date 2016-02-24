@@ -4,7 +4,6 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   $routeProvider.
   when('/', { templateUrl : 'app/partials/home.html', controller  : 'mainController'}).
   when('/search', {templateUrl : 'app/partials/search.html', controller  : 'searchController'}).
-  when('/navigation', {templateUrl : 'app/partials/navigation.html', controller  : 'navController'}).
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
   when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
@@ -16,77 +15,38 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   });
 });
 
-uNav.service('sharedProperties', function() {
-  var stringValue = 'test string value';
-  var objectValue = {
-    data: 'test object value'
-  };
-
-  return {
-    getString: function() {
-      return stringValue;
-    },
-    setString: function(value) {
-      stringValue = value;
-    },
-    getObject: function() {
-      return objectValue;
-    }
-  }
-});
-
 // create the controller and inject Angular's $scope
 uNav.controller('mainController', function($scope) {
   // create a message to display in our view
 });
 
-uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, sharedProperties) {
-  $scope.message = 'search';
-
+uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $.get('/api/buildings', function(obj){
-    $.each(JSON.parse(obj), function (idx, val) {
-      $("#buildingsInUW").append('<option value="' + val[0] + '">' + val[0] + ' - ' + val[1] + '</option>');
+    $scope.masterBuildings = JSON.parse(obj);
+    $.each($scope.masterBuildings, function (idx, val) {
+      $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
     });
     $("#buildingsInUW").chosen({ width: "95%" });
   });
 
   $( "#buildingsInUW" ).change(function() {
-    sharedProperties.setString($("#buildingsInUW option:selected").val());
-    $location.path('/navigation');
+    $scope.build = $("#buildingsInUW option:selected").val();
+    $scope.map.center = {latitude: $scope.masterBuildings[$scope.build].coordinates[1], longitude: $scope.masterBuildings[$scope.build].coordinates[0]};
+    $scope.map.zoom = 19;
     $timeout(function(empty) {
       $scope.$apply();
     },0);
   });
-});
 
-
-uNav.controller('nearyouController', ['$scope', function($scope) {
-  $scope.message = 'nearyou';
-}]);
-
-uNav.factory('RoomService', function($q, $timeout, $http) {
-  return {
-    getID: function(id){
-      return $http.get('/api/graph/rooms/' + id)
-      .then(function(response) {
-        if (typeof response.data === 'object') {
-          return response.data;
-        } else {
-          // invalid response
-          return $q.reject(response.data);
-        }
-      }, function(response){
-        return $q.reject(response.data);
-      });
-    }
+  $scope.restart = function(){
+    $scope.build = undefined;
+    $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
+    $scope.map.zoom = 16;
+    $scope.map.markers = [];
+    $(".chosen-select").val('').trigger("chosen:updated");
   }
-});
 
-uNav.controller('navController', function($scope, $timeout, sharedProperties, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
-
-  // dynamically set the map based on which building we're grabbing it from - take from uwapi
-  $scope.message = 'navigation';
-  var mapImage = sharedProperties.getString();
+  var mapImage = $scope.build;
   // $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
 
   $.get('/api/graph/rooms', function(obj){
@@ -118,10 +78,10 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
   uiGmapGoogleMapApi.then(function (maps) {
     $scope.map = {
       center: {
-        latitude: 43.47035091238624,
-        longitude: -80.54049253463745
+        latitude: 43.4722854,
+        longitude: -80.5448576
       },
-      zoom: 20,
+      zoom: 16,
       pan: 1,
       options: $scope.mapOptions,
       markers: [],
@@ -132,17 +92,6 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
 
   $scope.windowOptions = {
     visible: false,
-  };
-
-  $scope.onClick = function() {
-    var point = this.m;
-    $scope.windowOptions.content = '<b>' + point.name + '</b>: My latitude is: ' + point.coords.latitude + ' while my longitude is: ' + point.coords.longitude;
-    $scope.windowOptions.visible = !$scope.windowOptions.visible;
-    $scope.$apply();
-  };
-
-  $scope.closeClick = function() {
-    $scope.windowOptions.visible = false;
   };
 
   $scope.plot = function (node) {
@@ -165,7 +114,6 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
             break;
           }
         }
-        google.maps.event.addListener(marker, 'click', this.locationMarkerOnClick);
         $scope.map.markers.push(marker);
       })
     }
@@ -186,7 +134,6 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
             break;
           }
         }
-        google.maps.event.addListener(marker, 'click', this.locationMarkerOnClick);
         $scope.map.markers.push(marker);
       })
     }
@@ -302,6 +249,29 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
       ]
     }]
   };
+});
+
+
+uNav.controller('nearyouController', ['$scope', function($scope) {
+  $scope.message = 'nearyou';
+}]);
+
+uNav.factory('RoomService', function($q, $timeout, $http) {
+  return {
+    getID: function(id){
+      return $http.get('/api/graph/rooms/' + id)
+      .then(function(response) {
+        if (typeof response.data === 'object') {
+          return response.data;
+        } else {
+          // invalid response
+          return $q.reject(response.data);
+        }
+      }, function(response){
+        return $q.reject(response.data);
+      });
+    }
+  }
 });
 
 uNav.controller('contactController', function ($scope, $http){
