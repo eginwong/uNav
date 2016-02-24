@@ -18,10 +18,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   });
 });
 
-$("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("active");
-});
+
 
 uNav.service('sharedProperties', function() {
   var stringValue = 'test string value';
@@ -41,6 +38,13 @@ uNav.service('sharedProperties', function() {
     }
   }
 });
+
+$(document).on('click','.navbar-collapse.in',function(e) {
+    if( $(e.target).is('a') ) {
+        $(this).collapse('hide');
+    }
+});
+
 
 // create the controller and inject Angular's $scope
 uNav.controller('mainController', function($scope) {
@@ -67,9 +71,17 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 });
 
 
-uNav.controller('nearyouController', function($scope, $timeout, sharedProperties, uiGmapGoogleMapApi, uiGmapIsReady) {
+uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.message = 'nearyou';
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
+
+  $scope.scrollTo=function(id){
+    $location.hash(id);
+    $anchorScroll();
+  }
+
+
+
 
   // uiGmapGoogleMapApi is a promise.
   // The "then" callback function provides the google.maps object.
@@ -151,6 +163,31 @@ uNav.controller('nearyouController', function($scope, $timeout, sharedProperties
       ]
     }]
   };
+
+
+
+  $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("wrapper").toggleClass("active");
+    });
+
+    /*Scroll Spy*/
+    $('body').scrollspy({ target: '#spy', offset:80});
+
+  //   /*Smooth link animation*/
+  //   $('a[href*=#]:not([href=#])').click(function() {
+  //       if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+  //           var target = $(this.hash);
+  //           target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+  //           if (target.length) {
+  //               $('html,body').animate({
+  //                   scrollTop: target.offset().top
+  //               }, 1000);
+  //               return false;
+  //           }
+  //       }
+  //   });
 });
 
 
@@ -417,3 +454,5 @@ uNav.controller('contactController', function ($scope, $http){
     });
   }
 })
+
+
