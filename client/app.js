@@ -39,7 +39,13 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   });
 
   $scope.restart = function(){
+    if($scope.flightPath != undefined){
+      $scope.flightPath.setMap(null);
+      $scope.distance = null;
+    }
     $scope.build = undefined;
+    $scope.src = null;
+    $scope.dest = null;
     $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
     $scope.map.zoom = 16;
     $scope.map.markers = [];
@@ -59,6 +65,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val()
     $scope.plot("src");
+    $scope.drawDirections();
   });
 
   $.get('/api/graph/rooms', function(obj){
@@ -71,6 +78,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $( "#roomDest" ).change(function() {
     $scope.dest = $("#roomDest option:selected").val()
     $scope.plot("dest");
+    $scope.drawDirections();
   });
 
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
@@ -185,11 +193,37 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           }
         });
       });
-
-
     }
     else{
       alert("You are missing input.");
+    }
+  }
+
+  $scope.drawDirections = function() {
+    if($scope.src != undefined && $scope.dest != undefined){
+      if($scope.flightPath != undefined){
+        $scope.flightPath.setMap(null);
+      }
+      // instantiate google map objects for directions
+      $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
+        var leng = JSON.parse(obj).length;
+        var waypts = [];
+        $.each(JSON.parse(obj), function (idx, val) {
+          if(idx == (leng-1)) {
+            $scope.distance = (val.dist);
+          }
+          else{
+            waypts.push({lat: val.latitude, lng: val.longitude});
+          }
+        })
+        $scope.flightPath = new google.maps.Polyline({
+          map: $scope.map.control.getGMap(),
+          path: waypts,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+      })
     }
   }
 

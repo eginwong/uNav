@@ -52,7 +52,7 @@ router.route('/buildings')
         }
       }
       fs.writeFile( "uwapi_results.json", JSON.stringify(BuildingResults), "utf8");
-      res.send(JSON.stringify(BuildingResults));
+      res.send(BuildingResults);
     })
   }
   else {

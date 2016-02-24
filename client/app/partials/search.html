@@ -11,9 +11,11 @@
   <h2>Current building is: {{build}}</h2>
   <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select>
   <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select>
-  <button class="btn btn-primary" ng-click="getDirections()">Get Directions</button>
+
+  <!-- <button class="btn btn-primary" ng-click="drawDirections()">Get Directions</button> -->
   <button ng-click="restart()" class="btn btn-primary" id="restart">Restart</button>
 </div>
+<h2 ng-show="distance > 0">The distance is: {{distance}}</h2>
 <div>
 <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
   <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
