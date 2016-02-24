@@ -7,7 +7,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   when('/navigation', {templateUrl : 'app/partials/navigation.html', controller  : 'navController'}).
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
-  when('/contact', { templateUrl : 'app/partials/contact.html'});
+  when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyCYtcbfLrd9BGzJ8HPdvsxDEedBdh3F-z4',
@@ -134,15 +134,10 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
     visible: false,
   };
 
-  $scope.tally = 0;
   $scope.onClick = function() {
-    if($scope.tally > 0) {
-      $scope.windowOptions.visible = false;
-    }
     var point = this.m;
     $scope.windowOptions.content = '<b>' + point.name + '</b>: My latitude is: ' + point.coords.latitude + ' while my longitude is: ' + point.coords.longitude;
     $scope.windowOptions.visible = !$scope.windowOptions.visible;
-    $scope.tally++;
     $scope.$apply();
   };
 
@@ -227,21 +222,21 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
           showList: false
         }
 
-          var request = {
-            origin: $scope.directions.origin,
-            destination: $scope.directions.destination,
-            travelMode: google.maps.DirectionsTravelMode.WALKING
-          };
-          directionsService.route(request, function (response, status) {
-            if (status === google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(response);
-              directionsDisplay.setMap($scope.map.control.getGMap());
-              directionsDisplay.setPanel(document.getElementById('directionsList'));
-              $scope.directions.showList = true;
-            } else {
-              alert('Google route unsuccesfull!');
-            }
-          });
+        var request = {
+          origin: $scope.directions.origin,
+          destination: $scope.directions.destination,
+          travelMode: google.maps.DirectionsTravelMode.WALKING
+        };
+        directionsService.route(request, function (response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+            directionsDisplay.setMap($scope.map.control.getGMap());
+            directionsDisplay.setPanel(document.getElementById('directionsList'));
+            $scope.directions.showList = true;
+          } else {
+            alert('Google route unsuccesfull!');
+          }
+        });
       });
 
 
@@ -308,3 +303,23 @@ uNav.controller('navController', function($scope, $timeout, sharedProperties, Ro
     }]
   };
 });
+
+uNav.controller('contactController', function ($scope, $http){
+
+  $scope.sendMail = function () {
+    var data = ({
+      contactName : $scope.contactName,
+      contactEmail : $scope.contactEmail,
+      contactReason : $scope.contactReason,
+      contactMsg : $scope.contactMsg
+    });
+    // Simple POST request example (passing data) :
+    $http.post('/api/contact-form', data).
+    success(function(data, status, headers, config) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.message = "Huzzah";
+      alert('Thanks for your message, ' + data.contactName + '. You Rock!');
+    });
+  }
+})
