@@ -23,6 +23,7 @@ uNav.controller('mainController', function($scope) {
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $.get('/api/buildings', function(obj){
     $scope.masterBuildings = JSON.parse(obj);
+    console.log($scope.masterBuildings);
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
     });
