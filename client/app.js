@@ -288,6 +288,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       stylers: [
         { visibility: "off" }
       ]
+    },{
+      featureType: "buildings",
+      elementType: "labels.text",
+      stylers: [
+        { visibility: "off" }
+      ]
     }]
   };
 });
