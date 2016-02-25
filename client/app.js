@@ -221,7 +221,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         var waypts = [];
         $.each(JSON.parse(obj), function (idx, val) {
           if(idx == (leng-1)) {
-            $scope.distance = (val.dist);
+            $scope.distance = (val.dist.toFixed(2));
           }
           else{
             waypts.push({lat: val.latitude, lng: val.longitude});
