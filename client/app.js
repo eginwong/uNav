@@ -231,8 +231,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   .then(function (instances) {
   })
 
-  //
-  //
   // $scope.findMe = function () {
   //   if ($scope.geolocationAvailable) {
   //     navigator.geolocation.getCurrentPosition(function (position) {
@@ -241,11 +239,9 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   //         longitude: position.coords.longitude
   //       };
   //       $scope.$apply();
-  //       console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude);
+  //       console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude + position.coords.altitude);
   //       $scope.markerLat = position.coords.latitude;
   //       $scope.markerLng = position.coords.longitude;
-  //       $scope.addMarker();
-  //     }, function () {
   //     });
   //   }
   // };
