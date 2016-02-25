@@ -23,7 +23,6 @@ uNav.controller('mainController', function($scope) {
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $.get('/api/buildings', function(obj){
     $scope.masterBuildings = JSON.parse(obj);
-    console.log($scope.masterBuildings);
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
     });
@@ -34,6 +33,32 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.build = $("#buildingsInUW option:selected").val();
     $scope.map.center = {latitude: $scope.masterBuildings[$scope.build].coordinates[1], longitude: $scope.masterBuildings[$scope.build].coordinates[0]};
     $scope.map.zoom = 19;
+
+    $.get('/api/graph/rooms', function(obj){
+      var count = 0;
+      var appendage;
+      $.each(JSON.parse(obj), function (idx, val) {
+        var countOG = count;
+        count = parseInt(val.charAt(val.indexOf(" ") + 1));
+        if (count > countOG) {
+          if(countOG != 0){
+            appendage+='</optgroup>';
+            $("#roomSrc").append(appendage);
+            $("#roomDest").append(appendage);
+          }
+          appendage = '<optgroup label="' + $scope.build + ' Floor ' + count + '">';
+        }
+        appendage+='<option value="' + val + '">' + val + '</option>';
+      });
+      //The last one.
+      appendage+='</optgroup>';
+      $("#roomSrc").append(appendage);
+      $("#roomDest").append(appendage);
+
+      $("#roomSrc").chosen({ width: "10%" });
+      $("#roomDest").chosen({ width: "10%" });
+    });
+
     $timeout(function(empty) {
       $scope.$apply();
     },0);
@@ -54,26 +79,11 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   }
 
   var mapImage = $scope.build;
-  // $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
-
-  $.get('/api/graph/rooms', function(obj){
-    $.each(JSON.parse(obj), function (idx, val) {
-      $("#roomSrc").append('<option value="' + val + '">' + val + '</option>');
-    });
-    $("#roomSrc").chosen({ width: "10%" });
-  });
 
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val()
     $scope.plot("src");
     $scope.drawDirections();
-  });
-
-  $.get('/api/graph/rooms', function(obj){
-    $.each(JSON.parse(obj), function (idx, val) {
-      $("#roomDest").append('<option value="' + val + '">' + val + '</option>');
-    });
-    $("#roomDest").chosen({ width: "10%" });
   });
 
   $( "#roomDest" ).change(function() {

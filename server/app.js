@@ -27,6 +27,20 @@ fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) 
   });
 });
 
+fs.readFile('data/coordinates/RCH2_nodes_geo.json', 'utf8', function (err,data) {
+  geo_nodes = JSON.parse(data);
+  for (var ind in geo_nodes.features) {
+    g.addNode(g, geo_nodes.features[ind]);
+  }
+});
+
+fs.readFile('data/coordinates/RCH3_nodes_geo.json', 'utf8', function (err,data) {
+  geo_nodes = JSON.parse(data);
+  for (var ind in geo_nodes.features) {
+    g.addNode(g, geo_nodes.features[ind]);
+  }
+});
+
 
 var router = express.Router();              // get an instance of the express Router
 
