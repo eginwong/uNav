@@ -18,8 +18,9 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe7LduGMqcDv3021jOaiCxq4mxQ14Re6w&libraries=geometry">
 </script>
     <!--<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe7LduGMqcDv3021jOaiCxq4mxQ14Re6w&signed_in=true&callback=initMap"></script>
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe7LduGMqcDv3021jOaiCxq4mxQ14Re6w&signed_in=true&callback=initMap"></script>
     -->
+    
     
     <script>
     var overlay;
@@ -31,8 +32,8 @@
       };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-      var swBound = new google.maps.LatLng(43.470177, -80.541112);
-      var neBound = new google.maps.LatLng(43.470426, -80.540415);
+      var swBound = new google.maps.LatLng(43.470048, -80.540962);
+      var neBound = new google.maps.LatLng(43.470566, -80.540511);
       var bounds = new google.maps.LatLngBounds(swBound, neBound);
 
        console.log(map);

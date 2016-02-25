@@ -22,7 +22,7 @@
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18,
-    center: {lat: 43.470300, lng: -80.540780}
+    center: {lat: 37.783, lng: -122.403}
   });
 //need to figure out how to find the bounds
   var bounds = {
@@ -42,6 +42,8 @@ function initMap() {
 
       return ['../client/images/Waterloo Floor Plans/RCH_01FLR',
           zoom, '_', coord.x, '_', coord.y, '.png'].join('');
+          // return ['http://www.gstatic.com/io2010maps/tiles/5/L2_',
+          // zoom, '_', coord.x, '_', coord.y, '.png'].join('');
     },
     tileSize: new google.maps.Size(256, 256)
   });
