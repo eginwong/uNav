@@ -34,7 +34,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.map.center = {latitude: $scope.masterBuildings[$scope.build].coordinates[1], longitude: $scope.masterBuildings[$scope.build].coordinates[0]};
     $scope.map.zoom = 19;
 
-    $.get('/api/graph/rooms', function(obj){
+    //BUG: Fix this bug that the select dropdown won't refresh properly.
+    // $("#roomSrc").empty();
+    // $("#roomDest").empty();
+    $scope.$apply();
+
+    $.get('/api/graph/rooms/select/' + $scope.build, function(obj){
       var count = 0;
       var appendage;
       $.each(JSON.parse(obj), function (idx, val) {
@@ -58,8 +63,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       $("#roomSrc").chosen({ width: "10%" });
       $("#roomDest").chosen({ width: "10%" });
     });
-
-    $timeout(function(empty) {
+    $timeout(function() {
       $scope.$apply();
     },0);
   });
@@ -77,8 +81,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.map.markers = [];
     $(".chosen-select").val('').trigger("chosen:updated");
   }
-
-  var mapImage = $scope.build;
 
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val()

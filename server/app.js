@@ -135,6 +135,31 @@ router.route('/graph/rooms')
   });
 })
 
+router.route('/graph/rooms/select/:id')
+
+.get (function(req,res){
+  var rooms = [];
+  var hold;
+  function asyncFind(_callback){
+    for (var key in g._nodes) {
+      if(g._nodes[key]._data.building_code == req.params.id){
+        hold = g._nodes[key]._data.utility;
+        if(hold != "Hallway" && hold != "Entrance"){
+          rooms.push(key.substr(0,3) + " " + key.substr(3));
+        }
+      }
+    }
+    _callback();
+  }
+
+  // call first function and pass in a callback function which
+  // first function runs when it has completed
+  asyncFind(function() {
+    res.send(JSON.stringify(rooms));
+  });
+})
+
+
 router.route('/graph/rooms/:id')
 
 .get(function(req,res){
