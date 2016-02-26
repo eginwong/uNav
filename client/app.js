@@ -36,6 +36,32 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.build = $("#buildingsInUW option:selected").val();
     $scope.map.center = {latitude: $scope.masterBuildings[$scope.build].coordinates[1], longitude: $scope.masterBuildings[$scope.build].coordinates[0]};
     $scope.map.zoom = 19;
+
+    $.get('/api/graph/rooms', function(obj){
+      var count = 0;
+      var appendage;
+      $.each(JSON.parse(obj), function (idx, val) {
+        var countOG = count;
+        count = parseInt(val.charAt(val.indexOf(" ") + 1));
+        if (count > countOG) {
+          if(countOG != 0){
+            appendage+='</optgroup>';
+            $("#roomSrc").append(appendage);
+            $("#roomDest").append(appendage);
+          }
+          appendage = '<optgroup label="' + $scope.build + ' Floor ' + count + '">';
+        }
+        appendage+='<option value="' + val + '">' + val + '</option>';
+      });
+      //The last one.
+      appendage+='</optgroup>';
+      $("#roomSrc").append(appendage);
+      $("#roomDest").append(appendage);
+
+      $("#roomSrc").chosen({ width: "10%" });
+      $("#roomDest").chosen({ width: "10%" });
+    });
+
     $timeout(function(empty) {
       $scope.$apply();
     },0);
@@ -56,26 +82,11 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   }
 
   var mapImage = $scope.build;
-  // $('#buildingmap').attr("src", "images/Waterloo Floor Plans/"+mapImage+"1.png");
-
-  $.get('/api/graph/rooms', function(obj){
-    $.each(JSON.parse(obj), function (idx, val) {
-      $("#roomSrc").append('<option value="' + val + '">' + val + '</option>');
-    });
-    $("#roomSrc").chosen({ width: "10%" });
-  });
 
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val()
     $scope.plot("src");
     $scope.drawDirections();
-  });
-
-  $.get('/api/graph/rooms', function(obj){
-    $.each(JSON.parse(obj), function (idx, val) {
-      $("#roomDest").append('<option value="' + val + '">' + val + '</option>');
-    });
-    $("#roomDest").chosen({ width: "10%" });
   });
 
   $( "#roomDest" ).change(function() {
@@ -213,7 +224,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         var waypts = [];
         $.each(JSON.parse(obj), function (idx, val) {
           if(idx == (leng-1)) {
-            $scope.distance = (val.dist);
+            $scope.distance = (val.dist.toFixed(2));
           }
           else{
             waypts.push({lat: val.latitude, lng: val.longitude});
@@ -234,8 +245,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   .then(function (instances) {
   })
 
-  //
-  //
   // $scope.findMe = function () {
   //   if ($scope.geolocationAvailable) {
   //     navigator.geolocation.getCurrentPosition(function (position) {
@@ -244,11 +253,9 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   //         longitude: position.coords.longitude
   //       };
   //       $scope.$apply();
-  //       console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude);
+  //       console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude + position.coords.altitude);
   //       $scope.markerLat = position.coords.latitude;
   //       $scope.markerLng = position.coords.longitude;
-  //       $scope.addMarker();
-  //     }, function () {
   //     });
   //   }
   // };
@@ -281,6 +288,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     },{
       featureType: "road",
       elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "buildings",
+      elementType: "labels.text",
       stylers: [
         { visibility: "off" }
       ]
