@@ -155,7 +155,12 @@ router.route('/graph/rooms/select/:id')
   // call first function and pass in a callback function which
   // first function runs when it has completed
   asyncFind(function() {
-    res.send(JSON.stringify(rooms));
+    if(rooms.length > 0){
+      res.send(JSON.stringify(rooms));
+    }
+    else{
+      res.send(undefined);
+    }
   });
 })
 

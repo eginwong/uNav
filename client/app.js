@@ -24,6 +24,7 @@ uNav.controller('mainController', function($scope) {
 });
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
+  $scope.showSelect = true;
   $.get('/api/buildings', function(obj){
     $scope.masterBuildings = JSON.parse(obj);
     $.each($scope.masterBuildings, function (idx, val) {
@@ -36,42 +37,41 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.build = $("#buildingsInUW option:selected").val();
     $scope.map.center = {latitude: $scope.masterBuildings[$scope.build].coordinates[1], longitude: $scope.masterBuildings[$scope.build].coordinates[0]};
     $scope.map.zoom = 19;
-
-    //BUG: Fix this bug that the select dropdown won't refresh properly.
-    // $("#roomSrc").options.length = 0;
-    // $("#roomDest").empty();
-    $scope.$apply();
+    $scope.showSelect = false;
 
     $.get('/api/graph/rooms/select/' + $scope.build, function(obj){
       var count = 0;
       var appendage;
-      $.each(JSON.parse(obj), function (idx, val) {
-        var countOG = count;
-        count = parseInt(val.charAt(val.indexOf(" ") + 1));
-        if (count > countOG) {
-          if(countOG != 0){
-            appendage+='</optgroup>';
-            $("#roomSrc").append(appendage);
-            $("#roomDest").append(appendage);
+      if(obj != ''){
+        $scope.showSelect = true;
+        $.each(JSON.parse(obj), function (idx, val) {
+          var countOG = count;
+          count = parseInt(val.charAt(val.indexOf(" ") + 1));
+          if (count > countOG) {
+            if(countOG != 0){
+              appendage+='</optgroup>';
+              $("#roomSrc").append(appendage);
+              $("#roomDest").append(appendage);
+            }
+            appendage = '<optgroup label="' + $scope.build + ' Floor ' + count + '">';
           }
-          appendage = '<optgroup label="' + $scope.build + ' Floor ' + count + '">';
-        }
-        appendage+='<option value="' + val + '">' + val + '</option>';
-      });
-      //The last one.
-      appendage+='</optgroup>';
-      $("#roomSrc").append(appendage);
-      $("#roomDest").append(appendage);
+          appendage+='<option value="' + val + '">' + val + '</option>';
+        });
+        //The last one.
+        appendage+='</optgroup>';
+        $("#roomSrc").append(appendage);
+        $("#roomDest").append(appendage);
 
-      $("#roomSrc").chosen({ width: "10%" });
-      $("#roomDest").chosen({ width: "10%" });
+        $("#roomSrc").chosen({ width: "10%" });
+        $("#roomDest").chosen({ width: "10%" });
+      };
+      $timeout(function() {
+        $scope.$apply();
+      },0);
     });
-    $timeout(function() {
-      $scope.$apply();
-    },0);
   });
 
-    $scope.restart = function(){
+  $scope.restart = function(){
     if($scope.flightPath != undefined){
       $scope.flightPath.setMap(null);
       $scope.distance = null;
@@ -355,10 +355,10 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
   .then(function () {
 
     $scope.$watchGroup(["src", "dest"], function(newVal, oldVal){
-        if($scope.src != undefined && $scope.dest != undefined){
-          alert($scope.src + " to " + $scope.dest);
-        }
-      })
+      if($scope.src != undefined && $scope.dest != undefined){
+        alert($scope.src + " to " + $scope.dest);
+      }
+    })
 
   });
 
@@ -401,23 +401,23 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
   //       $("wrapper").toggleClass("active");
   //   });
 
-    // /*Scroll Spy*/
-    // $('body').scrollspy({ target: '#spy', offset:80});
+  // /*Scroll Spy*/
+  // $('body').scrollspy({ target: '#spy', offset:80});
 
-    // /*Smooth link animation*/
-    // $('a[href*=#]:not([href=#])').click(function() {
-    //     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+  // /*Smooth link animation*/
+  // $('a[href*=#]:not([href=#])').click(function() {
+  //     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
 
-    //         var target = $(this.hash);
-    //         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-    //         if (target.length) {
-    //             $('html,body').animate({
-    //                 scrollTop: target.offset().top
-    //             }, 1000);
-    //             return false;
-    //         }
-    //     }
-    // });
+  //         var target = $(this.hash);
+  //         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+  //         if (target.length) {
+  //             $('html,body').animate({
+  //                 scrollTop: target.offset().top
+  //             }, 1000);
+  //             return false;
+  //         }
+  //     }
+  // });
 });
 
 uNav.factory('RoomService', function($q, $timeout, $http) {
