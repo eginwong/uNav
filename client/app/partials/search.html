@@ -8,12 +8,13 @@
 </div>
 
 <div ng-show="build != undefined">
-  <h2>Current building is: {{build}}</h2>
   <div ng-show="showSelect">
+    <h2>Current building is: {{build}}</h2>
     <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select>
     <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select>
   </div>
-  
+  <div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div>
+
   <!-- <button class="btn btn-primary" ng-click="drawDirections()">Get Directions</button> -->
   <button ng-click="restart()" class="btn btn-primary" id="restart">Restart</button>
 </div>

@@ -5,7 +5,6 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   when('/', { templateUrl : 'app/partials/home.html', controller  : 'mainController'}).
   when('/search', {templateUrl : 'app/partials/search.html', controller  : 'searchController'}).
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
-  when('/findnearyou', { templateUrl : 'app/partials/findnearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
   when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
 
@@ -18,10 +17,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
 });
 
 
-// create the controller and inject Angular's $scope
-uNav.controller('mainController', function($scope) {
-  // create a message to display in our view
-});
+uNav.controller('mainController', function($scope) {});
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.showSelect = true;
@@ -163,6 +159,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }
   }
 
+  //Not currently used at the moment.
   $scope.getDirections = function() {
     if($scope.src != undefined && $scope.dest != undefined){
       // instantiate google map objects for directions
@@ -304,9 +301,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
 });
 
-
 uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapGoogleMapApi, uiGmapIsReady) {
-  $scope.message = 'nearyou';
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
   $scope.scrollTo=function(id){
@@ -314,53 +309,52 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
     $anchorScroll();
   }
 
-
   // uiGmapGoogleMapApi is a promise.
   // The "then" callback function provides the google.maps object.
-
   uiGmapGoogleMapApi.then(function (maps) {
-    $scope.googlemap = {};
     $scope.map = {
       center: {
-        latitude: 43.47035091238624,
-        longitude: -80.54049253463745
+        latitude: 43.4722854,
+        longitude: -80.5448576
       },
-      zoom: 20,
+      zoom: 16,
       pan: 1,
       options: $scope.mapOptions,
       markers: [],
-      events: {
-        click: function (map, eventName, originalEventArgs) {
-          var e = originalEventArgs[0];
-          var lat = e.latLng.lat(),lon = e.latLng.lng();
-          var marker = {
-            id: Date.now(),
-            coords: {
-              latitude: lat,
-              longitude: lon
-            }
-          };
-          $scope.map.markers.push(marker);
-          console.log($scope.map.markers);
-          $scope.$apply();
-        }
-      }
+      events: {},
+      control: {}
     }
   });
 
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function (instances) {
-    console.log(instances[0].map); // get the current map
   })
-  .then(function () {
 
-    $scope.$watchGroup(["src", "dest"], function(newVal, oldVal){
-      if($scope.src != undefined && $scope.dest != undefined){
-        alert($scope.src + " to " + $scope.dest);
-      }
-    })
+  $scope.chose = function(util){
+    if(this.naviOn == undefined){
+      alert("First timedu");
+      this.findMe();
+    }
+    console.log(util);
+    this.naviOn = true;
+    console.log("naviOn is: " + this.naviOn);
+    $scope.collapsed = false;
+  }
 
-  });
+  $scope.findMe = function () {
+    if ($scope.geolocationAvailable) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        $scope.map.center = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+        $scope.$apply();
+        console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude);
+        $scope.markerLat = position.coords.latitude;
+        $scope.markerLng = position.coords.longitude;
+      });
+    }
+  };
 
   $scope.mapOptions = {
     minZoom: 3,
@@ -390,6 +384,12 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
     },{
       featureType: "road",
       elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "buildings",
+      elementType: "labels.text",
       stylers: [
         { visibility: "off" }
       ]

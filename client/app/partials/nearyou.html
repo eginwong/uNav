@@ -1,62 +1,129 @@
- <div class="nearyou">
+<div class="nearyou"></div>
+<div class="container">
+  <div id="wrapper">
+    <div class="box col-lg-12 text-center row">
+      <center><h2 class="section-heading">Find What's Near You</h2></center>
+      <hr>
+    </div>
+    <div ng-show="naviOn != undefined" class="hidesymbol">
+      <a ng-model="collapsed" class="glyphicon glyphicon-chevron-right btn-sm" ng-click="collapsed=!collapsed"></a>
+    </div>
+
+    <div id="sidebar-wrapper" ng-if="collapsed">
+      <nav id="spy">
+        <ul class="sidebar-nav nav">
+          <li class="sidebar-brand">
+            <span class="">Amenities</span>
+          </li>
+          <li>
+            <a ng-click='chose("WC")' data-scroll>
+              <span class="">Washrooms</span>
+              <i class="fa fa-2x fa fa-female wow text-primary"></i>
+              <i class="fa fa-2x fa fa-male wow text-primary"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" data-scroll>
+              <span class="">Food and Drink</span>
+              <i class="fa fa-2x fa-coffee wow text-primary" data-wow-delay=".1s"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" data-scroll>
+              <span class="">Accessibility</span>
+              <i class="fa fa-2x fa-wheelchair wow text-primary" data-wow-delay=".2s"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" data-scroll>
+              <span class="">Water Fountains</span>
+              <i class="fa fa-2x fa fa-tint wow text-primary"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" data-scroll>
+              <span class="">Stairs</span>
+              <i class="fa fa-2x fa-sort-amount-asc wow text-primary" data-wow-delay=".1s"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" data-scroll>
+              <span class="">Elevators</span>
+              <i class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
 </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Find What's Near You</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 text-center">
-                    <div class="service-box">
-                        <a href="#findnearyou" ng-click="enableEditor()">
-                        <i class="fa fa-4x fa fa-female wow bounceIn text-primary"></i>
-                        <i class="fa fa-4x fa fa-male wow bounceIn text-primary"></i>
-                        <h3><b>Washrooms</b></h3>
-                        </a>
-                        <p class="text-muted">Find the closest washrooms.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-coffee wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3><b>Coffee</b></h3>
-                        <p class="text-muted">Need a cup of coffee?</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-wheelchair wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3><b>Wheelchair Accessibility</b></h3>
-                        <p class="text-muted">Look for wheelchair accessibility ramps.</p>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa fa-tint wow bounceIn text-primary"></i>
-                        <h3><b>Water Fountain</b></h3>
-                        <p class="text-muted">Thirsty?</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-sort-amount-asc wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3><b>Stairs</b></h3>
-                        <p class="text-muted">Trying to be healthy? Take the stairs!</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-toggle-down wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3><b>Elevators</b></h3>
-                        <p class="text-muted">Feeling lazy? Take the elevator!</p>
-                    </div>
-                </div>
-              </div>
+<div ng-show="!naviOn">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("WC")'>
+          <i class="fa fa-4x fa fa-female wow bounceIn text-primary"></i>
+          <i class="fa fa-4x fa fa-male wow bounceIn text-primary"></i>
+          <h3><b>Washrooms</b></h3>
+        </a>
+        <p class="text-muted">Find the closest washrooms.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Food")'>
+        <i class="fa fa-4x fa-coffee wow bounceIn text-primary" data-wow-delay=".1s"></i>
+        <h3><b>Food and Drink</b></h3>
+        <p class="text-muted">Need a cup of coffee? snacks?</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Ramps")'>
+        <i class="fa fa-4x fa-wheelchair wow bounceIn text-primary" data-wow-delay=".2s"></i>
+        <h3><b>Wheelchair Accessibility</b></h3>
+        <p class="text-muted">Look for wheelchair accessibility ramps.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Water")'>
+        <i class="fa fa-4x fa fa-tint wow bounceIn text-primary"></i>
+        <h3><b>Water Fountain</b></h3>
+        <p class="text-muted">Thirsty?</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Stairs")'>
+        <i class="fa fa-4x fa-sort-amount-asc wow bounceIn text-primary" data-wow-delay=".1s"></i>
+        <h3><b>Stairs</b></h3>
+        <p class="text-muted">Trying to be healthy? Take the stairs!</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Elevator")'>
+        <i class="fa fa-4x fa-toggle-down wow bounceIn text-primary" data-wow-delay=".2s"></i>
+        <h3><b>Elevators</b></h3>
+        <p class="text-muted">Feeling lazy? Take the elevator!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <a id="menu-toggle" data-toggle="collapse" ng-click="scrollTo('sidebar-wrapper')"  class="glyphicon glyphicon-chevron-right btn-sm">
+</a>  -->
+<!--  <a id="menu-toggle" data-toggle="collapse" class="glyphicon glyphicon-chevron-left btn-sm">
+</a>  -->
+<!-- </h1> -->
+<!-- Sidebar -->
+<!-- <div ng-show"naviOn != undefined"> -->
+  <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
+    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+  </ui-gmap-google-map>
+<!-- </div> -->
+
+<div class="page-content inset" data-spy="scroll" data-target="#spy">
+</div>
