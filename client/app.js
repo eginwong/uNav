@@ -5,8 +5,10 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   when('/', { templateUrl : 'app/partials/home.html', controller  : 'mainController'}).
   when('/search', {templateUrl : 'app/partials/search.html', controller  : 'searchController'}).
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
+  when('/findnearyou', { templateUrl : 'app/partials/findnearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
   when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
+
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyCYtcbfLrd9BGzJ8HPdvsxDEedBdh3F-z4',
@@ -15,6 +17,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   });
 });
 
+
 // create the controller and inject Angular's $scope
 uNav.controller('mainController', function($scope) {
   // create a message to display in our view
@@ -22,7 +25,7 @@ uNav.controller('mainController', function($scope) {
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $.get('/api/buildings', function(obj){
-    $scope.masterBuildings = JSON.parse(obj);
+    $scope.masterBuildings = obj;
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
     });
@@ -68,7 +71,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     },0);
   });
 
-  $scope.restart = function(){
+    $scope.restart = function(){
     if($scope.flightPath != undefined){
       $scope.flightPath.setMap(null);
       $scope.distance = null;
@@ -215,7 +218,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $scope.drawDirections = function() {
     if($scope.src != undefined && $scope.dest != undefined){
       if($scope.flightPath != undefined){
-        $scope.flightPath.setMap(null);
+        $scope.flightPath.setMap(null);ead
       }
       // instantiate google map objects for directions
       $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
@@ -298,12 +301,124 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       ]
     }]
   };
+
 });
 
 
-uNav.controller('nearyouController', ['$scope', function($scope) {
+uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.message = 'nearyou';
-}]);
+  $scope.geolocationAvailable = navigator.geolocation ? true : false;
+
+  $scope.scrollTo=function(id){
+    $location.hash(id);
+    $anchorScroll();
+  }
+
+
+  // uiGmapGoogleMapApi is a promise.
+  // The "then" callback function provides the google.maps object.
+
+  uiGmapGoogleMapApi.then(function (maps) {
+    $scope.googlemap = {};
+    $scope.map = {
+      center: {
+        latitude: 43.47035091238624,
+        longitude: -80.54049253463745
+      },
+      zoom: 20,
+      pan: 1,
+      options: $scope.mapOptions,
+      markers: [],
+      events: {
+        click: function (map, eventName, originalEventArgs) {
+          var e = originalEventArgs[0];
+          var lat = e.latLng.lat(),lon = e.latLng.lng();
+          var marker = {
+            id: Date.now(),
+            coords: {
+              latitude: lat,
+              longitude: lon
+            }
+          };
+          $scope.map.markers.push(marker);
+          console.log($scope.map.markers);
+          $scope.$apply();
+        }
+      }
+    }
+  });
+
+  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
+  .then(function (instances) {
+    console.log(instances[0].map); // get the current map
+  })
+  .then(function () {
+    
+    $scope.$watchGroup(["src", "dest"], function(newVal, oldVal){
+        if($scope.src != undefined && $scope.dest != undefined){
+          alert($scope.src + " to " + $scope.dest);
+        }
+      })
+
+  });
+
+  $scope.mapOptions = {
+    minZoom: 3,
+    zoomControl: false,
+    draggable: true,
+    navigationControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    disableDoubleClickZoom: false,
+    keyboardShortcuts: true,
+    markers: {
+      selected: {}
+    },
+    styles: [{
+      stylers: [
+        { hue: "#00ffe6" },
+        { saturation: -20 }
+      ]
+    },{
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }]
+  };
+
+  // $("#menu-toggle").click(function(e) {
+  //       e.preventDefault();
+  //       $("wrapper").toggleClass("active");
+  //   });
+
+    // /*Scroll Spy*/
+    // $('body').scrollspy({ target: '#spy', offset:80});
+
+    // /*Smooth link animation*/
+    // $('a[href*=#]:not([href=#])').click(function() {
+    //     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+    //         var target = $(this.hash);
+    //         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+    //         if (target.length) {
+    //             $('html,body').animate({
+    //                 scrollTop: target.offset().top
+    //             }, 1000);
+    //             return false;
+    //         }
+    //     }
+    // });
+});
 
 uNav.factory('RoomService', function($q, $timeout, $http) {
   return {
@@ -342,3 +457,5 @@ uNav.controller('contactController', function ($scope, $http){
     });
   }
 })
+
+
