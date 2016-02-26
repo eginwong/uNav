@@ -9,9 +9,11 @@
 
 <div ng-show="build != undefined">
   <h2>Current building is: {{build}}</h2>
-  <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select>
-  <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select>
-
+  <div ng-show="showSelect">
+    <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select>
+    <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select>
+  </div>
+  
   <!-- <button class="btn btn-primary" ng-click="drawDirections()">Get Directions</button> -->
   <button ng-click="restart()" class="btn btn-primary" id="restart">Restart</button>
 </div>
@@ -25,7 +27,5 @@
 </ui-gmap-google-map>
 </div>
 
-
-<div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div>
-
-<!-- <a class="button" ng-click="findMe()" href="">Find me</a> -->
+<!-- <a class="button" ng-click="findMe()" href="">Find me</a>
+<!-- <div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div> -->

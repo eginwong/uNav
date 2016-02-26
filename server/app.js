@@ -66,7 +66,7 @@ router.route('/buildings')
         }
       }
       fs.writeFile( "uwapi_results.json", JSON.stringify(BuildingResults), "utf8");
-      res.send(BuildingResults);
+      res.send(JSON.stringify(BuildingResults));
     })
   }
   else {
@@ -134,6 +134,36 @@ router.route('/graph/rooms')
     res.send(JSON.stringify(rooms));
   });
 })
+
+router.route('/graph/rooms/select/:id')
+
+.get (function(req,res){
+  var rooms = [];
+  var hold;
+  function asyncFind(_callback){
+    for (var key in g._nodes) {
+      if(g._nodes[key]._data.building_code == req.params.id){
+        hold = g._nodes[key]._data.utility;
+        if(hold != "Hallway" && hold != "Entrance"){
+          rooms.push(key.substr(0,3) + " " + key.substr(3));
+        }
+      }
+    }
+    _callback();
+  }
+
+  // call first function and pass in a callback function which
+  // first function runs when it has completed
+  asyncFind(function() {
+    if(rooms.length > 0){
+      res.send(JSON.stringify(rooms));
+    }
+    else{
+      res.send(undefined);
+    }
+  });
+})
+
 
 router.route('/graph/rooms/:id')
 
