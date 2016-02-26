@@ -28,16 +28,21 @@
     function initialize() {
       var mapOptions = {
         zoom: 15,
-        center: new google.maps.LatLng(43.470300,-80.540780)
+        center: new google.maps.LatLng(43.470309, -80.540746)
       };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      //RCH 1st floor: sw(43.46999349599889, -80.54125972520075) ne(43.47064191555473, -80.54024546130745)
+      //RCH 2nd floor: sw(43.469956511113, -80.54128386508188) ne(43.47063996900324, -80.5402374146804)
+      //RCH3rd floor: sw(43.4698708618167, -80.54143540989122) ne(43.470660407790774, -80.54018645270912)
+
       var swBound = new google.maps.LatLng(43.4699526179658, -80.54126777182773);
       var neBound = new google.maps.LatLng(43.47062439658903, -80.54022132142632);
       var bounds = new google.maps.LatLngBounds(swBound, neBound);
 
        console.log(map);
-      var srcImage = '../client/images/Waterloo Floor Plans/RCH2NEW2.png';
+      var srcImage = '../client/images/Waterloo Floor Plans/RCH1_CAD.png';
         
       overlay = new DebugOverlay(bounds, srcImage, map);
 
