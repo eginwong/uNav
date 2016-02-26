@@ -22,7 +22,7 @@ uNav.controller('mainController', function($scope) {});
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.showSelect = true;
   $.get('/api/buildings', function(obj){
-    $scope.masterBuildings = obj;
+    $scope.masterBuildings = JSON.parse(obj);
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
     });
@@ -222,8 +222,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         var leng = obj.length;
         var waypts = [];
         $.each(obj, function (idx, val) {
-          console.log(idx);
-          console.log(val);
           if(idx == (leng-1)) {
             $scope.distance = (val.dist.toFixed(2));
           }

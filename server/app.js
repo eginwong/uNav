@@ -168,7 +168,6 @@ router.route('/graph/rooms/select/:id')
 router.route('/graph/rooms/:id')
 
 .get(function(req,res){
-  //BUG: Circular JSON 'cause ASTAR doesn't clear parentnodes references.
   res.send(JSON.stringify(g._nodes[req.params.id]));
 })
 
@@ -206,7 +205,6 @@ app.use(express.static('client'));
 
 app.get('/*', function(req, res, next){
   var url = req.url;
-  console.log('/GET', req.url);
   //Checking for urls like ../../passwd etc
   if(!url.match(/\.\.+?\//)){
     res.sendFile(req.url, {root:'./client'});

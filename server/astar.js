@@ -46,6 +46,7 @@ module.exports = {
   aStar: function (graph, src, sink){
     //finished result to return.
     var fin;
+    graph.clearParents(graph);
     if(graph._nodes[src] && graph._nodes[sink]){
       // initializing all the variables.
       var openNodes = new BinaryHeap(function(x){return x;});

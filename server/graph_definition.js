@@ -18,6 +18,14 @@ Graph.prototype = {
     return this._adjacency[node._id];
   },
 
+  clearParents: function(graph){
+    for (var key in graph._nodes) {
+      if(graph._nodes[key]._parentNode != undefined){
+        graph._nodes[key]._parentNode = null;
+      }
+    }
+  },
+
   addNode: function(graph, node) {
     var newName = node.properties.building_code + node.properties.id;
     var obj = graph._nodes[newName];
