@@ -25,7 +25,7 @@ uNav.controller('mainController', function($scope) {
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $.get('/api/buildings', function(obj){
-    $scope.masterBuildings = obj;
+    $scope.masterBuildings = JSON.parse(obj);
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
     });
@@ -38,7 +38,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.map.zoom = 19;
 
     //BUG: Fix this bug that the select dropdown won't refresh properly.
-    // $("#roomSrc").empty();
+    // $("#roomSrc").options.length = 0;
     // $("#roomDest").empty();
     $scope.$apply();
 
@@ -353,7 +353,7 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
     console.log(instances[0].map); // get the current map
   })
   .then(function () {
-    
+
     $scope.$watchGroup(["src", "dest"], function(newVal, oldVal){
         if($scope.src != undefined && $scope.dest != undefined){
           alert($scope.src + " to " + $scope.dest);
@@ -457,5 +457,3 @@ uNav.controller('contactController', function ($scope, $http){
     });
   }
 })
-
-
