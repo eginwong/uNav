@@ -22,7 +22,7 @@ uNav.controller('mainController', function($scope) {});
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.showSelect = true;
   $.get('/api/buildings', function(obj){
-    $scope.masterBuildings = JSON.parse(obj);
+    $scope.masterBuildings = obj;
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
     });
@@ -215,13 +215,15 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $scope.drawDirections = function() {
     if($scope.src != undefined && $scope.dest != undefined){
       if($scope.flightPath != undefined){
-        $scope.flightPath.setMap(null);ead
+        $scope.flightPath.setMap(null);
       }
       // instantiate google map objects for directions
       $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
-        var leng = JSON.parse(obj).length;
+        var leng = obj.length;
         var waypts = [];
-        $.each(JSON.parse(obj), function (idx, val) {
+        $.each(obj, function (idx, val) {
+          console.log(idx);
+          console.log(val);
           if(idx == (leng-1)) {
             $scope.distance = (val.dist.toFixed(2));
           }
