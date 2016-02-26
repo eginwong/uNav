@@ -146,7 +146,7 @@ router.route('/astar/:src/:sink')
 //
 // // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
 .get(function(req, res) {
-  res.send(JSON.stringify(algo.aStar(g, req.params.src, req.params.sink)));
+  res.send(algo.aStar(g, req.params.src, req.params.sink));
 });
 
 router.route('/contact-form')
