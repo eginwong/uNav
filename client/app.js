@@ -136,41 +136,41 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     if (node == "src"){
       RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
         $scope.srcNode = result;
-        var marker = {
-          id: 0,
-          coords: {
-            latitude: $scope.srcNode._y,
-            longitude: $scope.srcNode._x
-          },
-          name: $scope.src
-        }
         for(var i = 0; i < mark.length; i++) {
           if (mark[i].id == 0) {
             mark.splice(i, 1);
             break;
           }
         }
-        $scope.map.markers.push(marker);
+
+        mark.push({
+          id: 0,
+          coords: {
+            latitude: $scope.srcNode._y,
+            longitude: $scope.srcNode._x
+          },
+          name: $scope.src
+        });
       })
     }
     else if (node == "dest") {
       RoomService.getID($scope.dest.replace(/\s+/g, '')).then(function(result){
         $scope.destNode = result;
-        var marker = {
-          id: 1,
-          coords: {
-            latitude: $scope.destNode._y,
-            longitude: $scope.destNode._x
-          },
-          name: $scope.dest
-        }
         for(var i = 0; i < mark.length; i++) {
           if (mark[i].id == 1) {
             mark.splice(i, 1);
             break;
           }
         }
-        $scope.map.markers.push(marker);
+        mark.push({
+          id: 1,
+          coords: {
+            latitude: $scope.destNode._y,
+            longitude: $scope.destNode._x
+          },
+          name: $scope.dest,
+          icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+        });
       })
     }
   }
