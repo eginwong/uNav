@@ -2,6 +2,7 @@
 </div>
 
 <h2><center>Where would you like to go today?</center></h2>
+ <button ng-click="button" class="toggle-div" id="searchButton" value="Expand">test</button>
 
 <div class="search col-md-offset-6" ng-show="build == undefined">
   <select ng-model="build" id="buildingsInUW" class="chosen-select" data-placeholder="Where are you?" tabindex="1"></select>
@@ -19,7 +20,7 @@
   <button ng-click="restart()" class="btn btn-primary" id="restart">Restart</button>
 </div>
 <h2 ng-show="distance > 0">The distance is: {{distance}} meters.</h2>
-<div>
+<div id="div1">
 <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
   <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
   <!-- <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" click="onClick()" idkey="m.id" events="marker.events"> -->
