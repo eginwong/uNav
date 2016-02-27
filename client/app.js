@@ -160,57 +160,57 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   }
 
   //Not currently used at the moment.
-  $scope.getDirections = function() {
-    if($scope.src != undefined && $scope.dest != undefined){
-      // instantiate google map objects for directions
-      $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
-        var leng = JSON.parse(obj).length;
-        var waypts = [];
-        $.each(JSON.parse(obj), function (idx, val) {
-          if (idx == 0 || idx == (leng - 1)){
-          }
-          else if(idx == leng) {
-            alert(val.dist);
-          }
-          else{
-            waypts.push({location: new google.maps.LatLng(val._y, val._x)});
-          }
-        })
-
-        var directionsDisplay = new google.maps.DirectionsRenderer();
-        var directionsService = new google.maps.DirectionsService();
-        var geocoder = new google.maps.Geocoder();
-
-        console.log(waypts);
-        // directions object -- with defaults
-        $scope.directions = {
-          origin: new google.maps.LatLng($scope.srcNode._y, $scope.srcNode._x),
-          destination: new google.maps.LatLng($scope.destNode._y, $scope.destNode._x),
-          waypoints: waypts,
-          showList: false
-        }
-
-        var request = {
-          origin: $scope.directions.origin,
-          destination: $scope.directions.destination,
-          travelMode: google.maps.DirectionsTravelMode.WALKING
-        };
-        directionsService.route(request, function (response, status) {
-          if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-            directionsDisplay.setMap($scope.map.control.getGMap());
-            directionsDisplay.setPanel(document.getElementById('directionsList'));
-            $scope.directions.showList = true;
-          } else {
-            alert('Google route unsuccesfull!');
-          }
-        });
-      });
-    }
-    else{
-      alert("You are missing input.");
-    }
-  }
+  // $scope.getDirections = function() {
+  //   if($scope.src != undefined && $scope.dest != undefined){
+  //     // instantiate google map objects for directions
+  //     $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
+  //       var leng = JSON.parse(obj).length;
+  //       var waypts = [];
+  //       $.each(JSON.parse(obj), function (idx, val) {
+  //         if (idx == 0 || idx == (leng - 1)){
+  //         }
+  //         else if(idx == leng) {
+  //           alert(val.dist);
+  //         }
+  //         else{
+  //           waypts.push({location: new google.maps.LatLng(val._y, val._x)});
+  //         }
+  //       })
+  //
+  //       var directionsDisplay = new google.maps.DirectionsRenderer();
+  //       var directionsService = new google.maps.DirectionsService();
+  //       var geocoder = new google.maps.Geocoder();
+  //
+  //       console.log(waypts);
+  //       // directions object -- with defaults
+  //       $scope.directions = {
+  //         origin: new google.maps.LatLng($scope.srcNode._y, $scope.srcNode._x),
+  //         destination: new google.maps.LatLng($scope.destNode._y, $scope.destNode._x),
+  //         waypoints: waypts,
+  //         showList: false
+  //       }
+  //
+  //       var request = {
+  //         origin: $scope.directions.origin,
+  //         destination: $scope.directions.destination,
+  //         travelMode: google.maps.DirectionsTravelMode.WALKING
+  //       };
+  //       directionsService.route(request, function (response, status) {
+  //         if (status === google.maps.DirectionsStatus.OK) {
+  //           directionsDisplay.setDirections(response);
+  //           directionsDisplay.setMap($scope.map.control.getGMap());
+  //           directionsDisplay.setPanel(document.getElementById('directionsList'));
+  //           $scope.directions.showList = true;
+  //         } else {
+  //           alert('Google route unsuccesfull!');
+  //         }
+  //       });
+  //     });
+  //   }
+  //   else{
+  //     alert("You are missing input.");
+  //   }
+  // }
 
   $scope.drawDirections = function() {
     if($scope.src != undefined && $scope.dest != undefined){
@@ -336,9 +336,12 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
       this.findMe();
     }
     console.log(util);
-    this.naviOn = true;
-    console.log("naviOn is: " + this.naviOn);
+    $scope.naviOn = true;
+    console.log("naviOn is: " + $scope.naviOn);
     $scope.collapsed = false;
+    $timeout(function() {
+      $scope.$apply();
+    },0);
   }
 
   $scope.findMe = function () {
