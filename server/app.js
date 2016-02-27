@@ -32,6 +32,12 @@ fs.readFile('data/coordinates/RCH2_nodes_geo.json', 'utf8', function (err,data) 
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
+  fs.readFile('data/coordinates/edges_RCH02.json', 'utf8', function (err,data2) {
+    var edges = JSON.parse(data2);
+    for (var ind in edges.vals) {
+      g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
+    }
+  });
 });
 
 fs.readFile('data/coordinates/RCH3_nodes_geo.json', 'utf8', function (err,data) {
@@ -121,8 +127,10 @@ router.route('/graph/rooms')
   function asyncFind(_callback){
     for (var key in g._nodes) {
       hold = g._nodes[key]._data.utility
-      if(hold != "Hallway" && hold != "Entrance"){
-        rooms.push(key.substr(0,3) + " " + key.substr(3));
+      for (var i in hold){
+        if(hold[i] != "Hallway" && hold[i] != "Entrance"){
+          rooms.push(key.substr(0,3) + " " + key.substr(3));
+        }
       }
     }
     _callback();
@@ -144,8 +152,10 @@ router.route('/graph/rooms/select/:id')
     for (var key in g._nodes) {
       if(g._nodes[key]._data.building_code == req.params.id){
         hold = g._nodes[key]._data.utility;
-        if(hold != "Hallway" && hold != "Entrance"){
-          rooms.push(key.substr(0,3) + " " + key.substr(3));
+        for (var i in hold){
+          if(hold[i] != "Hallway" && hold[i] != "Entrance"){
+            rooms.push(key.substr(0,3) + " " + key.substr(3));
+          }
         }
       }
     }
