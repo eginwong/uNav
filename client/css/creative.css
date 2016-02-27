@@ -49,13 +49,19 @@ p {
   line-height: 1.5;
   margin-bottom: 20px;
 }
+#div1{
+  position:relative;
+  height:auto;
+  width: auto;
+  max-width: 100%;
+}
 .bg-primary {
   background-color: #f05f41;
 }
 .nearyou {
   background-color: rgba(44, 62, 80, 0.80);
   padding-bottom: 0px;
-  height: 15px;
+  height: 35px;
 }
 .hidesymbol {
     display: inline-block;
@@ -489,12 +495,12 @@ body {
 
 /* Toggle Styles */
 
+
 #wrapper {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    
 }
 
 #wrapper.toggled {
@@ -616,13 +622,19 @@ body {
         position: relative;
         margin-right: 0;
     }
+  }
 
   @media(min-width:268px) {
     #box {
-      display: inline-block;
+    display: inline-block;
     width: 750px;
     height: 100%;
     padding-left: 50px;
+  }
+}
+  @media(max-width: 600px){
+    #div1 {
+    width: auto;
   }
 
 }
