@@ -28,31 +28,31 @@ fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) 
 });
 
 fs.readFile('data/coordinates/RCH2_nodes_geo.json', 'utf8', function (err,data) {
-  geo_nodes = JSON.parse(data);
+  var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
-  // fs.readFile('data/coordinates/edges_RCH02.json', 'utf8', function (err,data2) {
-  //   var edges = JSON.parse(data2);
-  //   for (var ind in edges.vals) {
-  //     g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
-  //   }
-  // });
+  fs.readFile('data/coordinates/edges_RCH02.json', 'utf8', function (err,data2) {
+    var edges = JSON.parse(data2);
+    for (var ind in edges.vals) {
+      g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
+    }
+  });
 });
 
 fs.readFile('data/coordinates/RCH3_nodes_geo.json', 'utf8', function (err,data) {
-  geo_nodes = JSON.parse(data);
+  var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
-  // fs.readFile('data/coordinates/edges_RCH03.json', 'utf8', function (err,data2) {
-  //   var edges = JSON.parse(data2);
-  //   for (var ind in edges.vals) {
-  //     g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
-  //   }
-  // });
-  fs.readFile('data/coordinates/edges_RCH_Connectors.json', 'utf8', function (err,data2) {
+  fs.readFile('data/coordinates/edges_RCH03.json', 'utf8', function (err,data2) {
     var edges = JSON.parse(data2);
+    for (var ind in edges.vals) {
+      g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
+    }
+  });
+  fs.readFile('data/coordinates/edges_RCH_Connectors.json', 'utf8', function (err,data3) {
+    var edges = JSON.parse(data3);
     for (var ind in edges.vals) {
       g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
     }
@@ -138,10 +138,15 @@ router.route('/graph/rooms')
   var hold;
   function asyncFind(_callback){
     for (var key in g._nodes) {
-      hold = g._nodes[key]._data.utility
-      for (var i in hold){
-        if(hold[i] != "Hallway" && hold[i] != "Entrance"){
-          rooms.push(key.substr(0,3) + " " + key.substr(3));
+      hold = g._nodes[key]._data.utility;
+      if(hold[0] == undefined){
+        rooms.push(key.substr(0,3) + " " + key.substr(3));
+      }
+      else{
+        for (var i in hold){
+          if(hold[i] != "Hallway" && hold[i] != "Entrance"){
+            rooms.push(key.substr(0,3) + " " + key.substr(3));
+          }
         }
       }
     }
@@ -164,9 +169,14 @@ router.route('/graph/rooms/select/:id')
     for (var key in g._nodes) {
       if(g._nodes[key]._data.building_code == req.params.id){
         hold = g._nodes[key]._data.utility;
-        for (var i in hold){
-          if(hold[i] != "Hallway" && hold[i] != "Entrance"){
-            rooms.push(key.substr(0,3) + " " + key.substr(3));
+        if(hold[0] == undefined){
+          rooms.push(key.substr(0,3) + " " + key.substr(3));
+        }
+        else{
+          for (var i in hold){
+            if(hold[i] != "Hallway" && hold[i] != "Entrance"){
+              rooms.push(key.substr(0,3) + " " + key.substr(3));
+            }
           }
         }
       }

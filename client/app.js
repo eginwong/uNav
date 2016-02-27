@@ -29,21 +29,21 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $("#buildingsInUW").chosen({ width: "95%" });
   });
 
-  // Anuja: divs that should be added to the search partial 
+  // Anuja: divs that should be added to the search partial
   $("#searchButton").click(function(){
     var inputValue=$("#searchButton").attr('value');
-    
+
     if(inputValue=="Expand")
     {
-        $("#div1").animate({width:"1000px"});
-        $("#searchButton").attr('value','Reduce');
+      $("#div1").animate({width:"1000px"});
+      $("#searchButton").attr('value','Reduce');
     }
     else if(inputValue=="Reduce")
     {
-        $("#div1").animate({width:"100%"});
-        $("#searchButton").attr('value','Expand');
+      $("#div1").animate({width:"100%"});
+      $("#searchButton").attr('value','Expand');
     }
-});
+  });
 
   $( "#buildingsInUW" ).change(function() {
     $scope.build = $("#buildingsInUW option:selected").val();
