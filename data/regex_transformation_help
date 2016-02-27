@@ -1,10 +1,10 @@
 {\n"type":"Feature",\n"properties":{\n"building_code":"RCH"\n},\n"geometry":{\n"type":"Point",\n"coordinates":[\n$1\n]\n}\n}
 
-^(.*?)$
 
-{(\d*)
-(\d*[A-Za-z0-9]*)}
-{(\w*) -> {"id1":"$1"
-(\w*)} -> "id2":"$1"}
+(\w*), -> {"id1":"RCH$1",
+(\w*)} -> , "id2":"RCH$1"},
 
 https://jsonformatter.curiousconcept.com/
+
+
+/*223H11*/ to the outside
