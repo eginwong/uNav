@@ -142,7 +142,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
             break;
           }
         }
-
         mark.push({
           id: 0,
           coords: {
@@ -228,6 +227,17 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   //   }
   // }
 
+  $scope.animateCircle = function(line) {
+    var count = 0;
+    window.setInterval(function() {
+      count = (count + 1) % 200;
+
+      var icons = line.get('icons');
+      icons[0].offset = (count / 2) + '%';
+      line.set('icons', icons);
+    }, 20);
+  }
+
   $scope.drawDirections = function() {
     if($scope.src != undefined && $scope.dest != undefined){
       if($scope.flightPath != undefined){
@@ -245,16 +255,32 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
             waypts.push({lat: val.latitude, lng: val.longitude});
           }
         })
+        var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+          // path: 'M 0,-1 0,1',
+          strokeOpacity: 1,
+          scale: 1.5
+        };
+
         $scope.flightPath = new google.maps.Polyline({
           map: $scope.map.control.getGMap(),
+          icons: [{
+            icon: lineSymbol,
+            offset: '100%',
+            // offset: '0',
+            repeat: '10px'
+          }],
           path: waypts,
+          strokeOpacity: 0,
           strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2
         });
+
+        this.animateCircle(line);
       })
     }
   }
+
+
 
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function (instances) {
