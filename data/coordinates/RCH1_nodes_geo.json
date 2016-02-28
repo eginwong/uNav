@@ -5,19 +5,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540558,43.470463, 1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility": [],
-    "id":"101",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -80.540623,43.470307, 1 ]
     },
     "properties": {
@@ -141,19 +128,6 @@
     "building_code":"RCH",
     "utility": ["Entrance"],
     "id":"103E2",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.540723,43.470133, 1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility": [],
-    "id":"104",
     "name":""
     }
   },
@@ -525,32 +499,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.5406425,43.4702945, 1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility": ["Elevator"],
-    "id":"117",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54068,43.4703594, 1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility": [],
-    "id":"118",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -80.5409107,43.4701526, 1 ]
     },
     "properties": {
@@ -798,38 +746,12 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54058,43.470264, 1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility": ["WC"],
-    "id":"126",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -80.540878,43.4703491, 1 ]
     },
     "properties": {
     "building_code":"RCH",
     "utility": [],
     "id":"127",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.5407544,43.4701785, 1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility": [],
-    "id":"128",
     "name":""
     }
   },
