@@ -84,7 +84,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       img.src = this.image_;
       img.style.width = '100%';
       img.style.height = '100%';
-      img.style.opacity = '0.5';
+      img.style.opacity = '0.95';
       img.style.position = 'absolute';
       div.appendChild(img);
       this.div_ = div;
