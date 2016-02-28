@@ -53,21 +53,18 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.map.zoom = 19;
     $scope.showSelect = false;
 
-// 1st floor
-    var swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
-    var neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
-    // 2nd floor
-    // var swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
-    // var neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
-    // 3rd floor
-    // var swBound = new google.maps.LatLng(43.4698708618167, -80.54143540989122);
-    // var neBound = new google.maps.LatLng(43.470660407790774, -80.54018645270912);
+    if($scope.build == "RCH"){
+      $scope.map.zoom = 20;
+      // 2nd floor
+      var swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
+      var neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
 
-    var bounds = new google.maps.LatLngBounds(swBound, neBound);
-    var srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
+      var bounds = new google.maps.LatLngBounds(swBound, neBound);
+      var srcImage = 'images/Waterloo Floor Plans/RCH2_CAD.png';
 
-    DebugOverlay.prototype = new google.maps.OverlayView();
-    $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+      DebugOverlay.prototype = new google.maps.OverlayView();
+      $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+    }
 
     function DebugOverlay(bounds, image, map) {
 
@@ -157,6 +154,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.build = undefined;
     $scope.src = null;
     $scope.dest = null;
+    $scope.overlay.setMap(null);
     $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
     $scope.map.zoom = 16;
     $scope.map.markers = [];
@@ -214,6 +212,81 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           },
           name: $scope.src
         });
+        var swBound; var neBound; var srcImage;
+        console.log($scope.srcNode._z);
+        if($scope.srcNode._z == 1 && $scope.build == "RCH"){
+          // 1st floor
+          swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
+          neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
+          srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
+        }
+        else if($scope.srcNode._z == 2 && $scope.build == "RCH"){
+          // 2nd floor
+          swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
+          neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
+          srcImage = 'images/Waterloo Floor Plans/RCH2_CAD.png';
+        }
+        else if($scope.srcNode._z == 3 && $scope.build == "RCH"){
+          // 3rd floor
+          swBound = new google.maps.LatLng(43.4698708618167, -80.54143540989122);
+          neBound = new google.maps.LatLng(43.470660407790774, -80.54018645270912);
+          srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
+        }
+
+        var bounds = new google.maps.LatLngBounds(swBound, neBound);
+
+        DebugOverlay.prototype = new google.maps.OverlayView();
+        $scope.overlay.setMap(null);
+        $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+
+        //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
+        function DebugOverlay(bounds, image, map) {
+          this.bounds_ = bounds;
+          this.image_ = image;
+          this.map_ = map;
+          this.div_ = null;
+          this.setMap(map.control.getGMap());
+        }
+
+        DebugOverlay.prototype.onAdd = function() {
+
+          var div = document.createElement('div');
+          div.style.borderStyle = 'none';
+          div.style.borderWidth = '0px';
+          div.style.position = 'absolute';
+          var img = document.createElement('img');
+          img.src = this.image_;
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.opacity = '0.95';
+          img.style.position = 'absolute';
+          div.appendChild(img);
+          this.div_ = div;
+          var panes = this.getPanes();
+          panes.overlayLayer.appendChild(div);
+        };
+
+        DebugOverlay.prototype.draw = function() {
+          var overlayProjection = this.getProjection();
+          var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+          var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+          var div = this.div_;
+          div.style.left = sw.x + 'px';
+          div.style.top = ne.y + 'px';
+          div.style.width = (ne.x - sw.x) + 'px';
+          div.style.height = (sw.y - ne.y) + 'px';
+        };
+
+        DebugOverlay.prototype.updateBounds = function(bounds){
+          this.bounds_ = bounds;
+          this.draw();
+        };
+
+        DebugOverlay.prototype.onRemove = function() {
+          this.div_.parentNode.removeChild(this.div_);
+          this.div_ = null;
+        };
+
       })
     }
     else if (node == "dest") {
