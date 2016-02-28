@@ -35,7 +35,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"220H9",
     "name":""
     }
@@ -61,7 +61,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"223H11",
     "name":""
     }
@@ -87,7 +87,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"220A",
     "name":""
     }
