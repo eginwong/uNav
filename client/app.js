@@ -21,6 +21,8 @@ uNav.controller('mainController', function($scope) {});
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.showSelect = true;
+  var overlay;
+
   $.get('/api/buildings', function(obj){
     $scope.masterBuildings = JSON.parse(obj);
     $.each($scope.masterBuildings, function (idx, val) {
@@ -50,6 +52,66 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.map.center = {latitude: $scope.masterBuildings[$scope.build].coordinates[1], longitude: $scope.masterBuildings[$scope.build].coordinates[0]};
     $scope.map.zoom = 19;
     $scope.showSelect = false;
+
+    var swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
+    var neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
+    var bounds = new google.maps.LatLngBounds(swBound, neBound);
+    var srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
+
+    DebugOverlay.prototype = new google.maps.OverlayView();
+    $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+
+    //RCH 1st floor: sw(43.469979383347734, -80.5412503374692) ne(43.47064580865753, -80.540254849039)
+    //RCH 2nd floor: sw(43.469956511113, -80.54128386508188) ne(43.47063996900324, -80.5402374146804)
+    //RCH 3rd floor: sw(43.4698708618167, -80.54143540989122) ne(43.470660407790774, -80.54018645270912)
+
+    function DebugOverlay(bounds, image, map) {
+
+      this.bounds_ = bounds;
+      this.image_ = image;
+      this.map_ = map;
+      this.div_ = null;
+      this.setMap(map.control.getGMap());
+    }
+
+    DebugOverlay.prototype.onAdd = function() {
+
+      var div = document.createElement('div');
+      div.style.borderStyle = 'none';
+      div.style.borderWidth = '0px';
+      div.style.position = 'absolute';
+      var img = document.createElement('img');
+      img.src = this.image_;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.opacity = '0.5';
+      img.style.position = 'absolute';
+      div.appendChild(img);
+      this.div_ = div;
+      var panes = this.getPanes();
+      panes.overlayLayer.appendChild(div);
+    };
+
+    DebugOverlay.prototype.draw = function() {
+      var overlayProjection = this.getProjection();
+      var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+      var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+      var div = this.div_;
+      div.style.left = sw.x + 'px';
+      div.style.top = ne.y + 'px';
+      div.style.width = (ne.x - sw.x) + 'px';
+      div.style.height = (sw.y - ne.y) + 'px';
+    };
+
+    DebugOverlay.prototype.updateBounds = function(bounds){
+      this.bounds_ = bounds;
+      this.draw();
+    };
+
+    DebugOverlay.prototype.onRemove = function() {
+      this.div_.parentNode.removeChild(this.div_);
+      this.div_ = null;
+    };
 
     $.get('/api/graph/rooms/select/' + $scope.build, function(obj){
       var count = 0;
@@ -108,8 +170,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.plot("dest");
     $scope.drawDirections();
   });
-
-  $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
   uiGmapGoogleMapApi.then(function (maps) {
     $scope.map = {
@@ -279,8 +339,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       })
     }
   }
-
-
 
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function (instances) {
