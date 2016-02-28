@@ -434,6 +434,19 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
+       "coordinates":  [ -80.5405937,43.4702716, 3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":[],
+    "id":"304",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
        "coordinates":  [ -80.540659,43.470299, 3 ]
     },
     "properties": {
@@ -573,6 +586,7 @@
     "name":""
     }
   },
+
   {
     "type": "Feature",
     "geometry": {

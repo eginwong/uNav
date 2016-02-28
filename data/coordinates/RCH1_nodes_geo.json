@@ -27,6 +27,84 @@
     "name":""
     }
   },
+    {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [-80.5405348425, 43.4703889802 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":"",
+    "id":101,
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54074009,43.47016713 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":"",
+    "id":104,
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54065905,43.47029997 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":"Elevator",
+    "id":117,
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54068761,43.47036839 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":"",
+    "id":118,
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5406039212, 43.4702654356 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":"Washroom",
+    "id":126,
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5407547,43.47020831 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":"",
+    "id":128,
+    "name":""
+    }
+  },
   {
     "type": "Feature",
     "geometry": {
