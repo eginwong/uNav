@@ -4,6 +4,7 @@ function Graphnode (obj){
   this._data = obj.properties;
   this._x = obj.geometry.coordinates[0];
   this._y = obj.geometry.coordinates[1];
+  this._z = obj.geometry.coordinates[2];
   this._f;
   this._g;
   this._h;
