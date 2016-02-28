@@ -233,9 +233,9 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       count = (count + 1) % 200;
 
       var icons = line.get('icons');
-      icons[0].offset = (count / 2) + '%';
+      icons[0].offset = (count * 2) + '%';
       line.set('icons', icons);
-    }, 20);
+    }, 80);
   }
 
   $scope.drawDirections = function() {
@@ -266,7 +266,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           map: $scope.map.control.getGMap(),
           icons: [{
             icon: lineSymbol,
-            offset: '100%',
+            offset: '50%',
             // offset: '0',
             repeat: '10px'
           }],
@@ -275,7 +275,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           strokeColor: '#FF0000',
         });
 
-        this.animateCircle(line);
+        $scope.animateCircle($scope.flightPath);
       })
     }
   }
