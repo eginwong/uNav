@@ -53,17 +53,21 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.map.zoom = 19;
     $scope.showSelect = false;
 
+// 1st floor
     var swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
     var neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
+    // 2nd floor
+    // var swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
+    // var neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
+    // 3rd floor
+    // var swBound = new google.maps.LatLng(43.4698708618167, -80.54143540989122);
+    // var neBound = new google.maps.LatLng(43.470660407790774, -80.54018645270912);
+
     var bounds = new google.maps.LatLngBounds(swBound, neBound);
     var srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
 
     DebugOverlay.prototype = new google.maps.OverlayView();
     $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
-
-    //RCH 1st floor: sw(43.469979383347734, -80.5412503374692) ne(43.47064580865753, -80.540254849039)
-    //RCH 2nd floor: sw(43.469956511113, -80.54128386508188) ne(43.47063996900324, -80.5402374146804)
-    //RCH 3rd floor: sw(43.4698708618167, -80.54143540989122) ne(43.470660407790774, -80.54018645270912)
 
     function DebugOverlay(bounds, image, map) {
 
