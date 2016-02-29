@@ -154,6 +154,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.build = undefined;
     $scope.src = null;
     $scope.dest = null;
+    $scope.floor = null;
     $scope.overlay.setMap(null);
     $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
     $scope.map.zoom = 16;
@@ -164,13 +165,21 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val()
     $scope.plot("src");
-    $scope.drawDirections();
+
+    function asyncFind(_callback){
+      $scope.waypts = $scope.getPath($scope.src, $scope.dest);
+      _callback();
+    }
+
+    asyncFind(function() {
+      $scope.drawDirections();
+    });
   });
 
   $( "#roomDest" ).change(function() {
     $scope.dest = $("#roomDest option:selected").val()
     $scope.plot("dest");
-    $scope.drawDirections();
+    $scope.drawDirections($scope.getPath($scope.src, $scope.dest));
   });
 
   uiGmapGoogleMapApi.then(function (maps) {
@@ -210,10 +219,10 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
             latitude: $scope.srcNode._y,
             longitude: $scope.srcNode._x
           },
-          name: $scope.src
+          name: $scope.src,
+          icon: {url: 'http://icon-park.com/imagefiles/location_map_pin_green5.png', scaledSize: new google.maps.Size(30,40)}
         });
         var swBound; var neBound; var srcImage;
-        console.log($scope.srcNode._z);
         if($scope.srcNode._z == 1 && $scope.build == "RCH"){
           // 1st floor
           swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
@@ -298,71 +307,18 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
             break;
           }
         }
+        // http://uxrepo.com/static/icon-sets/font-awesome/svg/circle-empty.svg
         mark.push({
           id: 1,
           coords: {
             latitude: $scope.destNode._y,
             longitude: $scope.destNode._x
           },
-          name: $scope.dest,
-          icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+          name: $scope.dest
         });
       })
     }
   }
-
-  //Not currently used at the moment.
-  // $scope.getDirections = function() {
-  //   if($scope.src != undefined && $scope.dest != undefined){
-  //     // instantiate google map objects for directions
-  //     $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
-  //       var leng = JSON.parse(obj).length;
-  //       var waypts = [];
-  //       $.each(JSON.parse(obj), function (idx, val) {
-  //         if (idx == 0 || idx == (leng - 1)){
-  //         }
-  //         else if(idx == leng) {
-  //           alert(val.dist);
-  //         }
-  //         else{
-  //           waypts.push({location: new google.maps.LatLng(val._y, val._x)});
-  //         }
-  //       })
-  //
-  //       var directionsDisplay = new google.maps.DirectionsRenderer();
-  //       var directionsService = new google.maps.DirectionsService();
-  //       var geocoder = new google.maps.Geocoder();
-  //
-  //       console.log(waypts);
-  //       // directions object -- with defaults
-  //       $scope.directions = {
-  //         origin: new google.maps.LatLng($scope.srcNode._y, $scope.srcNode._x),
-  //         destination: new google.maps.LatLng($scope.destNode._y, $scope.destNode._x),
-  //         waypoints: waypts,
-  //         showList: false
-  //       }
-  //
-  //       var request = {
-  //         origin: $scope.directions.origin,
-  //         destination: $scope.directions.destination,
-  //         travelMode: google.maps.DirectionsTravelMode.WALKING
-  //       };
-  //       directionsService.route(request, function (response, status) {
-  //         if (status === google.maps.DirectionsStatus.OK) {
-  //           directionsDisplay.setDirections(response);
-  //           directionsDisplay.setMap($scope.map.control.getGMap());
-  //           directionsDisplay.setPanel(document.getElementById('directionsList'));
-  //           $scope.directions.showList = true;
-  //         } else {
-  //           alert('Google route unsuccesfull!');
-  //         }
-  //       });
-  //     });
-  //   }
-  //   else{
-  //     alert("You are missing input.");
-  //   }
-  // }
 
   $scope.animateCircle = function(line) {
     var count = 0;
@@ -375,45 +331,60 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }, 80);
   }
 
-  $scope.drawDirections = function() {
-    if($scope.src != undefined && $scope.dest != undefined){
+  $scope.getPath = function(src, sink) {
+    if(src != undefined && sink != undefined){
       if($scope.flightPath != undefined){
         $scope.flightPath.setMap(null);
       }
       // instantiate google map objects for directions
-      $.get('/api/astar/' + $scope.src.replace(/\s+/g, '') +'/'+ $scope.dest.replace(/\s+/g, ''), function(obj){
-        var leng = obj.length;
+      $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, ''), function(obj){
         var waypts = [];
+        var leng = obj.length;
         $.each(obj, function (idx, val) {
           if(idx == (leng-1)) {
             $scope.distance = (val.dist.toFixed(2));
           }
           else{
-            waypts.push({lat: val.latitude, lng: val.longitude});
+            waypts.push({lat: val.latitude, lng: val.longitude, id: val.id});
           }
         })
-        var lineSymbol = {
-          path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-          // path: 'M 0,-1 0,1',
-          strokeOpacity: 1,
-          scale: 1.5
-        };
-
-        $scope.flightPath = new google.maps.Polyline({
-          map: $scope.map.control.getGMap(),
-          icons: [{
-            icon: lineSymbol,
-            offset: '50%',
-            // offset: '0',
-            repeat: '10px'
-          }],
-          path: waypts,
-          strokeOpacity: 0,
-          strokeColor: '#FF0000',
-        });
-
-        $scope.animateCircle($scope.flightPath);
+        return waypts;
       })
+    }
+  }
+
+  $scope.drawDirections = function(waypts){
+    $scope.waypts = waypts;
+    if($scope.waypts != undefined){
+      var lineSymbol = {
+        path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+        strokeOpacity: 1,
+        scale: 1.5
+      };
+
+      var pathFirst = [];
+      for (var i in $scope.waypts) {
+        // only for RCH
+        console.log($scope.srcNode._z + $scope.waypts[i].id[3]);
+        if ($scope.srcNode._z == parseInt($scope.waypts[i].id[3])){
+          console.log("pass");
+          pathFirst.push($scope.waypts[i]);
+        }
+      }
+      $scope.flightPath = new google.maps.Polyline({
+        map: $scope.map.control.getGMap(),
+        icons: [{
+          icon: lineSymbol,
+          offset: '50%',
+          // offset: '0',
+          repeat: '10px'
+        }],
+        path: pathFirst,
+        strokeOpacity: 0,
+        strokeColor: '#FF0000',
+      });
+
+      $scope.animateCircle($scope.flightPath);
     }
   }
 
@@ -476,6 +447,82 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }]
   };
 
+  $scope.floor = function(num){
+    var swBound; var neBound; var srcImage;
+    if(num == 1&& $scope.build == "RCH"){
+      // 1st floor
+      swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
+      neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
+      srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
+    }
+    else if(num == 2 && $scope.build == "RCH"){
+      // 2nd floor
+      swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
+      neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
+      srcImage = 'images/Waterloo Floor Plans/RCH2_CAD.png';
+    }
+    else if(num == 3 && $scope.build == "RCH"){
+      // 3rd floor
+      swBound = new google.maps.LatLng(43.4698708618167, -80.54143540989122);
+      neBound = new google.maps.LatLng(43.470660407790774, -80.54018645270912);
+      srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
+    }
+
+    var bounds = new google.maps.LatLngBounds(swBound, neBound);
+
+    DebugOverlay.prototype = new google.maps.OverlayView();
+    $scope.overlay.setMap(null);
+    $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+
+    //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
+    function DebugOverlay(bounds, image, map) {
+      this.bounds_ = bounds;
+      this.image_ = image;
+      this.map_ = map;
+      this.div_ = null;
+      this.setMap(map.control.getGMap());
+    }
+
+    DebugOverlay.prototype.onAdd = function() {
+
+      var div = document.createElement('div');
+      div.style.borderStyle = 'none';
+      div.style.borderWidth = '0px';
+      div.style.position = 'absolute';
+      var img = document.createElement('img');
+      img.src = this.image_;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.opacity = '0.95';
+      img.style.position = 'absolute';
+      div.appendChild(img);
+      this.div_ = div;
+      var panes = this.getPanes();
+      panes.overlayLayer.appendChild(div);
+    };
+
+    DebugOverlay.prototype.draw = function() {
+      var overlayProjection = this.getProjection();
+      var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+      var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+      var div = this.div_;
+      div.style.left = sw.x + 'px';
+      div.style.top = ne.y + 'px';
+      div.style.width = (ne.x - sw.x) + 'px';
+      div.style.height = (sw.y - ne.y) + 'px';
+    };
+
+    DebugOverlay.prototype.updateBounds = function(bounds){
+      this.bounds_ = bounds;
+      this.draw();
+    };
+
+    DebugOverlay.prototype.onRemove = function() {
+      this.div_.parentNode.removeChild(this.div_);
+      this.div_ = null;
+    };
+
+  }
 });
 
 uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapGoogleMapApi, uiGmapIsReady) {

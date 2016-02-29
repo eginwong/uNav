@@ -169,12 +169,14 @@ router.route('/graph/rooms/select/:id')
       if(g._nodes[key]._data.building_code == req.params.id){
         hold = g._nodes[key]._data.utility;
         if(hold[0] == undefined){
-          rooms.push(key.substr(0,3) + " " + key.substr(3));
+          if(req.params.id == "RCH"){ rooms.push(req.params.id + " " + key.substr(3));}
+          else{ rooms.push(req.params.id + " " + key.substr(2));}
         }
         else{
           for (var i in hold){
             if(hold[i] != "Hallway" && hold[i] != "Entrance" && hold[i] != "Fountain" && hold[i] != "Food"){
-              rooms.push(key.substr(0,3) + " " + key.substr(3));
+              if(req.params.id =="RCH") {rooms.push(req.params.id + " " + key.substr(3));}
+              else{rooms.push(req.params.id + " " + key.substr(2));}
             }
           }
         }
