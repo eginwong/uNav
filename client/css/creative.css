@@ -26,6 +26,9 @@ hr {
 hr.light {
   border-color: white;
 }
+.header-content hr{
+  border-color: transparent;
+}
 a {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
@@ -49,11 +52,8 @@ p {
   line-height: 1.5;
   margin-bottom: 20px;
 }
-#div1{
-  position:relative;
-  height:auto;
-  width: auto;
-  max-width: 100%;
+div label {
+    display: inline-block;
 }
 .bg-primary {
   background-color: #f05f41;
@@ -61,7 +61,7 @@ p {
 .nearyou {
   background-color: rgba(44, 62, 80, 0.80);
   padding-bottom: 0px;
-  height: 35px;
+  height: 40px;
 }
 .hidesymbol {
     display: inline-block;
@@ -76,16 +76,49 @@ p {
     padding-top: 100px;
   }
 .box{
-   display: inline-block;
+  display: inline-block;
   width: 750px;
   height: 100%;
   padding-left: 540px;
   margin: 1em;
 }
+.searchWrapper{
+  display: inline-block;
+}
+.resizeMap{
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+.roomDetails{
+  display: inline-block;
+  height: 40px;
+  float: right;
+  padding-right: 60px;
+  position: absolute;
+
+}
+.room1Details{
+  top: 0;
+  left: 10px;
+  position: absolute;
+  height: 100px;
+  width: 250px;
+  padding-right: 0px;
+  border:1px solid black;
+}
+.room2Details{
+  top: 220px;
+  left: 10px;
+  position: absolute;
+  height: 100px;
+  width: 250px;
+  border:1px solid black;
+}
 .navdiv {
   background-color: rgba(44, 62, 80, 0.80);
   padding-bottom: 0px;
-  height: 35px;
+  height: 40px;
 }
 .container{
   padding-bottom: 40px;
@@ -103,9 +136,23 @@ p {
   font-size: 18px;
   margin-top: 0;
 }
+.contactTitle p{
+  font-size: 13px;
+}
+.contactTitle h2{
+  padding-top: 20px;
+  font-size: 18px;
+  margin-top: 0;
+}
+.input p{
+  font-size: 10px;
+}
+.ng-pristine{
+  border-radius: 7px;
+}
 .img-responsive{
   padding: 30px;
-  border-radius: 55%;
+  border-radius: 50%;
 }
 .contact label{
   font-size: 13px;
@@ -133,6 +180,9 @@ aside {
 .no-padding {
   padding: 0;
 }
+.nav .navbar-nav .navbar-right{
+  position: fixed;
+}
 .navbar-default {
   background-color: white;
   border-color: rgba(34, 34, 34, 0.05);
@@ -140,12 +190,12 @@ aside {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
+  position: absolute;
 }
 .navbar-default .navbar-header .navbar-brand {
   color: #ffffff;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
-  text-transform: 
 }
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
@@ -212,18 +262,36 @@ aside {
     color: #f05f40;
   }
 }
-.header-content {
-  position: relative;
-  width: 100%;
+.ng-scope{
+  padding: 0px;
+}
+#full-screen-background-image {
+  z-index: -999;
   min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: 100%; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  }
+
+.header-content {
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover;
   background-position: center;
-  background-image: url('../images/backgroundpic.png');
+  background-image: url();
   text-align: center;
   color: white;
+  padding: 0px;
 }
 .header-content {
   position: relative;
@@ -240,6 +308,7 @@ aside {
 }
 .header-content .header-content-inner hr {
   margin: 130px auto;
+  color: transparent;
 }
 .header-content .header-content-inner p {
   font-weight: 400;
@@ -295,7 +364,7 @@ aside {
 .portfolio-box2 {
   position: relative;
   display: block;
-  max-width: 600px;
+  max-width: 290px;
   margin: 0 auto;
   padding-top: 30px;
 }
@@ -303,17 +372,17 @@ aside {
 .portfolio-box2 .portfolio-box-caption {
   color: white;
   opacity: 0;
-  display: block;
-  background: rgba(240, 95, 64, 0.9);
+  background: #000;
   position: absolute;
   bottom: 0;
-  text-align: center;
+  left: 0;
   width: 100%;
-  height: 85%;
+  height: 90%;
+  margin: 0 auto;
+  border-radius: 50%;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
-
 }
 .portfolio-box2 .portfolio-box-caption .portfolio-box-caption-content {
   width: 100%;
@@ -632,9 +701,4 @@ body {
     padding-left: 50px;
   }
 }
-  @media(max-width: 600px){
-    #div1 {
-    width: auto;
-  }
-
-}
+ 

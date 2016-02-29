@@ -1,9 +1,10 @@
 <div class="navdiv">
 </div>
 
-<h2><center>Where would you like to go today?</center></h2>
- <button ng-click="button" class="toggle-div" id="searchButton" value="Expand">test</button>
+<div class="aboutus">
 
+<h2><center>Where would you like to go today?</center></h2>
+<hr>
 <div class="search col-md-offset-6" ng-show="build == undefined">
   <select ng-model="build" id="buildingsInUW" class="chosen-select" data-placeholder="Where are you?" tabindex="1"></select>
 </div>
@@ -23,15 +24,49 @@
   <button ng-click="floor(3)" class="btn" id="floor3">Floor 3</button>
   <button ng-click="restart()" class="btn btn-primary" id="restart">Restart</button>
 </div>
-<h2 ng-show="distance > 0">The distance is: {{distance}} meters.</h2>
-<div id="div1">
-<ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
-  <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
-  <!-- <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" click="onClick()" idkey="m.id" events="marker.events"> -->
-    <!-- <ui-gmap-window id="marker-{{$index}}" options="windowOptions" closeClick="closeClick()"></ui-gmap-window> -->
-  </ui-gmap-marker>
-</ui-gmap-google-map>
+<button ng-click="ShowHide()" class="toggle-div" id="searchButton" value="Expand">test</button>
+<!-- <button ng-click="ShowHide()" class="toggle-div" id="hideButton" value="Expand">Details</button> -->
+
+<div id="searchWrapperOuter">
+
+      <div class="resizeMap" id="searchWrapper">
+      <h2 ng-show="distance > 0">The distance is: {{distance}} meters.</h2>
+      <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable  ="true" events="map.events" options="map.options">
+      <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
+      <!-- <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" click="onClick()" idkey="m.id" events="marker.events"> -->
+        <!-- <ui-gmap-window id="marker-{{$index}}" options="windowOptions" closeClick="closeClick()"></ui-gmap-window> -->
+      </ui-gmap-marker>
+      </ui-gmap-google-map>
+      </div>
+   
+      <div ng-hide="IsHidden" class="roomDetails" ng-show="one">
+          <div class="room1Details"> 
+            <p> Room 1 Details: </p>
+          </div>
+
+          <div ng-hide="IsHidden" class="room2Details" ng-show="two">
+            <p> Room 2 Details: </p>
+          </div>
+      </div>
+  </div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- <a class="button" ng-click="findMe()" href="">Find me</a>
 <!-- <div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div> -->
