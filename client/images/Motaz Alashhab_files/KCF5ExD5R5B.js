@@ -1,5 +1,0 @@
-/*!CK:3066674241!*//*1456274963,*/
-
-if (self.CavalryLogger) { CavalryLogger.start_js(["hk+qz"]); }
-
-__d('VideoDashPrefetchCache',['Map','Shaka'],function a(b,c,d,e,f,g,h){if(c.__markCompiled)c.__markCompiled();var i=c('Shaka').util.AjaxRequest,j=null;function k(){'use strict';this.$VideoDashPrefetchCache1=new h();}k.prototype.store=function(l,m){'use strict';this.$VideoDashPrefetchCache1.set(l,m);};k.prototype.getAndDelete=function(l){'use strict';var m=this.$VideoDashPrefetchCache1.get(l);this.$VideoDashPrefetchCache1['delete'](l);return m;};k.getInstance=function(){'use strict';if(j===null)j=new k();return j;};k.load=function(l){'use strict';for(var m=0;m<l.length;m++){var n=l[m],o=n.url,p=n.start,q=n.end;if(p!==null&&p!==undefined&&q!==null&&q!==undefined)o+='&bytestart='+p+'&byteend='+q;var r=new i(o);k.getInstance().store(o,r.send());}};k.getCacheValue=function(l){'use strict';return k.getInstance().getAndDelete(l);};f.exports=k;},null);

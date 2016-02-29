@@ -1,5 +1,0 @@
-/*!CK:3698798641!*//*1454948378,*/
-
-if (self.CavalryLogger) { CavalryLogger.start_js(["XOgYL"]); }
-
-__d('ChatSidebarSheetChatShutdownMsg.react',['ChannelConstants','ReactComponentWithPureRenderMixin','React','fbt'],function a(b,c,d,e,f,g,h,i,j,k){'use strict';if(c.__markCompiled)c.__markCompiled();var l=j.PropTypes,m=j.createClass({displayName:'ChatSidebarSheetChatShutdownMsg',mixins:[i],propTypes:{hint:l.string},render:function(){var n=this.props.hint;switch(n){case h.HINT_AUTH:return (j.createElement('div',null,k._("Your session has timed out. Please log in.")));case h.HINT_MAINT:return (j.createElement('div',null,k._("Facebook {Chat} is currently down for maintenance.",[k.param('Chat',k._("Chat"))])));case h.HINT_CONN:return (j.createElement('div',null,k._("Facebook {Chat} is currently unavailable.",[k.param('Chat',k._("Chat"))])));default:return (j.createElement('div',null,k._("Facebook {Chat} is currently unavailable.",[k.param('Chat',k._("Chat"))])));}}});f.exports=m;},null);

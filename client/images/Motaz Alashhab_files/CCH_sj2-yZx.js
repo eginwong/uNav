@@ -1,5 +1,0 @@
-/*!CK:1316208213!*//*1456170255,*/
-
-if (self.CavalryLogger) { CavalryLogger.start_js(["GCn9f"]); }
-
-__d('EmbeddedVideoWatchAndScrollControl.react',['AbstractButton.react','Image.react','React','ReactDOM','cx','fbt','ix','shallowCompare'],function a(b,c,d,e,f,g,h,i,j,k,l,m,n,o){'use strict';var p,q;if(c.__markCompiled)c.__markCompiled();var r=j.PropTypes;p=babelHelpers.inherits(s,j.Component);q=p&&p.prototype;s.prototype.shouldComponentUpdate=function(t,u){return o(this,t,u);};s.prototype.onMouseOut=function(t){k.findDOMNode(this.refs.button).blur();};s.prototype.onButtonClick=function(){this.props.onEnterWatchAndScroll&&this.props.onEnterWatchAndScroll();};s.prototype.render=function(){var t=j.createElement(i,{className:"_5i0o",src:n('/images/video/player/embedded_controls/icons/ws.png')});return (j.createElement(h,{'aria-label':m._("Enter Watch And Scroll"),className:"_3u33",image:t,onClick:this.onButtonClick.bind(this),onMouseOut:this.onMouseOut.bind(this),ref:'button',tabIndex:this.props.tabIndex,type:'button'}));};function s(){p.apply(this,arguments);}s.propTypes={onEnterWatchAndScroll:r.func,tabIndex:r.string};f.exports=s;},null);
