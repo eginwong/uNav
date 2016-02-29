@@ -26,6 +26,7 @@ uNav.controller('mainController', function($scope) {});
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
   $scope.showSelect = true;
+  $scope.IsHidden = true;
   var overlay;
 
   $.get('/api/buildings', function(obj){
@@ -37,8 +38,14 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   });
 
   // Anuja: divs that should be added to the search partial
-  $("#searchButton").click(function(){
+
+  //This will hide the DIV by default.
+  $scope.ShowHide = function (force) {
+    //If DIV is hidden it will be visible and vice versa.
     var inputValue=$("#searchButton").attr('value');
+    if(force){
+      inputValue = "Reduce";
+    }
 
     if(inputValue=="Expand")
     {
@@ -50,12 +57,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       $("#searchWrapper").animate({width:"100%"});
       $("#searchButton").attr('value','Expand');
     }
-  });
-
-  //This will hide the DIV by default.
-  $scope.IsHidden = true;
-  $scope.ShowHide = function () {
-    //If DIV is hidden it will be visible and vice versa.
     $scope.IsHidden = $scope.IsHidden ? false : true;
   };
 
@@ -164,6 +165,9 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       $scope.distance = null;
     }
     $scope.build = undefined;
+    $scope.ShowHide(true);
+    $("#l1Details").empty();
+    $("#l2Details").empty();
     $scope.src = null;
     $scope.dest = null;
     $scope.floor = null;
@@ -175,19 +179,34 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   }
 
   $( "#roomSrc" ).change(function() {
+    // $("#searchButton").attr('value','Expand');
+    // $scope.ShowHide(false);
     $scope.src = $("#roomSrc option:selected").val();
     $scope.plot("src");
     getPath($scope.src, $scope.dest).then(function(){
       if($scope.waypts != undefined) {drawDirections();}
     })
+    $("#l1Details").text("Room");
+    // Async problem, use promises!
+    // if($scope.srcNode._data.utility.length < 0){
+    //   $("#l1Details").text("Room");
+    // }
+    // else {
+    //   $("#l1Details").text($scope.srcNode._data.utility);
+    // }
   });
 
   $( "#roomDest" ).change(function() {
+    // $("#searchButton").attr('value','Expand');
+    // $scope.ShowHide(false);
     $scope.dest = $("#roomDest option:selected").val();
     $scope.plot("dest");
     getPath($scope.src, $scope.dest).then(function(){
       if($scope.waypts != undefined) {drawDirections();}
     })
+    $("#l2Details").text("Room");
+
+    // Async problem, use promises!
   });
 
   uiGmapGoogleMapApi.then(function (maps) {
@@ -303,7 +322,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           this.div_.parentNode.removeChild(this.div_);
           this.div_ = null;
         };
-
       })
     }
     else if (node == "dest") {
