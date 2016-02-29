@@ -449,7 +449,11 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
   $scope.floor = function(num){
     var swBound; var neBound; var srcImage;
-    if(num == 1&& $scope.build == "RCH"){
+    $("#floor1").removeClass("active disabled");
+    $("#floor2").removeClass("active disabled");
+    $("#floor3").removeClass("active disabled");
+    $("#floor" + num).addClass("active disabled");
+    if(num == 1 && $scope.build == "RCH"){
       // 1st floor
       swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
       neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
