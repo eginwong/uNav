@@ -42,7 +42,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
     if(inputValue=="Expand")
     {
-      $("#searchWrapper").animate({width:"1500px"});
+      $("#searchWrapper").animate({width:"1700px"});
       $("#searchButton").attr('value','Reduce');
     }
     else if(inputValue=="Reduce")

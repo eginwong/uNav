@@ -31,43 +31,24 @@
 
       <div class="resizeMap" id="searchWrapper">
       <h2 ng-show="distance > 0">The distance is: {{distance}} meters.</h2>
-      <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable  ="true" events="map.events" options="map.options">
-      <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
-        <div ng-non-bindable>
+        <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable  ="true" events="map.events" options="map.options">
+          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
+          <div ng-non-bindable>
           <ui-gmap-window id="marker-{{$index}}" options="windowOptions" closeClick="closeClick()"></ui-gmap-window>
-        </div>
-      </ui-gmap-marker>
+          </div>
+          </ui-gmap-marker>
       </ui-gmap-google-map>
-      </div>
+    </div>
 
       <div ng-hide="IsHidden" class="roomDetails" ng-show="one">
-          <div class="room1Details">
+          <div ng-model="roomDetail1" class="room1Details">
             <p> Room 1 Details: </p>
           </div>
 
-          <div ng-hide="IsHidden" class="room2Details" ng-show="two">
+          <div ng-hide="IsHidden" ng-model="roomDetail2" class="room2Details" ng-show="two">
             <p> Room 2 Details: </p>
           </div>
       </div>
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <a class="button" ng-click="findMe()" href="">Find me</a>
-<!-- <div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div> -->
