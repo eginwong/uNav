@@ -1,0 +1,6 @@
+/*!CK:921732339!*//*1454901653,*/
+
+if (self.CavalryLogger) { CavalryLogger.start_js(["dUkC9"]); }
+
+__d('ReactComposerAlbumActions',['ReactComposerAlbumActionType','ReactComposerDispatcher'],function a(b,c,d,e,f,g,h,i){if(c.__markCompiled)c.__markCompiled();j.prototype.selectorClicked=function(k){'use strict';i.dispatch({composerID:k,type:h.CREATE_ALBUM_SELECTOR_CLICKED});};function j(){'use strict';}f.exports=new j();},null);
+__d('ReactComposerAlbumAttachmentSelector.react',['ReactComposerAlbumActions','ReactComposerContextMixin','DOMContainer.react','ReactComponentWithPureRenderMixin','React'],function a(b,c,d,e,f,g,h,i,j,k,l){if(c.__markCompiled)c.__markCompiled();var m=l.PropTypes,n=l.createClass({displayName:'ReactComposerAlbumAttachmentSelector',mixins:[i,k],propTypes:{createAlbumLink:m.any},render:function(){return (l.createElement(j,{display:'block',onClick:this._onClick},this.props.createAlbumLink));},_onClick:function(){h.selectorClicked(this.context.composerID);}});f.exports=n;},null);

@@ -278,17 +278,15 @@ aside {
   -moz-background-size: cover;
   -o-background-size: cover;
   }
-
 .header-content {
-  z-index: 1000;
   position: fixed;
   width: 100%;
   height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  background-size: cover;
+  -o-background-size: cover;
+  background-size: 100%;
   background-position: center;
-  background-image: url();
   text-align: center;
   color: white;
   padding: 0px;
