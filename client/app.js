@@ -28,7 +28,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $scope.showSelect = true;
   var overlay;
 
-  $.get('/api/buildings', function(obj){
+  $.get('/api/buildings', function(obj){  
     $scope.masterBuildings = JSON.parse(obj);
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
@@ -565,37 +565,33 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
   });
 
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
-  .then(function (instances) {
-  })
+  .then(function () {})
 
   $scope.chose = function(util){
     if(this.naviOn == undefined){
       alert("First timedu");
-      this.findMe();
+      if ($scope.geolocationAvailable) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          $scope.map.center = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          $scope.map.zoom = 22;
+
+          $scope.map.markers.push({
+            id: 9000,
+            coords: {latitude: position.coords.latitude, longitude: position.coords.longitude}
+          });
+        });
+      }
     }
     console.log(util);
     $scope.naviOn = true;
-    console.log("naviOn is: " + $scope.naviOn);
     $scope.collapsed = false;
     $timeout(function() {
       $scope.$apply();
     },0);
   }
-
-  $scope.findMe = function () {
-    if ($scope.geolocationAvailable) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        $scope.map.center = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        };
-        $scope.$apply();
-        console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude);
-        $scope.markerLat = position.coords.latitude;
-        $scope.markerLng = position.coords.longitude;
-      });
-    }
-  };
 
   $scope.mapOptions = {
     minZoom: 3,
