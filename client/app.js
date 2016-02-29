@@ -163,23 +163,16 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   }
 
   $( "#roomSrc" ).change(function() {
-    $scope.src = $("#roomSrc option:selected").val()
+    $scope.src = $("#roomSrc option:selected").val();
     $scope.plot("src");
+    $scope.getPath($scope.src, $scope.dest);
 
-    function asyncFind(_callback){
-      $scope.waypts = $scope.getPath($scope.src, $scope.dest);
-      _callback();
-    }
-
-    asyncFind(function() {
-      $scope.drawDirections();
-    });
   });
 
   $( "#roomDest" ).change(function() {
-    $scope.dest = $("#roomDest option:selected").val()
+    $scope.dest = $("#roomDest option:selected").val();
     $scope.plot("dest");
-    $scope.drawDirections($scope.getPath($scope.src, $scope.dest));
+    $scope.getPath($scope.src, $scope.dest);
   });
 
   uiGmapGoogleMapApi.then(function (maps) {
@@ -220,7 +213,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
             longitude: $scope.srcNode._x
           },
           name: $scope.src,
-          icon: {url: 'http://icon-park.com/imagefiles/location_map_pin_green5.png', scaledSize: new google.maps.Size(30,40)}
+          icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
         });
         var swBound; var neBound; var srcImage;
         if($scope.srcNode._z == 1 && $scope.build == "RCH"){
@@ -348,43 +341,37 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
             waypts.push({lat: val.latitude, lng: val.longitude, id: val.id});
           }
         })
-        return waypts;
-      })
-    }
-  }
 
-  $scope.drawDirections = function(waypts){
-    $scope.waypts = waypts;
-    if($scope.waypts != undefined){
-      var lineSymbol = {
-        path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-        strokeOpacity: 1,
-        scale: 1.5
-      };
+        var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+          strokeOpacity: 1,
+          scale: 1.5
+        };
 
-      var pathFirst = [];
-      for (var i in $scope.waypts) {
-        // only for RCH
-        console.log($scope.srcNode._z + $scope.waypts[i].id[3]);
-        if ($scope.srcNode._z == parseInt($scope.waypts[i].id[3])){
-          console.log("pass");
-          pathFirst.push($scope.waypts[i]);
+        var pathFirst = [];
+        for (var i in waypts) {
+          // only for RCH
+          console.log($scope.srcNode._z + waypts[i].id[3]);
+          if ($scope.srcNode._z == parseInt(waypts[i].id[3])){
+            console.log("pass");
+            pathFirst.push(waypts[i]);
+          }
         }
-      }
-      $scope.flightPath = new google.maps.Polyline({
-        map: $scope.map.control.getGMap(),
-        icons: [{
-          icon: lineSymbol,
-          offset: '50%',
-          // offset: '0',
-          repeat: '10px'
-        }],
-        path: pathFirst,
-        strokeOpacity: 0,
-        strokeColor: '#FF0000',
-      });
+        $scope.flightPath = new google.maps.Polyline({
+          map: $scope.map.control.getGMap(),
+          icons: [{
+            icon: lineSymbol,
+            offset: '50%',
+            // offset: '0',
+            repeat: '10px'
+          }],
+          path: pathFirst,
+          strokeOpacity: 0,
+          strokeColor: '#FF0000',
+        });
 
-      $scope.animateCircle($scope.flightPath);
+        $scope.animateCircle($scope.flightPath);
+      })
     }
   }
 

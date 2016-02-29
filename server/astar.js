@@ -40,8 +40,8 @@ module.exports = {
   containsObject: function(obj, list) {
     for (var i = 0; i < list.length; i++) {
       if (list[i] === obj) {
-            return true;
-        }
+        return true;
+      }
     }
     return false;
   },
@@ -52,28 +52,16 @@ module.exports = {
     graph.clearParents(graph);
     if(graph._nodes[src] && graph._nodes[sink]){
       // initializing all the variables.
-      var openNodes = new BinaryHeap(function(x){return x;});
+      var openNodes = new BinaryHeap(function(x){return x._f;});
       var closedNodes = [];
       var startNode; var currentNode; var destNode; var testNode;
-      for (var key in graph._nodes) {
-        if(key == src){
-          currentNode = graph._nodes[key];
-        }
-        if(key == sink){
-          destNode = graph._nodes[key];
-        }
-      }
+      currentNode = graph._nodes[src];
+      destNode = graph._nodes[sink];
+
       currentNode._g = 0;
-      //set heuristic choice here.
       currentNode._h = this.manhattan(currentNode, destNode);
       currentNode._f = currentNode._g + currentNode._h;
 
-      var blocker = false;
-      if(graph._nodes[src]._z == graph._nodes[sink]._z){
-        blocker = true;
-      }
-
-      //get starting node
       startNode = currentNode;
 
       var connectedNodes;
@@ -84,38 +72,29 @@ module.exports = {
         connectedNodes = this.findConnectedNodes(graph, currentNode._id);
         l = connectedNodes.length;
         for (var i = 0; i < l; ++i) {
-          for (var key in graph._nodes) {
-            if(key == connectedNodes[i]){
-              testNode = graph._nodes[key];
-            }
-          }
-          if(blocker && testNode._z != graph._nodes[src]._z){
-            //Do nothing.
-          }
-          else{
-            // technically any node you connect to will be greater than 0, as there has to be one edge to connect to there.
-            // However, your destination node may only have one edge connecting to it too. >_<
-            if (graph._adjacency[testNode._id].length > 0) {
-              var doom = false;
-              g = currentNode._g + this.manhattan(currentNode, testNode);
-              h = this.manhattan(testNode, destNode);
-              f = g + h;
-              if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
-                if(testNode._f > f)
-                {
-                  testNode._f = f;
-                  testNode._g = g;
-                  testNode._h = h;
-                  testNode._parentNode = currentNode;
-                }
-              }
-              else {
+          testNode = graph._nodes[connectedNodes[i]];
+          // technically any node you connect to will be greater than 0, as there has to be one edge to connect to there.
+          // However, your destination node may only have one edge connecting to it too. >_<
+          if (graph._adjacency[testNode._id].length > 0) {
+            g = currentNode._g + 1;
+            // g = currentNode._g + this.manhattan(currentNode, testNode);
+            h = this.manhattan(testNode, destNode);
+            f = g + h;
+            if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
+              if(testNode._f > f)
+              {
                 testNode._f = f;
                 testNode._g = g;
                 testNode._h = h;
                 testNode._parentNode = currentNode;
-                openNodes.push(testNode);
               }
+            }
+            else {
+              testNode._f = f;
+              testNode._g = g;
+              testNode._h = h;
+              testNode._parentNode = currentNode;
+              openNodes.push(testNode);
             }
           }
         }
@@ -123,7 +102,6 @@ module.exports = {
         if (openNodes.length == 0) {
           return null;
         }
-
         currentNode = openNodes.pop();
       }
       var dist;
