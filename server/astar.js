@@ -21,18 +21,20 @@ module.exports = {
 
   //Heurisitic Definitions
   manhattan: function (source, dest) {
-    return (Math.abs(source._x - dest._x) + Math.abs(source._y - dest._y));
+    //to get accurate floor mapping
+    return(Math.abs(source._x - dest._x) + Math.abs(source._y - dest._y) + Math.abs(source._z - dest._z));
   },
 
   euclidean: function (source, dest) {
-    return Math.sqrt(Math.pow(source._x - dest._x, 2) + Math.pow(source._y - dest._y, 2));
+    return Math.sqrt(Math.pow(source._x - dest._x, 2) + Math.pow(source._y - dest._y, 2) + Math.pow(source._z - dest._z, 2));
   },
 
   //Chebyshev's algorithm, D2=D=1
   diagonal: function (source, dest) {
     var dx = Math.abs(source._x - dest._x);
     var dy = Math.abs(source._y - dest._y);
-    return ((dx + dy) - Math.min(dx,dy));
+    var dz = Math.abs(source._z - dest._z);
+    return ((dx + dy + dz) - Math.min(dx,dy,dz));
   },
 
   containsObject: function(obj, list) {
@@ -43,6 +45,7 @@ module.exports = {
     }
     return false;
   },
+
   aStar: function (graph, src, sink){
     //finished result to return.
     var fin;
@@ -65,6 +68,11 @@ module.exports = {
       currentNode._h = this.manhattan(currentNode, destNode);
       currentNode._f = currentNode._g + currentNode._h;
 
+      var blocker = false;
+      if(graph._nodes[src]._z == graph._nodes[sink]._z){
+        blocker = true;
+      }
+
       //get starting node
       startNode = currentNode;
 
@@ -81,27 +89,33 @@ module.exports = {
               testNode = graph._nodes[key];
             }
           }
-          // technically any node you connect to will be greater than 0, as there has to be one edge to connect to there.
-          // However, your destination node may only have one edge connecting to it too. >_<
-          if (graph._adjacency[testNode._id].length > 0) {
-            g = currentNode._g + this.manhattan(currentNode, testNode);
-            h = this.manhattan(testNode, destNode);
-            f = g + h;
-            if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
-              if(testNode._f > f)
-              {
+          if(blocker && testNode._z != graph._nodes[src]._z){
+            //Do nothing.
+          }
+          else{
+            // technically any node you connect to will be greater than 0, as there has to be one edge to connect to there.
+            // However, your destination node may only have one edge connecting to it too. >_<
+            if (graph._adjacency[testNode._id].length > 0) {
+              var doom = false;
+              g = currentNode._g + this.manhattan(currentNode, testNode);
+              h = this.manhattan(testNode, destNode);
+              f = g + h;
+              if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
+                if(testNode._f > f)
+                {
+                  testNode._f = f;
+                  testNode._g = g;
+                  testNode._h = h;
+                  testNode._parentNode = currentNode;
+                }
+              }
+              else {
                 testNode._f = f;
                 testNode._g = g;
                 testNode._h = h;
                 testNode._parentNode = currentNode;
+                openNodes.push(testNode);
               }
-            }
-            else {
-              testNode._f = f;
-              testNode._g = g;
-              testNode._h = h;
-              testNode._parentNode = currentNode;
-              openNodes.push(testNode);
             }
           }
         }
@@ -109,6 +123,7 @@ module.exports = {
         if (openNodes.length == 0) {
           return null;
         }
+
         currentNode = openNodes.pop();
       }
       var dist;
