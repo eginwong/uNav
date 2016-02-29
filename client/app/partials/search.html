@@ -23,51 +23,34 @@
   <button ng-click="floor(2)" class="btn active disabled" id="floor2">Floor 2</button>
   <button ng-click="floor(3)" class="btn" id="floor3">Floor 3</button>
   <button ng-click="restart()" class="btn btn-primary" id="restart">Restart</button>
+  <button ng-show="src != undefined || dest != undefined" ng-click="ShowHide(false)" class="btn btn-primary toggle-div" id="searchButton" value="Expand">Show Room Details</button>
 </div>
-<button ng-click="ShowHide()" class="toggle-div" id="searchButton" value="Expand">test</button>
 <!-- <button ng-click="ShowHide()" class="toggle-div" id="hideButton" value="Expand">Details</button> -->
 
 <div id="searchWrapperOuter">
 
       <div class="resizeMap" id="searchWrapper">
       <h2 ng-show="distance > 0">The distance is: {{distance}} meters.</h2>
-      <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable  ="true" events="map.events" options="map.options">
-      <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
-        <div ng-non-bindable>
+        <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
+          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
+          <div ng-non-bindable>
           <ui-gmap-window id="marker-{{$index}}" options="windowOptions" closeClick="closeClick()"></ui-gmap-window>
-        </div>
-      </ui-gmap-marker>
+          </div>
+          </ui-gmap-marker>
       </ui-gmap-google-map>
-      </div>
+    </div>
 
       <div ng-hide="IsHidden" class="roomDetails" ng-show="one">
-          <div class="room1Details">
-            <p> Room 1 Details: </p>
+          <!-- Maybe add a toggle close here -->
+          <div ng-hide="IsHidden" class="room1Details">
+            <p> Location 1 Details: <br>{{src}}</p>
+            <p id=l1Details></p>
           </div>
-
           <div ng-hide="IsHidden" class="room2Details" ng-show="two">
-            <p> Room 2 Details: </p>
+            <p> Location 2 Details: <br>{{dest}}</p>
+            <p id=l2Details></p>
           </div>
       </div>
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <a class="button" ng-click="findMe()" href="">Find me</a>
-<!-- <div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div> -->
