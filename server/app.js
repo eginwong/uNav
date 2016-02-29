@@ -114,12 +114,6 @@ router.route('/demo3')
     if (err) {
       res.send(err);
     }
-    // sorting alphabetically
-    // var life = JSON.parse(data);
-    // life.features.sort(function(a,b){
-    //   return (a.properties.id).localeCompare(b.properties.id);
-    // });
-    // res.send(JSON.stringify(life));
     res.send(data);
   })
 });

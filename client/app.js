@@ -335,7 +335,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         var leng = obj.length;
         $.each(obj, function (idx, val) {
           if(idx == (leng-1)) {
-            $scope.distance = (val.dist.toFixed(2));
+            $scope.distance = val.dist.toFixed(2);
           }
           else{
             waypts.push({lat: val.latitude, lng: val.longitude, id: val.id});
@@ -348,24 +348,25 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           scale: 1.5
         };
 
-        var pathFirst = [];
-        for (var i in waypts) {
-          // only for RCH
-          console.log($scope.srcNode._z + waypts[i].id[3]);
-          if ($scope.srcNode._z == parseInt(waypts[i].id[3])){
-            console.log("pass");
-            pathFirst.push(waypts[i]);
-          }
-        }
+        // var pathFirst = [];
+        // for (var i in waypts) {
+        //   // only for RCH
+        //   console.log($scope.srcNode._z + waypts[i].id[3]);
+        //   if ($scope.srcNode._z == parseInt(waypts[i].id[3])){
+        //     console.log("pass");
+        //     pathFirst.push(waypts[i]);
+        //   }
+        // }
+        // console.log(pathFirst);
         $scope.flightPath = new google.maps.Polyline({
           map: $scope.map.control.getGMap(),
           icons: [{
             icon: lineSymbol,
             offset: '50%',
-            // offset: '0',
             repeat: '10px'
           }],
-          path: pathFirst,
+          path: waypts,
+          // path: pathFirst,
           strokeOpacity: 0,
           strokeColor: '#FF0000',
         });
