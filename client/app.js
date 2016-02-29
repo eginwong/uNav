@@ -16,7 +16,6 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   });
 });
 
-
 uNav.controller('mainController', function($scope) {});
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
@@ -37,7 +36,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
     if(inputValue=="Expand")
     {
-        $("#searchWrapper").animate({width:"1000px"});
+        $("#searchWrapper").animate({width:"1500px"});
         $("#searchButton").attr('value','Reduce');
     }
     else if(inputValue=="Reduce")
@@ -47,14 +46,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }
   });
 
-  //Anuja: hiding and showing the room details divs 
-   
-            //This will hide the DIV by default.
-            $scope.IsHidden = true;
-            $scope.ShowHide = function () {
-            //If DIV is hidden it will be visible and vice versa.
-              $scope.IsHidden = $scope.IsHidden ? false : true;
-            };
+  //This will hide the DIV by default.
+  $scope.IsHidden = true;
+  $scope.ShowHide = function () {
+  //If DIV is hidden it will be visible and vice versa.
+    $scope.IsHidden = $scope.IsHidden ? false : true;
+  };
 
   $( "#buildingsInUW" ).change(function() {
     $scope.build = $("#buildingsInUW option:selected").val();
@@ -404,46 +401,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   //   }
   // };
 
-  $scope.mapOptions = {
-    minZoom: 3,
-    zoomControl: false,
-    draggable: true,
-    navigationControl: false,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    disableDoubleClickZoom: false,
-    keyboardShortcuts: true,
-    markers: {
-      selected: {}
-    },
-    styles: [{
-      stylers: [
-        { hue: "#00ffe6" },
-        { saturation: -20 }
-      ]
-    },{
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        { lightness: 100 },
-        { visibility: "simplified" }
-      ]
-    },{
-      featureType: "road",
-      elementType: "labels",
-      stylers: [
-        { visibility: "off" }
-      ]
-    },{
-      featureType: "buildings",
-      elementType: "labels.text",
-      stylers: [
-        { visibility: "off" }
-      ]
-    }]
-  };
-
   $scope.floor = function(num){
     var swBound; var neBound; var srcImage;
     $("#floor1").removeClass("active disabled");
@@ -522,8 +479,47 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       this.div_.parentNode.removeChild(this.div_);
       this.div_ = null;
     };
+  };
 
-  }
+  $scope.mapOptions = {
+    minZoom: 3,
+    zoomControl: false,
+    draggable: true,
+    navigationControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    disableDoubleClickZoom: false,
+    keyboardShortcuts: true,
+    markers: {
+      selected: {}
+    },
+    styles: [{
+      stylers: [
+        { hue: "#00ffe6" },
+        { saturation: -20 }
+      ]
+    },{
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "buildings",
+      elementType: "labels.text",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }]
+  };
 });
 
 uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapGoogleMapApi, uiGmapIsReady) {
