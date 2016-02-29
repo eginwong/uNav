@@ -1,35 +1,43 @@
 <div class="navdiv"></div>
 
-<h2 class="section-heading"><center>Want to report an incident? Please fill out the form below.<center>
-  <div class="contact">
-    <p><center>One of our team members will be in touch shortly.</center></p>
+<div class="aboutus">
+<center><h2>Contact Us</h2></center>
+   <hr>
+<center><p>Want to report an incident?</p></center>
+   <center><p>One of our team members will be in touch shortly.</p><center>
 
+  <div class="contact">
+ 
+    <br>
     <form ng-submit="sendMail()">
+
       <div>
-        <label>Name: <input type="text" ng-model="contactName" required> </label>
-        <br>
-        <label>Your Email: <input type="text" ng-model="contactEmail" required></label>
-        <br>
-        <label>What is the reason for your contact?
+        <div class"input">
+        <p>Name: <input type="text" ng-model="contactName" required></p>
+        <p>Email: <input type="text" ng-model="contactEmail" required></p>
+      </div>
+        <p>Reason: 
           <select required ng-model="contactReason">
             <option value="TechSupport">Technical Support</option>
             <option value="Info">Product Information</option>
             <option value="Others">Others</option>
           </select>
-        </label>
+        </p>
+        <p>Please provide additional comments below.</p>
+        <textarea rows="10" cols="60" data-ng-model="contactMsg"></textarea>
         <br>
-        <label>Any other comments?</label>
-        <textarea rows="8" cols="40" data-ng-model="contactMsg"></textarea>
         <br>
-        <input type="submit"></input>
+        <input class="btn btn-primary btn-xl page-scroll" type="submit"></input>
       </div>
     </form>
   </div>
+</div>
 
+<div class="contactTitle">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
-        <h2 class="section-heading">For further inquiries:</h2>
+        <center><h2>For further inquiries:</h2></center> 
         <hr class="primary">
         <p></p>
       </div>
@@ -44,3 +52,6 @@
     </div>
   </div>
 </h2>
+</div>
+
+

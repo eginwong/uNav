@@ -35,15 +35,24 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     
     if(inputValue=="Expand")
     {
-        $("#div1").animate({width:"1000px"});
+        $("#searchWrapper").animate({width:"1000px"});
         $("#searchButton").attr('value','Reduce');
     }
     else if(inputValue=="Reduce")
     {
-        $("#div1").animate({width:"100%"});
+        $("#searchWrapper").animate({width:"100%"});
         $("#searchButton").attr('value','Expand');
     }
 });
+
+  //Anuja: hiding and showing the room details divs 
+   
+            //This will hide the DIV by default.
+            $scope.IsHidden = true;
+            $scope.ShowHide = function () {
+            //If DIV is hidden it will be visible and vice versa.
+              $scope.IsHidden = $scope.IsHidden ? false : true;
+            };
 
   $( "#buildingsInUW" ).change(function() {
     $scope.build = $("#buildingsInUW option:selected").val();
