@@ -31,38 +31,12 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54067392,43.47018159,1 ]
+       "coordinates":  [ -80.54066527,43.47024163,1 ]
     },
     "properties": {
     "building_code":"RCH",
     "utility":[],
     "id":"103",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54075125,43.47018831,1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility":["Entrance"],
-    "id":"103E1",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54066527,43.47024163,1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility":["Entrance"],
-    "id":"103E2",
     "name":""
     }
   },
@@ -135,25 +109,12 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54100824,43.47016477,1 ]
+       "coordinates":  [ -80.54094819,43.47015565,1 ]
     },
     "properties": {
     "building_code":"RCH",
     "utility":[],
     "id":"106",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54094819,43.47015565,1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility":["Entrance"],
-    "id":"106E1",
     "name":""
     }
   },
@@ -178,7 +139,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Lab",
+    "utility":["Lab"],
     "id":"108",
     "name":"Helix Lab"
     }
@@ -317,38 +278,12 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54083147,43.47041167,1 ]
+       "coordinates":  [ -80.54076518,43.47038237,1 ]
     },
     "properties": {
     "building_code":"RCH",
     "utility":[],
     "id":"112",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54087278,43.47036123,1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility":["Entrance"],
-    "id":"112E1",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54076518,43.47038237,1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility":["Entrance"],
-    "id":"112E2",
     "name":""
     }
   },
