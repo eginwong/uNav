@@ -42,20 +42,20 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
     if(inputValue=="Expand")
     {
-        $("#searchWrapper").animate({width:"1500px"});
-        $("#searchButton").attr('value','Reduce');
+      $("#searchWrapper").animate({width:"1500px"});
+      $("#searchButton").attr('value','Reduce');
     }
     else if(inputValue=="Reduce")
     {
-        $("#searchWrapper").animate({width:"100%"});
-        $("#searchButton").attr('value','Expand');
+      $("#searchWrapper").animate({width:"100%"});
+      $("#searchButton").attr('value','Expand');
     }
   });
 
   //This will hide the DIV by default.
   $scope.IsHidden = true;
   $scope.ShowHide = function () {
-  //If DIV is hidden it will be visible and vice versa.
+    //If DIV is hidden it will be visible and vice versa.
     $scope.IsHidden = $scope.IsHidden ? false : true;
   };
 
@@ -177,14 +177,17 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val();
     $scope.plot("src");
-    $scope.getPath($scope.src, $scope.dest);
-
+    getPath($scope.src, $scope.dest).then(function(){
+      if($scope.waypts != undefined) {drawDirections();}
+    })
   });
 
   $( "#roomDest" ).change(function() {
     $scope.dest = $("#roomDest option:selected").val();
     $scope.plot("dest");
-    $scope.getPath($scope.src, $scope.dest);
+    getPath($scope.src, $scope.dest).then(function(){
+      if($scope.waypts != undefined) {drawDirections();}
+    })
   });
 
   uiGmapGoogleMapApi.then(function (maps) {
@@ -336,55 +339,63 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }, 80);
   }
 
-  $scope.getPath = function(src, sink) {
-    if(src != undefined && sink != undefined){
-      if($scope.flightPath != undefined){
-        $scope.flightPath.setMap(null);
-      }
-      // instantiate google map objects for directions
-      $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, ''), function(obj){
-        var waypts = [];
-        var leng = obj.length;
-        $.each(obj, function (idx, val) {
-          if(idx == (leng-1)) {
-            $scope.distance = val.dist.toFixed(2);
-          }
-          else{
-            waypts.push({lat: val.latitude, lng: val.longitude, id: val.id});
-          }
+  var getPath = function(src, sink) {
+    return $q(function(resolve){
+      if(src != undefined && sink != undefined){
+        if($scope.flightPath != undefined){
+          $scope.flightPath.setMap(null);
+        }
+        // instantiate google map objects for directions
+        $scope.waypts = [];
+        $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, ''), function(obj){
+          var leng = obj.length;
+          $.each(obj, function (idx, val) {
+            if(idx == (leng-1)) {
+              $scope.distance = val.dist.toFixed(2);
+            }
+            else{
+              $scope.waypts.push({lat: val.latitude, lng: val.longitude, id: val.id});
+            }
+          })
+          resolve();
         })
+      }
+    })
 
-        var lineSymbol = {
-          path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-          strokeOpacity: 1,
-          scale: 1.5
-        };
+  }
 
-        // var pathFirst = [];
-        // for (var i in waypts) {
-        //   // only for RCH
-        //   console.log($scope.srcNode._z + waypts[i].id[3]);
-        //   if ($scope.srcNode._z == parseInt(waypts[i].id[3])){
-        //     console.log("pass");
-        //     pathFirst.push(waypts[i]);
-        //   }
-        // }
-        // console.log(pathFirst);
-        $scope.flightPath = new google.maps.Polyline({
-          map: $scope.map.control.getGMap(),
-          icons: [{
-            icon: lineSymbol,
-            offset: '50%',
-            repeat: '10px'
-          }],
-          path: waypts,
-          // path: pathFirst,
-          strokeOpacity: 0,
-          strokeColor: '#FF0000',
-        });
+  var drawDirections = function(){
+    if($scope.waypts != undefined){
+      var lineSymbol = {
+        path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+        strokeOpacity: 1,
+        scale: 1.5
+      };
 
-        $scope.animateCircle($scope.flightPath);
-      })
+      // var pathFirst = [];
+      // for (var i in $scope.waypts) {
+      //   // only for RCH
+      //   console.log($scope.srcNode._z + $scope.waypts[i].id[3]);
+      //   if ($scope.srcNode._z == parseInt($scope.waypts[i].id[3])){
+      //     console.log("pass");
+      //     pathFirst.push($scope.waypts[i]);
+      //   }
+      // }
+      // console.log(pathFirst);
+      $scope.flightPath = new google.maps.Polyline({
+        map: $scope.map.control.getGMap(),
+        icons: [{
+          icon: lineSymbol,
+          offset: '50%',
+          repeat: '10px'
+        }],
+        path: $scope.waypts,
+        // path: pathFirst,
+        strokeOpacity: 0,
+        strokeColor: '#FF0000',
+      });
+
+      $scope.animateCircle($scope.flightPath);
     }
   }
 
