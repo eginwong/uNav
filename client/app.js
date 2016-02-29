@@ -264,8 +264,8 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         }
         else if($scope.srcNode._z == 3 && $scope.build == "RCH"){
           // 3rd floor
-          swBound = new google.maps.LatLng(43.46993509880034, -80.54134957920274);
-          neBound = new google.maps.LatLng(43.47064483538184, -80.54022668584435);
+          swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
+          neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
           srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
         }
 
@@ -456,8 +456,8 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }
     else if(num == 3 && $scope.build == "RCH"){
       // 3rd floor
-      swBound = new google.maps.LatLng(43.46993509880034, -80.54134957920274);
-      neBound = new google.maps.LatLng(43.47064483538184, -80.54022668584435);
+      swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
+      neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
       srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
     }
 
