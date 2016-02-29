@@ -9,7 +9,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"101",
     "name":""
     }
@@ -22,7 +22,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"102",
     "name":""
     }
@@ -35,7 +35,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"103",
     "name":""
     }
@@ -74,7 +74,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"104",
     "name":""
     }
@@ -100,7 +100,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"105",
     "name":""
     }
@@ -139,7 +139,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"106",
     "name":""
     }
@@ -165,7 +165,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"107",
     "name":""
     }
@@ -217,7 +217,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"109",
     "name":""
     }
@@ -243,7 +243,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"119H6",
     "name":""
     }
@@ -256,7 +256,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"110",
     "name":""
     }
@@ -295,7 +295,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"111",
     "name":""
     }
@@ -321,7 +321,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"112",
     "name":""
     }
@@ -360,7 +360,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"113",
     "name":""
     }
@@ -373,7 +373,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"114",
     "name":""
     }
@@ -399,7 +399,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"115",
     "name":""
     }
@@ -425,7 +425,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"116S",
     "name":""
     }
@@ -451,7 +451,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Elevator",
+    "utility":["Elevator"],
     "id":"117",
     "name":""
     }
@@ -464,7 +464,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"118",
     "name":""
     }
@@ -477,7 +477,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"119H1",
     "name":""
     }
@@ -490,7 +490,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"119H2",
     "name":""
     }
@@ -503,7 +503,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"119H3",
     "name":""
     }
@@ -516,7 +516,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"119H4",
     "name":""
     }
@@ -529,7 +529,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"119H5",
     "name":""
     }
@@ -555,7 +555,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Stairs",
+    "utility":["Stairs"],
     "id":"120S",
     "name":""
     }
@@ -568,7 +568,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Stairs",
+    "utility":["Stairs"],
     "id":"121S",
     "name":""
     }
@@ -581,7 +581,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"122H1",
     "name":""
     }
@@ -594,7 +594,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"122H2",
     "name":""
     }
@@ -607,7 +607,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"122H3",
     "name":""
     }
@@ -620,7 +620,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"122H4",
     "name":""
     }
@@ -633,7 +633,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"122H5",
     "name":""
     }
@@ -646,7 +646,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"122H6",
     "name":""
     }
@@ -659,7 +659,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"Hallway",
+    "utility":["Hallway"],
     "id":"122H7",
     "name":""
     }
@@ -672,7 +672,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"123",
     "name":""
     }
@@ -685,7 +685,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"124S",
     "name":""
     }
@@ -711,7 +711,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"WC",
+    "utility":["WC"],
     "id":"125",
     "name":""
     }
@@ -724,7 +724,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"WC",
+    "utility":["WC"],
     "id":"126",
     "name":""
     }
@@ -737,7 +737,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"127",
     "name":""
     }
@@ -750,7 +750,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":"",
+    "utility":[],
     "id":"128",
     "name":""
     }
