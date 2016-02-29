@@ -605,9 +605,9 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
 
     var mark = $scope.map.markers;
     // Conserve the first one and reset.
-    var temp = $scope.map.markers[0];
-    $scope.map.markers = [];
-    $scope.map.markers.push(temp);
+    var temp = mark[0];
+    mark = [];
+    mark.push(temp);
 
     $.get('/api/graph/amenities/' + util, function(result){
       result = JSON.parse(result);
@@ -619,7 +619,7 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
             longitude: val._x
           },
           name: val._id,
-          icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+          // icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
         });
       });
     });
