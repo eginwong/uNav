@@ -1,0 +1,1825 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540257,43.471328,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1107S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539958,43.470351,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Study Room",
+    "id":"1301",
+    "name":"Civil Study Room"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540013,43.470457,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Lab",
+    "id":"1302",
+    "name":"Civil Computer Lab"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54044961,43.47093685,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1304",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54067045,43.47123363,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1305",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54053607,43.47127497,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1306",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54002663,43.47108744,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1312",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53994394,43.47098555,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1313",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53993951,43.47110221,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1314",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53979628,43.47105791,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1318",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54047029,43.47088265,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1347",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54061803,43.47120539,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1352",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53985941,43.47120797,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1356",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54008828,43.47106548,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1359",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54008189,43.47053828,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Water fountain",
+    "id":"1369",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540041,43.470519,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1371S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539899,43.470289,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1373S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540164,43.470897,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Washroom",
+    "id":"1376",
+    "name":"Men Washroom"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539939,43.470286,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1301E2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539944,43.470414,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1301E1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540083,43.470503,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1302A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540153,43.470654,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Lab",
+    "id":"1302B",
+    "name":"Wedge Lab"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540077,43.470599,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1302BE2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540005,43.470504,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1302E1",
+    "name":"Civil Computer Lab"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540017,43.470402,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1302E2",
+    "name":"Civil Computer Lab"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540163,43.47074,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1302BE1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54085702,43.47080399,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54086963,43.47075079,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303AE1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54077282,43.47077424,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303AE2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54072441,43.47084534,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303B",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54074256,43.47078483,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303BE1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54100022,43.47071147,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303E1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54068861,43.47073088,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Lab",
+    "id":"1303F",
+    "name":"Advanced Micro and Nano Devices Lab"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54080105,43.47072634,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303GE1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54073197,43.47073592,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303GE2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54084946,43.47071121,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303H",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54062508,43.47086752,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303L",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54048697,43.47097762,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1304A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54054899,43.47119099,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1306E1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54040059,43.47111051,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1307JH2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54003365,43.47099165,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1308A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54003882,43.47094365,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1308C",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54037623,43.47097393,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54018353,43.470985,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309E",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54013406,43.47105957,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309G",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54013037,43.47103299,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309H",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54010305,43.47101822,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309J",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54016507,43.47135933,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1310A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54009414,43.47139014,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1310B",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5401001,43.47115112,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1310E1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53986384,43.47123972,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1310E2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54021527,43.47129657,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1310E3",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54040355,43.47094513,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1345H1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54044711,43.47099977,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1345H2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54057926,43.47120428,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1345H4",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54051134,43.47116958,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1351H1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54013701,43.47114079,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1360H1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540147,43.470745,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1372H1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540044,43.470586,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1372H3",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540016,43.470536,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1372H4",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54,43.470518,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1372H5",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539862,43.470312,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1372H7",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5404602,43.47085328,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H10",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54033314,43.47089815,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H13",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54026961,43.47091882,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H14",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54006872,43.47100438,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H17",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54000375,43.47102801,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H18",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53997864,43.47103908,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H19",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54090694,43.47071424,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5399122,43.47106271,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H20",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53985461,43.4710819,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H21",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53978447,43.47110258,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H22",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54083483,43.47074197,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H4",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54074861,43.47076668,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H6",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54063012,43.47080033,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H7",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54056004,43.47082554,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H8",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54099114,43.47074606,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54012095,43.47091767,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1308",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54034314,43.47095609,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5400646,43.47128521,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Lab",
+    "id":"1310",
+    "name":"Weef Lab"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54005756,43.47114306,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1311",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53985522,43.47101692,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1315",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53988019,43.47112129,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1316",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53990772,43.47119109,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1317",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540426,43.4709,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Elevator",
+    "id":"1346",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54058902,43.47114178,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1350",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5397835,43.47112385,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1355",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54094952,43.47063657,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1362",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540933,43.470651,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Elevator",
+    "id":"1363",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54100971,43.47067115,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1364",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540041,43.470519,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1365S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54020547,43.47075375,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1367",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54004603,43.47055717,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1368",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540211,43.470884,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Washroom",
+    "id":"1375",
+    "name":"Lady Washroom"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54001145,43.47103869,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1312E1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53988403,43.47108607,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1316E1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53981552,43.47111041,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1316E2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54012095,43.47056485,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1302C",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54063192,43.47082418,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303BE2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54054292,43.47086196,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303C",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54044943,43.47083379,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303D",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54051795,43.47082034,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303DE1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54038604,43.47086324,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303DE2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54059414,43.47076335,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303E",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5409143,43.47073006,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Entrance",
+    "id":"1303E2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54076319,43.47070893,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303G",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54060247,43.47084595,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303K",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54062744,43.47089526,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303M",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5405839,43.47087029,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303N",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54058646,43.47091447,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1303P",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54061527,43.47117028,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1305A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54062168,43.47127337,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1306A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54040333,43.47100635,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1307C",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5403918,43.47108895,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1307JH1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54042382,43.47113762,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1307JH3",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54044751,43.47117028,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1307JH4",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54005051,43.4709737,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1308B",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54033097,43.47099483,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309B",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5402727,43.47095321,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309C",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54022852,43.47098202,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1309D",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54002938,43.47140847,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1310C",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53996663,43.47105662,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1312E2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53994102,43.47107327,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1316E1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5405506,43.47116259,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"",
+    "id":"1345H3",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54097321,43.47061064,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1348S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54046544,43.47118756,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1351H2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540649,43.471252,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1352S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539899,43.470289,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Stairs",
+    "id":"1354S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54025413,43.47127593,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1360H2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54005628,43.47061576,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1372H2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.53992245,43.47043007,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1372H6",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54096233,43.47069132,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H1",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54041678,43.47087765,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H11",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54032905,43.47090454,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H12",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54020867,43.47094744,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H15",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54014976,43.47096857,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H16",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5397438,43.47111457,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H23",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54085667,43.47072846,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H3",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54075358,43.47076623,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H5",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54053908,43.47083475,1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":"Hallway",
+    "id":"1374H9",
+    "name":""
+    }
+  }
+]
+}
