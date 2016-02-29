@@ -109,7 +109,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54094819,43.47015565,1 ]
+       "coordinates":  [ -80.5409568401, 43.4701590107,1 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -356,7 +356,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54047266,43.47026469,1 ]
+       "coordinates":  [ -80.5404697747, 43.4702598822,1 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -395,7 +395,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54069746,43.47036123,1 ]
+       "coordinates":  [ -80.5406964955, 43.4703602734,1 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -486,7 +486,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54097,43.470124,1 ]
+       "coordinates":  [ -80.5409755734, 43.4701325919,1 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -499,7 +499,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.541083,43.470279,1 ]
+       "coordinates":  [ -80.5410745235, 43.47027093,1 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -694,7 +694,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54076999,43.47020272,1 ]
+       "coordinates":  [ -80.5407695073, 43.4701940755,1 ]
     },
     "properties": {
     "building_code":"RCH",
