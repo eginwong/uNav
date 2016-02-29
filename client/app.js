@@ -165,6 +165,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       $scope.distance = null;
     }
     $scope.build = undefined;
+    $scope.IsHidden = false;
     $scope.ShowHide(true);
     $("#l1Details").empty();
     $("#l2Details").empty();
@@ -438,10 +439,10 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
   $scope.floor = function(num){
     var swBound; var neBound; var srcImage;
-    $("#floor1").removeClass("active disabled");
-    $("#floor2").removeClass("active disabled");
-    $("#floor3").removeClass("active disabled");
-    $("#floor" + num).addClass("active disabled");
+    $("#floor1").removeClass("btn-primary disabled");
+    $("#floor2").removeClass("btn-primary disabled");
+    $("#floor3").removeClass("btn-primary disabled");
+    $("#floor" + num).addClass("btn-primary disabled");
     if(num == 1 && $scope.build == "RCH"){
       // 1st floor
       swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);

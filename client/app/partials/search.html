@@ -3,27 +3,34 @@
 
 <div class="aboutus">
 
-<h2><center>Where would you like to go today?</center></h2>
+<h1><center>Where would you like to go today?</center></h1>
 <hr>
-<div class="search col-md-offset-6" ng-show="build == undefined">
-  <select ng-model="build" id="buildingsInUW" class="chosen-select" data-placeholder="Where are you?" tabindex="1"></select>
-</div>
+<center><div class="search col-md-offset-6" ng-show="build == undefined">
+  <select ng-model="build" id="buildingsInUW" class="chosen-select" data-placeholder="Search" tabindex="1"></select>
+</div></center>
+<br>
 
 <div ng-show="build != undefined">
-  <div ng-show="showSelect">
-    <h2>Current building is: {{build}}</h2>
-    <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select>
-    <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select>
+  <div ng-show="showSelect" class="buildingName">
+    <center><h4>{{build}}
+    <button ng-click="floor(1)" class="btn" id="floor1">1</button>
+    <button ng-click="floor(2)" class="btn btn-primary disabled" id="floor2">2</button>
+    <button ng-click="floor(3)" class="btn" id="floor3">3</button>
+    <button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">x</button></h4></center>
+
+    <center><select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select></center>
+    <br>
+    <center><select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></center>
+    <br>
   </div>
   <div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div>
 
   <!-- <button class="btn btn-primary" ng-click="drawDirections()">Get Directions</button> -->
   <!-- OPTIMIZATION: MAKE THESE DYNAMIC INSTEAD OF STATIC -->
-  <button ng-click="floor(1)" class="btn" id="floor1">Floor 1</button>
-  <button ng-click="floor(2)" class="btn active disabled" id="floor2">Floor 2</button>
-  <button ng-click="floor(3)" class="btn" id="floor3">Floor 3</button>
-  <button ng-click="restart()" class="btn btn-primary" id="restart">Restart</button>
-  <button ng-show="src != undefined || dest != undefined" ng-click="ShowHide(false)" class="btn btn-primary toggle-div" id="searchButton" value="Expand">Show Room Details</button>
+  <div align="right">
+  <a ng-show="src != undefined || dest != undefined" ng-click="ShowHide(false)" class="glyphicon glyphicon-chevron-right btn-sm" id="searchButton" value="Expand"> Show Details</a>
+</div>
+
 </div>
 <!-- <button ng-click="ShowHide()" class="toggle-div" id="hideButton" value="Expand">Details</button> -->
 

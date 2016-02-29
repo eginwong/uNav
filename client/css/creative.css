@@ -90,7 +90,7 @@ div label {
    width:100%;
    margin:0 0.5%;
 }
-@media only screen and (max-width: 40em) {
+@media only screen and (max-width: 49em) {
     .resizeMap {
         float:none;
         width:100%;
@@ -106,6 +106,8 @@ div label {
   display: inline-block;
   height: 40px;
   position:absolute;
+  background: #000;
+  opacity: 0.6;
 }
 .room1Details{
   top: 0;
@@ -124,6 +126,9 @@ div label {
   width: 200px;
   border:1px solid black;
 }
+.search {
+  width: 430px;
+}
 .navdiv {
   background-color: rgba(44, 62, 80, 0.80);
   padding-bottom: 0px;
@@ -132,18 +137,28 @@ div label {
 .container{
   padding-bottom: 40px;
 }
-.aboutus h2{
-  padding-top: 30px;
-  font-size: 24px;
-  margin-top: 0;
-}
-.aboutus p{
-  font-size: 13px;
-}
 .aboutus h1{
   padding-top: 40px;
   font-size: 24px;
   margin-top: 0;
+}
+.aboutus h2{
+  padding-top: 20px;
+  font-size: 20px;
+  margin-top: 0;
+}
+.aboutus h3{
+  padding-top: 20px;
+  font-size: 24px;
+  margin-top: 0;
+}
+.aboutus h4{
+  padding-top: 5px;
+  font-size: 18px;
+  margin-top: 0;
+}
+.aboutus p{
+  font-size: 13px;
 }
 .contactTitle p{
   font-size: 13px;
