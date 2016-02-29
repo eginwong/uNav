@@ -672,7 +672,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":[],
+    "utility":["Hallway"],
     "id":"127",
     "name":""
     }
@@ -685,7 +685,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":[],
+    "utility":["Hallway"],
     "id":"128",
     "name":""
     }

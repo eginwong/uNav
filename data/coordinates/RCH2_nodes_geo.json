@@ -763,8 +763,8 @@
       },
       "properties": {
         "building_code":"RCH",
-        "utility":[],
-        "id":"236",
+        "utility":["Stairs", "Outside"],
+        "id":"236S",
         "name":""
       }
     },
@@ -776,8 +776,8 @@
       },
       "properties": {
         "building_code":"RCH",
-        "utility":[],
-        "id":"237",
+        "utility":["Stairs", "Outside"],
+        "id":"237S",
         "name":""
       }
     }

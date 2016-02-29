@@ -603,6 +603,27 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
       }
     }
 
+    var mark = $scope.map.markers;
+    // Conserve the first one and reset.
+    var temp = $scope.map.markers[0];
+    $scope.map.markers = [];
+    $scope.map.markers.push(temp);
+
+    $.get('/api/graph/amenities/' + util, function(result){
+      result = JSON.parse(result);
+      $.each(result, function(idx, val){
+        mark.push({
+          id: idx,
+          coords: {
+            latitude: val._y,
+            longitude: val._x
+          },
+          name: val._id,
+          icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+        });
+      });
+    });
+
     // api call to get all graph nodes that have that utility and display them.
 
     console.log(util);

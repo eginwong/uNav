@@ -137,7 +137,7 @@ router.route('/graph/rooms')
       }
       else{
         for (var i in hold){
-          if(hold[i] != "Hallway" && hold[i] != "Entrance" && hold[i] != "Fountain" && hold[i] != "Food"){
+          if(hold[i].length == 0 || hold[i] == "Stairs"){
             rooms.push(key.substr(0,3) + " " + key.substr(3));
           }
         }
@@ -192,7 +192,7 @@ router.route('/graph/rooms/select/:id')
         }
         else{
           for (var i in hold){
-            if(hold[i] != "Hallway" && hold[i] != "Fountain" && hold[i] != "Entrance" && hold[i] != "Food"){
+            if(hold[i].length == 0 || hold[i] == "Stairs"){
               if(req.params.id =="RCH") {rooms.push(req.params.id + " " + key.substr(3));}
               else{rooms.push(req.params.id + " " + key.substr(2));}
             }
