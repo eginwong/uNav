@@ -587,7 +587,6 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
 
   $scope.chose = function(util){
     if(this.naviOn == undefined){
-      alert("First timedu");
       if ($scope.geolocationAvailable) {
         navigator.geolocation.getCurrentPosition(function (position) {
           $scope.map.center = {
@@ -603,6 +602,9 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
         });
       }
     }
+
+    // api call to get all graph nodes that have that utility and display them.
+
     console.log(util);
     $scope.naviOn = true;
     $scope.collapsed = false;
@@ -651,15 +653,15 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
     }]
   };
 
-  // $("#menu-toggle").click(function(e) {
-  //       e.preventDefault();
-  //       $("wrapper").toggleClass("active");
-  //   });
+  $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("wrapper").toggleClass("active");
+    });
 
-  // /*Scroll Spy*/
-  // $('body').scrollspy({ target: '#spy', offset:80});
+  /*Scroll Spy*/
+  $('body').scrollspy({ target: '#spy', offset:80});
 
-  // /*Smooth link animation*/
+  /*Smooth link animation*/
   // $('a[href*=#]:not([href=#])').click(function() {
   //     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
 

@@ -153,6 +153,30 @@ router.route('/graph/rooms')
   });
 })
 
+router.route('/graph/amenities/:id')
+
+.get (function(req,res){
+  var nodes = [];
+  var hold;
+  function asyncFind(_callback){
+    for (var key in g._nodes) {
+      hold = g._nodes[key]._data.utility;
+        for (var i in hold){
+          if(hold[i] == req.params.id ){
+            nodes.push(g._nodes[key]);
+          }
+        }
+    }
+    _callback();
+  }
+
+  // call first function and pass in a callback function which
+  // first function runs when it has completed
+  asyncFind(function() {
+    res.send(JSON.stringify(nodes));
+  });
+})
+
 router.route('/graph/rooms/select/:id')
 
 .get (function(req,res){
