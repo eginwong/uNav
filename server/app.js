@@ -137,7 +137,7 @@ router.route('/graph/rooms')
       }
       else{
         for (var i in hold){
-          if(hold[i] != "Hallway" && hold[i] != "Entrance" && hold[i] != "Fountain" && hold[i] != "Food"){
+          if(hold[i].length == 0 || hold[i] == "Stairs"){
             rooms.push(key.substr(0,3) + " " + key.substr(3));
           }
         }
@@ -150,6 +150,30 @@ router.route('/graph/rooms')
   // first function runs when it has completed
   asyncFind(function() {
     res.send(JSON.stringify(rooms));
+  });
+})
+
+router.route('/graph/amenities/:id')
+
+.get (function(req,res){
+  var nodes = [];
+  var hold;
+  function asyncFind(_callback){
+    for (var key in g._nodes) {
+      hold = g._nodes[key]._data.utility;
+        for (var i in hold){
+          if(hold[i] == req.params.id ){
+            nodes.push(g._nodes[key]);
+          }
+        }
+    }
+    _callback();
+  }
+
+  // call first function and pass in a callback function which
+  // first function runs when it has completed
+  asyncFind(function() {
+    res.send(JSON.stringify(nodes));
   });
 })
 
@@ -168,7 +192,7 @@ router.route('/graph/rooms/select/:id')
         }
         else{
           for (var i in hold){
-            if(hold[i] != "Hallway" && hold[i] != "Fountain" && hold[i] != "Entrance" && hold[i] != "Food"){
+            if(hold[i].length == 0 || hold[i] == "Stairs"){
               if(req.params.id =="RCH") {rooms.push(req.params.id + " " + key.substr(3));}
               else{rooms.push(req.params.id + " " + key.substr(2));}
             }

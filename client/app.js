@@ -29,7 +29,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $scope.IsHidden = true;
   var overlay;
 
-  $.get('/api/buildings', function(obj){
+  $.get('/api/buildings', function(obj){  
     $scope.masterBuildings = JSON.parse(obj);
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');
@@ -265,8 +265,8 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         }
         else if($scope.srcNode._z == 3 && $scope.build == "RCH"){
           // 3rd floor
-          swBound = new google.maps.LatLng(43.46993509880034, -80.54134957920274);
-          neBound = new google.maps.LatLng(43.47064483538184, -80.54022668584435);
+          swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
+          neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
           srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
         }
 
@@ -457,8 +457,8 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }
     else if(num == 3 && $scope.build == "RCH"){
       // 3rd floor
-      swBound = new google.maps.LatLng(43.46993509880034, -80.54134957920274);
-      neBound = new google.maps.LatLng(43.47064483538184, -80.54022668584435);
+      swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
+      neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
       srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
     }
 
@@ -584,37 +584,56 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
   });
 
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
-  .then(function (instances) {
-  })
+  .then(function () {})
 
   $scope.chose = function(util){
     if(this.naviOn == undefined){
-      alert("First timedu");
-      this.findMe();
+      if ($scope.geolocationAvailable) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          $scope.map.center = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          $scope.map.zoom = 22;
+
+          $scope.map.markers.push({
+            id: 9000,
+            coords: {latitude: position.coords.latitude, longitude: position.coords.longitude}
+          });
+        });
+      }
     }
+
+    var mark = $scope.map.markers;
+    // Conserve the first one and reset.
+    var temp = mark[0];
+    mark = [];
+    mark.push(temp);
+
+    $.get('/api/graph/amenities/' + util, function(result){
+      result = JSON.parse(result);
+      $.each(result, function(idx, val){
+        mark.push({
+          id: idx,
+          coords: {
+            latitude: val._y,
+            longitude: val._x
+          },
+          name: val._id,
+          // icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+        });
+      });
+    });
+
+    // api call to get all graph nodes that have that utility and display them.
+
     console.log(util);
     $scope.naviOn = true;
-    console.log("naviOn is: " + $scope.naviOn);
     $scope.collapsed = false;
     $timeout(function() {
       $scope.$apply();
     },0);
   }
-
-  $scope.findMe = function () {
-    if ($scope.geolocationAvailable) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        $scope.map.center = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        };
-        $scope.$apply();
-        console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude);
-        $scope.markerLat = position.coords.latitude;
-        $scope.markerLng = position.coords.longitude;
-      });
-    }
-  };
 
   $scope.mapOptions = {
     minZoom: 3,
@@ -656,15 +675,15 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
     }]
   };
 
-  // $("#menu-toggle").click(function(e) {
-  //       e.preventDefault();
-  //       $("wrapper").toggleClass("active");
-  //   });
+  $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("wrapper").toggleClass("active");
+    });
 
-  // /*Scroll Spy*/
-  // $('body').scrollspy({ target: '#spy', offset:80});
+  /*Scroll Spy*/
+  $('body').scrollspy({ target: '#spy', offset:80});
 
-  // /*Smooth link animation*/
+  /*Smooth link animation*/
   // $('a[href*=#]:not([href=#])').click(function() {
   //     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
 
