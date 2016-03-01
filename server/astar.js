@@ -111,11 +111,12 @@ module.exports = {
       }
       else{
         var resultArray = [];
+        var dist = 0;
         for (var i = 0; i < path.length; i++){
           resultArray.push({id: path[i]._id, latitude: path[i]._y, longitude : path[i]._x});
-          if(i == path.length - 1){
-            var lat1 = path[0]._y;
-            var lon1 = path[0]._x;
+          if(i != 0){
+            var lat1 = path[i-1]._y;
+            var lon1 = path[i-1]._x;
             var lat2 = path[i]._y;
             var lon2 = path[i]._x;
             var R = 6378.137; // Radius of earth in KM
@@ -124,9 +125,10 @@ module.exports = {
             var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             var d = R * c * 1000;
-            resultArray.push({dist: d});
+            dist+= d;
           }
         }
+        resultArray.push({dist: dist});
         fin = resultArray;
         return fin;
       }
