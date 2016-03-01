@@ -20,11 +20,11 @@
             <b><span class="">Amenities</span></b>
           </li> -->
           <li>
-            <a ng-click='chose("WC")' data-scroll>
+            <button ng-click='chose("WC")' data-scroll ng-disabled='{{util}} == "WC"'>
               <span class="">Washrooms</span>
-              <i class="fa fa-2x fa fa-female wow text-primary"></i>
-              <i class="fa fa-2x fa fa-male wow text-primary"></i>
-            </a>
+              <i class="fa fa-2x fa-female wow text-primary"></i>
+              <i class="fa fa-2x fa-male wow text-primary"></i>
+            </button>
           </li>
           <li>
             <a ng-click='chose("Food")' data-scroll>
