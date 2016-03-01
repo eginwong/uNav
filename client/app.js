@@ -589,7 +589,7 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
           $scope.map.markers.push({
             id: 9000,
             coords: {latitude: position.coords.latitude, longitude: position.coords.longitude},
-            icon: {url: 'http://www.iconsdb.com/icons/preview/caribbean-blue/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
+            icon: {url: 'http://www.wongwatch.com/images/icons/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
             options: {animation: google.maps.Animation.BOUNCE}
           });
           resolve();
