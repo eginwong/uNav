@@ -29,7 +29,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $scope.IsHidden = true;
   var overlay;
 
-  $.get('/api/buildings', function(obj){  
+  $.get('/api/buildings', function(obj){
     $scope.masterBuildings = JSON.parse(obj);
     $.each($scope.masterBuildings, function (idx, val) {
       $("#buildingsInUW").append('<option value="' + idx + '">' + idx + ' - ' + val.name + '</option>');

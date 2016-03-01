@@ -37,7 +37,6 @@
 <div id="searchWrapperOuter">
 
       <div class="resizeMap" id="searchWrapper">
-      <h2 ng-show="distance > 0">The distance is: {{distance}} meters.</h2>
         <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
           <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
           <div ng-non-bindable>
@@ -47,15 +46,27 @@
       </ui-gmap-google-map>
     </div>
 
-      <div ng-hide="IsHidden" class="roomDetails" ng-show="one">
+      <div ng-hide="IsHidden" class="roomDetails" id="roomSideBar">
+
           <!-- Maybe add a toggle close here -->
-          <div ng-hide="IsHidden" class="room1Details">
-            <p> Location 1 Details: <br>{{src}}</p>
-            <p id=l1Details></p>
+          <div ng-hide="IsHidden" class="room1Details" ng-show="one">
+            <h2 ng-show="distance > 0">Time: {{distance}} meters.</h2>
+            <hr>
+            <br>
+            <center><p> Location 1 Details:</p></center>
+            <br>
+            <center><p>{{src}}</p></center>
+            <br>
+            <center><p id=l1Details></p></center>
+            <hr>
           </div>
           <div ng-hide="IsHidden" class="room2Details" ng-show="two">
-            <p> Location 2 Details: <br>{{dest}}</p>
-            <p id=l2Details></p>
+            <br>
+            <center><p class="infol2"> Location 2 Details:</p></center>
+            <br>
+            <center><p>{{dest}}</p></center>
+            <br>
+            <center><p id=l2Details></p></center>
           </div>
       </div>
   </div>
