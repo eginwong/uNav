@@ -38,7 +38,7 @@
 
       <div class="resizeMap" id="searchWrapper">
         <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
-          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
+          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options">
           <div ng-non-bindable>
           <ui-gmap-window id="marker-{{$index}}" options="windowOptions" closeClick="closeClick()"></ui-gmap-window>
           </div>
