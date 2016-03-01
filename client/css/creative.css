@@ -128,7 +128,14 @@ div label {
   width: 200px;
 }
 .search {
-  width: 430px;
+  width: 360px;
+}
+.search2 {
+  width: 100%;
+}
+.chosen-select{
+  width: 100%;
+  height: 100%;
 }
 .navdiv {
   background-color: rgba(44, 62, 80, 0.80);
@@ -143,7 +150,7 @@ div label {
 }
 .aboutus h1{
   padding-top: 40px;
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 0;
 }
 .aboutus h2{
@@ -153,15 +160,18 @@ div label {
 }
 .aboutus h3{
   padding-top: 20px;
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 0;
 }
 .aboutus h4{
-  padding-top: 5px;
+  padding-top: 0px;
   font-size: 18px;
   margin-top: 0;
 }
 .aboutus p{
+  font-size: 13px;
+}
+.aboutus hr{
   font-size: 13px;
 }
 .contactTitle p{
@@ -170,6 +180,11 @@ div label {
 .contactTitle h2{
   padding-top: 20px;
   font-size: 18px;
+  margin-top: 0;
+}
+.contactTitle h3{
+  padding-top: 20px;
+  font-size: 20px;
   margin-top: 0;
 }
 .input p{
