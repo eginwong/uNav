@@ -65,6 +65,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $scope.showSelect = false;
 
     if($scope.build == "RCH"){
+      $scope.floorNum = 2;
       $scope.map.zoom = 20;
       // 2nd floor
       var swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
@@ -158,20 +159,23 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   });
 
   $scope.restart = function(){
+    $scope.floor(2);
     if($scope.flightPath != undefined){
       $.each($scope.flightPath, function(i){
         $scope.flightPath[i].setMap(null);
       });
-      $scope.distance = null;
+      $scope.distance = undefined;
     }
     $scope.build = undefined;
     $scope.IsHidden = false;
     $scope.ShowHide(true);
     $("#l1Details").empty();
     $("#l2Details").empty();
-    $scope.src = null;
-    $scope.dest = null;
-    $scope.floor(2);
+    $scope.src = undefined;
+    $scope.dest = undefined;
+    $scope.srcNode = undefined;
+    $scope.destNode = undefined;
+    $scope.waypts = undefined;
     $scope.overlay.setMap(null);
     $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
     $scope.map.zoom = 16;
@@ -186,15 +190,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     plot("src").then(function(resp){
       if(resp._data.utility.length <= 0){$("#l1Details").text("Room");}
       else {$("#l1Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+      if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
+        getPath($scope.src, $scope.dest).then(function(floorNum){
+          drawDirections(floorNum);
+        });
+      }
     });
-    // if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-    //   getPath($scope.src, $scope.dest).then(function(floorNum){
-    //     console.log($scope.waypts);
-    //     listDirections(floorNum).then(function(lineFloor){
-    //       console.log(lineFloor);
-    //     });
-    //   });
-    // }
   });
 
   $( "#roomDest" ).change(function() {
@@ -235,6 +236,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     return $q(function(resolve){
       var map = $scope.map;
       var mark = $scope.map.markers;
+      var options = {};
       if (node == "src"){
         RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
           $scope.srcNode = result;
@@ -251,81 +253,10 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
               longitude: $scope.srcNode._x
             },
             name: $scope.src,
+            options: options,
             icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
           });
-          var swBound; var neBound; var srcImage;
-          if($scope.srcNode._z == 1 && $scope.build == "RCH"){
-            // 1st floor
-            swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
-            neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
-            srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
-          }
-          else if($scope.srcNode._z == 2 && $scope.build == "RCH"){
-            // 2nd floor
-            swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
-            neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
-            srcImage = 'images/Waterloo Floor Plans/RCH2_CAD.png';
-          }
-          else if($scope.srcNode._z == 3 && $scope.build == "RCH"){
-            // 3rd floor
-            swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
-            neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
-            srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
-          }
-
-          var bounds = new google.maps.LatLngBounds(swBound, neBound);
-
-          DebugOverlay.prototype = new google.maps.OverlayView();
-          $scope.overlay.setMap(null);
-          $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
-
-          //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
-          function DebugOverlay(bounds, image, map) {
-            this.bounds_ = bounds;
-            this.image_ = image;
-            this.map_ = map;
-            this.div_ = null;
-            this.setMap(map.control.getGMap());
-          }
-
-          DebugOverlay.prototype.onAdd = function() {
-
-            var div = document.createElement('div');
-            div.style.borderStyle = 'none';
-            div.style.borderWidth = '0px';
-            div.style.position = 'absolute';
-            var img = document.createElement('img');
-            img.src = this.image_;
-            img.style.width = '100%';
-            img.style.height = '100%';
-            img.style.opacity = '0.95';
-            img.style.position = 'absolute';
-            div.appendChild(img);
-            this.div_ = div;
-            var panes = this.getPanes();
-            panes.overlayLayer.appendChild(div);
-          };
-
-          DebugOverlay.prototype.draw = function() {
-            var overlayProjection = this.getProjection();
-            var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
-            var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
-            var div = this.div_;
-            div.style.left = sw.x + 'px';
-            div.style.top = ne.y + 'px';
-            div.style.width = (ne.x - sw.x) + 'px';
-            div.style.height = (sw.y - ne.y) + 'px';
-          };
-
-          DebugOverlay.prototype.updateBounds = function(bounds){
-            this.bounds_ = bounds;
-            this.draw();
-          };
-
-          DebugOverlay.prototype.onRemove = function() {
-            this.div_.parentNode.removeChild(this.div_);
-            this.div_ = null;
-          };
+          $scope.floor($scope.srcNode._z);
           resolve($scope.srcNode);
         })
       }
@@ -338,6 +269,9 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
               break;
             }
           }
+          if ($scope.destNode != $scope.floorNum){
+            options = {'opacity':0.6};
+          }
           // http://uxrepo.com/static/icon-sets/font-awesome/svg/circle-empty.svg
           mark.push({
             id: 1,
@@ -345,8 +279,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
               latitude: $scope.destNode._y,
               longitude: $scope.destNode._x
             },
-            name: $scope.dest
+            name: $scope.dest,
+            options: options
           });
+          if($scope.srcNode != undefined){
+            $scope.floor($scope.srcNode._z);
+          }
           resolve($scope.destNode);
         })
       }
@@ -396,55 +334,51 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   };
 
   var drawDirections = function(floor){
-    if($scope.flightPath != undefined){
-      $.each($scope.flightPath, function(i){
-        $scope.flightPath[i].setMap(null);
-      });
-    }
-    $scope.flightPath = [];
-    var path;
-    for (var i in $scope.waypts) {
-      path = $scope.waypts[i].path;
-      if($scope.waypts[i].alt == floor){
-        var lineSymbol = {
-          path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-          strokeOpacity: 1,
-          scale: 1.5
-        };
+    return $q(function(resolve){
+      if($scope.flightPath != undefined){
+        $.each($scope.flightPath, function(i){
+          $scope.flightPath[i].setMap(null);
+        });
       }
-      else{
-        var lineSymbol = {
-          path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-          strokeOpacity: 0.4,
-          scale: 1.5
-        };
+      $scope.flightPath = [];
+      var path;
+      for (var i in $scope.waypts) {
+        path = $scope.waypts[i].path;
+        if($scope.waypts[i].alt == floor){
+          var lineSymbol = {
+            path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+            strokeOpacity: 1,
+            scale: 1.5
+          };
+        }
+        else{
+          var lineSymbol = {
+            path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+            strokeOpacity: 0.4,
+            scale: 1.5
+          };
+        }
+        // in order to have continuity from the last point.
+        if(i > 0){
+          path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
+        }
+        $scope.flightPath.push(new google.maps.Polyline({
+          map: $scope.map.control.getGMap(),
+          icons: [{
+            icon: lineSymbol,
+            offset: '50%',
+            repeat: '10px'
+          }],
+          path: path,
+          strokeOpacity: 0,
+          strokeColor: '#FF0000',
+        }));
+        if(floor == $scope.waypts[i].alt){
+          animateLine($scope.flightPath[i]);
+        }
       }
-      // in order to have continuity from the last point.
-      if(i > 0){
-        path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
-      }
-      $scope.flightPath.push(new google.maps.Polyline({
-        map: $scope.map.control.getGMap(),
-        icons: [{
-          icon: lineSymbol,
-          offset: '50%',
-          repeat: '10px'
-        }],
-        path: path,
-        strokeOpacity: 0,
-        strokeColor: '#FF0000',
-      }));
-      animateLine($scope.flightPath[0]);
-
-      if($scope.waypts[0].alt != floor){
-        console.log("beep");
-        if($scope.srcNode._z != floor){$scope.map.markers[0].options = {'opacity': 0.6};}
-        else{$scope.map.markers[0].options = {'opacity': 1.0}}
-        if($scope.destNode._z != floor){$scope.map.markers[1].options = {'opacity': 0.6};}
-        else{$scope.map.markers[1].options = {'opacity': 1.0}}
-        clearInterval($scope.flashingAnima);
-      }
-    }
+      resolve();
+    })
   }
 
   var animateLine = function(line){
@@ -495,6 +429,20 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     DebugOverlay.prototype = new google.maps.OverlayView();
     $scope.overlay.setMap(null);
     $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+
+    if($scope.srcNode != undefined){
+      if($scope.srcNode._z != num){$scope.map.markers[0].options = {'opacity': 0.6};}
+      else{$scope.map.markers[0].options = {'opacity': 1.0}}
+    }
+    if($scope.destNode != undefined){
+      if($scope.destNode._z != num){$scope.map.markers[1].options = {'opacity': 0.6};}
+      else{$scope.map.markers[1].options = {'opacity': 1.0}}
+    }
+    if($scope.waypts != undefined){
+      if($scope.waypts[0].alt != num){
+        clearInterval($scope.flashingAnima);
+      }
+    }
     drawDirections(num);
 
     //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
