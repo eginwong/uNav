@@ -543,24 +543,23 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
 });
 
-uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapIsReady) {
-  // $scope.geolocationAvailable = navigator.geolocation ? true : false;
+uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScroll, $location, uiGmapIsReady) {
+  $scope.geolocationAvailable = navigator.geolocation ? true : false;
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function () {
-    $scope.map = {
-      center: {
-        latitude: 43.4722854,
-        longitude: -80.5448576
-      },
-      zoom: 16,
-      pan: 1,
-      options: $scope.mapOptions,
-      markers: [],
-      events: {},
-      control: {}
-    }
+    // $scope.map = {
+    //   center: {
+    //     latitude: 43.4722854,
+    //     longitude: -80.5448576
+    //   },
+    //   zoom: 16,
+    //   pan: 1,
+    //   options: $scope.mapOptions,
+    //   markers: [],
+    //   events: {},
+    //   control: {}
+    // }
   })
-  $scope.geolocationAvailable = false;
 
   $scope.scrollTo=function(id){
     $location.hash(id);
@@ -570,53 +569,66 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
   $scope.chose = function(util){
     var temp = {};
     var mark = $scope.map.markers;
-    google.maps.event.trigger($scope.map, "resize");
-    if(this.naviOn == undefined){
-      // if ($scope.geolocationAvailable) {
-      //   navigator.geolocation.getCurrentPosition(function (position) {
-      //     $scope.map.center = {
-      //       latitude: position.coords.latitude,
-      //       longitude: position.coords.longitude
-      //     };
-      //     $scope.map.zoom = 22;
-      //
-      //     mark.push({
-      //       id: 9000,
-      //       coords: {latitude: position.coords.latitude, longitude: position.coords.longitude}
-      //     });
-      //   });
-      // }
-    }
-
-    // api call to get all graph nodes that have that utility and display them.
-    $.get('/api/graph/amenities/' + util, function(result){
-      result = JSON.parse(result);
+    if($scope.naviOn == undefined){
       mark = [];
-      // if(util == "WC")
-      //   if(util == "Food")
-      //     if(util == "Access")
-      //     if(util == "Fountain")
-      //     if(util == "Stairs")
-      //     if(util == "Elevator")
-      $.each(result, function(idx, val){
-        mark.push({
-          id: idx,
-          coords: {
-            latitude: val._y,
-            longitude: val._x
-          },
-          name: val._id
-          // icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
-        });
-      });
-      $scope.naviOn = true;
-      $scope.collapsed = false;
-      $timeout(function() {
-        console.log(mark);
-        $scope.$apply();
-      },0);
-    });
+      geoLocate().then(loadMarkers(util).then(function(){
+        $scope.naviOn = true;
+        $scope.collapsed = false;
+        $timeout(function() {
+          $scope.$apply();
+        },0);
+      }))
+    }
   };
+
+  var geoLocate = function(){
+    return $q(function(resolve){
+      if ($scope.geolocationAvailable) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          $scope.map.center = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          $scope.map.zoom = 19;
+
+          $scope.map.markers.push({
+            id: 9000,
+            coords: {latitude: position.coords.latitude, longitude: position.coords.longitude},
+            icon: {url: 'http://www.iconsdb.com/icons/preview/caribbean-blue/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
+            options: {animation: google.maps.Animation.BOUNCE}
+          });
+          resolve();
+        });
+      }
+    })
+  }
+
+// Add Async over here to load later
+  var loadMarkers = function(util){
+    return $q(function(resolve){
+      $.get('/api/graph/amenities/' + util, function(result){
+        $scope.map.markers = [];
+        // if(util == "WC")
+        //   if(util == "Food")
+        //     if(util == "Access")
+        //     if(util == "Fountain")
+        //     if(util == "Stairs")
+        //     if(util == "Elevator")
+        $.each(JSON.parse(result), function(idx, val){
+          $scope.map.markers.push({
+            id: idx,
+            coords: {
+              latitude: val._y,
+              longitude: val._x
+            },
+            name: val._id
+            // icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+          });
+        });
+        resolve();
+      });
+    })
+  }
 
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
