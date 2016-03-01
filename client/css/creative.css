@@ -63,18 +63,11 @@ div label {
   padding-bottom: 0px;
   height: 40px;
 }
-.hidesymbol {
-    display: inline-block;
-    width: 100px;
-    height: 10px;
-    z-index: 1000;
-    position: fixed;
-    right: 250px;
-    margin-right: -300px;
-    overflow-y: fixed;
-    background: transparent;
-    padding-top: 100px;
-  }
+.hidesymbol{
+  height: 100%;
+  width: 100%;
+  border-width: 0;
+}
 .box{
   display: inline-block;
   width: 750px;
@@ -137,9 +130,6 @@ div label {
 .search {
   width: 430px;
 }
-.infol1{
-  opacity: 1;
-}
 .navdiv {
   background-color: rgba(44, 62, 80, 0.80);
   padding-bottom: 0px;
@@ -147,6 +137,9 @@ div label {
 }
 .container{
   padding-bottom: 40px;
+}
+.container h1{
+  font-size: 24px;
 }
 .aboutus h1{
   padding-top: 40px;
@@ -299,6 +292,7 @@ aside {
 }
 .ng-scope{
   padding: 0px;
+
 }
 #full-screen-background-image {
   z-index: -999;
@@ -625,6 +619,7 @@ body {
     transition: all 0.5s ease;
 }
 
+
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 
@@ -647,6 +642,7 @@ body {
     position: absolute;
     top: 0;
     width: 250px;
+
     margin: 0;
     padding: 0;
     list-style: none;
