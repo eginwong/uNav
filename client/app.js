@@ -556,6 +556,7 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function () {
+    $scope.map.zoom = 19;
   })
 
   $scope.scrollTo=function(id){
@@ -568,21 +569,22 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
     var temp = {};
     var mark = $scope.map.markers;
     mark = [];
-    geoLocate().then(loadMarkers(util).then(function(){
+    geoLocate($scope.naviOn).then(loadMarkers(util).then(function(){
       $scope.naviOn = true;
       $scope.collapsed = true;
     }));
   };
 
-  var geoLocate = function(){
+  var geoLocate = function(navi){
     return $q(function(resolve){
       if ($scope.geolocationAvailable) {
         navigator.geolocation.getCurrentPosition(function (position) {
-          $scope.map.center = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-          $scope.map.zoom = 18;
+          if(navi == undefined){
+            $scope.map.center = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            };
+          }
 
           $scope.map.markers.push({
             id: 9000,
@@ -601,28 +603,27 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
     return $q(function(resolve){
       $.get('/api/graph/amenities/' + util, function(result){
         $scope.map.markers = [];
-        // var icon;
-        //
-        // switch (util) {
-        //   case "WC":
-        //     icon = {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)};
-        //     break;
-        //   case "Food":
-        //     icon = "Monicon";
-        //     break;
-        //   case "Access":
-        //     icon = "Tuesicon";
-        //     break;
-        //   case "Fountain":
-        //     icon = "Wednesicon";
-        //     break;
-        //   case "Stairs":
-        //     icon = "Thursicon";
-        //     break;
-        //   case "Elevator":
-        //     icon = "Friicon";
-        //     break;
-        // }
+        var labelContent = {};
+        switch (util) {
+          case "WC":
+            labelContent = '<i class="fa fa-2x fa-female text-primary"></i><i class="fa fa-2x fa-male text-primary"></i>';
+            break;
+          case "Food":
+            labelContent = '<i class="fa fa-2x fa-coffee text-primary"></i>';
+            break;
+          case "Access":
+            labelContent = '<i class="fa fa-2x fa-wheelchair text-primary"></i>';
+            break;
+          case "Fountain":
+            labelContent = '<i class="fa fa-2x fa fa-tint text-primary"></i>';
+            break;
+          case "Stairs":
+            labelContent = '<i class="fa fa-2x fa-sort-amount-asc text-primary"></i>';
+            break;
+          case "Elevator":
+            labelContent = '<i class="fa fa-2x fa-toggle-down text-primary"></i>';
+            break;
+        }
         $.each(JSON.parse(result), function(idx, val){
           $scope.map.markers.push({
             id: idx,
@@ -630,8 +631,9 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
               latitude: val._y,
               longitude: val._x
             },
-            name: val._id
-            // icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+            name: val._id,
+            icon: {url: 'http://www.netdotart.com/statebirds/transparent.gif', scaledSize: new google.maps.Size(0,0)},
+            options: {labelContent: labelContent}
           });
         });
         resolve();
