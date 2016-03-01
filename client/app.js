@@ -556,18 +556,6 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function () {
-    // $scope.map = {
-    //   center: {
-    //     latitude: 43.4722854,
-    //     longitude: -80.5448576
-    //   },
-    //   zoom: 16,
-    //   pan: 1,
-    //   options: $scope.mapOptions,
-    //   markers: [],
-    //   events: {},
-    //   control: {}
-    // }
   })
 
   $scope.scrollTo=function(id){
