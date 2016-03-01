@@ -366,7 +366,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           map: $scope.map.control.getGMap(),
           icons: [{
             icon: lineSymbol,
-            offset: '50%',
+            offset: '100%',
             repeat: '10px'
           }],
           path: path,
@@ -388,7 +388,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         count = (count + 1) % 200;
         // Always animate the flightPath for the one that you're on.
         var icons = line.get('icons');
-        icons[0].offset = (count * 2) + '%';
+        icons[0].offset = (count / 2) + '%';
         line.set('icons', icons);
       }, 80);
       resolve();
