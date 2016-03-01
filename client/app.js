@@ -37,8 +37,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     $("#buildingsInUW").chosen({ width: "95%" });
   });
 
-  // Anuja: divs that should be added to the search partial
-
   //This will hide the DIV by default.
   $scope.ShowHide = function (force) {
     //If DIV is hidden it will be visible and vice versa.
@@ -183,31 +181,26 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     // $("#searchButton").attr('value','Expand');
     // $scope.ShowHide(false);
     $scope.src = $("#roomSrc option:selected").val();
-    $scope.plot("src");
+    plot("src").then(function(resp){
+      if(resp._data.utility.length <= 0){$("#l1Details").text("Room");}
+      else {$("#l1Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+    });
     getPath($scope.src, $scope.dest).then(function(){
       if($scope.waypts != undefined) {drawDirections();}
-    })
-    $("#l1Details").text("Room");
-    // Async problem, use promises!
-    // if($scope.srcNode._data.utility.length < 0){
-    //   $("#l1Details").text("Room");
-    // }
-    // else {
-    //   $("#l1Details").text($scope.srcNode._data.utility);
-    // }
+    });
   });
 
   $( "#roomDest" ).change(function() {
     // $("#searchButton").attr('value','Expand');
     // $scope.ShowHide(false);
     $scope.dest = $("#roomDest option:selected").val();
-    $scope.plot("dest");
+    plot("dest").then(function(resp){
+      if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
+      else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+    });
     getPath($scope.src, $scope.dest).then(function(){
       if($scope.waypts != undefined) {drawDirections();}
     })
-    $("#l2Details").text("Room");
-
-    // Async problem, use promises!
   });
 
   uiGmapGoogleMapApi.then(function (maps) {
@@ -229,123 +222,128 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     visible: false,
   };
 
-  $scope.plot = function (node) {
-    var map = $scope.map;
-    var mark = $scope.map.markers;
-    if (node == "src"){
-      RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
-        $scope.srcNode = result;
-        for(var i = 0; i < mark.length; i++) {
-          if (mark[i].id == 0) {
-            mark.splice(i, 1);
-            break;
+  var plot = function(node) {
+    return $q(function(resolve){
+      var map = $scope.map;
+      var mark = $scope.map.markers;
+      if (node == "src"){
+        RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
+          $scope.srcNode = result;
+          for(var i = 0; i < mark.length; i++) {
+            if (mark[i].id == 0) {
+              mark.splice(i, 1);
+              break;
+            }
           }
-        }
-        mark.push({
-          id: 0,
-          coords: {
-            latitude: $scope.srcNode._y,
-            longitude: $scope.srcNode._x
-          },
-          name: $scope.src,
-          icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
-        });
-        var swBound; var neBound; var srcImage;
-        if($scope.srcNode._z == 1 && $scope.build == "RCH"){
-          // 1st floor
-          swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
-          neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
-          srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
-        }
-        else if($scope.srcNode._z == 2 && $scope.build == "RCH"){
-          // 2nd floor
-          swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
-          neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
-          srcImage = 'images/Waterloo Floor Plans/RCH2_CAD.png';
-        }
-        else if($scope.srcNode._z == 3 && $scope.build == "RCH"){
-          // 3rd floor
-          swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
-          neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
-          srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
-        }
-
-        var bounds = new google.maps.LatLngBounds(swBound, neBound);
-
-        DebugOverlay.prototype = new google.maps.OverlayView();
-        $scope.overlay.setMap(null);
-        $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
-
-        //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
-        function DebugOverlay(bounds, image, map) {
-          this.bounds_ = bounds;
-          this.image_ = image;
-          this.map_ = map;
-          this.div_ = null;
-          this.setMap(map.control.getGMap());
-        }
-
-        DebugOverlay.prototype.onAdd = function() {
-
-          var div = document.createElement('div');
-          div.style.borderStyle = 'none';
-          div.style.borderWidth = '0px';
-          div.style.position = 'absolute';
-          var img = document.createElement('img');
-          img.src = this.image_;
-          img.style.width = '100%';
-          img.style.height = '100%';
-          img.style.opacity = '0.95';
-          img.style.position = 'absolute';
-          div.appendChild(img);
-          this.div_ = div;
-          var panes = this.getPanes();
-          panes.overlayLayer.appendChild(div);
-        };
-
-        DebugOverlay.prototype.draw = function() {
-          var overlayProjection = this.getProjection();
-          var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
-          var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
-          var div = this.div_;
-          div.style.left = sw.x + 'px';
-          div.style.top = ne.y + 'px';
-          div.style.width = (ne.x - sw.x) + 'px';
-          div.style.height = (sw.y - ne.y) + 'px';
-        };
-
-        DebugOverlay.prototype.updateBounds = function(bounds){
-          this.bounds_ = bounds;
-          this.draw();
-        };
-
-        DebugOverlay.prototype.onRemove = function() {
-          this.div_.parentNode.removeChild(this.div_);
-          this.div_ = null;
-        };
-      })
-    }
-    else if (node == "dest") {
-      RoomService.getID($scope.dest.replace(/\s+/g, '')).then(function(result){
-        $scope.destNode = result;
-        for(var i = 0; i < mark.length; i++) {
-          if (mark[i].id == 1) {
-            mark.splice(i, 1);
-            break;
+          mark.push({
+            id: 0,
+            coords: {
+              latitude: $scope.srcNode._y,
+              longitude: $scope.srcNode._x
+            },
+            name: $scope.src,
+            icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
+          });
+          var swBound; var neBound; var srcImage;
+          if($scope.srcNode._z == 1 && $scope.build == "RCH"){
+            // 1st floor
+            swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
+            neBound = new google.maps.LatLng(43.47064580865753, -80.540254849039);
+            srcImage = 'images/Waterloo Floor Plans/RCH1_CAD.png';
           }
-        }
-        // http://uxrepo.com/static/icon-sets/font-awesome/svg/circle-empty.svg
-        mark.push({
-          id: 1,
-          coords: {
-            latitude: $scope.destNode._y,
-            longitude: $scope.destNode._x
-          },
-          name: $scope.dest
-        });
-      })
-    }
-  }
+          else if($scope.srcNode._z == 2 && $scope.build == "RCH"){
+            // 2nd floor
+            swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
+            neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
+            srcImage = 'images/Waterloo Floor Plans/RCH2_CAD.png';
+          }
+          else if($scope.srcNode._z == 3 && $scope.build == "RCH"){
+            // 3rd floor
+            swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
+            neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
+            srcImage = 'images/Waterloo Floor Plans/RCH3_CAD.png';
+          }
+
+          var bounds = new google.maps.LatLngBounds(swBound, neBound);
+
+          DebugOverlay.prototype = new google.maps.OverlayView();
+          $scope.overlay.setMap(null);
+          $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+          console.log($scope.srcNode);
+
+          //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
+          function DebugOverlay(bounds, image, map) {
+            this.bounds_ = bounds;
+            this.image_ = image;
+            this.map_ = map;
+            this.div_ = null;
+            this.setMap(map.control.getGMap());
+          }
+
+          DebugOverlay.prototype.onAdd = function() {
+
+            var div = document.createElement('div');
+            div.style.borderStyle = 'none';
+            div.style.borderWidth = '0px';
+            div.style.position = 'absolute';
+            var img = document.createElement('img');
+            img.src = this.image_;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.opacity = '0.95';
+            img.style.position = 'absolute';
+            div.appendChild(img);
+            this.div_ = div;
+            var panes = this.getPanes();
+            panes.overlayLayer.appendChild(div);
+          };
+
+          DebugOverlay.prototype.draw = function() {
+            var overlayProjection = this.getProjection();
+            var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+            var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+            var div = this.div_;
+            div.style.left = sw.x + 'px';
+            div.style.top = ne.y + 'px';
+            div.style.width = (ne.x - sw.x) + 'px';
+            div.style.height = (sw.y - ne.y) + 'px';
+          };
+
+          DebugOverlay.prototype.updateBounds = function(bounds){
+            this.bounds_ = bounds;
+            this.draw();
+          };
+
+          DebugOverlay.prototype.onRemove = function() {
+            this.div_.parentNode.removeChild(this.div_);
+            this.div_ = null;
+          };
+          resolve(result);
+        })
+      }
+      else if (node == "dest") {
+        RoomService.getID($scope.dest.replace(/\s+/g, '')).then(function(result){
+          $scope.destNode = result;
+          for(var i = 0; i < mark.length; i++) {
+            if (mark[i].id == 1) {
+              mark.splice(i, 1);
+              break;
+            }
+          }
+          // http://uxrepo.com/static/icon-sets/font-awesome/svg/circle-empty.svg
+          mark.push({
+            id: 1,
+            coords: {
+              latitude: $scope.destNode._y,
+              longitude: $scope.destNode._x
+            },
+            name: $scope.dest
+          });
+          resolve($scope.destNode);
+        })
+      }
+    })
+  };
 
   $scope.animateCircle = function(line) {
     var count = 0;
@@ -370,7 +368,8 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
           var leng = obj.length;
           $.each(obj, function (idx, val) {
             if(idx == (leng-1)) {
-              $scope.distance = val.dist.toFixed(2);
+              // https://en.wikipedia.org/wiki/Preferred_walking_speed to convert to time.
+              $scope.distance = (val.dist / 1.4).toFixed(2);
             }
             else{
               $scope.waypts.push({lat: val.latitude, lng: val.longitude, id: val.id});
@@ -380,7 +379,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         })
       }
     })
-
   }
 
   var drawDirections = function(){
@@ -421,21 +419,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function (instances) {
   })
-
-  // $scope.findMe = function () {
-  //   if ($scope.geolocationAvailable) {
-  //     navigator.geolocation.getCurrentPosition(function (position) {
-  //       $scope.map.center = {
-  //         latitude: position.coords.latitude,
-  //         longitude: position.coords.longitude
-  //       };
-  //       $scope.$apply();
-  //       console.log('Found You: ' + position.coords.latitude + ' || ' + position.coords.longitude + position.coords.altitude);
-  //       $scope.markerLat = position.coords.latitude;
-  //       $scope.markerLng = position.coords.longitude;
-  //     });
-  //   }
-  // };
 
   $scope.floor = function(num){
     var swBound; var neBound; var srcImage;
