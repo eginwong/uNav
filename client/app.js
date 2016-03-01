@@ -587,6 +587,8 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
   .then(function () {})
 
   $scope.chose = function(util){
+    var temp = {};
+    var mark = $scope.map.markers;
     if(this.naviOn == undefined){
       if ($scope.geolocationAvailable) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -596,22 +598,28 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
           };
           $scope.map.zoom = 22;
 
-          $scope.map.markers.push({
+          mark.push({
             id: 9000,
             coords: {latitude: position.coords.latitude, longitude: position.coords.longitude}
           });
+
+          console.log(mark[0]);
+          temp = {id: mark[0].id, coords: mark[0].coords};
+          console.log (temp);
         });
       }
     }
 
-    var mark = $scope.map.markers;
-    // Conserve the first one and reset.
-    var temp = mark[0];
-    mark = [];
-    mark.push(temp);
-
+    // api call to get all graph nodes that have that utility and display them.
     $.get('/api/graph/amenities/' + util, function(result){
       result = JSON.parse(result);
+      mark = [];
+      // if(util == "WC")
+      //   if(util == "Food")
+      //     if(util == "Access")
+      //     if(util == "Fountain")
+      //     if(util == "Stairs")
+      //     if(util == "Elevator")
       $.each(result, function(idx, val){
         mark.push({
           id: idx,
@@ -623,9 +631,7 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
           // icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
         });
       });
-    });
-
-    // api call to get all graph nodes that have that utility and display them.
+      console.log(mark);
 
     console.log(util);
     $scope.naviOn = true;
@@ -633,7 +639,8 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
     $timeout(function() {
       $scope.$apply();
     },0);
-  }
+    });
+  };
 
   $scope.mapOptions = {
     minZoom: 3,
