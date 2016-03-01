@@ -22,9 +22,75 @@ $(document).on('click.nav','.navbar-collapse.in',function(e) {
   }
 });
 
-uNav.controller('mainController', function($scope) {});
+uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsReady) {
+  // uiGmapGoogleMapApi is a promise.
+  // The "then" callback function provides the google.maps object.
+  uiGmapGoogleMapApi.then(function (maps) {
+    $scope.map = {
+      center: {
+        latitude: 43.4722854,
+        longitude: -80.5448576
+      },
+      zoom: 16,
+      pan: 1,
+      options: $scope.mapOptions,
+      markers: [],
+      events: {},
+      control: {}
+    }
+  });
 
-uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapGoogleMapApi, uiGmapIsReady) {
+  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
+  .then(function (instances) {
+  })
+
+  $scope.mapOptions = {
+    minZoom: 3,
+    zoomControl: false,
+    draggable: true,
+    navigationControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    disableDoubleClickZoom: false,
+    keyboardShortcuts: true,
+    markers: {
+      selected: {}
+    },
+    styles: [{
+      stylers: [
+        { hue: "#00ffe6" },
+        { saturation: -20 }
+      ]
+    },{
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },{
+      featureType: "buildings",
+      elementType: "labels.text",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }]
+  };
+
+  $scope.windowOptions = {
+    visible: false,
+  };
+
+});
+
+uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady) {
   $scope.showSelect = true;
   $scope.IsHidden = true;
   var overlay;
@@ -41,9 +107,15 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   $scope.ShowHide = function (force) {
     //If DIV is hidden it will be visible and vice versa.
     var inputValue=$("#searchButton").attr('value');
-    if(force){
-      inputValue = "Reduce";
+    if(force == "found"){
+      inputValue = "Expand";
+      $scope.IsHidden = true;
     }
+    else if(force == "reset"){
+      inputValue = "Reduce";
+      $scope.IsHidden = false;
+    }
+    else{}
 
     if(inputValue=="Expand")
     {
@@ -184,13 +256,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   }
 
   $( "#roomSrc" ).change(function() {
-    // $("#searchButton").attr('value','Expand');
-    // $scope.ShowHide(false);
     $scope.src = $("#roomSrc option:selected").val();
     plot("src").then(function(resp){
       if(resp._data.utility.length <= 0){$("#l1Details").text("Room");}
       else {$("#l1Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
+        $scope.ShowHide("found");
         getPath($scope.src, $scope.dest).then(function(floorNum){
           drawDirections(floorNum);
         });
@@ -199,38 +270,18 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
   });
 
   $( "#roomDest" ).change(function() {
-    // $("#searchButton").attr('value','Expand');
-    // $scope.ShowHide(false);
     $scope.dest = $("#roomDest option:selected").val();
     plot("dest").then(function(resp){
       if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
       else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
+        $scope.ShowHide("found");
         getPath($scope.src, $scope.dest).then(function(floorNum){
           drawDirections(floorNum);
         });
       }
     });
   })
-
-  uiGmapGoogleMapApi.then(function (maps) {
-    $scope.map = {
-      center: {
-        latitude: 43.4722854,
-        longitude: -80.5448576
-      },
-      zoom: 16,
-      pan: 1,
-      options: $scope.mapOptions,
-      markers: [],
-      events: {},
-      control: {}
-    }
-  });
-
-  $scope.windowOptions = {
-    visible: false,
-  };
 
   var plot = function(node) {
     return $q(function(resolve){
@@ -395,10 +446,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     })
   }
 
-  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
-  .then(function (instances) {
-  })
-
   $scope.floor = function(num){
     var swBound; var neBound; var srcImage;
     $("#floor1").removeClass("btn-primary disabled");
@@ -494,59 +541,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     };
   };
 
-  $scope.mapOptions = {
-    minZoom: 3,
-    zoomControl: false,
-    draggable: true,
-    navigationControl: false,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    disableDoubleClickZoom: false,
-    keyboardShortcuts: true,
-    markers: {
-      selected: {}
-    },
-    styles: [{
-      stylers: [
-        { hue: "#00ffe6" },
-        { saturation: -20 }
-      ]
-    },{
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        { lightness: 100 },
-        { visibility: "simplified" }
-      ]
-    },{
-      featureType: "road",
-      elementType: "labels",
-      stylers: [
-        { visibility: "off" }
-      ]
-    },{
-      featureType: "buildings",
-      elementType: "labels.text",
-      stylers: [
-        { visibility: "off" }
-      ]
-    }]
-  };
 });
 
-
-uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapGoogleMapApi, uiGmapIsReady) {
-  $scope.geolocationAvailable = navigator.geolocation ? true : false;
-
-  $scope.scrollTo=function(id){
-    $location.hash(id);
-    $anchorScroll();
-  }
-
-  // uiGmapGoogleMapApi is a promise.
-  // The "then" callback function provides the google.maps object.
-  uiGmapGoogleMapApi.then(function (maps) {
+uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $location, uiGmapIsReady) {
+  // $scope.geolocationAvailable = navigator.geolocation ? true : false;
+  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
+  .then(function () {
     $scope.map = {
       center: {
         latitude: 43.4722854,
@@ -559,33 +559,33 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
       events: {},
       control: {}
     }
-  });
+  })
+  $scope.geolocationAvailable = false;
 
-  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
-  .then(function () {})
+  $scope.scrollTo=function(id){
+    $location.hash(id);
+    $anchorScroll();
+  }
 
   $scope.chose = function(util){
     var temp = {};
     var mark = $scope.map.markers;
+    google.maps.event.trigger($scope.map, "resize");
     if(this.naviOn == undefined){
-      if ($scope.geolocationAvailable) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          $scope.map.center = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-          $scope.map.zoom = 22;
-
-          mark.push({
-            id: 9000,
-            coords: {latitude: position.coords.latitude, longitude: position.coords.longitude}
-          });
-
-          console.log(mark[0]);
-          temp = {id: mark[0].id, coords: mark[0].coords};
-          console.log (temp);
-        });
-      }
+      // if ($scope.geolocationAvailable) {
+      //   navigator.geolocation.getCurrentPosition(function (position) {
+      //     $scope.map.center = {
+      //       latitude: position.coords.latitude,
+      //       longitude: position.coords.longitude
+      //     };
+      //     $scope.map.zoom = 22;
+      //
+      //     mark.push({
+      //       id: 9000,
+      //       coords: {latitude: position.coords.latitude, longitude: position.coords.longitude}
+      //     });
+      //   });
+      // }
     }
 
     // api call to get all graph nodes that have that utility and display them.
@@ -605,59 +605,17 @@ uNav.controller('nearyouController', function($scope, $timeout, $anchorScroll, $
             latitude: val._y,
             longitude: val._x
           },
-          name: val._id,
+          name: val._id
           // icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
         });
       });
-      console.log(mark);
-
-      console.log(util);
       $scope.naviOn = true;
       $scope.collapsed = false;
       $timeout(function() {
+        console.log(mark);
         $scope.$apply();
       },0);
     });
-  };
-
-  $scope.mapOptions = {
-    minZoom: 3,
-    zoomControl: false,
-    draggable: true,
-    navigationControl: false,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    disableDoubleClickZoom: false,
-    keyboardShortcuts: true,
-    markers: {
-      selected: {}
-    },
-    styles: [{
-      stylers: [
-        { hue: "#00ffe6" },
-        { saturation: -20 }
-      ]
-    },{
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        { lightness: 100 },
-        { visibility: "simplified" }
-      ]
-    },{
-      featureType: "road",
-      elementType: "labels",
-      stylers: [
-        { visibility: "off" }
-      ]
-    },{
-      featureType: "buildings",
-      elementType: "labels.text",
-      stylers: [
-        { visibility: "off" }
-      ]
-    }]
   };
 
   $("#menu-toggle").click(function(e) {
@@ -699,9 +657,6 @@ uNav.controller('contactController', function ($scope, $http){
     // Simple POST request example (passing data) :
     $http.post('/api/contact-form', data).
     success(function(data, status, headers, config) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $scope.message = "Huzzah";
       alert('Thanks for your message, ' + data.contactName + '. You Rock!');
     });
   }

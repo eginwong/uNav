@@ -12,7 +12,7 @@
       <a ng-show="naviOn != undefined" ng-model="collapsed" "naviOn" class="glyphicon glyphicon-chevron-right btn-sm" ng-click="collapsed=!collapsed">
       Amenities</a>
     </div>
-  
+
 
     <div id="sidebar-wrapper" ng-if="collapsed" >
       <nav id="spy">
@@ -117,7 +117,7 @@
 
 <div ng-show="naviOn">
   <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
-    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options"></ui-gmap-marker>
   </ui-gmap-google-map>
 </div>
 
