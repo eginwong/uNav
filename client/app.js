@@ -8,7 +8,6 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   when('/about', { templateUrl : 'app/partials/about.html'}).
   when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
 
-
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyCYtcbfLrd9BGzJ8HPdvsxDEedBdh3F-z4',
     v: '3.24', //defaults to latest 3.X anyhow
@@ -90,7 +89,12 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
 
 });
 
-uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady) {
+uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady, $route) {
+  $scope.$on('$routeChangeSuccess', function() {
+    if($scope.map != undefined){
+      $scope.map.markers = [];
+    }
+  });
   $scope.showSelect = true;
   $scope.IsHidden = true;
   var overlay;
@@ -543,7 +547,12 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
 });
 
-uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScroll, $location, uiGmapIsReady) {
+uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScroll, $location, uiGmapIsReady, $route) {
+  $scope.$on('$routeChangeSuccess', function() {
+    if($scope.map != undefined){
+      $scope.map.markers = [];
+    }
+  });
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function () {
@@ -567,18 +576,14 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
   }
 
   $scope.chose = function(util){
+    $scope.util = util;
     var temp = {};
     var mark = $scope.map.markers;
-    if($scope.naviOn == undefined){
-      mark = [];
-      geoLocate().then(loadMarkers(util).then(function(){
-        $scope.naviOn = true;
-        $scope.collapsed = false;
-        $timeout(function() {
-          $scope.$apply();
-        },0);
-      }))
-    }
+    mark = [];
+    geoLocate().then(loadMarkers(util).then(function(){
+      $scope.naviOn = true;
+      $scope.collapsed = true;
+    }));
   };
 
   var geoLocate = function(){
@@ -589,7 +594,7 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           };
-          $scope.map.zoom = 19;
+          $scope.map.zoom = 18;
 
           $scope.map.markers.push({
             id: 9000,
@@ -603,17 +608,33 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
     })
   }
 
-// Add Async over here to load later
+  // Add Async over here to load later
   var loadMarkers = function(util){
     return $q(function(resolve){
       $.get('/api/graph/amenities/' + util, function(result){
         $scope.map.markers = [];
-        // if(util == "WC")
-        //   if(util == "Food")
-        //     if(util == "Access")
-        //     if(util == "Fountain")
-        //     if(util == "Stairs")
-        //     if(util == "Elevator")
+        // var icon;
+        //
+        // switch (util) {
+        //   case "WC":
+        //     icon = {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)};
+        //     break;
+        //   case "Food":
+        //     icon = "Monicon";
+        //     break;
+        //   case "Access":
+        //     icon = "Tuesicon";
+        //     break;
+        //   case "Fountain":
+        //     icon = "Wednesicon";
+        //     break;
+        //   case "Stairs":
+        //     icon = "Thursicon";
+        //     break;
+        //   case "Elevator":
+        //     icon = "Friicon";
+        //     break;
+        // }
         $.each(JSON.parse(result), function(idx, val){
           $scope.map.markers.push({
             id: idx,
