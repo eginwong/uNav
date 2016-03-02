@@ -11,20 +11,20 @@
     </div>
 
     <div id="sidebar-wrapper" ng-if="collapsed" >
-      <nav id="spy">
+      
         <ul class="sidebar-nav nav">
           <!-- <li class="sidebar-brand">
             <b><span class="">Amenities</span></b>
           </li> -->
           <li>
-            <button ng-click='chose("WC")' data-scroll ng-disabled='{{util}} == "WC"'>
+            <a ng-click='chose("WC")'  data-scroll ng-disabled='{{util}} == "WC"'>
               <span class="">Washrooms</span>
               <i class="fa fa-2x fa-female wow text-primary"></i>
               <i class="fa fa-2x fa-male wow text-primary"></i>
-            </button>
+            </a>
           </li>
-          <li>
-            <a ng-click='chose("Food")' data-scroll>
+          <li class="active">
+            <a ng-click='chose("Food")'  data-scroll>
               <span class="">Food and Drink</span>
               <i class="fa fa-2x fa-coffee wow text-primary" data-wow-delay=".1s"></i>
             </a>
@@ -54,7 +54,7 @@
             </a>
           </li>
         </ul>
-      </nav>
+ 
     </div>
 
 <div ng-show="!naviOn">
