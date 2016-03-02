@@ -110,6 +110,18 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
       $scope.map.markers = [];
     }
   });
+
+
+
+
+
+
+
+
+
+
+
+
   $scope.showSelect = true;
   $scope.IsHidden = true;
   var overlay;
@@ -240,8 +252,8 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         $("#roomSrc").append(appendage);
         $("#roomDest").append(appendage);
 
-        $("#roomSrc").chosen({ width: "10%" });
-        $("#roomDest").chosen({ width: "10%" });
+        $("#roomSrc").chosen({ width: "20%" });
+        $("#roomDest").chosen({ width: "20%" });
       };
       $timeout(function() {
         $scope.$apply();
@@ -575,6 +587,8 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
       $scope.map.markers = [];
     }
   });
+
+
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
   uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
   .then(function () {

@@ -142,12 +142,12 @@ div label {
   padding-bottom: 0px;
   height: 40px;
 }
-.container{
+/*.container{
   padding-bottom: 40px;
-}
-.container h1{
+}*/
+/*.container h1{
   font-size: 24px;
-}
+}*/
 .aboutus h1{
   padding-top: 40px;
   font-size: 20px;
@@ -574,6 +574,14 @@ fieldset[disabled] .btn-primary.active {
   text-transform: uppercase;
   font-size: 12px;
 }
+.btn2 {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  border: none;
+  border-radius: 100px;
+  font-weight: 100px;
+  font-size: 10px;
+  background-color: transparent;
+}
 .btn-xl {
   padding: 7px 12px;
 }
@@ -653,11 +661,14 @@ body {
 
 /* Sidebar Styles */
 
+.sidebar-nav a.ng-click-active, 
+.sidebar-nav a:active {
+  background-color: #fff;
+}
 .sidebar-nav {
     position: absolute;
     top: 0;
     width: 250px;
-
     margin: 0;
     padding: 0;
     list-style: none;
@@ -666,15 +677,16 @@ body {
 .sidebar-nav li {
     text-indent: 10px;
     line-height: 40px;
+
 }
 
 .sidebar-nav li a {
+  top: 10px;
     display: block;
     text-decoration: none;
     color: #999999;
-
+    width: 200px;
 }
-
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
