@@ -89,12 +89,9 @@ div label {
         width:100%;
         margin-bottom:5px
     }
-    .roomDetails {
-        float:none;
-        width:100%;
-        margin-bottom:5px
-    }
 }
+
+
 .roomDetails{
   display: inline-block;
   height: 500px;
@@ -127,6 +124,9 @@ div label {
   height: 130px;
   width: 200px;
 }
+.buildingName h2{
+  font-size: 10px;
+}
 .search {
   width: 360px;
 }
@@ -142,12 +142,6 @@ div label {
   padding-bottom: 0px;
   height: 40px;
 }
-/*.container{
-  padding-bottom: 40px;
-}*/
-/*.container h1{
-  font-size: 24px;
-}*/
 .aboutus h1{
   padding-top: 40px;
   font-size: 20px;
@@ -757,9 +751,77 @@ body {
     padding-left: 50px;
   }
 }
-
-/*@media screen and (max-width: 640px) {
-   #roomDetails{
-    width:50%;
-  }
+@media screen and (max-width: 480px){
+  .roomDetails{
+    display: inline-block;
+    height: 30%;
+    width: 100%;
+    position:absolute;
+    background-color: black;
+    opacity: 0.6;
+}
+  .room1Details{
+  top: 0;
+  left: 10px;
+  position: absolute;
+  height: 50px;
+  width: 100px;
+  padding-right: 0px;
+}
+.room2Details{
+  top: 77px;
+  left: 230px;
+  position: absolute;
+  height: 50px;
+  width: 100px;
+}
+.roomDetails p{
+  font-size: 10px;
+}
+.roomDetails h2{
+  font-size: 12px;
+}
+/*.time {
+  position: center;
+  height: 20px;
+  width: 200px;
 }*/
+  }
+}
+@media screen and (max-width : 680px){
+   .roomDetails{
+    display: inline-block;
+    height: 30%;
+    width: 100%;
+    position:absolute;
+    background-color: black;
+    opacity: 0.6;
+}
+  .room1Details{
+  top: 0;
+  left: 10px;
+  position: absolute;
+  height: 50px;
+  width: 100px;
+  padding-right: 0px;
+}
+.room2Details{
+  top: 77px;
+  left: 230px;
+  position: absolute;
+  height: 50px;
+  width: 100px;
+}
+.roomDetails p{
+  font-size: 10px;
+}
+.roomDetails h2{
+  font-size: 12px;
+}
+/*.time {
+  position: center;
+  height: 20px;
+  width: 200px;
+}*/
+  }
+}

@@ -10,8 +10,8 @@
   </div></center>
   <br>
 
-  <div ng-show="build != undefined">
-    <div ng-show="showSelect" class="buildingName">
+  <div ng-show="build != undefined" class="buildingName">
+    <div ng-show="showSelect">
       <center><h4>{{build}}
         <button ng-click="floor(1)" class="btn" id="floor1">1</button>
         <button ng-click="floor(2)" class="btn btn-primary disabled" ng-show='build == "RCH"' id="floor2">2</button>
@@ -19,11 +19,11 @@
         <button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">x</button></h4></center>
 
         <!-- Avoid areas -->
-        <center><h2>
+        <center><p>
           Avoid:
-          <input type="checkbox" class="limit" id="stairSearch">Stairs</input>
-          <input type="checkbox" class="limit" id="elevatorSearch">Elevators</input>
-        </h2></center>
+          <input type="checkbox" class="limit" id="stairSearch"> Stairs</input>
+          <input type="checkbox" class="limit" id="elevatorSearch"> Elevators</input>
+        </p></center>
         <center><div class="search col-md-offset-6">
         <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select></div></center>
         <br>
@@ -35,7 +35,7 @@
 
       <!-- OPTIMIZATION: MAKE THESE DYNAMIC INSTEAD OF STATIC -->
       <div align="right">
-        <a ng-show="(src != undefined || dest != undefined)" ng-click='ShowHide("")' class="glyphicon glyphicon-chevron-right btn-sm" id="searchButton" value="Expand"> Show Details</a>
+        <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
       </div>
 
     </div>
@@ -55,23 +55,23 @@
       <div ng-hide="IsHidden" class="roomDetails" id="roomSideBar">
 
         <div ng-hide="IsHidden" class="room1Details" ng-show="one">
-          <center><h2 ng-show="distance > 0">Time: {{distance}} s.</h2></center>
+          <!-- <div class="time"> -->
+          <center><h2 ng-show="distance > 0">Time: {{distance}} s.</h2></center><!-- </div> -->
           <hr>
-          <br>
+
           <center><p> Location 1 Details:</p></center>
-          <br>
+
           <center><p>{{src}}</p></center>
-          <br>
-          <center><p id=l1Details>Hello</p></center>
-          <hr>
+
+          <center><p id=l1Details>"Hello"</p></center>
         </div>
 
         <div ng-hide="IsHidden" class="room2Details" ng-show="two">
-          <br>
+
           <center><p> Location 2 Details:</p></center>
-          <br>
+
           <center><p>{{dest}}</p></center>
-          <br>
+
           <center><p id=l2Details></p></center>
         </div>
       </div>
