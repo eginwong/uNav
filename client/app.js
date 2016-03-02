@@ -111,17 +111,6 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }
   });
 
-
-
-
-
-
-
-
-
-
-
-
   $scope.showSelect = true;
   $scope.IsHidden = true;
   var overlay;
@@ -252,8 +241,8 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
         $("#roomSrc").append(appendage);
         $("#roomDest").append(appendage);
 
-        $("#roomSrc").chosen({ width: "20%" });
-        $("#roomDest").chosen({ width: "20%" });
+        $("#roomSrc").chosen({ width: "50%" });
+        $("#roomDest").chosen({ width: "50%" });
       };
       $timeout(function() {
         $scope.$apply();
