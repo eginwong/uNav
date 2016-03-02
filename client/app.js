@@ -141,11 +141,18 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     {
       $("#searchWrapper").animate({width:"1700px"});
       $("#searchButton").attr('value','Reduce');
+      // $("#searchButton").text(" Hide Details");
+      // $("#searchButton").removeClass("glyphicon-chevron-right");
+      // $("#searchButton").addClass("glyphicon-chevron-left");
+
     }
     else if(inputValue=="Reduce")
     {
       $("#searchWrapper").animate({width:"100%"});
       $("#searchButton").attr('value','Expand');
+      // $("#searchButton").text(" Show Details");
+      // $("#searchButton").removeClass("glyphicon-chevron-left");
+      // $("#searchButton").addClass("glyphicon-chevron-right");
     }
     $scope.IsHidden = $scope.IsHidden ? false : true;
   };
