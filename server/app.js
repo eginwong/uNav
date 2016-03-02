@@ -223,11 +223,17 @@ router.route('/graph/rooms/:id')
 })
 
 
-router.route('/astar/:src/:sink')
-//
-// // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+router.route('/astar/:src/:sink/:options')
 .get(function(req, res) {
-  res.send(algo.aStar(g, req.params.src, req.params.sink));
+  if(req.params.options == "none"){
+    res.send(algo.aStar(g, req.params.src, req.params.sink, "none"));
+  }
+  if(req.params.options == "stairs"){
+    res.send(algo.aStar(g, req.params.src, req.params.sink, "stairs"));
+  }
+  if(req.params.options == "elevators"){
+    res.send(algo.aStar(g, req.params.src, req.params.sink, "elevators"));
+  }
 });
 
 router.route('/contact-form')

@@ -46,7 +46,7 @@ module.exports = {
     return false;
   },
 
-  aStar: function (graph, src, sink){
+  aStar: function (graph, src, sink, opt){
     //finished result to return.
     var fin;
     graph.clearParents(graph);
@@ -73,30 +73,31 @@ module.exports = {
         l = connectedNodes.length;
         for (var i = 0; i < l; ++i) {
           testNode = graph._nodes[connectedNodes[i]];
-          // technically any node you connect to will be greater than 0, as there has to be one edge to connect to there.
-          // However, your destination node may only have one edge connecting to it too. >_<
-          if (graph._adjacency[testNode._id].length > 0) {
-            g = currentNode._g + 1;
-            // g = currentNode._g + this.manhattan(currentNode, testNode);
-            h = this.manhattan(testNode, destNode);
-            f = g + h;
-            if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
-              if(testNode._f > f)
-              {
+            // technically any node you connect to will be greater than 0, as there has to be one edge to connect to there.
+            // However, your destination node may only have one edge connecting to it too. >_<
+            if (graph._adjacency[testNode._id].length > 0) {
+              g = currentNode._g + 1;
+              h = this.manhattan(testNode, destNode);
+              f = g + h;
+              if(opt == "stairs" && testNode._data.utility.indexOf("Stairs") > -1){ f = 10000}
+              if(opt == "elevators" && testNode._data.utility.indexOf("Elevator") > -1){ f = 10000}
+              if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
+                if(testNode._f > f)
+                {
+                  testNode._f = f;
+                  testNode._g = g;
+                  testNode._h = h;
+                  testNode._parentNode = currentNode;
+                }
+              }
+              else {
                 testNode._f = f;
                 testNode._g = g;
                 testNode._h = h;
                 testNode._parentNode = currentNode;
+                openNodes.push(testNode);
               }
             }
-            else {
-              testNode._f = f;
-              testNode._g = g;
-              testNode._h = h;
-              testNode._parentNode = currentNode;
-              openNodes.push(testNode);
-            }
-          }
         }
         closedNodes.push( currentNode );
         if (openNodes.length == 0) {

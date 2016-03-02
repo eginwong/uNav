@@ -90,6 +90,21 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
 });
 
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady, $route) {
+
+  $('input.limit').on('change', function() {
+      $('input.limit').not(this).prop('checked', false);
+      plot("dest").then(function(resp){
+        if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
+        else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+        if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
+          $scope.ShowHide("found");
+          getPath($scope.src, $scope.dest).then(function(floorNum){
+            drawDirections(floorNum);
+          });
+        }
+      });
+  });
+
   $scope.$on('$routeChangeSuccess', function() {
     if($scope.map != undefined){
       $scope.map.markers = [];
@@ -244,7 +259,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     }
     $scope.build = undefined;
     $scope.IsHidden = false;
-    $scope.ShowHide(true);
+    $scope.ShowHide("reset");
     $("#l1Details").empty();
     $("#l2Details").empty();
     $scope.src = undefined;
@@ -350,7 +365,14 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
     return $q(function(resolve){
       // instantiate google map objects for directions
       var waypts = {};
-      $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, ''), function(obj){
+      var handicap = "none";
+      if($("#stairSearch").is(":checked")){
+        handicap = "stairs";
+      }
+      if($("#elevatorSearch").is(":checked")){
+        handicap = "elevators";
+      }
+      $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, '') + '/' + handicap, function(obj){
         var leng = obj.length;
         var start; var pathTemp; var pathNum; var tempNum;
         var waypts = [];
