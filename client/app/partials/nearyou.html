@@ -5,57 +5,57 @@
   <hr>
 
 </div>
-    <div class="showAm" align="right">
-      <a ng-show="naviOn != undefined" ng-model="collapsed" class="glyphicon glyphicon-chevron-right btn-sm" ng-click="collapsed=!collapsed">
-      Amenities</a>
-    </div>
+<div class="showAm" align="right">
+  <a ng-show="naviOn != undefined" ng-model="collapsed" class="glyphicon glyphicon-chevron-right btn-sm" ng-click="collapsed=!collapsed">
+    Amenities</a>
+  </div>
 
-    <div id="sidebar-wrapper" ng-if="collapsed" >
-      
-        <ul class="sidebar-nav nav">
-          <!-- <li class="sidebar-brand">
-            <b><span class="">Amenities</span></b>
-          </li> -->
-          <li>
-            <a ng-click='chose("WC")'  data-scroll ng-disabled='{{util}} == "WC"'>
-              <span class="">Washrooms</span>
-              <i class="fa fa-2x fa-female wow text-primary"></i>
-              <i class="fa fa-2x fa-male wow text-primary"></i>
-            </a>
-          </li>
-          <li class="active">
-            <a ng-click='chose("Food")'  data-scroll>
-              <span class="">Food and Drink</span>
-              <i class="fa fa-2x fa-coffee wow text-primary" data-wow-delay=".1s"></i>
-            </a>
-          </li>
-          <li>
-            <a ng-click='chose("Access")' data-scroll>
-              <span class="">Accessibility</span>
-              <i class="fa fa-2x fa-wheelchair wow text-primary" data-wow-delay=".2s"></i>
-            </a>
-          </li>
-          <li>
-            <a ng-click='chose("Fountain")' data-scroll>
-              <span class="">Water Fountains</span>
-              <i class="fa fa-2x fa fa-tint wow text-primary"></i>
-            </a>
-          </li>
-          <li>
-            <a ng-click='chose("Stairs")' data-scroll>
-              <span class="">Stairs</span>
-              <i class="fa fa-2x fa-sort-amount-asc wow text-primary" data-wow-delay=".1s"></i>
-            </a>
-          </li>
-          <li>
-            <a ng-click='chose("Elevator")' data-scroll>
-              <span class="">Elevators</span>
-              <i class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i>
-            </a>
-          </li>
-        </ul>
- 
-    </div>
+  <div id="sidebar-wrapper" ng-if="collapsed" >
+
+    <ul class="sidebar-nav nav">
+      <!-- <li class="sidebar-brand">
+      <b><span class="">Amenities</span></b>
+    </li> -->
+    <li>
+      <a ng-click='chose("WC")'  data-scroll ng-disabled='{{util}} == "WC"'>
+        <span class="">Washrooms</span>
+        <i class="fa fa-2x fa-female wow text-primary"></i>
+        <i class="fa fa-2x fa-male wow text-primary"></i>
+      </a>
+    </li>
+    <li class="active">
+      <a ng-click='chose("Food")'  data-scroll>
+        <span class="">Food and Drink</span>
+        <i class="fa fa-2x fa-coffee wow text-primary" data-wow-delay=".1s"></i>
+      </a>
+    </li>
+    <li>
+      <a ng-click='chose("Access")' data-scroll>
+        <span class="">Accessibility</span>
+        <i class="fa fa-2x fa-wheelchair wow text-primary" data-wow-delay=".2s"></i>
+      </a>
+    </li>
+    <li>
+      <a ng-click='chose("Fountain")' data-scroll>
+        <span class="">Water Fountains</span>
+        <i class="fa fa-2x fa fa-tint wow text-primary"></i>
+      </a>
+    </li>
+    <li>
+      <a ng-click='chose("Stairs")' data-scroll>
+        <span class="">Stairs</span>
+        <i class="fa fa-2x fa-sort-amount-asc wow text-primary" data-wow-delay=".1s"></i>
+      </a>
+    </li>
+    <li>
+      <a ng-click='chose("Elevator")' data-scroll>
+        <span class="">Elevators</span>
+        <i class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i>
+      </a>
+    </li>
+  </ul>
+
+</div>
 
 <div ng-show="!naviOn">
   <div class="container">
@@ -112,7 +112,13 @@
 
 <div ng-if="naviOn">
   <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
-    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options"></ui-gmap-marker>
+    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options" click="onClick(this)">
+      <ui-gmap-window id="marker-{{$index}}" options="windowOptions" show="false" closeClick="closeClick()">
+      <div ng-non-bindable>
+        <p></p>
+      </div>
+    </ui-gmap-window>
+    </ui-gmap-marker>
   </ui-gmap-google-map>
 </div>
 

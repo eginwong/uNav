@@ -663,7 +663,7 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
               latitude: val._y,
               longitude: val._x
             },
-            name: val._id,
+            content: val._id,
             icon: {url: 'http://www.netdotart.com/statebirds/transparent.gif', scaledSize: new google.maps.Size(0,0)},
             options: {labelContent: labelContent}
           });
@@ -672,6 +672,24 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
       });
     })
   }
+
+  $scope.windowOptions = {
+      visible: false
+  };
+
+  $scope.onClick = function(e) {
+    for (var i = 0; i < $scope.map.markers.length; ++i){
+      $("#marker-" + i).trigger("closeClick");
+    }
+    $("#marker-" + e.$index + " p").text(e.m.content);
+    $timeout(function() {
+      $scope.$apply();
+    },0);
+  };
+
+  $scope.closeClick = function() {
+      $scope.windowOptions.visible = false;
+  };
 
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
