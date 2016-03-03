@@ -124,35 +124,6 @@ router.route('/graph')
   res.send(JSON.stringify(g));
 })
 
-router.route('/graph/rooms')
-
-.get (function(req,res){
-  var rooms = [];
-  var hold;
-  function asyncFind(_callback){
-    for (var key in g._nodes) {
-      hold = g._nodes[key]._data.utility;
-      if(hold[0] == undefined){
-        rooms.push(key.substr(0,3) + " " + key.substr(3));
-      }
-      else{
-        for (var i in hold){
-          if(hold[i].length == 0 || hold[i] == "Stairs"){
-            rooms.push(key.substr(0,3) + " " + key.substr(3));
-          }
-        }
-      }
-    }
-    _callback();
-  }
-
-  // call first function and pass in a callback function which
-  // first function runs when it has completed
-  asyncFind(function() {
-    res.send(JSON.stringify(rooms));
-  });
-})
-
 router.route('/graph/amenities/:id')
 
 .get (function(req,res){
@@ -200,6 +171,7 @@ router.route('/graph/rooms/select/:id')
         }
       }
     }
+    rooms.sort();
     _callback();
   }
 
