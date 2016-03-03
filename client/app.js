@@ -577,7 +577,7 @@ uNav.controller('searchController', function($scope, $q, $timeout, $resource, $l
 
 });
 
-uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScroll, $location, uiGmapIsReady, $route) {
+uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $anchorScroll, $location, uiGmapIsReady, $route) {
   $scope.$on('$routeChangeSuccess', function() {
     if($scope.map != undefined){
       $scope.map.markers = [];
@@ -598,6 +598,7 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
 
   $scope.chose = function(util){
     $scope.util = util;
+    if($scope.windowOptions.show){$scope.windowOptions.show = undefined;}
     var temp = {};
     var mark = $scope.map.markers;
     mark = [];
@@ -677,15 +678,20 @@ uNav.controller('nearyouController', function($scope, $q, $timeout, $anchorScrol
       visible: false
   };
 
-  $scope.onClick = function(e) {
-    for (var i = 0; i < $scope.map.markers.length; ++i){
-      $("#marker-" + i).trigger("closeClick");
+  $scope.onClick = function(e){
+    if($scope.windowOptions.show == undefined){
+      $scope.windowOptions.show = !$scope.windowOptions.show;
     }
-    $("#marker-" + e.$index + " p").text(e.m.content);
+    $scope.selectedMarker = e.m;
+    var temp = e.m.content;
+    if(/\w*[HE]\d$/.test(temp)){temp = temp.slice(0, -2)}
+    if(/\w*[S]$/.test(temp)){temp = temp.slice(0, -1)}
+
+    $scope.infoContent = temp;
     $timeout(function() {
       $scope.$apply();
     },0);
-  };
+  }
 
   $scope.closeClick = function() {
       $scope.windowOptions.visible = false;

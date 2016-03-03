@@ -111,13 +111,14 @@
 </div>
 
 <div ng-if="naviOn">
+
   <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
-    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options" click="onClick(this)">
-      <ui-gmap-window id="marker-{{$index}}" options="windowOptions" show="false" closeClick="closeClick()">
-      <div ng-non-bindable>
-        <p></p>
-      </div>
+    <ui-gmap-window ng-model="infoContent" model="selectedMarker" coords="selectedMarker.coords" show="windowOptions.show" closeClick="closeClick()">
+      {{infoContent}}
+    <!-- <ui-gmap-window id="infoContent" model="selectedMarker" coords="selectedMarker.coords" show="windowOptions.show" closeClick="closeClick()"> -->
+    <!-- <ui-gmap-window id="marker-{{$index}}" options="windowOptions" closeClick="closeClick()"> -->
     </ui-gmap-window>
+    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options" click="onClick(this)">
     </ui-gmap-marker>
   </ui-gmap-google-map>
 </div>
