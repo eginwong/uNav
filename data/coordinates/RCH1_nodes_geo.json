@@ -252,25 +252,12 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54092706,43.4703987,1 ]
+       "coordinates":  [ -80.54090256,43.47036892,1 ]
     },
     "properties": {
     "building_code":"RCH",
     "utility":[],
     "id":"111",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54090256,43.47036892,1 ]
-    },
-    "properties": {
-    "building_code":"RCH",
-    "utility":["Entrance"],
-    "id":"111E1",
     "name":""
     }
   },

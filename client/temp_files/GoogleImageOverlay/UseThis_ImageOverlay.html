@@ -28,7 +28,7 @@
     function initialize() {
       var mapOptions = {
         zoom: 15,
-        center: new google.maps.LatLng(43.470309, -80.540746)
+        center: new google.maps.LatLng(43.470896, -80.540307)
       };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -37,12 +37,12 @@
       //RCH 2nd floor: sw(43.469956511113, -80.54128386508188) ne(43.47063996900324, -80.5402374146804)
       //RCH3rd floor: sw(43.46993704537453, -80.54133616815767) ne(43.47064191555471, -80.5402374146804)
 
-      var swBound = new google.maps.LatLng(43.46993704537453, -80.54133616815767);
-      var neBound = new google.maps.LatLng(43.47064191555471, -80.5402374146804);
+      var swBound = new google.maps.LatLng(43.46968368478908, -80.54181125662228);
+      var neBound = new google.maps.LatLng(43.472067954481304, -80.53893026487356);
       var bounds = new google.maps.LatLngBounds(swBound, neBound);
 
        console.log(map);
-      var srcImage = '../../images/Waterloo Floor Plans/RCH3_CAD.png';
+      var srcImage = '../../images/Waterloo Floor Plans/E2_1CAD.png';
         
       overlay = new DebugOverlay(bounds, srcImage, map);
 
@@ -110,7 +110,7 @@
       img.src = this.image_;
       img.style.width = '100%';
       img.style.height = '100%';
-      img.style.opacity = '0.5';
+      img.style.opacity = '0.9';
       img.style.position = 'absolute';
       div.appendChild(img);
       this.div_ = div;
