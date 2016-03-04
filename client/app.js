@@ -92,17 +92,17 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
 uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady, $route) {
 
   $('input.limit').on('change', function() {
-      $('input.limit').not(this).prop('checked', false);
-      plot("dest").then(function(resp){
-        if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
-        else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
-        if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-          $scope.ShowHide("found");
-          getPath($scope.src, $scope.dest).then(function(floorNum){
-            drawDirections(floorNum);
-          });
-        }
-      });
+    $('input.limit').not(this).prop('checked', false);
+    plot("dest").then(function(resp){
+      if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
+      else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+      if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
+        $scope.ShowHide("found");
+        getPath($scope.src, $scope.dest).then(function(floorNum){
+          drawDirections(floorNum);
+        });
+      }
+    });
   });
 
   $scope.$on('$routeChangeSuccess', function() {
@@ -637,37 +637,49 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
       $.get('/api/graph/amenities/' + util, function(result){
         $scope.map.markers = [];
         var labelContent = {};
-        switch (util) {
-          // What about woman or men bathrooms?
-          case "WC":
+        $.each(JSON.parse(result), function(idx, val){
+          if(val._data.utility.indexOf("WC-W") > -1){
+            util = "WC-W";
+          }
+          if(val._data.utility.indexOf("WC-M") > -1){
+            util = "WC-M";
+          }
+          switch (util) {
+            case "WC":
             labelContent = '<i class="fa fa-2x fa-female text-primary"></i><i class="fa fa-2x fa-male text-primary"></i>';
             break;
-          case "Food":
+            case "WC-W":
+            labelContent = '<i class="fa fa-2x fa-female text-primary"></i>';
+            break;
+            case "WC-M":
+            labelContent = '<i class="fa fa-2x fa-male text-primary"></i>';
+            break;
+            case "Food":
             labelContent = '<i class="fa fa-2x fa-coffee text-primary"></i>';
             break;
-          case "Ramp":
+            case "Ramp":
             labelContent = '<i class="fa fa-2x fa-wheelchair text-primary"></i>';
             break;
-          case "Fountain":
+            case "Fountain":
             labelContent = '<i class="fa fa-2x fa fa-tint text-primary"></i>';
             break;
-          case "Stairs":
+            case "Stairs":
             labelContent = '<i class="fa fa-2x fa-sort-amount-asc text-primary"></i>';
             break;
-          case "Elevator":
+            case "Elevator":
             labelContent = '<i class="fa fa-2x fa-toggle-down text-primary"></i>';
             break;
-          case "Exit":
+            case "Exit":
             labelContent = '<i class="fa fa-2x fa-sign-out text-primary"></i>';
             break;
-          case "Lab":
+            case "Lab":
             labelContent = '<i class="fa fa-2x fa-laptop text-primary"</i>';
             break;
-          case "Study":
+            case "Study":
             labelContent = '<i class="fa fa-2x fa-pencil text-primary"></i>';
             break;
-        }
-        $.each(JSON.parse(result), function(idx, val){
+          }
+
           $scope.map.markers.push({
             id: idx,
             coords: {
@@ -685,7 +697,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
   }
 
   $scope.windowOptions = {
-      visible: false
+    visible: false
   };
 
   $scope.onClick = function(e){
@@ -704,7 +716,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
   }
 
   $scope.closeClick = function() {
-      $scope.windowOptions.visible = false;
+    $scope.windowOptions.visible = false;
   };
 
   $("#menu-toggle").click(function(e) {
