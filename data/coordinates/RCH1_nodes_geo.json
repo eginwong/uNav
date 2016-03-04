@@ -594,7 +594,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":[],
+    "utility":["Study"],
     "id":"123",
     "name":""
     }

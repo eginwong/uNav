@@ -30,7 +30,7 @@
       </a>
     </li>
     <li>
-      <a ng-click='chose("Access")' data-scroll>
+      <a ng-click='chose("Ramp")' data-scroll>
         <span class="">Accessibility</span>
         <i class="fa fa-2x fa-wheelchair wow text-primary" data-wow-delay=".2s"></i>
       </a>
@@ -53,6 +53,25 @@
         <i class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i>
       </a>
     </li>
+     <li>
+      <a ng-click='chose("Exit")' data-scroll>
+        <span class="">Exits</span>
+        <i class="fa fa-2x fa-sign-out wow text-primary" data-wow-delay=".2s"></i>
+      </a>
+    </li>
+     <li>
+      <a ng-click='chose("Lab")' data-scroll>
+        <span class="">Labs</span>
+        <i class="fa fa-2x fa-laptop wow text-primary" data-wow-delay=".2s"></i>
+      </a>
+    </li>
+     <li>
+      <a ng-click='chose("Study")' data-scroll>
+        <span class="">Study Space</span>
+        <i class="fa fa-2x fa-pencil wow text-primary" data-wow-delay=".2s"></i>
+      </a>
+    </li>
+
   </ul>
 
 </div>
@@ -77,7 +96,7 @@
       </div>
     </div>
     <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Access")'>
+      <div class="service-box" ng-click='chose("Ramp")'>
         <i class="fa fa-4x fa-wheelchair wow bounceIn text-primary" data-wow-delay=".2s"></i>
         <h3><b>Wheelchair Accessibility</b></h3>
         <p class="text-muted">Look for wheelchair accessibility ramps.</p>
@@ -104,6 +123,29 @@
         <i class="fa fa-4x fa-toggle-down wow bounceIn text-primary" data-wow-delay=".2s"></i>
         <h3><b>Elevators</b></h3>
         <p class="text-muted">Feeling lazy? Take the elevator!</p>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Exit")'>
+        <i class="fa fa-4x fa fa-sign-out wow bounceIn text-primary"></i>
+        <h3><b>Exits</b></h3>
+        <p class="text-muted">In a rush? Find the nearest exit.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Study")'>
+        <i class="fa fa-4x fa-laptop wow bounceIn text-primary" data-wow-delay=".1s"></i>
+        <h3><b>Labs</b></h3>
+        <p class="text-muted">Need a computer? Find a lab!</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 text-center">
+      <div class="service-box" ng-click='chose("Lab")'>
+        <i class="fa fa-4x fa-pencil wow bounceIn text-primary" data-wow-delay=".2s"></i>
+        <h3><b>Study Space</b></h3>
+        <p class="text-muted">Get some work done!</p>
       </div>
     </div>
   </div>

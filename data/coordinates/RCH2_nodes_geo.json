@@ -321,7 +321,7 @@
       },
       "properties": {
         "building_code":"RCH",
-        "utility":[],
+        "utility":["WC-M"],
         "id":"215",
         "name":""
       }
@@ -698,7 +698,7 @@
       },
       "properties": {
         "building_code":"RCH",
-        "utility":[],
+        "utility":["WC-W"],
         "id":"226",
         "name":""
       }
@@ -763,7 +763,7 @@
       },
       "properties": {
         "building_code":"RCH",
-        "utility":["Stairs", "Outside"],
+        "utility":["Stairs", "Exit"],
         "id":"236S",
         "name":""
       }
@@ -776,7 +776,7 @@
       },
       "properties": {
         "building_code":"RCH",
-        "utility":["Stairs", "Outside"],
+        "utility":["Stairs", "Exit"],
         "id":"237S",
         "name":""
       }

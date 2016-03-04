@@ -130,13 +130,25 @@ router.route('/graph/amenities/:id')
   var nodes = [];
   var hold;
   function asyncFind(_callback){
-    for (var key in g._nodes) {
-      hold = g._nodes[key]._data.utility;
+    if(req.params.id == "WC"){
+      for (var key in g._nodes) {
+        hold = g._nodes[key]._data.utility;
+        for (var i in hold){
+          if(hold[i] == req.params.id || hold[i] == "WC-M" || hold[i] == "WC-W"){
+            nodes.push(g._nodes[key]);
+          }
+        }
+      }
+    }
+    else{
+      for (var key in g._nodes) {
+        hold = g._nodes[key]._data.utility;
         for (var i in hold){
           if(hold[i] == req.params.id ){
             nodes.push(g._nodes[key]);
           }
         }
+      }
     }
     _callback();
   }
