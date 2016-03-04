@@ -175,7 +175,7 @@ router.route('/graph/rooms/select/:id')
         }
         else{
           for (var i in hold){
-            if(hold[i].length == 0 || hold[i] == "Stairs"){
+            if(hold[i].length == 0 || hold[i] != "Hallway"){
               if(req.params.id =="RCH") {rooms.push(req.params.id + " " + key.substr(3));}
               else{rooms.push(req.params.id + " " + key.substr(2));}
             }

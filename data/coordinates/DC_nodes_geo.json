@@ -1,0 +1,187 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542345,43.472709 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Food"],
+    "id":"1802B",
+    "name":"Tim Hortons Express"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542965,43.472895 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Food"],
+    "id":"1108",
+    "name":"Tim Hortons"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.543354,43.472807 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Food"],
+    "id":"1103",
+    "name":"DC Food Court"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542468,43.473061 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["WC"],
+    "id":"1934",
+    "name":"Men Washroom"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54242,43.473079 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["WC"],
+    "id":"1935",
+    "name":"Ladies Washroom"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542473,43.472686 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Entrance"],
+    "id":"1841J",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542012,43.472863 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Entrance"],
+    "id":"1842G",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542473,43.472725 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Stairs"],
+    "id":"1841A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542642,43.472941 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Stairs"],
+    "id":"1841B",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542033,43.472883 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Stairs"],
+    "id":"1842A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54217,43.47311 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Stairs"],
+    "id":"1842B",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542527,43.473028 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Fountain, Food"],
+    "id":"1840",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542575,43.473014 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Food"],
+    "id":"1831G",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.54221,43.472668 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Study"],
+    "id":"1501",
+    "name":"DC Library"
+    }
+  }
+]
+}
