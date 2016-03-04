@@ -3,7 +3,7 @@ config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   $locationProvider.hashPrefix('');
   $routeProvider.
   when('/', { templateUrl : 'app/partials/home.html', controller  : 'mainController'}).
-  when('/search', {templateUrl : 'app/partials/search.html', controller  : 'searchController'}).
+  when('/navigate', {templateUrl : 'app/partials/navigate.html', controller  : 'navigateController'}).
   when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
   when('/about', { templateUrl : 'app/partials/about.html'}).
   when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
@@ -89,7 +89,7 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
 
 });
 
-uNav.controller('searchController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady, $route) {
+uNav.controller('navigateController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady, $route) {
 
   $('input.limit').on('change', function() {
     $('input.limit').not(this).prop('checked', false);
@@ -637,6 +637,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
       $.get('/api/graph/amenities/' + util, function(result){
         $scope.map.markers = [];
         var labelContent = {};
+        var input;
         $.each(JSON.parse(result), function(idx, val){
           if(val._data.utility.indexOf("WC-W") > -1){
             util = "WC-W";
@@ -679,14 +680,19 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
             labelContent = '<i class="fa fa-2x fa-pencil text-primary"></i>';
             break;
           }
-
+          if(val._data.name != ""){
+            input = val._data.name;
+          }
+          else{
+            input = val._id;
+          }
           $scope.map.markers.push({
             id: idx,
             coords: {
               latitude: val._y,
               longitude: val._x
             },
-            content: val._id,
+            content: input,
             icon: {url: 'http://www.netdotart.com/statebirds/transparent.gif', scaledSize: new google.maps.Size(0,0)},
             options: {labelContent: labelContent}
           });
@@ -706,8 +712,8 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
     }
     $scope.selectedMarker = e.m;
     var temp = e.m.content;
-    if(/\w*[HE]\d$/.test(temp)){temp = temp.slice(0, -2)}
-    if(/\w*[S]$/.test(temp)){temp = temp.slice(0, -1)}
+    if(/\w*[A-Z]\d$/.test(temp)){temp = temp.slice(0, -2)}
+    if(/\w*[A-Z]$/.test(temp)){temp = temp.slice(0, -1)}
 
     $scope.infoContent = temp;
     $timeout(function() {
