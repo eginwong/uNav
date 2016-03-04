@@ -638,13 +638,14 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
         $scope.map.markers = [];
         var labelContent = {};
         switch (util) {
+          // What about woman or men bathrooms?
           case "WC":
             labelContent = '<i class="fa fa-2x fa-female text-primary"></i><i class="fa fa-2x fa-male text-primary"></i>';
             break;
           case "Food":
             labelContent = '<i class="fa fa-2x fa-coffee text-primary"></i>';
             break;
-          case "Access":
+          case "Ramp":
             labelContent = '<i class="fa fa-2x fa-wheelchair text-primary"></i>';
             break;
           case "Fountain":
@@ -655,6 +656,15 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
             break;
           case "Elevator":
             labelContent = '<i class="fa fa-2x fa-toggle-down text-primary"></i>';
+            break;
+          case "Exit":
+            labelContent = '<i class="fa fa-2x fa-sign-out text-primary"></i>';
+            break;
+          case "Lab":
+            labelContent = '<i class="fa fa-2x fa-laptop text-primary"</i>';
+            break;
+          case "Study":
+            labelContent = '<i class="fa fa-2x fa-pencil text-primary"></i>';
             break;
         }
         $.each(JSON.parse(result), function(idx, val){
