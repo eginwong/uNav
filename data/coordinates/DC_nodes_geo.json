@@ -47,7 +47,7 @@
        "coordinates":  [ -80.542468,43.473061 ]
     },
     "properties": {
-    "building_code":"DC",
+    "building_code":"DC-M",
     "utility":["WC"],
     "id":"1934",
     "name":"Men Washroom"
@@ -61,7 +61,7 @@
     },
     "properties": {
     "building_code":"DC",
-    "utility":["WC"],
+    "utility":["WC-W"],
     "id":"1935",
     "name":"Ladies Washroom"
     }
@@ -152,7 +152,7 @@
     },
     "properties": {
     "building_code":"DC",
-    "utility":["Fountain, Food"],
+    "utility":["Fountain", "Food"],
     "id":"1840",
     "name":""
     }
