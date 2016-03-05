@@ -285,7 +285,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val();
     plot("src").then(function(resp){
-      if(resp._data.utility.length <= 0){$("#l1Details").text("Room");}
+      if(resp._data.utility.length <= 0 && resp._data.name == ""){$("#l1Details").text("Room");}
+      else if(resp._data.name != ""){$("#l1Details").text(resp._data.name);}
       else {$("#l1Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
         $scope.ShowHide("found");
@@ -300,6 +301,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.dest = $("#roomDest option:selected").val();
     plot("dest").then(function(resp){
       if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
+      else if(resp._data.name != ""){$("#l2Details").text(resp._data.name);}
       else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
         $scope.ShowHide("found");

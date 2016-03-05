@@ -20,8 +20,8 @@
     <!--<script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe7LduGMqcDv3021jOaiCxq4mxQ14Re6w&signed_in=true&callback=initMap"></script>
     -->
-    
-    
+
+
     <script>
     var overlay;
     DebugOverlay.prototype = new google.maps.OverlayView();
@@ -36,6 +36,7 @@
       //RCH 1st floor: sw(43.46999349599889, -80.54125972520075) ne(43.47064191555473, -80.54024546130745)
       //RCH 2nd floor: sw(43.469956511113, -80.54128386508188) ne(43.47063996900324, -80.5402374146804)
       //RCH3rd floor: sw(43.46993704537453, -80.54133616815767) ne(43.47064191555471, -80.5402374146804)
+      //E21st floor: sw(43.46968368478908, -80.54181125662228) ne(43.472067954481304, -80.53893026487356)
 
       var swBound = new google.maps.LatLng(43.46968368478908, -80.54181125662228);
       var neBound = new google.maps.LatLng(43.472067954481304, -80.53893026487356);
@@ -43,7 +44,7 @@
 
        console.log(map);
       var srcImage = '../../images/Waterloo Floor Plans/E2_1CAD.png';
-        
+
       overlay = new DebugOverlay(bounds, srcImage, map);
 
       var markerA = new google.maps.Marker({
@@ -75,7 +76,7 @@
       });
 
         google.maps.event.addListener(markerA, 'dragend', function () {
-     
+
           var newPointA = markerA.getPosition();
             var newPointB = markerB.getPosition();
             console.log("point1"+ newPointA);
@@ -144,6 +145,6 @@
     //google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     </script>
-    
+
     </body>
     </html>
