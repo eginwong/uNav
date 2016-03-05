@@ -18,7 +18,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.5404084,43.4702895, 2 ]
+        "coordinates":  [ -80.540415,43.470282, 2 ]
       },
       "properties": {
         "building_code":"RCH",
@@ -447,7 +447,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.54055899,43.47031083, 2 ]
+        "coordinates":  [ -80.540568,43.470306, 2 ]
       },
       "properties": {
         "building_code":"RCH",
@@ -733,7 +733,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.54051605,43.47029356, 2 ]
+        "coordinates":  [ -80.540520,43.470284, 2 ]
       },
       "properties": {
         "building_code":"RCH",
