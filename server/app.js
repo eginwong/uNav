@@ -103,28 +103,6 @@ router.route('/buildings')
   }
 });
 
-router.route('/demo1')
-
-.get(function(req, res){
-  fs.readFile('data/coordinates/room_nodes.json', 'utf8', function (err,data) {
-    if (err) {
-      res.send(err);
-    }
-    res.send(data);
-  })
-});
-
-router.route('/demo3')
-
-.get(function(req, res){
-  fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) {
-    if (err) {
-      res.send(err);
-    }
-    res.send(data);
-  })
-});
-
 router.route('/graph')
 
 .get(function(req,res){
@@ -182,10 +160,12 @@ router.route('/graph/rooms/select/:id')
         }
         else{
           for (var i in hold){
-            if(hold[i].length == 0 || hold[i] != "Hallway"){
+            if(hold[i] != "Hallway" && hold[i] != "Entrance"){
               if(req.params.id =="RCH") {rooms.push(req.params.id + " " + key.substr(3));}
               else{rooms.push(req.params.id + " " + key.substr(2));}
+              break;
             }
+            else{break;}
           }
         }
       }

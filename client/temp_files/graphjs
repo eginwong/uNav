@@ -22,19 +22,3 @@ http://theory.stanford.edu/~amitp/GameProgramming/ImplementationNotes.html
 // We have found the destination node (hurrah!) Now we create a list of nodes that will be our path list and we will add the destination node to that list.
 // Add the parent node of the destination node to the path list.
 // Add the parent of the previous node to the path list, we will continue to do this until we have added our starting node.
-
-
-Plan:
-
-Start writing up edges or teach Astor how to do it.
-
-@me: use google maps for now with api for waypoints and look into if you can superimpose a map, from qgis on there.
-
-geolocation services and return that to user
-
-
-
-WHAT DO I NEED FOR FUNCTIONING PROTOTYPE?
-
-
--display a path in the front end through some sort of mapping
