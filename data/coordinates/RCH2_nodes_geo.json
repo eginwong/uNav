@@ -83,38 +83,12 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.54069026,43.47018646, 2 ]
+        "coordinates":  [ -80.54067743,43.47015192, 2 ]
       },
       "properties": {
         "building_code":"RCH",
         "utility":[],
         "id":"204",
-        "name":""
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates":  [ -80.54073369,43.47021311, 2 ]
-      },
-      "properties": {
-        "building_code":"RCH",
-        "utility":["Entrance"],
-        "id":"204E1",
-        "name":""
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates":  [ -80.54067743,43.47015192, 2 ]
-      },
-      "properties": {
-        "building_code":"RCH",
-        "utility":["Entrance"],
-        "id":"204E2",
         "name":""
       }
     },
