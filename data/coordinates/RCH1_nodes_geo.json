@@ -304,6 +304,19 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
+       "coordinates":  [ -80.540647,43.470276, 1 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway"],
+    "id":"119H7",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
        "coordinates":  [ -80.540624,43.470286,1 ]
     },
     "properties": {
@@ -343,7 +356,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [-80.541015, 43.470277,1 ]
+       "coordinates":  [-80.541013,43.470275, 1 ]
     },
     "properties": {
     "building_code":"RCH",
