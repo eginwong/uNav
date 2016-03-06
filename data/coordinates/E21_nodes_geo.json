@@ -9,7 +9,7 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":["Stairs"],
+    "utility":["Stairs","Exit"],
     "id":"1107S",
     "name":""
     }
@@ -213,12 +213,12 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.539899,43.470289,1 ]
+       "coordinates":  [ -80.539843,43.470296,1 ]
     },
     "properties": {
     "building_code":"E2",
-    "utility":["Stairs"],
-    "id":"1373S",
+    "utility":["Exit"],
+    "id":"1373",
     "name":""
     }
   },
@@ -1166,8 +1166,8 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":[],
-    "id":"1364",
+    "utility":["Stairs"],
+    "id":"1364S",
     "name":""
     }
   },
@@ -1192,7 +1192,7 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":[],
+    "utility":["Exit"],
     "id":"1367",
     "name":""
     }
@@ -1621,8 +1621,8 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":["Stairs"],
-    "id":"1348S",
+    "utility":["Exit"],
+    "id":"1348",
     "name":""
     }
   },
@@ -1636,6 +1636,19 @@
     "building_code":"E2",
     "utility":["Hallway"],
     "id":"1351H2",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540419,43.471202, 1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":["Exit"],
+    "id":"1351E1",
     "name":""
     }
   },
