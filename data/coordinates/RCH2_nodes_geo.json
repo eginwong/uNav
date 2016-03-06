@@ -18,7 +18,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.540415,43.470282, 2 ]
+        "coordinates":  [ -80.540415,43.470265, 2 ]
       },
       "properties": {
         "building_code":"RCH",
@@ -31,7 +31,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.5405703,43.4705186, 2 ]
+        "coordinates":  [ -80.540572, 43.470513, 2 ]
       },
       "properties": {
         "building_code":"RCH",
@@ -668,12 +668,12 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.5406192,43.47045494, 2 ]
+        "coordinates":  [  -80.540634,43.470451, 2 ]
       },
       "properties": {
         "building_code":"RCH",
-        "utility":[],
-        "id":"228",
+        "utility":["Stairs"],
+        "id":"228S",
         "name":""
       }
     },
