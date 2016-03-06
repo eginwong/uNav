@@ -473,6 +473,19 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
+       "coordinates":  [ -80.540565,43.470368, 3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway", "Fountain"],
+    "id":"331H9",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
        "coordinates":  [ -80.54097042,43.47013845, 3 ]
     },
     "properties": {
