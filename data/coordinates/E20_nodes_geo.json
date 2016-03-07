@@ -13,6 +13,19 @@
     "id":"0347S",
     "name":""
     }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540984,43.470514, 0]
+    },
+    "properties": {
+    "building_code":"Outdoor",
+    "utility": ["Outdoor"],
+    "id":"001",
+    "name":""
+    }
   }
 ]
 }
