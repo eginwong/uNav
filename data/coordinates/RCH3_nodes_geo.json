@@ -283,10 +283,10 @@
     "properties": {
     "building_code":"RCH",
     "utility":["Hallway"],
-    "id":"325",
+    "id":"325E",
     "name":""
     }
-  },
+  },  
   {
     "type": "Feature",
     "geometry": {
@@ -296,7 +296,7 @@
     "properties": {
     "building_code":"RCH",
     "utility":["Exit"],
-    "id":"325E",
+    "id":"325",
     "name":""
     }
   },
