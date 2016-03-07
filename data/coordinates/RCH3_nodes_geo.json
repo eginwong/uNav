@@ -282,8 +282,21 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":["Exit"],
+    "utility":["Hallway"],
     "id":"325",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.541017,43.470404, 3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Exit"],
+    "id":"325E",
     "name":""
     }
   },
