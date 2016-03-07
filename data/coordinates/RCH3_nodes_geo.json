@@ -521,6 +521,32 @@
     "name":""
     }
   },
+    {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540730,43.470241, 3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway", "Fountain"],
+    "id":"331H10",
+    "name":""
+    }
+  },
+      {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540790,43.470351,  3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway", "Fountain"],
+    "id":"331H11",
+    "name":""
+    }
+  },
   {
     "type": "Feature",
     "geometry": {
