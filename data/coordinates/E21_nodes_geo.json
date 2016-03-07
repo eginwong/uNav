@@ -18,32 +18,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.539958,43.470351,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Study"],
-    "id":"1301",
-    "name":"Civil Study Room"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.540013,43.470457,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Lab"],
-    "id":"1302",
-    "name":"Civil Computer Lab"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -80.54044961,43.47093685,1 ]
     },
     "properties": {
@@ -239,39 +213,13 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.539939,43.470286,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1301E2",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -80.539944,43.470414,1 ]
     },
     "properties": {
     "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1301E1",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.540083,43.470503,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":[],
-    "id":"1302A",
-    "name":""
+    "utility":["Study"],
+    "id":"1301",
+    "name":"Civil Study Room"
     }
   },
   {
@@ -308,21 +256,8 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1302E1",
-    "name":"Civil Computer Lab"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.540017,43.470402,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1302E2",
+    "utility":["Lab"],
+    "id":"1302",
     "name":"Civil Computer Lab"
     }
   },
@@ -343,38 +278,12 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54085702,43.47080399,1 ]
+       "coordinates":  [ -80.54086963,43.47075079,1 ]
     },
     "properties": {
     "building_code":"E2",
     "utility":[],
     "id":"1303A",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54086963,43.47075079,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1303AE1",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54077282,43.47077424,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1303AE2",
     "name":""
     }
   },
@@ -401,19 +310,6 @@
     "building_code":"E2",
     "utility":["Entrance"],
     "id":"1303BE1",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.54100022,43.47071147,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1303E1",
     "name":""
     }
   },
@@ -993,19 +889,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54099114,43.47074606,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":[],
-    "id":"1303",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -80.54012095,43.47091767,1 ]
     },
     "properties": {
@@ -1361,8 +1244,8 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1303E2",
+    "utility":[],
+    "id":"1303",
     "name":""
     }
   },
