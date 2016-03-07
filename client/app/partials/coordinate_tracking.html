@@ -93,8 +93,6 @@
     context.fillStyle="#FF0000";
     context.font = "5px Arial";
     context.fillText(row.cells[2].innerHTML, PosX-15,PosY);
-    // context.fillRect( PosX, PosY, 2, 2 );
-
   }
 
   function ImportCoordinates()
@@ -110,9 +108,8 @@
       var canvas = document.getElementById("myCanvas");
       var context = canvas.getContext("2d");
       context.fillStyle="#FF0000";
-      context.font = "10px Arial";
-      context.fillText(row.cells[2].innerHTML, PosX-15,PosY);
-      // context.fillRect( PosX, PosY, 2, 2 );
+      context.font = "8px Arial";
+      context.fillText(row.cells[2].innerHTML, PosX,PosY);
     }
   }
 
