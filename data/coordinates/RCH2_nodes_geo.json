@@ -213,7 +213,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.54065819,43.470298, 2 ]
+        "coordinates":  [ -80.540659,43.470290, 2 ]
       },
       "properties": {
         "building_code":"RCH",
