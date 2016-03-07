@@ -1236,6 +1236,19 @@
     "name":""
     }
   },
+   {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540449,43.471160, 1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":["Hallway"],
+    "id":"1307G",
+    "name":""
+    }
+  },
   {
     "type": "Feature",
     "geometry": {
@@ -1461,7 +1474,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54014976,43.47096857,1 ]
+       "coordinates":  [ 43.470982, -80.540117,1 ]
     },
     "properties": {
     "building_code":"E2",

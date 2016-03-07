@@ -209,6 +209,19 @@
     "name":""
     }
   },
+   {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540730,43.470241, 3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway"],
+    "id":"321H4",
+    "name":""
+    }
+  },
   {
     "type": "Feature",
     "geometry": {
@@ -271,6 +284,19 @@
     "building_code":"RCH",
     "utility":["Hallway"],
     "id":"324H3",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540795, 43.470347, 3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway"],
+    "id":"324H4",
     "name":""
     }
   },
@@ -408,7 +434,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540642,43.470406,  3 ]
+       "coordinates":  [ -80.540639,43.470402,  3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -434,7 +460,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54054133,43.47034838, 3 ]
+       "coordinates":  [ -80.540558,43.470346, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -492,6 +518,32 @@
     "building_code":"RCH",
     "utility":["Hallway", "Fountain"],
     "id":"331H9",
+    "name":""
+    }
+  },
+    {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540730,43.470241, 3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway", "Fountain"],
+    "id":"331H10",
+    "name":""
+    }
+  },
+      {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540790,43.470351,  3 ]
+    },
+    "properties": {
+    "building_code":"RCH",
+    "utility":["Hallway", "Fountain"],
+    "id":"331H11",
     "name":""
     }
   },
