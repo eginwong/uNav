@@ -70,7 +70,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates":  [ -80.54063347,43.47025232, 2 ]
+        "coordinates":  [ -80.540586,43.470227, 2 ]
       },
       "properties": {
         "building_code":"RCH",
@@ -440,6 +440,32 @@
         "building_code":"RCH",
         "utility":["Hallway"],
         "id":"220H13",
+        "name":""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -80.540730,43.470241, 2 ]
+      },
+      "properties": {
+        "building_code":"RCH",
+        "utility":["Hallway"],
+        "id":"220H14",
+        "name":""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -80.540604,43.470252, 2 ]
+      },
+      "properties": {
+        "building_code":"RCH",
+        "utility":["Hallway"],
+        "id":"220H15",
         "name":""
       }
     },
