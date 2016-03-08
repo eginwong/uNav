@@ -27,13 +27,13 @@
         <center><div class="search col-md-offset-6">
           <p>
             To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div></center>
+          </p>
+          <center><div class="search col-md-offset-6">
+            <p>
+              From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div></center>
             </p>
-            <center><div class="search col-md-offset-6">
-              <p>
-                From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div></center>
-              </p>
           </div>
-          <div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div>
+          <center><div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div></center>
 
           <!-- OPTIMIZATION: MAKE THESE DYNAMIC INSTEAD OF STATIC -->
           <div align="right">
