@@ -976,6 +976,19 @@
     "name":""
     }
   },
+    {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540265,43.470869, 1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":[""],
+    "id":"1366",
+    "name":""
+    }
+  },
   {
     "type": "Feature",
     "geometry": {
