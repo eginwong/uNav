@@ -3,7 +3,8 @@
 
 <div class="aboutus">
 
-  <h1><center>Please enter your current building:</center></h1>
+  <h1 ng-show="build == undefined"><center>Please enter your current building:</center></h1>
+  <h1 ng-show="build != undefined"><center>Where shall we go today?</center></h1>
   <hr>
   <center><div class="search col-md-offset-6" ng-show="build == undefined">
     <select ng-model="build" id="buildingsInUW" class="chosen-select" data-placeholder="Navigate" tabindex="1"></select>
@@ -12,26 +13,24 @@
 
   <div ng-show="build != undefined" class="buildingName">
     <div ng-show="showSelect">
-      <center><h4>{{build}}
+      <!-- <center><h4>{{build}}
         <button ng-click="floor(1)" class="btn" id="floor1">1</button>
         <button ng-click="floor(2)" class="btn btn-primary disabled" ng-show='build == "RCH"' id="floor2">2</button>
         <button ng-click="floor(3)" class="btn" id="floor3" ng-show='build == "RCH"'>3</button>
-        <button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
+        <button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center> -->
 
         <!-- Avoid areas -->
         <center><p>
           Avoid:
-          <input type="checkbox" class="limit" id="stairSearch"> Stairs</input>
-          <input type="checkbox" class="limit" id="elevatorSearch"> Elevators</input>
+          <a ng-click='opt("Stairs")' data-scroll><i id="stairIcon" class="fa fa-2x fa-sort-amount-asc wow text-primary" data-wow-delay=".1s"></i></a> or
+          <a ng-click='opt("Elevator")' data-scroll><i id="elevatorIcon" class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i></a>
         </p></center>
         <center><div class="search col-md-offset-6">
-          <p>
-            To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div></center>
-          </p>
-          <center><div class="search col-md-offset-6">
-            <p>
-              From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div></center>
-            </p>
+          <p>To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div>
+          </p></center>
+          <center><div class="search col-md-offset-6" ng-show="dest != undefined">
+            <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div>
+          </p></center>
           </div>
           <center><div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div></center>
 

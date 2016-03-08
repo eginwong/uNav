@@ -91,19 +91,42 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
 
 uNav.controller('navigateController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady, $route) {
 
-  $('input.limit').on('change', function() {
-    $('input.limit').not(this).prop('checked', false);
-    plot("dest").then(function(resp){
-      if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
-      else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
-      if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-        $scope.ShowHide("found");
-        getPath($scope.src, $scope.dest).then(function(floorNum){
-          drawDirections(floorNum);
-        });
+  $scope.stairs = false;
+  $scope.elevator = false;
+
+  $scope.opt = function(util){
+    if(util == "Stairs"){
+      $scope.stairs = !$scope.stairs;
+      if($scope.stairs && $scope.elevator){
+        $scope.elevator = false;
       }
-    });
-  });
+    }
+    if(util == "Elevator"){
+      $scope.elevator = !$scope.elevator;
+      if($scope.stairs && $scope.elevator){
+        $scope.stairs = false;
+      }
+    }
+    //What if both are true?
+
+    if($scope.elevator){$("#elevatorIcon").css("color", "black");}
+    else{$("#elevatorIcon").css("color", "");}
+
+    if($scope.stairs){$("#stairIcon").css("color", "black");}
+    else{$("#stairIcon").css("color", "");}
+    if($scope.dest != undefined){
+      plot("dest").then(function(resp){
+        if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
+        else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+        if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
+          $scope.ShowHide("found");
+          getPath($scope.src, $scope.dest).then(function(floorNum){
+            drawDirections(floorNum);
+          });
+        }
+      });
+    }
+  };
 
   $scope.$on('$routeChangeSuccess', function() {
     if($scope.map != undefined){
@@ -393,10 +416,10 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       // instantiate google map objects for directions
       var waypts = {};
       var handicap = "none";
-      if($("#stairSearch").is(":checked")){
+      if($scope.stairs){
         handicap = "stairs";
       }
-      if($("#elevatorSearch").is(":checked")){
+      if($scope.elevator){
         handicap = "elevators";
       }
       $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, '') + '/' + handicap, function(obj){
