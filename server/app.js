@@ -38,7 +38,6 @@ fs.readFile('data/coordinates/RCH2_nodes_geo.json', 'utf8', function (err,data) 
     }
   });
 });
-
 fs.readFile('data/coordinates/RCH3_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
@@ -50,20 +49,38 @@ fs.readFile('data/coordinates/RCH3_nodes_geo.json', 'utf8', function (err,data) 
       g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
     }
   });
-  fs.readFile('data/coordinates/edges_RCH_Connectors.json', 'utf8', function (err,data3) {
-    var edges = JSON.parse(data3);
+});
+fs.readFile('data/coordinates/E20_nodes_geo.json', 'utf8', function (err,data) {
+  var geo_nodes = JSON.parse(data);
+  for (var ind in geo_nodes.features) {
+    g.addNode(g, geo_nodes.features[ind]);
+  }
+});
+fs.readFile('data/coordinates/E21_nodes_geo.json', 'utf8', function (err,data) {
+  var geo_nodes = JSON.parse(data);
+  for (var ind in geo_nodes.features) {
+    g.addNode(g, geo_nodes.features[ind]);
+  }
+  fs.readFile('data/coordinates/edges_E21.json', 'utf8', function (err,data2) {
+    var edges = JSON.parse(data2);
     for (var ind in edges.vals) {
       g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
     }
+    fs.readFile('data/coordinates/edges_RCH_Connectors.json', 'utf8', function (err,data3) {
+      var edges = JSON.parse(data3);
+      for (var ind in edges.vals) {
+        g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
+      }
+    });
   });
 });
-
 fs.readFile('data/coordinates/DC_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
 });
+
 
 
 var router = express.Router();              // get an instance of the express Router

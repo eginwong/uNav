@@ -31,7 +31,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54055846,43.47028873, 3 ]
+       "coordinates":  [ -80.54056946,43.470278, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -44,7 +44,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540598,43.470268, 3 ]
+       "coordinates":  [ -80.540605,43.470268, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -83,7 +83,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54095164,43.47022348, 3 ]
+       "coordinates":  [ -80.5409750,43.47026048, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -148,7 +148,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54063394,43.47034311, 3 ]
+       "coordinates":  [ -80.54066394,43.47037611, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -304,7 +304,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54094307,43.47041298, 3 ]
+       "coordinates":  [ -80.54094307,43.47041798, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -312,7 +312,7 @@
     "id":"325E",
     "name":""
     }
-  },  
+  },
   {
     "type": "Feature",
     "geometry": {
@@ -421,7 +421,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540651,43.470403,  3 ]
+       "coordinates":  [ -80.540651,43.470393,  3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -473,7 +473,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54055945,43.47031839, 3 ]
+       "coordinates":  [ -80.54056995,43.47031839, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -486,7 +486,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54057033,43.47029961, 3 ]
+       "coordinates":  [ -80.54057033,43.47029971, 3 ]
     },
     "properties": {
     "building_code":"RCH",
@@ -529,7 +529,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":["Hallway", "Fountain"],
+    "utility":["Hallway"],
     "id":"331H10",
     "name":""
     }
@@ -542,7 +542,7 @@
     },
     "properties": {
     "building_code":"RCH",
-    "utility":["Hallway", "Fountain"],
+    "utility":["Hallway"],
     "id":"331H11",
     "name":""
     }
@@ -560,7 +560,6 @@
     "name":""
     }
   },
-
   {
     "type": "Feature",
     "geometry": {
