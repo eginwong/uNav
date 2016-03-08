@@ -25,53 +25,47 @@
           <input type="checkbox" class="limit" id="elevatorSearch"> Elevators</input>
         </p></center>
         <center><div class="search col-md-offset-6">
-        <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Which room?" no-results-text="'Could not find your location :('"></select></div></center>
-        <br>
-        <center><div class="search col-md-offset-6">
-          <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div></center>
-        <br>
-      </div>
-      <div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div>
+          <p>
+            To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div></center>
+            </p>
+            <center><div class="search col-md-offset-6">
+              <p>
+                From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div></center>
+              </p>
+          </div>
+          <div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div>
 
-      <!-- OPTIMIZATION: MAKE THESE DYNAMIC INSTEAD OF STATIC -->
-      <div align="right">
-        <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
-      </div>
+          <!-- OPTIMIZATION: MAKE THESE DYNAMIC INSTEAD OF STATIC -->
+          <div align="right">
+            <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
+          </div>
 
-    </div>
-
-    <div id="searchWrapperOuter">
-
-      <div class="resizeMap" id="searchWrapper">
-        <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
-          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options">
-          </ui-gmap-marker>
-        </ui-gmap-google-map>
-      </div>
-
-      <div ng-hide="IsHidden" class="roomDetails" id="roomSideBar">
-
-        <div ng-hide="IsHidden" class="room1Details" ng-show="one">
-          <!-- <div class="time"> -->
-          <center><h2 ng-show="distance > 0">Time: {{distance}} s.</h2></center><!-- </div> -->
-          <hr>
-
-          <center><p> Location 1 Details:</p></center>
-
-          <center><p>{{src}}</p></center>
-
-          <center><p id=l1Details></p></center>
         </div>
 
-        <div ng-hide="IsHidden" class="room2Details" ng-show="two">
+        <div id="searchWrapperOuter">
+          <div class="resizeMap" id="searchWrapper">
+            <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
+              <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options">
+              </ui-gmap-marker>
+            </ui-gmap-google-map>
+          </div>
 
-          <center><p> Location 2 Details:</p></center>
+          <div ng-hide="IsHidden" class="roomDetails" id="roomSideBar">
+            <div ng-hide="IsHidden" class="room1Details" ng-show="one">
+              <!-- <div class="time"> -->
+              <center><h2 ng-show="distance > 0">Time: {{distance}} s.</h2></center><!-- </div> -->
+              <hr>
 
-          <center><p>{{dest}}</p></center>
+              <center><p> Location 1 Details:</p></center>
+              <center><p>{{src}}</p></center>
+              <center><p id=l1Details></p></center>
+            </div>
 
-          <center><p id=l2Details></p></center>
+            <div ng-hide="IsHidden" class="room2Details" ng-show="two">
+              <center><p> Location 2 Details:</p></center>
+              <center><p>{{dest}}</p></center>
+              <center><p id=l2Details></p></center>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-  </div>
