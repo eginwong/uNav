@@ -230,7 +230,7 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":[],
+    "utility":["Entrance"],
     "id":"1302BE2",
     "name":""
     }
@@ -360,7 +360,7 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":[],
+    "utility":["Hallway"],
     "id":"1307JH2",
     "name":""
     }
@@ -1335,7 +1335,7 @@
     },
     "properties": {
     "building_code":"E2",
-    "utility":[],
+    "utility":["Hallway"],
     "id":"1345H3",
     "name":""
     }

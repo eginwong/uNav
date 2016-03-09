@@ -30,7 +30,7 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
         latitude: 43.4722854,
         longitude: -80.5448576
       },
-      zoom: 16,
+      zoom: 15,
       pan: 1,
       options: $scope.mapOptions,
       markers: [],
@@ -89,7 +89,15 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
 
 });
 
-uNav.controller('navigateController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady, $route) {
+uNav.controller('navigateController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady) {
+
+  // To reset the map between routing.
+  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
+  .then(function (instances) {
+    $scope.map.markers = [];
+    $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
+    $scope.map.zoom = 15;
+  })
 
   $scope.stairs = false;
   $scope.elevator = false;
@@ -127,12 +135,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       });
     }
   };
-
-  $scope.$on('$routeChangeSuccess', function() {
-    if($scope.map != undefined){
-      $scope.map.markers = [];
-    }
-  });
 
   $scope.showSelect = true;
   $scope.IsHidden = true;
@@ -260,7 +262,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       this.div_.parentNode.removeChild(this.div_);
       this.div_ = null;
     };
-    $.get('/api/graph/rooms/select/' + $scope.build, function(obj){
+
+    $.get('/api/graph/rooms/', function(obj){
       var count = 0;
       var appendage;
       if(obj != ''){
@@ -306,10 +309,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.ShowHide("reset");
     $("#l1Details").empty();
     $("#l2Details").empty();
-    // $("#roomSrc")[0].options.length = 0;
-    // $("#roomDest")[0].options.length = 0;
-    // $("#roomSrc").children().remove("optgroup");
-    // $("#roomDest").children().remove("optgroup");
     $scope.src = undefined;
     $scope.dest = undefined;
     $scope.srcNode = undefined;
@@ -317,7 +316,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.waypts = undefined;
     $scope.overlay.setMap(null);
     $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
-    $scope.map.zoom = 16;
+    $scope.map.zoom = 15;
     $scope.map.markers = [];
     $(".chosen-select").val('').trigger("chosen:updated");
   }
@@ -646,19 +645,9 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   };
 });
 
-uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $anchorScroll, $location, uiGmapIsReady, $route) {
-  $scope.$on('$routeChangeSuccess', function() {
-    if($scope.map != undefined){
-      $scope.map.markers = [];
-    }
-  });
-
+uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $anchorScroll, $location, uiGmapIsReady) {
 
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
-  uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
-  .then(function () {
-    $scope.map.zoom = 19;
-  })
 
   $scope.scrollTo=function(id){
     $location.hash(id);
@@ -686,6 +675,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             };
+            $scope.map.zoom = 19;
           }
 
           $scope.map.markers.push({
@@ -776,18 +766,21 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
   };
 
   $scope.onClick = function(e){
-    if($scope.windowOptions.show == undefined){
-      $scope.windowOptions.show = !$scope.windowOptions.show;
-    }
-    $scope.selectedMarker = e.m;
-    var temp = e.m.content;
-    if(/\w*[A-Z]\d$/.test(temp)){temp = temp.slice(0, -2)}
-    if(/\w*[A-Z]$/.test(temp)){temp = temp.slice(0, -1)}
+    if(e.m.id != 9000){
+      if($scope.windowOptions.show == undefined){
+        $scope.windowOptions.show = !$scope.windowOptions.show;
+      }
+      $scope.selectedMarker = e.m;
+      var temp = e.m.content;
+      if(/\w*[A-Z]\d$/.test(temp)){temp = temp.slice(0, -2)}
+      if(/\w*[A-Z]$/.test(temp)){temp = temp.slice(0, -1)}
 
-    $scope.infoContent = temp;
-    $timeout(function() {
-      $scope.$apply();
-    },0);
+      $scope.infoContent = temp;
+      $timeout(function() {
+        $scope.$apply();
+      },0);
+    }
+
   }
 
   $scope.closeClick = function() {

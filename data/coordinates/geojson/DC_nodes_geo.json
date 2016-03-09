@@ -47,8 +47,8 @@
        "coordinates":  [ -80.542468,43.473061 ]
     },
     "properties": {
-    "building_code":"DC-M",
-    "utility":["WC"],
+    "building_code":"DC",
+    "utility":["WC-M"],
     "id":"1934",
     "name":"Men Washroom"
     }

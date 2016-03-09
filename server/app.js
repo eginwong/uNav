@@ -14,59 +14,59 @@ var algo = require('./astar.js');
 var graphDef = require('./graph_definition.js');
 
 var g = new graphDef();
-fs.readFile('data/coordinates/RCH1_nodes_geo.json', 'utf8', function (err,data) {
+fs.readFile('data/coordinates/geojson/RCH1_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
-  fs.readFile('data/coordinates/edges_RCH01.json', 'utf8', function (err,data2) {
+  fs.readFile('data/coordinates/edges/edges_RCH01.json', 'utf8', function (err,data2) {
     var edges = JSON.parse(data2);
     for (var ind in edges.vals) {
       g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
     }
   });
 });
-fs.readFile('data/coordinates/RCH2_nodes_geo.json', 'utf8', function (err,data) {
+fs.readFile('data/coordinates/geojson/RCH2_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
-  fs.readFile('data/coordinates/edges_RCH02.json', 'utf8', function (err,data2) {
+  fs.readFile('data/coordinates/edges/edges_RCH02.json', 'utf8', function (err,data2) {
     var edges = JSON.parse(data2);
     for (var ind in edges.vals) {
       g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
     }
   });
 });
-fs.readFile('data/coordinates/RCH3_nodes_geo.json', 'utf8', function (err,data) {
+fs.readFile('data/coordinates/geojson/RCH3_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
-  fs.readFile('data/coordinates/edges_RCH03.json', 'utf8', function (err,data2) {
+  fs.readFile('data/coordinates/edges/edges_RCH03.json', 'utf8', function (err,data2) {
     var edges = JSON.parse(data2);
     for (var ind in edges.vals) {
       g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
     }
   });
 });
-fs.readFile('data/coordinates/E20_nodes_geo.json', 'utf8', function (err,data) {
+fs.readFile('data/coordinates/geojson/E20_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
 });
-fs.readFile('data/coordinates/E21_nodes_geo.json', 'utf8', function (err,data) {
+fs.readFile('data/coordinates/geojson/E21_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
-  fs.readFile('data/coordinates/edges_E21.json', 'utf8', function (err,data2) {
+  fs.readFile('data/coordinates/edges/edges_E21.json', 'utf8', function (err,data2) {
     var edges = JSON.parse(data2);
     for (var ind in edges.vals) {
       g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
     }
-    fs.readFile('data/coordinates/edges_RCH_Connectors.json', 'utf8', function (err,data3) {
+    fs.readFile('data/coordinates/edges/edges_RCH_Connectors.json', 'utf8', function (err,data3) {
       var edges = JSON.parse(data3);
       for (var ind in edges.vals) {
         g.addEdge(g, edges.vals[ind].id1, edges.vals[ind].id2);
@@ -74,14 +74,12 @@ fs.readFile('data/coordinates/E21_nodes_geo.json', 'utf8', function (err,data) {
     });
   });
 });
-fs.readFile('data/coordinates/DC_nodes_geo.json', 'utf8', function (err,data) {
+fs.readFile('data/coordinates/geojson/DC_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
     g.addNode(g, geo_nodes.features[ind]);
   }
 });
-
-
 
 var router = express.Router();              // get an instance of the express Router
 
@@ -184,6 +182,49 @@ router.route('/graph/rooms/select/:id')
             }
             else{break;}
           }
+        }
+      }
+    }
+    rooms.sort();
+    _callback();
+  }
+
+  // call first function and pass in a callback function which
+  // first function runs when it has completed
+  asyncFind(function() {
+    if(rooms.length > 0){
+      res.send(JSON.stringify(rooms));
+    }
+    else{
+      res.send(undefined);
+    }
+  });
+})
+
+
+// If you want to display everything
+router.route('/graph/rooms')
+
+.get (function(req,res){
+  var rooms = [];
+  var hold;
+  var build;
+  function asyncFind(_callback){
+    for (var key in g._nodes) {
+      hold = g._nodes[key]._data.utility;
+      build = g._nodes[key]._data.building_code;
+      if(hold[0] == undefined){
+        if(/\w{3}/.test(build)){ rooms.push(build + " " + key.substr(3));}
+        else{ rooms.push(build + " " + key.substr(2));}
+      }
+      else{
+        for (var i in hold){
+          if(hold[i] != "Hallway" && hold[i] != "Entrance" && hold[i] != "Outdoor"){
+            if(/\w{3}/.test(build)) {rooms.push(build + " " + key.substr(3));}
+            else{rooms.push(build + " " + key.substr(2));}
+            break;
+          }
+          else{break;}
         }
       }
     }
