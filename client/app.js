@@ -117,11 +117,12 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     }
     //What if both are true?
 
-    if($scope.elevator){$("#elevatorIcon").css("color", "black");}
-    else{$("#elevatorIcon").css("color", "");}
+    if($scope.elevator){$("#elevatorIcon").addClass("btn-primary");}
+    else{$("#elevatorIcon").removeClass("btn-primary");}
 
-    if($scope.stairs){$("#stairIcon").css("color", "black");}
-    else{$("#stairIcon").css("color", "");}
+    if($scope.stairs){$("#stairIcon").addClass("btn-primary");}
+    else{$("#stairIcon").removeClass("btn-primary");}
+    
     if($scope.dest != undefined){
       plot("dest").then(function(resp){
         if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}

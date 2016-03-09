@@ -22,8 +22,7 @@
         <!-- Avoid areas -->
         <center><p>
           Avoid:
-          <a ng-click='opt("Stairs")' data-scroll><i id="stairIcon" class="fa fa-2x fa-sort-amount-asc wow text-primary" data-wow-delay=".1s"></i></a> or
-          <a ng-click='opt("Elevator")' data-scroll><i id="elevatorIcon" class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i></a>
+          <button ng-click='opt("Stairs")' class="btn" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn">Elevators</button>
         </p></center>
         <center><div class="search col-md-offset-6">
           <p>To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div>

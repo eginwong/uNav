@@ -81,6 +81,7 @@ module.exports = {
               f = g + h;
               if(opt == "stairs" && testNode._data.utility.indexOf("Stairs") > -1){ f = 10000}
               if(opt == "elevators" && testNode._data.utility.indexOf("Elevator") > -1){ f = 10000}
+              if(testNode._data.utility.indexOf("Elevator") > -1){ f = 100}
               if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
                 if(testNode._f > f)
                 {
