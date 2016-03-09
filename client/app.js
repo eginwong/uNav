@@ -269,20 +269,31 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       $.get('/api/graph/rooms/', function(obj){
         var count = 0;
         var appendage;
+        var build;
+        var buildOG;
         if(obj != ''){
           $scope.showSelect = true;
           $.each(JSON.parse(obj), function (idx, val) {
+            if(build == undefined){
+              buildOG = val.match(/(\w*)\s/)[1];
+            }
+            else{
+              buildOG = build;
+            }
             var countOG = count;
             count = parseInt(val.charAt(val.indexOf(" ") + 1));
-            if (count > countOG) {
-              if(countOG != 0){
-                appendage+='</optgroup>';
-                $("#roomSrc").append(appendage);
-                $("#roomDest").append(appendage);
+            build = val.match(/(\w*)\s/)[1];
+            if(build != "DC"){
+              if (count > countOG || build != buildOG) {
+                if(countOG != 0){
+                  appendage+='</optgroup>';
+                  $("#roomSrc").append(appendage);
+                  $("#roomDest").append(appendage);
+                }
+                appendage = '<optgroup label="' + build + ' Floor ' + count + '">';
               }
-              appendage = '<optgroup label="' + $scope.build + ' Floor ' + count + '">';
+              appendage+='<option value="' + val + '">' + val + '</option>';
             }
-            appendage+='<option value="' + val + '">' + val + '</option>';
           });
           //The last one.
           appendage+='</optgroup>';
@@ -291,7 +302,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
           $("#roomSrc").chosen({ width: "50%" });
           $("#roomDest").chosen({ width: "50%" });
-
         };
       });
     }
@@ -445,7 +455,15 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         $.each(obj, function (idx, val) {
           if(idx == (leng-1)) {
             // https://en.wikipedia.org/wiki/Preferred_walking_speed to convert to time.
+            // How to display to user:
             $scope.distance = (val.dist / 1.4).toFixed(2);
+            $("#distDisplay").text("Time: " + $scope.distance + " s.");
+            if($scope.distance >= 60){
+              $("#distDisplay").text("Time: " + ($scope.distance/60).toFixed(2) + " min.");
+            }
+            if($scope.distance >= 3600){
+              $("#distDisplay").text("Time: " + ($scope.distance/3600).toFixed(2) + " hr.");
+            }
             waypts.push({alt: pathNum, path: pathTemp});
             $scope.waypts = waypts;
             resolve(start);
