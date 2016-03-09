@@ -101,6 +101,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
   $scope.stairs = false;
   $scope.elevator = false;
+  $scope.load = false;
 
   $scope.opt = function(util){
     if(util == "Stairs"){
@@ -122,7 +123,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
     if($scope.stairs){$("#stairIcon").addClass("btn-primary");}
     else{$("#stairIcon").removeClass("btn-primary");}
-    
+
     if($scope.dest != undefined){
       plot("dest").then(function(resp){
         if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
@@ -189,109 +190,115 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.map.zoom = 19;
     $scope.showSelect = false;
 
-    if($scope.build == "RCH"){
-      $scope.floorNum = 2;
-      $scope.map.zoom = 20;
-      // 2nd floor
-      var swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
-      var neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
+    if($scope.build == "RCH" || $scope.build == "E2"){
+      if($scope.build == "RCH"){
+        $scope.floorNum = 2;
+        $scope.map.zoom = 20;
+        // 2nd floor
+        var swBound = new google.maps.LatLng(43.469956511113, -80.54128386508188);
+        var neBound = new google.maps.LatLng(43.47063996900324, -80.5402374146804);
 
-      var bounds = new google.maps.LatLngBounds(swBound, neBound);
-      var srcImage = 'images/Waterloo Floor Plans/final/RCH2_CAD.png';
+        var bounds = new google.maps.LatLngBounds(swBound, neBound);
+        var srcImage = 'images/Waterloo Floor Plans/final/RCH2_CAD.png';
 
-      DebugOverlay.prototype = new google.maps.OverlayView();
-      $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
-    }
+        DebugOverlay.prototype = new google.maps.OverlayView();
+        $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+      }
 
-    if($scope.build == "E2"){
-      $scope.floorNum = 1;
-      $scope.map.zoom = 19;
-      // 1st floor
-      var swBound = new google.maps.LatLng(43.46968368478908, -80.54181125662228);
-      var neBound = new google.maps.LatLng(43.472067954481304, -80.53893026487356);
+      if($scope.build == "E2"){
+        $scope.floorNum = 1;
+        $scope.map.zoom = 19;
+        // 1st floor
+        var swBound = new google.maps.LatLng(43.46968368478908, -80.54181125662228);
+        var neBound = new google.maps.LatLng(43.472067954481304, -80.53893026487356);
 
-      var bounds = new google.maps.LatLngBounds(swBound, neBound);
-      var srcImage = 'images/Waterloo Floor Plans/final/E2_1CAD.png';
+        var bounds = new google.maps.LatLngBounds(swBound, neBound);
+        var srcImage = 'images/Waterloo Floor Plans/final/E2_1CAD.png';
 
-      DebugOverlay.prototype = new google.maps.OverlayView();
-      $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
-    }
+        DebugOverlay.prototype = new google.maps.OverlayView();
+        $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
+      }
 
-    function DebugOverlay(bounds, image, map) {
-      this.bounds_ = bounds;
-      this.image_ = image;
-      this.map_ = map;
-      this.div_ = null;
-      this.setMap(map.control.getGMap());
-    }
+      function DebugOverlay(bounds, image, map) {
+        this.bounds_ = bounds;
+        this.image_ = image;
+        this.map_ = map;
+        this.div_ = null;
+        this.setMap(map.control.getGMap());
+      }
 
-    DebugOverlay.prototype.onAdd = function() {
+      DebugOverlay.prototype.onAdd = function() {
 
-      var div = document.createElement('div');
-      div.style.borderStyle = 'none';
-      div.style.borderWidth = '0px';
-      div.style.position = 'absolute';
-      var img = document.createElement('img');
-      img.src = this.image_;
-      img.style.width = '100%';
-      img.style.height = '100%';
-      img.style.opacity = '0.95';
-      img.style.position = 'absolute';
-      div.appendChild(img);
-      this.div_ = div;
-      var panes = this.getPanes();
-      panes.overlayLayer.appendChild(div);
-    };
-
-    DebugOverlay.prototype.draw = function() {
-      var overlayProjection = this.getProjection();
-      var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
-      var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
-      var div = this.div_;
-      div.style.left = sw.x + 'px';
-      div.style.top = ne.y + 'px';
-      div.style.width = (ne.x - sw.x) + 'px';
-      div.style.height = (sw.y - ne.y) + 'px';
-    };
-
-    DebugOverlay.prototype.updateBounds = function(bounds){
-      this.bounds_ = bounds;
-      this.draw();
-    };
-
-    DebugOverlay.prototype.onRemove = function() {
-      this.div_.parentNode.removeChild(this.div_);
-      this.div_ = null;
-    };
-
-    $.get('/api/graph/rooms/', function(obj){
-      var count = 0;
-      var appendage;
-      if(obj != ''){
-        $scope.showSelect = true;
-        $.each(JSON.parse(obj), function (idx, val) {
-          var countOG = count;
-          count = parseInt(val.charAt(val.indexOf(" ") + 1));
-          if (count > countOG) {
-            if(countOG != 0){
-              appendage+='</optgroup>';
-              $("#roomSrc").append(appendage);
-              $("#roomDest").append(appendage);
-            }
-            appendage = '<optgroup label="' + $scope.build + ' Floor ' + count + '">';
-          }
-          appendage+='<option value="' + val + '">' + val + '</option>';
-        });
-        //The last one.
-        appendage+='</optgroup>';
-        $("#roomSrc").append(appendage);
-        $("#roomDest").append(appendage);
-
-        $("#roomSrc").chosen({ width: "50%" });
-        $("#roomDest").chosen({ width: "50%" });
-
+        var div = document.createElement('div');
+        div.style.borderStyle = 'none';
+        div.style.borderWidth = '0px';
+        div.style.position = 'absolute';
+        var img = document.createElement('img');
+        img.src = this.image_;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.opacity = '0.95';
+        img.style.position = 'absolute';
+        div.appendChild(img);
+        this.div_ = div;
+        var panes = this.getPanes();
+        panes.overlayLayer.appendChild(div);
       };
-    });
+
+      DebugOverlay.prototype.draw = function() {
+        var overlayProjection = this.getProjection();
+        var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+        var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+        var div = this.div_;
+        div.style.left = sw.x + 'px';
+        div.style.top = ne.y + 'px';
+        div.style.width = (ne.x - sw.x) + 'px';
+        div.style.height = (sw.y - ne.y) + 'px';
+      };
+
+      DebugOverlay.prototype.updateBounds = function(bounds){
+        this.bounds_ = bounds;
+        this.draw();
+      };
+
+      DebugOverlay.prototype.onRemove = function() {
+        this.div_.parentNode.removeChild(this.div_);
+        this.div_ = null;
+      };
+
+      $.get('/api/graph/rooms/', function(obj){
+        var count = 0;
+        var appendage;
+        if(obj != ''){
+          $scope.showSelect = true;
+          $.each(JSON.parse(obj), function (idx, val) {
+            var countOG = count;
+            count = parseInt(val.charAt(val.indexOf(" ") + 1));
+            if (count > countOG) {
+              if(countOG != 0){
+                appendage+='</optgroup>';
+                $("#roomSrc").append(appendage);
+                $("#roomDest").append(appendage);
+              }
+              appendage = '<optgroup label="' + $scope.build + ' Floor ' + count + '">';
+            }
+            appendage+='<option value="' + val + '">' + val + '</option>';
+          });
+          //The last one.
+          appendage+='</optgroup>';
+          $("#roomSrc").append(appendage);
+          $("#roomDest").append(appendage);
+
+          $("#roomSrc").chosen({ width: "50%" });
+          $("#roomDest").chosen({ width: "50%" });
+
+        };
+      });
+    }
+    else{
+      $("#loadMessage").text("We have no data points here. Sorry!");
+      $scope.load = true;
+    }
     $timeout(function() {
       $scope.$apply();
     },0);
@@ -320,6 +327,15 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.map.zoom = 15;
     $scope.map.markers = [];
     $(".chosen-select").val('').trigger("chosen:updated");
+  }
+
+  $scope.retryOnFail = function(){
+    $scope.build = undefined;
+    $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
+    $scope.map.zoom = 15;
+    $(".chosen-select").val('').trigger("chosen:updated");
+    $scope.load = false;
+    $("#loadMessage").text("Loading ...");
   }
 
   $( "#roomSrc" ).change(function() {
@@ -542,10 +558,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
   $scope.floor = function(num){
     var swBound; var neBound; var srcImage;
-    $("#floor1").removeClass("btn-primary disabled");
-    $("#floor2").removeClass("btn-primary disabled");
-    $("#floor3").removeClass("btn-primary disabled");
-    $("#floor" + num).addClass("btn-primary disabled");
     if($scope.build == "RCH"){
       if(num == 1){
         // 1st floor

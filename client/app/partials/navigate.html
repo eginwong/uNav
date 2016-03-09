@@ -14,56 +14,54 @@
   <div ng-show="build != undefined" class="buildingName">
     <div ng-show="showSelect">
       <!-- <center><h4>{{build}}
-        <button ng-click="floor(1)" class="btn" id="floor1">1</button>
-        <button ng-click="floor(2)" class="btn btn-primary disabled" ng-show='build == "RCH"' id="floor2">2</button>
-        <button ng-click="floor(3)" class="btn" id="floor3" ng-show='build == "RCH"'>3</button>-->
-        <center><h4><button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
+      <button ng-click="floor(1)" class="btn" id="floor1">1</button>
+      <button ng-click="floor(2)" class="btn btn-primary disabled" ng-show='build == "RCH"' id="floor2">2</button>
+      <button ng-click="floor(3)" class="btn" id="floor3" ng-show='build == "RCH"'>3</button>-->
 
-        <!-- Avoid areas -->
-        <center><p>
-          Avoid:
-          <button ng-click='opt("Stairs")' class="btn" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn">Elevators</button>
+      <!-- Avoid areas -->
+      <center><p>
+        Avoid:
+        <button ng-click='opt("Stairs")' class="btn" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn">Elevators</button>
+      </p></center>
+      <center><div class="search col-md-offset-6">
+        <p>To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div>
         </p></center>
-        <center><div class="search col-md-offset-6">
-          <p>To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div>
+        <center><div class="search col-md-offset-6" ng-show="dest != undefined">
+          <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div>
           </p></center>
-          <center><div class="search col-md-offset-6" ng-show="dest != undefined">
-            <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div>
-          </p></center>
-          </div>
-          <center><div ng-show="!showSelect"><h2>There is no data available for {{build}}.</h2></div></center>
-
-          <!-- OPTIMIZATION: MAKE THESE DYNAMIC INSTEAD OF STATIC -->
+          <center><h4><button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
           <div align="right">
-            <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
+            <a  ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
           </div>
+        </div>
+        <center><div ng-show="!showSelect"><h2 id="loadMessage">Loading ...</h2><button ng-show="load" ng-click="retryOnFail()" class="btn btn-danger btn-sm btn-round">Try Again</button><br><br></div></center>
 
+      </div>
+
+      <div id="searchWrapperOuter">
+        <div class="resizeMap" id="searchWrapper">
+          <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
+            <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options">
+            </ui-gmap-marker>
+          </ui-gmap-google-map>
         </div>
 
-        <div id="searchWrapperOuter">
-          <div class="resizeMap" id="searchWrapper">
-            <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
-              <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options">
-              </ui-gmap-marker>
-            </ui-gmap-google-map>
+        <div ng-hide="IsHidden" class="roomDetails" id="roomSideBar">
+          <div ng-hide="IsHidden" class="room1Details" ng-show="one">
+            <!-- <div class="time"> -->
+            <center><h2 ng-show="distance > 0">Time: {{distance}} s.</h2></center><!-- </div> -->
+            <hr>
+
+            <center><p> Location 1 Details:</p></center>
+            <center><p>{{src}}</p></center>
+            <center><p id=l1Details></p></center>
           </div>
 
-          <div ng-hide="IsHidden" class="roomDetails" id="roomSideBar">
-            <div ng-hide="IsHidden" class="room1Details" ng-show="one">
-              <!-- <div class="time"> -->
-              <center><h2 ng-show="distance > 0">Time: {{distance}} s.</h2></center><!-- </div> -->
-              <hr>
-
-              <center><p> Location 1 Details:</p></center>
-              <center><p>{{src}}</p></center>
-              <center><p id=l1Details></p></center>
-            </div>
-
-            <div ng-hide="IsHidden" class="room2Details" ng-show="two">
-              <center><p> Location 2 Details:</p></center>
-              <center><p>{{dest}}</p></center>
-              <center><p id=l2Details></p></center>
-            </div>
+          <div ng-hide="IsHidden" class="room2Details" ng-show="two">
+            <center><p> Location 2 Details:</p></center>
+            <center><p>{{dest}}</p></center>
+            <center><p id=l2Details></p></center>
           </div>
         </div>
       </div>
+    </div>
