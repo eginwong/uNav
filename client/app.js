@@ -268,7 +268,9 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
       $.get('/api/graph/rooms/', function(obj){
         var count = 0;
-        var appendage;
+        var destAppendage;
+        // Assuming the floor start at 1.
+        var srcAppendage = '<optgroup label="' + $scope.build + ' Floor 1">';
         var build;
         var buildOG;
         if(obj != ''){
@@ -284,21 +286,37 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             count = parseInt(val.charAt(val.indexOf(" ") + 1));
             build = val.match(/(\w*)\s/)[1];
             if(build != "DC"){
-              if (count > countOG || build != buildOG) {
-                if(countOG != 0){
-                  appendage+='</optgroup>';
-                  $("#roomSrc").append(appendage);
-                  $("#roomDest").append(appendage);
+              if(build == $scope.build){
+                if (count > countOG) {
+                  if(countOG != 0){
+                    destAppendage+='</optgroup>';
+                    srcAppendage+='</optgroup>';
+                    $("#roomSrc").append(srcAppendage);
+                    $("#roomDest").append(destAppendage);
+                  }
+                  destAppendage = '<optgroup label="' + build + ' Floor ' + count + '">';
+                  srcAppendage = '<optgroup label="' + build + ' Floor ' + count + '">';
                 }
-                appendage = '<optgroup label="' + build + ' Floor ' + count + '">';
+                destAppendage+='<option value="' + val + '">' + val + '</option>';
+                srcAppendage+='<option value="' + val + '">' + val + '</option>';
               }
-              appendage+='<option value="' + val + '">' + val + '</option>';
+              else{
+                if (count > countOG || build != buildOG) {
+                  if(countOG != 0){
+                    destAppendage+='</optgroup>';
+                    $("#roomDest").append(destAppendage);
+                  }
+                  destAppendage = '<optgroup label="' + build + ' Floor ' + count + '">';
+                }
+                destAppendage+='<option value="' + val + '">' + val + '</option>';
+              }
             }
           });
           //The last one.
-          appendage+='</optgroup>';
-          $("#roomSrc").append(appendage);
-          $("#roomDest").append(appendage);
+          destAppendage+='</optgroup>';
+          srcAppendage+='</optgroup>';
+          $("#roomSrc").append(destAppendage);
+          $("#roomDest").append(srcAppendage);
 
           $("#roomSrc").chosen({ width: "50%" });
           $("#roomDest").chosen({ width: "50%" });
@@ -315,7 +333,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   });
 
   $scope.restart = function(){
-    $scope.floor(2);
     if($scope.flightPath != undefined){
       $.each($scope.flightPath, function(i){
         $scope.flightPath[i].setMap(null);
