@@ -115,7 +115,7 @@ module.exports = {
         var resultArray = [];
         var dist = 0;
         for (var i = 0; i < path.length; i++){
-          resultArray.push({id: path[i]._id, latitude: path[i]._y, longitude : path[i]._x});
+          resultArray.push({id: path[i]._id, utility: graph._nodes[path[i]._id]._data.utility, latitude: path[i]._y, longitude : path[i]._x});
           if(i != 0){
             var lat1 = path[i-1]._y;
             var lon1 = path[i-1]._x;

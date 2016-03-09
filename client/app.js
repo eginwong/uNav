@@ -540,6 +540,19 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         // in order to have continuity from the last point.
         if(i > 0){
           path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
+          var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
+          console.log(switchFloormarker);
+          //put in the button here.
+          $scope.map.markers.push({
+            id: 1000,
+            coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
+            // icon: {url: 'http://www.wongwatch.com/images/icons/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
+            options: {animation: google.maps.Animation.BOUNCE}
+          });
+          console.log($scope.map.markers);
+          $timeout(function() {
+            $scope.$apply();
+          },0);
         }
         $scope.flightPath.push(new google.maps.Polyline({
           map: $scope.map.control.getGMap(),

@@ -19,16 +19,18 @@
       <button ng-click="floor(3)" class="btn" id="floor3" ng-show='build == "RCH"'>3</button>-->
 
       <!-- Avoid areas -->
-      <center><p>
-        Avoid:
-        <button ng-click='opt("Stairs")' class="btn" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn">Elevators</button>
-      </p></center>
       <center><div class="search col-md-offset-6">
         <p>To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div>
         </p></center>
         <center><div class="search col-md-offset-6" ng-show="dest != undefined">
-          <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></div>
+          <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></p>
+        </div>
+          </center>
+          <div ng-show="src != undefined"><center><p>
+            Avoid:
+            <button ng-click='opt("Stairs")' class="btn btn-small" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn btn-small">Elevators</button>
           </p></center>
+        </div>
           <center><h4><button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
           <div align="right">
             <a  ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
