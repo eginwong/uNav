@@ -116,8 +116,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         $scope.stairs = false;
       }
     }
-    //What if both are true?
 
+    //What if both are true?
     if($scope.elevator){$("#elevatorIcon").addClass("btn-primary");}
     else{$("#elevatorIcon").removeClass("btn-primary");}
 
@@ -404,6 +404,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
           $scope.srcNode = result;
           for(var i = 0; i < mark.length; i++) {
+            // remove src and any stair markers
             if (mark[i].id == 0) {
               mark.splice(i, 1);
               break;
@@ -531,6 +532,18 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
   var drawDirections = function(floor){
     return $q(function(resolve){
+      var mark = $scope.map.markers;
+
+      while(mark.length > 2){
+        for(var i = 0; i <= mark.length; i++) {
+          // remove src and any stair markers
+          if (mark[i].id != 0 && mark[i].id != 1) {
+            mark.splice(i, 1);
+            break;
+          }
+        }
+      }
+
       if($scope.flightPath != undefined){
         $.each($scope.flightPath, function(i){
           $scope.flightPath[i].setMap(null);
@@ -558,15 +571,14 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         if(i > 0){
           path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
           var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
-          console.log(switchFloormarker);
+
           //put in the button here.
-          $scope.map.markers.push({
+          mark.push({
             id: 1000,
             coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
             // icon: {url: 'http://www.wongwatch.com/images/icons/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
             options: {animation: google.maps.Animation.BOUNCE}
           });
-          console.log($scope.map.markers);
           $timeout(function() {
             $scope.$apply();
           },0);
@@ -582,6 +594,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           strokeOpacity: 0,
           strokeColor: '#FF0000',
         }));
+
+        // Figure out how we're going to change the floor function.
         if(floor == $scope.waypts[i].alt){
           animateLine($scope.flightPath[i]);
         }
@@ -654,7 +668,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         clearInterval($scope.flashingAnima);
       }
     }
-    drawDirections(num);
+    // This is used to change the floors after the map has been plotted.
+    // drawDirections(num);
 
     //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
     function DebugOverlay(bounds, image, map) {
