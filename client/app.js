@@ -534,6 +534,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     return $q(function(resolve){
       var mark = $scope.map.markers;
 
+      // To purge the extra markers!
       while(mark.length > 2){
         for(var i = 0; i <= mark.length; i++) {
           // remove src and any stair markers
@@ -576,8 +577,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           mark.push({
             id: 1000,
             coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
-            // icon: {url: 'http://www.wongwatch.com/images/icons/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
-            options: {animation: google.maps.Animation.BOUNCE}
+            icon: {url: 'http://www.wongwatch.com/images/icons/person-walk.png', scaledSize: new google.maps.Size(25,25)},
+            options: {animation: google.maps.Animation.DROP}
           });
           $timeout(function() {
             $scope.$apply();
