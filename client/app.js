@@ -166,7 +166,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
     if(inputValue=="Expand")
     {
-      $("#searchWrapper").animate({width:"1700px"});
+      $("#searchWrapper").animate({width:"1070px"});
       $("#searchButton").attr('value','Reduce');
       $("#searchButton").text(" Hide Details");
       $("#searchButton").removeClass("glyphicon-chevron-left");

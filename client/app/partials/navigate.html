@@ -4,7 +4,7 @@
 <div class="aboutus">
 
   <h1 ng-show="build == undefined"><center>Please enter your current building:</center></h1>
-  <h1 ng-show="build != undefined"><center>Where shall we go today?</center></h1>
+  <h1 ng-show="build != undefined"><center>Where do you want to go today?</center></h1>
   <hr>
   <center><div class="search col-md-offset-6" ng-show="build == undefined">
     <select ng-model="build" id="buildingsInUW" class="chosen-select" data-placeholder="Navigate" tabindex="1"></select>
@@ -19,14 +19,15 @@
       <button ng-click="floor(3)" class="btn" id="floor3" ng-show='build == "RCH"'>3</button>-->
 
       <!-- Avoid areas -->
-      <center><div class="search col-md-offset-6">
-        <p>To: <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></div>
-        </p></center>
-        <center><div class="search col-md-offset-6" ng-show="dest != undefined">
-          <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></p>
-        </div>
-          </center>
-          <div ng-show="src != undefined"><center><p>
+      <center><div class="to search col-md-offset-6">
+        <p>To:   <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></p>
+      </div></center>
+        
+        <center><div class="from search col-md-offset-6" ng-show="dest != undefined">
+        <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></p>
+        </div></center>
+          
+          <div class="avoid" ng-show="src != undefined"><center><p>
             Avoid:
             <button ng-click='opt("Stairs")' class="btn btn-small" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn btn-small">Elevators</button>
           </p></center>
@@ -56,13 +57,13 @@
 
             <center><p> Location 1 Details:</p></center>
             <center><p>{{src}}</p></center>
-            <center><p id=l1Details></p></center>
+            <center><p id="l1Details"></p></center>
           </div>
 
           <div ng-hide="IsHidden" class="room2Details" ng-show="two">
             <center><p> Location 2 Details:</p></center>
             <center><p>{{dest}}</p></center>
-            <center><p id=l2Details></p></center>
+            <center><p id="l2Details"></p></center>
           </div>
         </div>
       </div>
