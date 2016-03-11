@@ -267,12 +267,10 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       };
 
       $.get('/api/graph/rooms/', function(obj){
-        $("#roomSrc").val('');
         var count = 0;
         var destAppendage;
         // Assuming the floor start at 1.
-
-        var srcAppendage = '<optgroup label="' + $scope.build + ' Floor 1">';
+        var srcAppendage;
         var build;
         var buildOG;
         if(obj != ''){
@@ -289,7 +287,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             build = val.match(/(\w*)\s/)[1];
             if(build != "DC"){
               if(build == $scope.build){
-                if (count > countOG) {
+                if (count > countOG || build != buildOG) {
                   if(countOG != 0){
                     destAppendage+='</optgroup>';
                     srcAppendage+='</optgroup>';
