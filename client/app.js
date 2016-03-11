@@ -731,6 +731,22 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
 
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
+  $scope.flipSidebar = function () {
+    //If DIV is hidden it will be visible and vice versa.
+    if($scope.collapsed){
+      $("#sidebar").text(" Show Amenities");
+      $("#sidebar").removeClass("glyphicon-chevron-right");
+      $("#sidebar").addClass("glyphicon-chevron-left");
+    }
+    else{
+      $("#sidebar").text(" Hide Amenities");
+      $("#sidebar").removeClass("glyphicon-chevron-left");
+      $("#sidebar").addClass("glyphicon-chevron-right");
+    }
+
+    $scope.collapsed = !$scope.collapsed;
+  };
+
   $scope.scrollTo=function(id){
     $location.hash(id);
     $anchorScroll();

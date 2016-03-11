@@ -22,11 +22,11 @@
       <center><div class="to search col-md-offset-6">
         <p>To:   <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></p>
       </div></center>
-        
+
         <center><div class="from search col-md-offset-6" ng-show="dest != undefined">
         <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></p>
         </div></center>
-          
+
           <div class="avoid" ng-show="src != undefined"><center><p>
             Avoid:
             <button ng-click='opt("Stairs")' class="btn btn-small" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn btn-small">Elevators</button>
@@ -34,7 +34,7 @@
         </div>
           <center><h4><button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
           <div align="right">
-            <a  ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
+            <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
           </div>
         </div>
         <center><div ng-show="!showSelect"><h2 id="loadMessage">Loading ...</h2><button ng-show="load" ng-click="retryOnFail()" class="btn btn-danger btn-sm btn-round">Try Again</button><br><br></div></center>

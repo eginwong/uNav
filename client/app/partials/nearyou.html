@@ -6,16 +6,13 @@
 
 </div>
 <div class="showAm" align="right">
-  <a ng-show="naviOn != undefined" ng-model="collapsed" class="glyphicon glyphicon-chevron-right btn-sm" ng-click="collapsed=!collapsed">
-    Amenities</a>
+  <a id="sidebar" ng-show="naviOn != undefined" ng-model="collapsed" class="glyphicon glyphicon-chevron-right btn-sm" ng-click="flipSidebar()">
+    Hide Amenities</a>
   </div>
 
   <div id="sidebar-wrapper" ng-if="collapsed" >
 
     <ul class="sidebar-nav nav">
-      <!-- <li class="sidebar-brand">
-      <b><span class="">Amenities</span></b>
-    </li> -->
     <li>
       <a ng-click='chose("WC")'  data-scroll ng-disabled='{{util}} == "WC"'>
         <span class="">Washrooms</span>
