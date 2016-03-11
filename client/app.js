@@ -267,9 +267,11 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       };
 
       $.get('/api/graph/rooms/', function(obj){
+        $("#roomSrc").val('');
         var count = 0;
         var destAppendage;
         // Assuming the floor start at 1.
+
         var srcAppendage = '<optgroup label="' + $scope.build + ' Floor 1">';
         var build;
         var buildOG;
@@ -315,22 +317,23 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           //The last one.
           destAppendage+='</optgroup>';
           srcAppendage+='</optgroup>';
-          $("#roomSrc").append(destAppendage);
-          $("#roomDest").append(srcAppendage);
+          $("#roomSrc").append(srcAppendage);
+          $("#roomDest").append(destAppendage);
 
           $("#roomSrc").chosen({ width: "50%" });
           $("#roomDest").chosen({ width: "50%" });
-        };
+          $(".chosen-select").val('').trigger("chosen:updated");
+        }
+        else{
+          $("#loadMessage").text("We have no data points here. Sorry!");
+          $scope.load = true;
+        }
+        $timeout(function() {
+          $scope.$apply();
+        },0);
       });
     }
-    else{
-      $("#loadMessage").text("We have no data points here. Sorry!");
-      $scope.load = true;
-    }
-    $timeout(function() {
-      $scope.$apply();
-    },0);
-  });
+  })
 
   $scope.restart = function(){
     if($scope.flightPath != undefined){
@@ -344,6 +347,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.ShowHide("reset");
     $("#l1Details").empty();
     $("#l2Details").empty();
+    $("#roomSrc").empty();
     $scope.src = undefined;
     $scope.dest = undefined;
     $scope.srcNode = undefined;
@@ -518,9 +522,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
                 pathTemp = [];
                 pathTemp.push({lat: val.latitude, lng: val.longitude});
               }
-              else{
-                pathTemp.push({lat: val.latitude, lng: val.longitude});
-              }
+              else{pathTemp.push({lat: val.latitude, lng: val.longitude});}
               pathNum = tempNum;
             }
             else{pathTemp.push({lat: val.latitude, lng: val.longitude});}
