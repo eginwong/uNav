@@ -577,9 +577,14 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           mark.push({
             id: 1000,
             coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
-            icon: {url: 'http://www.wongwatch.com/images/icons/person-walk.png', scaledSize: new google.maps.Size(25,25)},
-            options: {animation: google.maps.Animation.DROP}
+            icon: {url: 'http://www.wongwatch.com/images/icons/person-walk.png', scaledSize: new google.maps.Size(30,30)},
+            options: {animation: google.maps.Animation.DROP},
+            events: {
+              click: 'alert("Hello");'
+              // click: "floor(" + "hello" + ");"
+            }
           });
+          console.log(mark);
           $timeout(function() {
             $scope.$apply();
           },0);
