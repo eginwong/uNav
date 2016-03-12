@@ -103,26 +103,21 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   $scope.elevator = false;
   $scope.load = false;
 
-  // $scope.closeClick = function() {
-  //   $scope.transitOn = false;
-  // };
-  //
-  // $scope.transitClick = function(e){
-  //   if(e.m.id != 1000){
-  //     if($scope.windowOptions.show == undefined){
-  //       $scope.windowOptions.show = !$scope.windowOptions.show;
-  //     }
-  //     $scope.transition = e.m;
-  //     var temp = e.m.content;
-  //     if(/\w*[A-Z]\d$/.test(temp)){temp = temp.slice(0, -2)}
-  //     if(/\w*[A-Z]$/.test(temp)){temp = temp.slice(0, -1)}
-  //
-  //     $scope.infoContent = temp;
-  //     $timeout(function() {
-  //       $scope.$apply();
-  //     },0);
-  //   }
-  // }
+  $scope.closeClick = function() {
+    $scope.transitOn = false;
+  };
+
+  $scope.transitClick = function(e){
+    $scope.firstTime = false;
+    if(e.m.id == 1000){
+      $scope.transition = e.m;
+
+      $scope.infoContent = e.m.content;
+      $timeout(function() {
+        $scope.$apply();
+      },0);
+    }
+  }
 
   $scope.opt = function(util){
     if(util == "Stairs"){
@@ -576,6 +571,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       var path;
       var pointer = 0;
       var options = {};
+      var content = "Click on me to switch floors!"
       for (var i in $scope.waypts) {
         path = $scope.waypts[i].path;
         if($scope.waypts[i].alt == floor){
@@ -602,18 +598,24 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
           $scope.transitOn = true;
           //put in the button here.
-          mark.push({
+          var newTarget = {
             id: 1000,
             coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
             icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
             options: options,
+            content: content,
             events: {
               click: function () {
                 $scope.floor(pointer);
               }
             }
             // infoWindow:
-          });
+          }
+
+          mark.push(newTarget);
+
+          $scope.transition = newTarget;
+          $scope.infoContent = newTarget.content;
 
           $timeout(function() {
             $scope.$apply();
@@ -693,15 +695,15 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
 
     if($scope.srcNode != undefined){
-      if($scope.srcNode._z != num){$scope.map.markers[0].options = {'opacity': 0.6};}
-      else{$scope.map.markers[0].options = {'opacity': 1.0}}
-    }
-    if($scope.destNode != undefined){
-      if($scope.destNode._z != num){$scope.map.markers[1].options = {'opacity': 0.6};}
+      if($scope.srcNode._z != num){$scope.map.markers[1].options = {'opacity': 0.6};}
       else{$scope.map.markers[1].options = {'opacity': 1.0}}
     }
+    if($scope.destNode != undefined){
+      if($scope.destNode._z != num){$scope.map.markers[0].options = {'opacity': 0.6};}
+      else{$scope.map.markers[0].options = {'opacity': 1.0}}
+    }
     if($scope.waypts != undefined){
-      if($scope.waypts[0].alt != num){
+      if($scope.waypts[1].alt != num){
         clearInterval($scope.flashingAnima);
       }
     }
