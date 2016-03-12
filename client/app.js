@@ -703,8 +703,11 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       else{$scope.map.markers[0].options = {'opacity': 1.0}}
     }
     if($scope.waypts != undefined){
-      if($scope.waypts[1].alt != num){
-        clearInterval($scope.flashingAnima);
+      if($scope.waypts[1] != undefined)
+      {
+        if($scope.waypts[1].alt != num){
+          clearInterval($scope.flashingAnima);
+        }
       }
     }
     // This is used to change the floors after the map has been plotted.

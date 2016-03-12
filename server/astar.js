@@ -5,7 +5,7 @@ module.exports = {
     return graph._adjacency[nodeID];
   },
 
-  buildPath: function (source, dest) {
+  buildPath: function (graph, source, dest) {
     var path = [];
     var node = dest;
     path.push(node);
@@ -15,6 +15,26 @@ module.exports = {
         return [];
       }
       path.unshift( node );
+    }
+
+    // Do something here the cleans up the path before returning it.
+    var NotDone = true;
+    while(NotDone){
+      for (var i in path){
+        console.log(path[i]);
+        if(path[parseInt(i)+2] != undefined){
+          if(this.findConnectedNodes(graph, path[i]._id).indexOf(path[parseInt(i)+2]._id) > -1){
+            console.log("Trim");
+            path.splice(parseInt(i)+1, 1);
+            break;
+          }
+        }
+        else{
+          console.log("last one");
+          NotDone = false;
+          break;
+        }
+      }
     }
     return path;
   },
@@ -107,7 +127,7 @@ module.exports = {
         currentNode = openNodes.pop();
       }
       var dist;
-      var path = this.buildPath(startNode, destNode);
+      var path = this.buildPath(graph, startNode, destNode);
       if (path.length == 0){
         return fin;
       }
