@@ -21,16 +21,13 @@ module.exports = {
     var NotDone = true;
     while(NotDone){
       for (var i in path){
-        console.log(path[i]);
         if(path[parseInt(i)+2] != undefined){
           if(this.findConnectedNodes(graph, path[i]._id).indexOf(path[parseInt(i)+2]._id) > -1){
-            console.log("Trim");
             path.splice(parseInt(i)+1, 1);
             break;
           }
         }
         else{
-          console.log("last one");
           NotDone = false;
           break;
         }

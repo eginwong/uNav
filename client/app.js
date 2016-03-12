@@ -438,7 +438,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             options: options,
             icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
           });
-          $scope.floor($scope.srcNode._z);
+          $scope.floor($scope.build, $scope.srcNode._z);
           resolve($scope.srcNode);
         })
       }
@@ -465,7 +465,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             options: options
           });
           if($scope.srcNode != undefined){
-            $scope.floor($scope.srcNode._z);
+            $scope.floor($scope.build, $scope.srcNode._z);
           }
           resolve($scope.destNode);
         })
@@ -597,20 +597,25 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
           var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
           $scope.transitOn = true;
+          var building;
+          if($scope.srcNode._data.building_code != $scope.destNode._data.building_code){
+            building = $scope.destNode._data.building_code;
+          }
+          else{
+            building = $scope.srcNode._data.building_code;
+          }
           //put in the button here.
           var newTarget = {
             id: 1000,
             coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
-            // icon: {url: 'http://www.unav.ca/images/icons/circle-outline-xxl-full.png', scaledSize: new google.maps.Size(20,20)},
             icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
             options: options,
             content: content,
             events: {
               click: function () {
-                $scope.floor(pointer);
+                $scope.floor(building, pointer);
               }
             }
-            // infoWindow:
           }
 
           mark.push(newTarget);
@@ -658,9 +663,9 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     })
   }
 
-  $scope.floor = function(num){
+  $scope.floor = function(build, num){
     var swBound; var neBound; var srcImage;
-    if($scope.build == "RCH"){
+    if(build == "RCH"){
       if(num == 1){
         // 1st floor
         swBound = new google.maps.LatLng(43.469979383347734, -80.5412503374692);
@@ -680,7 +685,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         srcImage = 'images/Waterloo Floor Plans/final/RCH3_CAD.png';
       }
     }
-    if($scope.build == "E2"){
+    if(build == "E2"){
       if(num == 1){
         // 1st floor
         swBound = new google.maps.LatLng(43.46968368478908, -80.54181125662228);
