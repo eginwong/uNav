@@ -338,15 +338,15 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           $("#roomDest").chosen({ width: "50%" });
           $(".chosen-select").val('').trigger("chosen:updated");
         }
-        else{
-          $("#loadMessage").text("We have no data points here. Sorry!");
-          $scope.load = true;
-        }
-        $timeout(function() {
-          $scope.$apply();
-        },0);
       });
     }
+    else{
+      $("#loadMessage").text("We have no data points here. Sorry!");
+      $scope.load = true;
+    }
+    $timeout(function() {
+      $scope.$apply();
+    },0);
   })
 
   $scope.restart = function(){
