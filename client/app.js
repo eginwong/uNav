@@ -103,6 +103,27 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   $scope.elevator = false;
   $scope.load = false;
 
+  // $scope.closeClick = function() {
+  //   $scope.transitOn = false;
+  // };
+  //
+  // $scope.transitClick = function(e){
+  //   if(e.m.id != 1000){
+  //     if($scope.windowOptions.show == undefined){
+  //       $scope.windowOptions.show = !$scope.windowOptions.show;
+  //     }
+  //     $scope.transition = e.m;
+  //     var temp = e.m.content;
+  //     if(/\w*[A-Z]\d$/.test(temp)){temp = temp.slice(0, -2)}
+  //     if(/\w*[A-Z]$/.test(temp)){temp = temp.slice(0, -1)}
+  //
+  //     $scope.infoContent = temp;
+  //     $timeout(function() {
+  //       $scope.$apply();
+  //     },0);
+  //   }
+  // }
+
   $scope.opt = function(util){
     if(util == "Stairs"){
       $scope.stairs = !$scope.stairs;
@@ -532,6 +553,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
   var drawDirections = function(floor){
     return $q(function(resolve){
+      $scope.transitOn = false;
       var mark = $scope.map.markers;
 
       // To purge the extra markers!
@@ -552,6 +574,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
       $scope.flightPath = [];
       var path;
+      var pointer = 0;
+      var options = {};
       for (var i in $scope.waypts) {
         path = $scope.waypts[i].path;
         if($scope.waypts[i].alt == floor){
@@ -560,6 +584,10 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             strokeOpacity: 1,
             scale: 1.5
           };
+
+          pointer = parseInt(i) + 1;
+          if($scope.waypts[pointer] == undefined){pointer = $scope.waypts[0].alt;}
+          else{pointer = $scope.waypts[pointer].alt; options = {animation: google.maps.Animation.DROP};}
         }
         else{
           var lineSymbol = {
@@ -572,19 +600,21 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         if(i > 0){
           path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
           var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
-
+          $scope.transitOn = true;
           //put in the button here.
           mark.push({
             id: 1000,
             coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
-            icon: {url: 'http://www.wongwatch.com/images/icons/person-walk.png', scaledSize: new google.maps.Size(30,30)},
-            options: {animation: google.maps.Animation.DROP},
+            icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
+            options: options,
             events: {
-              click: 'alert("Hello");'
-              // click: "floor(" + "hello" + ");"
+              click: function () {
+                $scope.floor(pointer);
+              }
             }
+            // infoWindow:
           });
-          console.log(mark);
+
           $timeout(function() {
             $scope.$apply();
           },0);
@@ -609,6 +639,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       resolve();
     })
   }
+
 
   var animateLine = function(line){
     return $q(function(resolve){
@@ -675,7 +706,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
     }
     // This is used to change the floors after the map has been plotted.
-    // drawDirections(num);
+    drawDirections(num);
 
     //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
     function DebugOverlay(bounds, image, map) {
@@ -878,7 +909,6 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
         $scope.$apply();
       },0);
     }
-
   }
 
   $scope.closeClick = function() {

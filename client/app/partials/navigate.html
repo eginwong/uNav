@@ -13,10 +13,6 @@
 
   <div ng-show="build != undefined" class="buildingName">
     <div ng-show="showSelect">
-      <!-- <center><h4>{{build}}
-      <button ng-click="floor(1)" class="btn" id="floor1">1</button>
-      <button ng-click="floor(2)" class="btn btn-primary disabled" ng-show='build == "RCH"' id="floor2">2</button>
-      <button ng-click="floor(3)" class="btn" id="floor3" ng-show='build == "RCH"'>3</button>-->
 
       <!-- Avoid areas -->
       <center><div class="to search col-md-offset-6">
@@ -44,7 +40,9 @@
       <div id="searchWrapperOuter">
         <div class="resizeMap" id="searchWrapper">
           <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
-            <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options">
+            <!-- <ui-gmap-window ng-model="transition" model="transition" coords="transition.coords" show="true" closeClick="closeClick()">
+            </ui-gmap-window> -->
+            <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options" events="m.events" click="transitClick(this)">
             </ui-gmap-marker>
           </ui-gmap-google-map>
         </div>
