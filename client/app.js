@@ -601,8 +601,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           var newTarget = {
             id: 1000,
             coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
-            icon: {url: 'http://www.unav.ca/images/icons/circle-outline-xxl-full.png', scaledSize: new google.maps.Size(20,20)},
-            // icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
+            // icon: {url: 'http://www.unav.ca/images/icons/circle-outline-xxl-full.png', scaledSize: new google.maps.Size(20,20)},
+            icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
             options: options,
             content: content,
             events: {
@@ -816,7 +816,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
           $scope.map.markers.push({
             id: 9000,
             coords: {latitude: position.coords.latitude, longitude: position.coords.longitude},
-            icon: {url: 'http://www.wongwatch.com/images/icons/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
+            icon: {url: 'http://www.unav.ca/images/icons/circle-xxl.png', scaledSize: new google.maps.Size(20,20)},
             options: {animation: google.maps.Animation.BOUNCE}
           });
           resolve();
