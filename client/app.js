@@ -147,7 +147,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
           $scope.ShowHide("found");
           getPath($scope.src, $scope.dest).then(function(floorNum){
-            drawDirections(floorNum);
+            drawDirections($scope.srcNode._data.building_code, floorNum);
           });
         }
       });
@@ -392,7 +392,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
         $scope.ShowHide("found");
         getPath($scope.src, $scope.dest).then(function(floorNum){
-          drawDirections(floorNum);
+          drawDirections($scope.srcNode._data.building_code, floorNum);
         });
       }
     });
@@ -407,7 +407,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
         $scope.ShowHide("found");
         getPath($scope.src, $scope.dest).then(function(floorNum){
-          drawDirections(floorNum);
+          drawDirections($scope.srcNode._data.building_code, floorNum);
         });
       }
     });
@@ -486,7 +486,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
       $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, '') + '/' + handicap, function(obj){
         var leng = obj.length;
-        var start; var pathTemp; var pathNum; var tempNum;
+        var start; var pathTemp; var pathNum; var tempNum; var buildId;
         var waypts = [];
         $.each(obj, function (idx, val) {
           if(idx == (leng-1)) {
@@ -500,7 +500,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             if($scope.distance >= 3600){
               $("#distDisplay").text("Time: " + ($scope.distance/3600).toFixed(2) + " hr.");
             }
-            waypts.push({alt: pathNum, path: pathTemp});
+            waypts.push({alt: pathNum, buildId: buildId, path: pathTemp});
             $scope.waypts = waypts;
             resolve(start);
           }
@@ -513,7 +513,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
                 pathNum = tempNum;
               }
               if(tempNum != pathNum){
-                waypts.push({alt: pathNum, path: pathTemp});
+                waypts.push({alt: pathNum, buildId: buildId, path: pathTemp});
                 // restart for next iteration
                 pathTemp = [];
                 pathTemp.push({lat: val.latitude, lng: val.longitude});
@@ -521,6 +521,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
               else{
                 pathTemp.push({lat: val.latitude, lng: val.longitude});
               }
+              buildId = "RCH";
               pathNum = tempNum;
             }
             if(val.id.substr(0,2) == "E2"){
@@ -531,13 +532,14 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
                 pathNum = tempNum;
               }
               if(tempNum != pathNum){
-                waypts.push({alt: pathNum, path: pathTemp});
+                waypts.push({alt: pathNum, buildId: buildId, path: pathTemp});
                 // restart for next iteration
                 pathTemp = [];
                 pathTemp.push({lat: val.latitude, lng: val.longitude});
               }
               else{pathTemp.push({lat: val.latitude, lng: val.longitude});}
               pathNum = tempNum;
+              buildId = "E2";
             }
             else{pathTemp.push({lat: val.latitude, lng: val.longitude});}
           }
@@ -546,7 +548,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     })
   };
 
-  var drawDirections = function(floor){
+  var drawDirections = function(targetBuild, floor){
     return $q(function(resolve){
       $scope.transitOn = false;
       var mark = $scope.map.markers;
@@ -568,13 +570,15 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         });
       }
       $scope.flightPath = [];
-      var path;
+      var path; var building;
       var pointer = 0;
       var options = {};
       var content = "Click on me to switch floors!"
+      // debugger;
       for (var i in $scope.waypts) {
+        debugger;
         path = $scope.waypts[i].path;
-        if($scope.waypts[i].alt == floor){
+        if($scope.waypts[i].alt == floor && $scope.waypts[i].buildId == targetBuild){
           var lineSymbol = {
             path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
             strokeOpacity: 1,
@@ -582,8 +586,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           };
 
           pointer = parseInt(i) + 1;
-          if($scope.waypts[pointer] == undefined){pointer = $scope.waypts[0].alt;}
-          else{pointer = $scope.waypts[pointer].alt; options = {animation: google.maps.Animation.DROP};}
+          if($scope.waypts[pointer] == undefined){pointer = $scope.waypts[0].alt; building = $scope.waypts[0].buildId;}
+          else{building = $scope.waypts[pointer].buildId; pointer = $scope.waypts[pointer].alt; options = {animation: google.maps.Animation.DROP};}
         }
         else{
           var lineSymbol = {
@@ -592,36 +596,33 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             scale: 1.5
           };
         }
-        // in order to have continuity from the last point.
+        // If there are multiple levels/buildings in this route.
         if(i > 0){
+          // in order to have continuity from the last point.
           path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
           var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
           $scope.transitOn = true;
-          var building;
-          if($scope.srcNode._data.building_code != $scope.destNode._data.building_code){
-            building = $scope.destNode._data.building_code;
-          }
-          else{
-            building = $scope.srcNode._data.building_code;
-          }
-          //put in the button here.
-          var newTarget = {
-            id: 1000,
-            coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
-            icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
-            options: options,
-            content: content,
-            events: {
-              click: function () {
-                $scope.floor(building, pointer);
+
+          if($scope.waypts[parseInt(i) - 1].alt == floor){
+            var newTarget = {
+              id: 1000,
+              coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
+              icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
+              options: options,
+              content: content,
+              events: {
+                click: function () {
+                  $scope.floor(building, pointer);
+                }
               }
             }
+
+            mark.push(newTarget);
+
+            $scope.transition = newTarget;
+            $scope.infoContent = newTarget.content;
+            console.log($scope.waypts);
           }
-
-          mark.push(newTarget);
-
-          $scope.transition = newTarget;
-          $scope.infoContent = newTarget.content;
 
           $timeout(function() {
             $scope.$apply();
@@ -686,7 +687,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
     }
     if(build == "E2"){
-      if(num == 1){
+      // Because we ignore floor 0
+      if(num >= 0){
         // 1st floor
         swBound = new google.maps.LatLng(43.46968368478908, -80.54181125662228);
         neBound = new google.maps.LatLng(43.472067954481304, -80.53893026487356);
@@ -717,7 +719,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
     }
     // This is used to change the floors after the map has been plotted.
-    drawDirections(num);
+    drawDirections(build, num);
 
     //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
     function DebugOverlay(bounds, image, map) {
