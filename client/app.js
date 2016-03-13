@@ -646,7 +646,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             newTarget = {
               id: 1000,
               coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
-              icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
+              icon: {url: 'http://www.unav.ca/images/icons/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
               options: options,
               content: content,
               events: {
