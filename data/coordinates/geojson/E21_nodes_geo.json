@@ -369,7 +369,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540025,143.470987,  ]
+       "coordinates":  [ -80.540025,43.470987, 1 ]
     },
     "properties": {
     "building_code":"E2",
