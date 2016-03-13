@@ -122,7 +122,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.53985941,43.47120797,1 ]
+       "coordinates":  [ -80.539857,43.471207, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -681,7 +681,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540001,43.471024, 1 ]
+       "coordinates":  [ -80.539999,43.471021, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -694,7 +694,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.53997864,43.47103908,1 ]
+       "coordinates":  [ -80.539975,43.471033,1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -720,7 +720,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.5399122,43.47106271,1 ]
+       "coordinates":  [-80.539883,43.471064, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -733,7 +733,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.53985461,43.4710819,1 ]
+       "coordinates":  [ -80.539852,43.471076, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -850,7 +850,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54005756,43.47114306,1 ]
+       "coordinates":  [ -80.540054,43.471138, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -915,7 +915,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.5397835,43.47112385,1 ]
+       "coordinates":  [ -80.539778,43.471117, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -1045,7 +1045,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.53981552,43.47111041,1 ]
+       "coordinates":  [ -80.539812,43.471105, 1 ]
     },
     "properties": {
     "building_code":"E2",
