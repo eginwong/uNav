@@ -108,7 +108,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   };
 
   $scope.transitClick = function(e){
-    $scope.firstTime = false;
     if(e.m.id == 1000){
       $scope.transition = e.m;
 
@@ -490,9 +489,9 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         var waypts = [];
         $.each(obj, function (idx, val) {
           if(idx == (leng-1)) {
-            // https://en.wikipedia.org/wiki/Preferred_walking_speed to convert to time.
+            // https://en.wikipedia.org/wiki/Preferred_walking_speed to convert to time. Make them slower.
             // How to display to user:
-            $scope.distance = (val.dist / 1.4).toFixed(2);
+            $scope.distance = (val.dist / 1.1).toFixed(2);
             $("#distDisplay").text("Time: " + $scope.distance + " s.");
             if($scope.distance >= 60){
               $("#distDisplay").text("Time: " + ($scope.distance/60).toFixed(2) + " min.");
@@ -570,11 +569,17 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         });
       }
       $scope.flightPath = [];
-      var path; var building;
+      var path; var building; var newTarget; var content;
       var pointer = 0;
       var options = {};
-      var content = "Click on me to switch floors!"
-      // debugger;
+
+      var closeFirst = function(){
+        return $q(function(resolve){
+          $scope.transitOn = false;
+          resolve();
+        })
+      }
+
       for (var i in $scope.waypts) {
         debugger;
         path = $scope.waypts[i].path;
@@ -586,7 +591,25 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           };
 
           pointer = parseInt(i) + 1;
-          if($scope.waypts[pointer] == undefined){pointer = $scope.waypts[0].alt; building = $scope.waypts[0].buildId;}
+          if($scope.waypts[pointer] == undefined){
+            for(var j = 0; j < mark.length; j++) {
+              // Leave a note on the destination marker!
+              if (mark[j].id == 1) {
+                content = "Made it! Again?";
+                mark[j].content = content;
+                mark[j].events = {
+                  click: function () {
+                    closeFirst().then(function(){
+                      $scope.floor($scope.waypts[0].buildId, $scope.waypts[0].alt);
+                    })
+                  }
+                }
+                $scope.transition = mark[j];
+                $scope.infoContent = mark[j].content;
+                $scope.transitOn = true;
+              }
+            }
+          }
           else{building = $scope.waypts[pointer].buildId; pointer = $scope.waypts[pointer].alt; options = {animation: google.maps.Animation.DROP};}
         }
         else{
@@ -602,9 +625,25 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
           var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
           $scope.transitOn = true;
-
           if($scope.waypts[parseInt(i) - 1].alt == floor){
-            var newTarget = {
+            if(building != $scope.waypts[i-1].buildId){
+              if($scope.waypts[i].alt == 0){
+                content = "Going underground to " + building + "."
+              }
+              else{
+                content = "Going outside to " + building + ".";
+              }
+            }
+            else{
+              if($scope.waypts[i].alt > floor){
+                content = "Going up to floor " + $scope.waypts[i].alt + ".";
+              }
+              else if($scope.waypts[i].alt < floor){
+                content = "Going down to floor " + $scope.waypts[i].alt + ".";
+              }
+            }
+
+            newTarget = {
               id: 1000,
               coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
               icon: {url: 'http://www.iconsdb.com/icons/preview/persian-red/circle-outline-xxl.png', scaledSize: new google.maps.Size(20,20)},
@@ -612,16 +651,16 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
               content: content,
               events: {
                 click: function () {
-                  $scope.floor(building, pointer);
+                  closeFirst().then(function(){
+                    $scope.floor(building, pointer);
+                  })
                 }
               }
             }
 
-            mark.push(newTarget);
-
             $scope.transition = newTarget;
             $scope.infoContent = newTarget.content;
-            console.log($scope.waypts);
+            mark.push(newTarget);
           }
 
           $timeout(function() {
@@ -641,7 +680,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         }));
 
         // Figure out how we're going to change the floor function.
-        if(floor == $scope.waypts[i].alt){
+        if(floor == $scope.waypts[i].alt && targetBuild == $scope.waypts[i].buildId){
           animateLine($scope.flightPath[i]);
         }
       }

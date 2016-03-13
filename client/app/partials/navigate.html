@@ -40,7 +40,7 @@
       <div id="searchWrapperOuter">
         <div class="resizeMap" id="searchWrapper">
           <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
-            <ui-gmap-window ng-model="transition" model="transition" coords="transition.coords" show="transitOn && firstTime == undefined" closeClick="closeClick()" options="{pixelOffset: {width: -10, height: -15}}">
+            <ui-gmap-window ng-model="transition" model="transition" coords="transition.coords" show="transitOn" closeClick="closeClick()" options="{pixelOffset: {width: -10, height: -15}}">
               {{infoContent}}
             </ui-gmap-window>
             <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options" events="m.events" click="transitClick(this)">
