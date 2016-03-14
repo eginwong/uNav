@@ -28,7 +28,7 @@
         <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></p>
       </div></center>
 
-      <!-- Avoid areas , only show when src has been chosen. -->
+      <!-- Avoid areas, only show when src has been chosen. -->
       <div class="avoid" ng-show="src != undefined"><center><p>
         Avoid:
         <button ng-click='opt("Stairs")' class="btn btn-small" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn btn-small">Elevators</button>

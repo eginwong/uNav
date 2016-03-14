@@ -145,8 +145,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
         else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
         if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-          // $scope.ShowHide("found");
-          $scope.collapsed = false;
           getPath($scope.src, $scope.dest).then(function(floorNum){
             drawDirections($scope.srcNode._data.building_code, floorNum);
           });
@@ -357,10 +355,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       if(resp._data.utility.length <= 0 && resp._data.name == ""){$scope.l1Dets = "Room";}
       else if(resp._data.name != ""){$scope.l1Dets = resp._data.name;}
       else {$scope.l1Dets = resp._data.utility.toString().replace(/,/g, ', ');}
+      debugger;
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-        // $scope.ShowHide("found");
-        $scope.collapsed = false;
-        console.log($scope.collapsed);
         getPath($scope.src, $scope.dest).then(function(floorNum){
           drawDirections($scope.srcNode._data.building_code, floorNum);
         });
@@ -375,8 +371,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       else if(resp._data.name != ""){$scope.l2Dets = resp._data.name;}
       else {$scope.l2Dets = resp._data.utility.toString().replace(/,/g, ', ');}
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-        // $scope.ShowHide("found");
-        $scope.collapsed = false;
         getPath($scope.src, $scope.dest).then(function(floorNum){
           drawDirections($scope.srcNode._data.building_code, floorNum);
         });
@@ -585,6 +579,9 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
                 else if (mark[j].id == 1000){
                   mark.splice(j, 1);
                 }
+                else if(mark[j].id == 1){
+                  counterOff = false;
+                }
               }
             }
           }
@@ -662,6 +659,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           animateLine($scope.flightPath[i]);
         }
       }
+      $scope.collapsed = false;
       resolve();
     })
   }

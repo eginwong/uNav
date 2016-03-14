@@ -1,9 +1,9 @@
-/*
-Brain child of the project. Requires the binary heap definition.
-*/
-
 var BinaryHeap = require('./binary_heap.js');
 module.exports = {
+
+  /*
+  Brain child of the project. Requires the binary heap definition.
+  */
 
   // Find all connected nodes given the graph and node ID.
   findConnectedNodes: function (graph, nodeID) {
