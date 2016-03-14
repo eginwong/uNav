@@ -563,21 +563,28 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
           pointer = parseInt(i) + 1;
           if($scope.waypts[pointer] == undefined){
-            for(var j = 0; j < mark.length; j++) {
-              // Leave a note on the destination marker!
-              if (mark[j].id == 1 && $scope.waypts.length > 1) {
-                content = "Click on me to restart route.";
-                mark[j].content = content;
-                mark[j].events = {
-                  click: function () {
-                    closeFirst().then(function(){
-                      $scope.floor($scope.waypts[0].buildId, $scope.waypts[0].alt);
-                    })
+            var counterOff = true;
+            while(counterOff){
+              for(var j = 0; j < mark.length; j++) {
+                // Leave a note on the destination marker!
+                if (mark[j].id == 1 && $scope.waypts.length > 1) {
+                  content = "Click on me to restart route.";
+                  mark[j].content = content;
+                  mark[j].events = {
+                    click: function () {
+                      closeFirst().then(function(){
+                        $scope.floor($scope.waypts[0].buildId, $scope.waypts[0].alt);
+                      })
+                    }
                   }
+                  $scope.transition = mark[j];
+                  $scope.infoContent = mark[j].content;
+                  $scope.transitOn = true;
+                  counterOff = false;
                 }
-                $scope.transition = mark[j];
-                $scope.infoContent = mark[j].content;
-                $scope.transitOn = true;
+                else if (mark[j].id == 1000){
+                  mark.splice(j, 1);
+                }
               }
             }
           }

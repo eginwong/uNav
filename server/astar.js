@@ -27,6 +27,12 @@ module.exports = {
             break;
           }
         }
+        if(path[parseInt(i)+3] != undefined){
+          if(this.findConnectedNodes(graph, path[i]._id).indexOf(path[parseInt(i)+3]._id) > -1){
+            path.splice(parseInt(i)+1, 2);
+            break;
+          }
+        }
         else{
           NotDone = false;
           break;
