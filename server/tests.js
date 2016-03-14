@@ -1,4 +1,4 @@
-//JavaScript test suite for graph definition - unit tests
+//JavaScript test suite for graph definition - unit tests - never had time to write them. :'(
 
 // define graph
 

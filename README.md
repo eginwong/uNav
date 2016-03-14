@@ -7,6 +7,10 @@ $ npm install
 $ nodemon index.js
 ```
 
+###March 14, 2016
+
+Officially finished making props as well as the little minor fixes for the application. We did it, team! :) There are a few outstanding issues, but they have been dealt with as best as possible, given the time constraints.
+
 ###February 24, 2016
 
 Added company e-mail 'unavfydp@gmail.com' for sending out support e-mails. Linked up to google maps for the most part. Can't use directions api because it defaults to where google has set their paths. We want to make our paths ourselves, so we will most likely go with drawing the polygon on the map without textual directions. :'(.
