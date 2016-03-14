@@ -16,6 +16,7 @@
         <p>Name: <input type="text" ng-model="contactName" required></p>
         <p>Email: <input type="text" ng-model="contactEmail" required></p>
       </div>
+      <div class="reason search col-md-offset-6">
         <p>Reason:
           <select required ng-model="contactReason">
             <option value="TechSupport">Technical Support</option>
@@ -23,6 +24,7 @@
             <option value="Others">Others</option>
           </select>
         </p>
+      </div>
         <p>Please provide additional comments below.</p>
         <textarea rows="10" cols="45" data-ng-model="contactMsg"></textarea>
         <br>

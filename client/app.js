@@ -156,7 +156,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   };
 
   $scope.showSelect = true;
-  $scope.IsHidden = true;
   var overlay;
 
   $.get('/api/buildings', function(obj){
@@ -166,29 +165,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     });
     $("#buildingsInUW").chosen({ width: "95%" });
   });
-
-  //This will hide the DIV by default.
-  $scope.ShowHide = function (force) {
-
-    if(inputValue=="Expand")
-    {
-      $("#searchWrapper").animate({width:"100%"});
-      $("#searchButton").attr('value','Reduce');
-      $("#searchButton").text(" Hide Details");
-      $("#searchButton").removeClass("glyphicon-chevron-left");
-      $("#searchButton").addClass("glyphicon-chevron-right");
-
-    }
-    else if(inputValue=="Reduce")
-    {
-      $("#searchWrapper").animate({width:"100%"});
-      $("#searchButton").attr('value','Expand');
-      $("#searchButton").text(" Show Details");
-      $("#searchButton").removeClass("glyphicon-chevron-right");
-      $("#searchButton").addClass("glyphicon-chevron-left");
-    }
-    $scope.IsHidden = $scope.IsHidden ? false : true;
-  };
 
   $( "#buildingsInUW" ).change(function() {
     $scope.build = $("#buildingsInUW option:selected").val();
