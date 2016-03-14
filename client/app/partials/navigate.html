@@ -3,74 +3,83 @@
 
 <div class="aboutus">
 
+  <!-- Toggle to show different texts depending on status of user. -->
   <h1 ng-show="build == undefined"><center>Please enter your current building:</center></h1>
   <h1 ng-show="build != undefined"><center>Where do you want to go today?</center></h1>
   <hr>
+
+  <!-- Dropdown for list of all buildings available - loaded from the backend via UW API. -->
   <center><div class="search col-md-offset-6" ng-show="build == undefined">
     <select ng-model="build" id="buildingsInUW" class="chosen-select" data-placeholder="Navigate" tabindex="1"></select>
   </div></center>
   <br>
- 
+
+  <!-- Only show this div if the model build has been set - i.e. from the previous dropdown. -->
   <div ng-show="build != undefined" class="buildingName">
     <div ng-show="showSelect">
 
-      <!-- Avoid areas -->
+      <!-- Dropdown for destination. -->
       <center><div class="to search col-md-offset-6">
         <p>To:   <select ng-model="dest" id="roomDest" class="chosen-select" data-placeholder="To where?" no-results-text="'Could not find your location :('"></select></p>
       </div></center>
 
-        <center><div class="from search col-md-offset-6" ng-show="dest != undefined">
+      <!-- Dropdown for source location, dependent on the origin building. -->
+      <center><div class="from search col-md-offset-6" ng-show="dest != undefined">
         <p>From: <select ng-model="src" id="roomSrc" class="chosen-select" data-placeholder="Starting from?" no-results-text="'Could not find your location :('"></select></p>
-        </div></center>
+      </div></center>
 
-          <div class="avoid" ng-show="src != undefined"><center><p>
-            Avoid:
-            <button ng-click='opt("Stairs")' class="btn btn-small" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn btn-small">Elevators</button>
-          </p></center>
-        </div>
-          <center><h4><button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
-          <div align="right">
-            <!-- <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>  -->
-                       <a ng-show="src != undefined && dest != undefined" ng-model="collapsed" ng-click="flipSidebar()" class="glyphicon btn-sm glyphicon-chevron-right" id="searchButton"> Hide Details</a>
-          </div>
-        </div>
-        <center><div ng-show="!showSelect"><h2 id="loadMessage">Loading ...</h2><button ng-show="load" ng-click="retryOnFail()" class="btn btn-danger btn-sm btn-round">Try Again</button><br><br></div></center>
+      <!-- Avoid areas , only show when src has been chosen. -->
+      <div class="avoid" ng-show="src != undefined"><center><p>
+        Avoid:
+        <button ng-click='opt("Stairs")' class="btn btn-small" id="stairIcon">Stairs</button> or <button ng-click='opt("Elevator")' id="elevatorIcon" class="btn btn-small">Elevators</button>
+      </p></center>
+    </div>
+    <center><h4><button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
 
-      </div>
+    <!-- Side bar activation when src and dest nodes have been chosen by the user. Add a toggle to hide and show the content. -->
+    <div align="right">
+      <a ng-show="src != undefined && dest != undefined" ng-model="collapsed" ng-click="flipSidebar()" class="glyphicon btn-sm glyphicon-chevron-right" id="searchButton"> Hide Details</a>
+    </div>
+    </div>
+    <!-- Load message is necessary for when the data has not yet been loaded from the backend. Dependent on Internet speed. -->
+  <center><div ng-show="!showSelect"><h2 id="loadMessage">Loading ...</h2><button ng-show="load" ng-click="retryOnFail()" class="btn btn-danger btn-sm btn-round">Try Again</button><br><br></div></center>
 
-      <div id="searchWrapperOuter">
-        <div class="resizeMap" id="searchWrapper">
-          <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
-            <ui-gmap-window ng-model="transition" model="transition" coords="transition.coords" show="transitOn" closeClick="closeClick()" options="{pixelOffset: {width: -10, height: -15}}">
-              {{infoContent}}
-            </ui-gmap-window>
-            <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options" events="m.events" click="transitClick(this)">
-            </ui-gmap-marker>
-          </ui-gmap-google-map>
-        </div>
+  </div>
 
+<!-- Using Angular-Google-Maps Directive. -->
+<div id="searchWrapperOuter">
+  <div class="resizeMap" id="searchWrapper">
+    <!-- Add gmap directive and feed in all the events/options that need to be linked to the Angular frontend. -->
+    <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom" data-tap-disabled="true" draggable="true" events="map.events" options="map.options">
+      <!-- Only one info window for all the markers. Keep the interface clean. -->
+      <ui-gmap-window ng-model="transition" model="transition" coords="transition.coords" show="transitOn" closeClick="closeClick()" options="{pixelOffset: {width: -10, height: -15}}">
+        {{infoContent}}
+      </ui-gmap-window>
+      <!-- List of markers available via the ng-repeat directive from Angular. -->
+      <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" options="m.options" events="m.events" click="transitClick(this)">
+      </ui-gmap-marker>
+    </ui-gmap-google-map>
+  </div>
+
+  <!-- Wrapper with actual info from the sidebar. -->
   <div id="sidebar-wrapper" class="roomDetails" ng-if="!collapsed" >
 
     <ul class="sidebar-nav nav">
+      <li class="room1Details">
+        <center><h2>{{distDisplay}}</h2></center>
+        <hr>
+        <center><p> Location 1 Details:</p></center>
+        <center><p>{{src}}</p></center>
+        <center><p>{{l1Dets}}</p></center>
+        <hr>
+      </li>
 
-    <li class="room1Details">
-            <center><h2>{{distDisplay}}</h2></center>
-            <hr>
-
-            <center><p> Location 1 Details:</p></center>
-            <center><p>{{src}}</p></center>
-            <center><p>{{l1Dets}}</p></center>
-            <hr>
-    </li>
-    <li class="room2Details">
+      <li class="room2Details">
         <center><p> Location 2 Details:</p></center>
         <center><p>{{dest}}</p></center>
         <center><p>{{l2Dets}}</p></center>
-    </li>
-
-  </ul>
-
+      </li>
+    </ul>
+  </div>
 </div>
-
-      </div>
-    </div>
+</div>

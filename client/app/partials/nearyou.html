@@ -5,153 +5,156 @@
   <hr>
 
 </div>
+<!-- Fancy sidebar from the right. Show only if the navigation amenity has been chosen. -->
 <div class="showAm" align="right">
   <a id="sidebar" ng-show="naviOn != undefined" ng-model="collapsed" class="glyphicon glyphicon-chevron-right btn-sm" ng-click="flipSidebar()">
     Hide Amenities</a>
   </div>
 
+  <!-- Each element in the list is a link to change which amenity is being displayed/searched for on the front end. -->
   <div id="sidebar-wrapper" ng-if="collapsed" >
 
     <ul class="sidebar-nav nav">
-    <li>
-      <a ng-click='chose("WC")'  data-scroll ng-disabled='{{util}} == "WC"'>
-        <span class="">Washrooms</span>
-        <i class="fa fa-2x fa-female wow text-primary"></i>
-        <i class="fa fa-2x fa-male wow text-primary"></i>
-      </a>
-    </li>
-    <li class="active">
-      <a ng-click='chose("Food")'  data-scroll>
-        <span class="">Food and Drink</span>
-        <i class="fa fa-2x fa-coffee wow text-primary" data-wow-delay=".1s"></i>
-      </a>
-    </li>
-    <li>
-      <a ng-click='chose("Ramp")' data-scroll>
-        <span class="">Accessibility</span>
-        <i class="fa fa-2x fa-wheelchair wow text-primary" data-wow-delay=".2s"></i>
-      </a>
-    </li>
-    <li>
-      <a ng-click='chose("Fountain")' data-scroll>
-        <span class="">Water Fountains</span>
-        <i class="fa fa-2x fa fa-tint wow text-primary"></i>
-      </a>
-    </li>
-    <li>
-      <a ng-click='chose("Stairs")' data-scroll>
-        <span class="">Stairs</span>
-        <i class="fa fa-2x fa-sort-amount-asc wow text-primary" data-wow-delay=".1s"></i>
-      </a>
-    </li>
-    <li>
-      <a ng-click='chose("Elevator")' data-scroll>
-        <span class="">Elevators</span>
-        <i class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i>
-      </a>
-    </li>
-     <li>
-      <a ng-click='chose("Exit")' data-scroll>
-        <span class="">Exits</span>
-        <i class="fa fa-2x fa-sign-out wow text-primary" data-wow-delay=".2s"></i>
-      </a>
-    </li>
-     <li>
-      <a ng-click='chose("Lab")' data-scroll>
-        <span class="">Labs</span>
-        <i class="fa fa-2x fa-laptop wow text-primary" data-wow-delay=".2s"></i>
-      </a>
-    </li>
-     <li>
-      <a ng-click='chose("Study")' data-scroll>
-        <span class="">Study Space</span>
-        <i class="fa fa-2x fa-pencil wow text-primary" data-wow-delay=".2s"></i>
-      </a>
-    </li>
+      <li>
+        <a ng-click='chose("WC")'  data-scroll ng-disabled='{{util}} == "WC"'>
+          <span class="">Washrooms</span>
+          <i class="fa fa-2x fa-female wow text-primary"></i>
+          <i class="fa fa-2x fa-male wow text-primary"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Food")'  data-scroll>
+          <span class="">Food and Drink</span>
+          <i class="fa fa-2x fa-coffee wow text-primary" data-wow-delay=".1s"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Ramp")' data-scroll>
+          <span class="">Accessibility</span>
+          <i class="fa fa-2x fa-wheelchair wow text-primary" data-wow-delay=".2s"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Fountain")' data-scroll>
+          <span class="">Water Fountains</span>
+          <i class="fa fa-2x fa fa-tint wow text-primary"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Stairs")' data-scroll>
+          <span class="">Stairs</span>
+          <i class="fa fa-2x fa-sort-amount-asc wow text-primary" data-wow-delay=".1s"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Elevator")' data-scroll>
+          <span class="">Elevators</span>
+          <i class="fa fa-2x fa-toggle-down wow text-primary" data-wow-delay=".2s"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Exit")' data-scroll>
+          <span class="">Exits</span>
+          <i class="fa fa-2x fa-sign-out wow text-primary" data-wow-delay=".2s"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Lab")' data-scroll>
+          <span class="">Labs</span>
+          <i class="fa fa-2x fa-laptop wow text-primary" data-wow-delay=".2s"></i>
+        </a>
+      </li>
+      <li>
+        <a ng-click='chose("Study")' data-scroll>
+          <span class="">Study Space</span>
+          <i class="fa fa-2x fa-pencil wow text-primary" data-wow-delay=".2s"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-  </ul>
-
-</div>
-
-<div ng-show="!naviOn">
-  <div class="container">
+  <!-- Initial menu that is shown when the user first hits the page and no navigation amenity has been selected. -->
+  <div ng-show="!naviOn">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 text-center">
+          <div class="service-box" ng-click='chose("WC")'>
+            <i class="fa fa-4x fa fa-female wow bounceIn text-primary"></i>
+            <i class="fa fa-4x fa fa-male wow bounceIn text-primary"></i>
+            <h3><b>Washrooms</b></h3>
+          </a>
+          <p class="text-muted">Find the closest washrooms.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("Food")'>
+          <i class="fa fa-4x fa-coffee wow bounceIn text-primary" data-wow-delay=".1s"></i>
+          <h3><b>Food and Drink</b></h3>
+          <p class="text-muted">Need a cup of coffee? snacks?</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("Ramp")'>
+          <i class="fa fa-4x fa-wheelchair wow bounceIn text-primary" data-wow-delay=".2s"></i>
+          <h3><b>Wheelchair Accessibility</b></h3>
+          <p class="text-muted">Look for wheelchair accessibility ramps.</p>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-4 col-md-4 text-center">
-        <div class="service-box" ng-click='chose("WC")'>
-          <i class="fa fa-4x fa fa-female wow bounceIn text-primary"></i>
-          <i class="fa fa-4x fa fa-male wow bounceIn text-primary"></i>
-          <h3><b>Washrooms</b></h3>
-        </a>
-        <p class="text-muted">Find the closest washrooms.</p>
+        <div class="service-box" ng-click='chose("Fountain")'>
+          <i class="fa fa-4x fa fa-tint wow bounceIn text-primary"></i>
+          <h3><b>Water Fountain</b></h3>
+          <p class="text-muted">Thirsty?</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("Stairs")'>
+          <i class="fa fa-4x fa-sort-amount-asc wow bounceIn text-primary" data-wow-delay=".1s"></i>
+          <h3><b>Stairs</b></h3>
+          <p class="text-muted">Trying to be healthy? Take the stairs!</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("Elevator")'>
+          <i class="fa fa-4x fa-toggle-down wow bounceIn text-primary" data-wow-delay=".2s"></i>
+          <h3><b>Elevators</b></h3>
+          <p class="text-muted">Feeling lazy? Take the elevator!</p>
+        </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Food")'>
-        <i class="fa fa-4x fa-coffee wow bounceIn text-primary" data-wow-delay=".1s"></i>
-        <h3><b>Food and Drink</b></h3>
-        <p class="text-muted">Need a cup of coffee? snacks?</p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Ramp")'>
-        <i class="fa fa-4x fa-wheelchair wow bounceIn text-primary" data-wow-delay=".2s"></i>
-        <h3><b>Wheelchair Accessibility</b></h3>
-        <p class="text-muted">Look for wheelchair accessibility ramps.</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Fountain")'>
-        <i class="fa fa-4x fa fa-tint wow bounceIn text-primary"></i>
-        <h3><b>Water Fountain</b></h3>
-        <p class="text-muted">Thirsty?</p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Stairs")'>
-        <i class="fa fa-4x fa-sort-amount-asc wow bounceIn text-primary" data-wow-delay=".1s"></i>
-        <h3><b>Stairs</b></h3>
-        <p class="text-muted">Trying to be healthy? Take the stairs!</p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Elevator")'>
-        <i class="fa fa-4x fa-toggle-down wow bounceIn text-primary" data-wow-delay=".2s"></i>
-        <h3><b>Elevators</b></h3>
-        <p class="text-muted">Feeling lazy? Take the elevator!</p>
-      </div>
-    </div>
-  </div>
     <div class="row">
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Exit")'>
-        <i class="fa fa-4x fa fa-sign-out wow bounceIn text-primary"></i>
-        <h3><b>Exits</b></h3>
-        <p class="text-muted">In a rush? Find the nearest exit.</p>
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("Exit")'>
+          <i class="fa fa-4x fa fa-sign-out wow bounceIn text-primary"></i>
+          <h3><b>Exits</b></h3>
+          <p class="text-muted">In a rush? Find the nearest exit.</p>
+        </div>
       </div>
-    </div>
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Lab")'>
-        <i class="fa fa-4x fa-laptop wow bounceIn text-primary" data-wow-delay=".1s"></i>
-        <h3><b>Labs</b></h3>
-        <p class="text-muted">Need a computer? Find a lab!</p>
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("Lab")'>
+          <i class="fa fa-4x fa-laptop wow bounceIn text-primary" data-wow-delay=".1s"></i>
+          <h3><b>Labs</b></h3>
+          <p class="text-muted">Need a computer? Find a lab!</p>
+        </div>
       </div>
-    </div>
-    <div class="col-lg-4 col-md-4 text-center">
-      <div class="service-box" ng-click='chose("Study")'>
-        <i class="fa fa-4x fa-pencil wow bounceIn text-primary" data-wow-delay=".2s"></i>
-        <h3><b>Study Space</b></h3>
-        <p class="text-muted">Get some work done!</p>
+      <div class="col-lg-4 col-md-4 text-center">
+        <div class="service-box" ng-click='chose("Study")'>
+          <i class="fa fa-4x fa-pencil wow bounceIn text-primary" data-wow-delay=".2s"></i>
+          <h3><b>Study Space</b></h3>
+          <p class="text-muted">Get some work done!</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
+<!-- Only show map when navigation amenity has been chosen. -->
 <div ng-if="naviOn">
-
+  <!-- angular-ui-gmap directive. Link necessary options. -->
   <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
+    <!-- Again, only one info window is desired. -->
     <ui-gmap-window ng-model="infoContent" model="selectedMarker" coords="selectedMarker.coords" show="windowOptions.show" closeClick="closeClick()">
       {{infoContent}}
     </ui-gmap-window>

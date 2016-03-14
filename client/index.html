@@ -6,8 +6,6 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
   <!-- Custom Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -22,6 +20,7 @@
   <link rel="stylesheet" type="text/css" href="css/app.css"/>
   <link rel="stylesheet" type="text/css" href="css/creative.css"/>
 
+  <!-- Load in all the javascript files and dependencies in the index.html shell for SPA. -->
   <script src='libs\lodash\dist\lodash.min.js'></script>
   <script src="libs\angular\angular.min.js"></script>
 
@@ -43,59 +42,54 @@
 </head>
 
 <body id="page-top" ng-controller="mainController"  class="scope" >
-  <!-- For Anuja's UI -->
+  <!-- UI styling -->
   <script src="libs\jquery.easing\js\jquery.easing.min.js"></script>
   <script src="libs\fittext\fittext.js"></script>
   <script src="libs\wow\dist\wow.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-creative/1.0.2/js/creative.min.js"></script>
-  <!-- <script src="libs\AnimatedHeader\js\classie.js"></script>
-  <script src="libs\AnimatedHeader\js\cbpAnimatedHeader.min.js"></script> -->
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+  <!-- Setting up the main navigation bar that runs throughout the app. -->
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#/">uNav</a>
-            </div>
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll" href="#/">uNav</a>
+      </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="\#/">Home</a>
-                    </li>
-                    <li>
-                        <a href="#navigate">Navigate</a>
-                    </li>
-                    <li>
-                        <a href="#nearyou">Near You</a>
-                    </li>
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="\#/">Home</a>
+          </li>
+          <li>
+            <a href="#navigate">Navigate</a>
+          </li>
+          <li>
+            <a href="#nearyou">Near You</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-
-    <div id="main">
+  <div id="main">
     <div ng-view></div>
 
   </div>
 
-
-  </body>
-  </html>
+</body>
+</html>
