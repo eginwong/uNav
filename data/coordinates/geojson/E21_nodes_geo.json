@@ -226,19 +226,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540077,43.470599,1 ]
-    },
-    "properties": {
-    "building_code":"E2",
-    "utility":["Entrance"],
-    "id":"1302BE2",
-    "name":""
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -80.540005,43.470504,1 ]
     },
     "properties": {
@@ -252,7 +239,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540163,43.47074,1 ]
+       "coordinates":  [ -80.540169,43.470743, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -1058,7 +1045,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54012095,43.47056485,1 ]
+       "coordinates":  [ -80.540127,43.470565, 1 ]
     },
     "properties": {
     "building_code":"E2",
