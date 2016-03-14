@@ -595,8 +595,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           if($scope.waypts[pointer] == undefined){
             for(var j = 0; j < mark.length; j++) {
               // Leave a note on the destination marker!
-              if (mark[j].id == 1) {
-                content = "Made it! Again?";
+              if (mark[j].id == 1 && $scope.waypts.length > 1) {
+                content = "Click on me to restart route.";
                 mark[j].content = content;
                 mark[j].events = {
                   click: function () {
