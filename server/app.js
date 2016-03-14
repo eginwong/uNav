@@ -6,6 +6,7 @@ var fs = require("fs");
 var nodemailer = require('nodemailer');
 var bodyParser = require("body-parser");
 
+// bodyParser required for post functions.
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
@@ -14,6 +15,7 @@ var algo = require('./astar.js');
 var graphDef = require('./graph_definition.js');
 
 var g = new graphDef();
+// Read in all the nodes and edge definitions to initiate backend server.
 fs.readFile('data/coordinates/geojson/RCH1_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
@@ -74,6 +76,7 @@ fs.readFile('data/coordinates/geojson/E21_nodes_geo.json', 'utf8', function (err
     });
   });
 });
+
 fs.readFile('data/coordinates/geojson/DC_nodes_geo.json', 'utf8', function (err,data) {
   var geo_nodes = JSON.parse(data);
   for (var ind in geo_nodes.features) {
@@ -90,7 +93,7 @@ router.get('/', function(req, res) {
 
 router.route('/buildings')
 
-// get example
+// get a list of buildings from UWAPI all sorted. We write the file to disk to speed up and minimize the overhead of running the application.
 .get(function(req, res) {
   if (!fs.existsSync("./uwapi_results.json")) {
     request('https://api.uwaterloo.ca/v2/buildings/list.geojson?key=2a7eb4185520ceff7b74992e7df4f55e', function (error, response, body) {
@@ -118,12 +121,14 @@ router.route('/buildings')
   }
 });
 
+// Return graph object.
 router.route('/graph')
 
 .get(function(req,res){
   res.send(JSON.stringify(g));
 })
 
+// Return a list of all amenities given the ID.
 router.route('/graph/amenities/:id')
 
 .get (function(req,res){
@@ -153,13 +158,12 @@ router.route('/graph/amenities/:id')
     _callback();
   }
 
-  // call first function and pass in a callback function which
-  // first function runs when it has completed
   asyncFind(function() {
     res.send(JSON.stringify(nodes));
   });
 })
 
+// Return specific list of rooms given a building acronym.
 router.route('/graph/rooms/select/:id')
 
 .get (function(req,res){
@@ -169,6 +173,7 @@ router.route('/graph/rooms/select/:id')
     for (var key in g._nodes) {
       if(g._nodes[key]._data.building_code == req.params.id){
         hold = g._nodes[key]._data.utility;
+        // If RCH, splice the first 3 characters.Otherwise, splice first two.
         if(hold[0] == undefined){
           if(req.params.id == "RCH"){ rooms.push(req.params.id + " " + key.substr(3));}
           else{ rooms.push(req.params.id + " " + key.substr(2));}
@@ -202,7 +207,7 @@ router.route('/graph/rooms/select/:id')
 })
 
 
-// If you want to display everything
+// If you want to display all rooms, not entrances or outdoor or hallway nodes.
 router.route('/graph/rooms')
 
 .get (function(req,res){
@@ -245,13 +250,14 @@ router.route('/graph/rooms')
 })
 
 
+// Return specific room.
 router.route('/graph/rooms/:id')
 
 .get(function(req,res){
   res.send(JSON.stringify(g._nodes[req.params.id]));
 })
 
-
+// Run A* given specific parameter.
 router.route('/astar/:src/:sink/:options')
 .get(function(req, res) {
   if(req.params.options == "none"){
@@ -265,6 +271,7 @@ router.route('/astar/:src/:sink/:options')
   }
 });
 
+// Post information to the nodemailer library to take care of e-mails.
 router.route('/contact-form')
 
 .post(function(req,res){

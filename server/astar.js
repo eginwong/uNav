@@ -1,10 +1,16 @@
+/*
+Brain child of the project. Requires the binary heap definition.
+*/
+
 var BinaryHeap = require('./binary_heap.js');
 module.exports = {
 
+  // Find all connected nodes given the graph and node ID.
   findConnectedNodes: function (graph, nodeID) {
     return graph._adjacency[nodeID];
   },
 
+  // Build path after the A* algorithm has run. Trim any excess paths caused by the algorithm.
   buildPath: function (graph, source, dest) {
     var path = [];
     var node = dest;
@@ -17,7 +23,7 @@ module.exports = {
       path.unshift( node );
     }
 
-    // Do something here the cleans up the path before returning it.
+    // Do something here that cleans up the path before returning it.
     var NotDone = true;
     while(NotDone){
       for (var i in path){
@@ -69,12 +75,15 @@ module.exports = {
     return false;
   },
 
+  // Run for actual path between src and sink on graph, with options for avoidance.
   aStar: function (graph, src, sink, opt){
     //finished result to return.
     var fin;
+    // Clear parentNodes after previous runs.
     graph.clearParents(graph);
     if(graph._nodes[src] && graph._nodes[sink]){
       // initializing all the variables.
+      // Binary Heap definition is important as it is what determines the priority queue, based on the f variable under the graphnode.
       var openNodes = new BinaryHeap(function(x){return x._f;});
       var closedNodes = [];
       var startNode; var currentNode; var destNode; var testNode;
@@ -91,6 +100,7 @@ module.exports = {
       var g; var h; var f;
       var l;
 
+      // While loop to iterate through each node on the openNodes list to find the desired option.
       while (currentNode != destNode && currentNode != undefined) {
         connectedNodes = this.findConnectedNodes(graph, currentNode._id);
         l = connectedNodes.length;
@@ -102,10 +112,14 @@ module.exports = {
               g = currentNode._g + 1;
               h = this.manhattan(testNode, destNode);
               f = g + h;
-              if(opt == "stairs" && testNode._data.utility.indexOf("Stairs") > -1){ f = 10000}
-              if(opt == "elevators" && testNode._data.utility.indexOf("Elevator") > -1){ f = 10000}
-              if(testNode._data.utility.indexOf("Elevator") > -1){ f = 100}
-              if ( this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
+
+              // For avoidances, make the elevators and stairs ridiculously high to avoid them.
+              if(opt == "stairs" && testNode._data.utility.indexOf("Stairs") > -1){f = 10000}
+              if(opt == "elevators" && testNode._data.utility.indexOf("Elevator") > -1){f = 10000}
+
+              // Discourage the use of elevators as they are slow.
+              if(testNode._data.utility.indexOf("Elevator") > -1){f = 100}
+              if (this.containsObject(testNode, openNodes) || this.containsObject(testNode, closedNodes))	{
                 if(testNode._f > f)
                 {
                   testNode._f = f;
@@ -139,6 +153,7 @@ module.exports = {
         var dist = 0;
         for (var i = 0; i < path.length; i++){
           resultArray.push({id: path[i]._id, utility: graph._nodes[path[i]._id]._data.utility, latitude: path[i]._y, longitude : path[i]._x});
+          // This calculation is required to determine the metres distance given two lat/long points.
           if(i != 0){
             var lat1 = path[i-1]._y;
             var lon1 = path[i-1]._x;
