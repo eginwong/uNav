@@ -30,7 +30,8 @@
         </div>
           <center><h4><button ng-click="restart()" class="btn btn-danger btn-sm btn-round" id="restart">Reset</button></h4></center>
           <div align="right">
-            <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>
+            <!-- <a ng-show="src != undefined && dest != undefined" ng-click='ShowHide("")' class="glyphicon btn-sm" id="searchButton" value="Expand"></a>  -->
+                       <a ng-show="src != undefined && dest != undefined" ng-model="collapsed" ng-click="flipSidebar()" class="glyphicon btn-sm glyphicon-chevron-right" id="searchButton"> Hide Details</a>
           </div>
         </div>
         <center><div ng-show="!showSelect"><h2 id="loadMessage">Loading ...</h2><button ng-show="load" ng-click="retryOnFail()" class="btn btn-danger btn-sm btn-round">Try Again</button><br><br></div></center>
@@ -48,22 +49,28 @@
           </ui-gmap-google-map>
         </div>
 
-        <div ng-hide="IsHidden" class="roomDetails" id="roomSideBar">
-          <div ng-hide="IsHidden" class="room1Details" ng-show="one">
-            <!-- <div class="time"> -->
-            <center><h2 ng-show="distance > 0" id="distDisplay"></h2></center>
+  <div id="sidebar-wrapper" class="roomDetails" ng-if="!collapsed" >
+
+    <ul class="sidebar-nav nav">
+
+    <li class="room1Details">
+            <center><h2>{{distDisplay}}</h2></center>
             <hr>
 
             <center><p> Location 1 Details:</p></center>
             <center><p>{{src}}</p></center>
-            <center><p id="l1Details"></p></center>
-          </div>
+            <center><p>{{l1Dets}}</p></center>
+            <hr>
+    </li>
+    <li class="room2Details">
+        <center><p> Location 2 Details:</p></center>
+        <center><p>{{dest}}</p></center>
+        <center><p>{{l2Dets}}</p></center>
+    </li>
 
-          <div ng-hide="IsHidden" class="room2Details" ng-show="two">
-            <center><p> Location 2 Details:</p></center>
-            <center><p>{{dest}}</p></center>
-            <center><p id="l2Details"></p></center>
-          </div>
-        </div>
+  </ul>
+
+</div>
+
       </div>
     </div>

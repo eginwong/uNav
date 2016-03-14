@@ -81,24 +81,16 @@ div label {
 .resizeMap{
   float:left;
    width:100%;
-   margin:0 0.5%;
+   margin:0; 
 }
-@media only screen and (max-width: 49em) {
-    .resizeMap {
-        float:none;
-        width:100%;
-        margin-bottom:5px
-    }
-}
-
-
-.roomDetails{
+/*.roomDetails{
   display: inline-block;
   height: 500px;
-  width: 200px;
+  width: 205px;
   position:absolute;
   background-color: black;
   opacity: 0.6;
+  padding-right: 10px;
 }
 .roomDetails p{
   text-decoration: none;
@@ -123,7 +115,7 @@ div label {
   position: absolute;
   height: 130px;
   width: 200px;
-}
+}*/
 .buildingName h2{
   font-size: 10px;
 }
@@ -756,7 +748,13 @@ body {
     padding-left: 50px;
   }
 }
-
+/*@media only screen and (max-width: 49em) {
+    .resizeMap {
+        float:none;
+        width:100%;
+        margin-bottom:5px
+    }
+}
 @media screen and (max-width: 480px), screen and (max-width: 768px) {
   .roomDetails{
     display: inline-block;
@@ -787,13 +785,8 @@ body {
 .roomDetails h2{
   font-size: 12px;
 }
-/*.time {
-  position: center;
-  height: 20px;
-  width: 200px;
-}*/
   }
-}
+}*/
 /*@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
    .roomDetails{
     display: inline-block;

@@ -102,6 +102,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   $scope.stairs = false;
   $scope.elevator = false;
   $scope.load = false;
+  $scope.collapsed = true;
 
   $scope.closeClick = function() {
     $scope.transitOn = false;
@@ -144,7 +145,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
         else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
         if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-          $scope.ShowHide("found");
+          // $scope.ShowHide("found");
+          $scope.collapsed = false;
           getPath($scope.src, $scope.dest).then(function(floorNum){
             drawDirections($scope.srcNode._data.building_code, floorNum);
           });
@@ -167,21 +169,10 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
 
   //This will hide the DIV by default.
   $scope.ShowHide = function (force) {
-    //If DIV is hidden it will be visible and vice versa.
-    var inputValue=$("#searchButton").attr('value');
-    if(force == "found"){
-      inputValue = "Expand";
-      $scope.IsHidden = true;
-    }
-    else if(force == "reset"){
-      inputValue = "Reduce";
-      $scope.IsHidden = false;
-    }
-    else{}
 
     if(inputValue=="Expand")
     {
-      $("#searchWrapper").animate({width:"1070px"});
+      $("#searchWrapper").animate({width:"100%"});
       $("#searchButton").attr('value','Reduce');
       $("#searchButton").text(" Hide Details");
       $("#searchButton").removeClass("glyphicon-chevron-left");
@@ -356,10 +347,11 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       $scope.distance = undefined;
     }
     $scope.build = undefined;
-    $scope.IsHidden = false;
-    $scope.ShowHide("reset");
-    $("#l1Details").empty();
-    $("#l2Details").empty();
+    $scope.collapsed = true;
+    // $scope.ShowHide("reset");
+    $scope.distDisplay = undefined;
+    $scope.l1Dets = undefined;
+    $scope.l2Dets = undefined;
     $("#roomSrc").empty();
     $scope.src = undefined;
     $scope.dest = undefined;
@@ -386,11 +378,13 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val();
     plot("src").then(function(resp){
-      if(resp._data.utility.length <= 0 && resp._data.name == ""){$("#l1Details").text("Room");}
-      else if(resp._data.name != ""){$("#l1Details").text(resp._data.name);}
-      else {$("#l1Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+      if(resp._data.utility.length <= 0 && resp._data.name == ""){$scope.l1Dets = "Room";}
+      else if(resp._data.name != ""){$scope.l1Dets = resp._data.name;}
+      else {$scope.l1Dets = resp._data.utility.toString().replace(/,/g, ', ');}
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-        $scope.ShowHide("found");
+        // $scope.ShowHide("found");
+        $scope.collapsed = false;
+        console.log($scope.collapsed);
         getPath($scope.src, $scope.dest).then(function(floorNum){
           drawDirections($scope.srcNode._data.building_code, floorNum);
         });
@@ -401,11 +395,12 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   $( "#roomDest" ).change(function() {
     $scope.dest = $("#roomDest option:selected").val();
     plot("dest").then(function(resp){
-      if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
-      else if(resp._data.name != ""){$("#l2Details").text(resp._data.name);}
-      else {$("#l2Details").text(resp._data.utility.toString().replace(/,/g, ', '));}
+      if(resp._data.utility.length <= 0){$scope.l2Dets = "Room";}
+      else if(resp._data.name != ""){$scope.l2Dets = resp._data.name;}
+      else {$scope.l2Dets = resp._data.utility.toString().replace(/,/g, ', ');}
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
-        $scope.ShowHide("found");
+        // $scope.ShowHide("found");
+        $scope.collapsed = false;
         getPath($scope.src, $scope.dest).then(function(floorNum){
           drawDirections($scope.srcNode._data.building_code, floorNum);
         });
@@ -493,12 +488,12 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             // https://en.wikipedia.org/wiki/Preferred_walking_speed to convert to time. Make them slower.
             // How to display to user:
             $scope.distance = (val.dist / 1.1).toFixed(2);
-            $("#distDisplay").text("Time: " + $scope.distance + " s.");
+            $scope.distDisplay = "Time: " + $scope.distance + " s.";
             if($scope.distance >= 60){
-              $("#distDisplay").text("Time: " + ($scope.distance/60).toFixed(2) + " min.");
+              $scope.distDisplay = "Time: " + ($scope.distance/60).toFixed(2) + " min.";
             }
             if($scope.distance >= 3600){
-              $("#distDisplay").text("Time: " + ($scope.distance/3600).toFixed(2) + " hr.");
+              $scope.distDisplay = "Time: " + ($scope.distance/3600).toFixed(2) + " hr.";
             }
             waypts.push({alt: pathNum, buildId: buildId, path: pathTemp});
             $scope.waypts = waypts;
@@ -582,7 +577,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
 
       for (var i in $scope.waypts) {
-        debugger;
         path = $scope.waypts[i].path;
         if($scope.waypts[i].alt == floor && $scope.waypts[i].buildId == targetBuild){
           var lineSymbol = {
@@ -809,7 +803,26 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       this.div_ = null;
     };
   };
+
+$scope.flipSidebar = function () {
+    //If DIV is hidden it will be visible and vice versa.
+    if(!$scope.collapsed){
+      $("#searchButton").text(" Show Details");
+      $("#searchButton").removeClass("glyphicon-chevron-right");
+      $("#searchButton").addClass("glyphicon-chevron-left");
+    }
+    else{
+      $("#searchButton").text(" Hide Details");
+      $("#searchButton").removeClass("glyphicon-chevron-left");
+      $("#searchButton").addClass("glyphicon-chevron-right");
+    }
+    $scope.collapsed = !$scope.collapsed;
+    console.log($scope.distance);
+  };
+
 });
+
+
 
 uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $anchorScroll, $location, uiGmapIsReady) {
 
