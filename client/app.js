@@ -367,6 +367,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.destNode = undefined;
     $scope.waypts = undefined;
     $scope.overlay.setMap(null);
+    $scope.transitOn = false;
     $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
     $scope.map.zoom = 15;
     $scope.map.markers = [];
@@ -628,18 +629,18 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           if($scope.waypts[parseInt(i) - 1].alt == floor){
             if(building != $scope.waypts[i-1].buildId){
               if($scope.waypts[i].alt == 0){
-                content = "Going underground to " + building + "."
+                content = "Click me. Going underground to " + building + "."
               }
               else{
-                content = "Going outside to " + building + ".";
+                content = "Click me. Going outside to " + building + ".";
               }
             }
             else{
               if($scope.waypts[i].alt > floor){
-                content = "Going up to floor " + $scope.waypts[i].alt + ".";
+                content = "Click me. Going up to floor " + $scope.waypts[i].alt + ".";
               }
               else if($scope.waypts[i].alt < floor){
-                content = "Going down to floor " + $scope.waypts[i].alt + ".";
+                content = "Click me. Going down to floor " + $scope.waypts[i].alt + ".";
               }
             }
 
