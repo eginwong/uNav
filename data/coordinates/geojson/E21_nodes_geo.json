@@ -1496,6 +1496,19 @@
     "name":""
     }
   },
+      {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539923,43.471053, 1 ]
+    },
+    "properties": {
+    "building_code":"E2",
+    "utility":["Hallway"],
+    "id":"1374H26",
+    "name":""
+    }
+  },
   {
     "type": "Feature",
     "geometry": {
