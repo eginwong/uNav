@@ -635,7 +635,6 @@ body {
 
 #wrapper.toggled #sidebar-wrapper {
     width: 160px;
-
 }
 
 #page-content-wrapper {
@@ -657,7 +656,6 @@ body {
 }
 .sidebar-nav {
     position: absolute;
-    top: 0;
     width: 160px;
     list-style: none;
     overflow-y: scroll;
@@ -705,7 +703,15 @@ body {
     padding-top: 160px;
 }
 
-@media(min-width:160px) {
+@media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation:landscape) { 
+    #sidebar-wrapper {
+        width: 160px;
+        height: 50%;
+    }
+}
+
+
+@media(min-width:268px) {
     #wrapper {
         padding-left: 0px;
     }
