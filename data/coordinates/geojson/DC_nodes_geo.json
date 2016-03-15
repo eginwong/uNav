@@ -5,7 +5,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542345,43.472709 ]
+       "coordinates":  [ -80.542345,43.472709, 1]
     },
     "properties": {
     "building_code":"DC",
@@ -18,7 +18,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542965,43.472895 ]
+       "coordinates":  [ -80.542965,43.472895,1  ]
     },
     "properties": {
     "building_code":"DC",
@@ -31,7 +31,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.543354,43.472807 ]
+       "coordinates":  [ -80.543354,43.472807,1  ]
     },
     "properties": {
     "building_code":"DC",
@@ -44,20 +44,20 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542468,43.473061 ]
+       "coordinates":  [ -80.542468,43.473061,1 ]
     },
     "properties": {
     "building_code":"DC",
     "utility":["WC-M"],
     "id":"1934",
-    "name":"Men Washroom"
+    "name":"Men's Washroom"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54242,43.473079 ]
+       "coordinates":  [ -80.54242,43.473079,1 ]
     },
     "properties": {
     "building_code":"DC",
@@ -70,11 +70,11 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542473,43.472686 ]
+       "coordinates":  [ -80.542473,43.472686,1 ]
     },
     "properties": {
     "building_code":"DC",
-    "utility":["Exit"],
+    "utility":["Exit", "Ramp"],
     "id":"1841J",
     "name":""
     }
@@ -83,11 +83,11 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542012,43.472863 ]
+       "coordinates":  [ -80.542012,43.472863,1 ]
     },
     "properties": {
     "building_code":"DC",
-    "utility":["Exit"],
+    "utility":["Exit", "Ramp"],
     "id":"1842G",
     "name":""
     }
@@ -96,7 +96,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542473,43.472725 ]
+       "coordinates":  [ -80.542473,43.472725,1 ]
     },
     "properties": {
     "building_code":"DC",
@@ -109,7 +109,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542642,43.472941 ]
+       "coordinates":  [ -80.542642,43.472941,1 ]
     },
     "properties": {
     "building_code":"DC",
@@ -122,7 +122,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542033,43.472883 ]
+       "coordinates":  [ -80.542033,43.472883,1 ]
     },
     "properties": {
     "building_code":"DC",
@@ -135,7 +135,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54217,43.47311 ]
+       "coordinates":  [ -80.54217,43.47311,1 ]
     },
     "properties": {
     "building_code":"DC",
@@ -148,7 +148,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542527,43.473028 ]
+       "coordinates":  [ -80.542527,43.473028,1 ]
     },
     "properties": {
     "building_code":"DC",
@@ -161,7 +161,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.542575,43.473014 ]
+       "coordinates":  [ -80.542575,43.473014,1 ]
     },
     "properties": {
     "building_code":"DC",
@@ -174,13 +174,26 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54221,43.472668 ]
+       "coordinates":  [ -80.54221,43.472668,1 ]
     },
     "properties": {
     "building_code":"DC",
     "utility":["Study"],
     "id":"1501",
     "name":"DC Library"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.542525,43.472761,1 ]
+    },
+    "properties": {
+    "building_code":"DC",
+    "utility":["Elevator"],
+    "id":"1818",
+    "name":""
     }
   }
 ]
