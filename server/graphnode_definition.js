@@ -1,3 +1,7 @@
+/*
+Define the graph node object. f,g,h, parentnode are required fields for pathfinding.
+*/
+
 function Graphnode (obj){
   // *** fields ***
   this._id = obj.properties.building_code + obj.properties.id;

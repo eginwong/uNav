@@ -1,37 +1,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Isolated page used for first section of design phase, when creating some standard referencing system. -->
 <html>
 <head>
+  <!-- Keeping styling local so that this file can be standalone. -->
   <Title>Floor Mapping</Title>
   <!-- All dem script calls. -->
   <style>
   body{background: #f2f6f8;}
-.backImg{position:absolute;z-index:1;}
-#myImgId{
-  position: absolute; left: 0px; top:0px; z-index: 2;
-  width: auto;
-  height:842px;
-}
-#container{
-  display:inline-block;
-  width:1174px;
-  height:842px;
-  margin: 0 auto;
-  background: black;
-  position:relative;
-}
+  .backImg{position:absolute;z-index:1;}
+  #myImgId{
+    position: absolute; left: 0px; top:0px; z-index: 2;
+    width: auto;
+    height:842px;
+  }
+  #container{
+    display:inline-block;
+    width:1174px;
+    height:842px;
+    margin: 0 auto;
+    background: black;
+    position:relative;
+  }
 
-#wrapper{position:relative;}
-#myCanvas{position:absolute; z-index:20;}
-#canvas1{position:absolute; z-index:20;}
-#canvas2{position:absolute; z-index:20; visibility: hidden;}
-#canvas3{position:absolute; z-index:20; visibility: hidden;}
-#canvas4{position:absolute; z-index:20; visibility: hidden;}
-#canvas5{position:absolute; z-index:20; visibility: hidden;}
+  #wrapper{position:relative;}
+  #myCanvas{position:absolute; z-index:20;}
+  #canvas1{position:absolute; z-index:20;}
+  #canvas2{position:absolute; z-index:20; visibility: hidden;}
+  #canvas3{position:absolute; z-index:20; visibility: hidden;}
+  #canvas4{position:absolute; z-index:20; visibility: hidden;}
+  #canvas5{position:absolute; z-index:20; visibility: hidden;}
   </style>
+
   <script src="../../libs/jquery/dist/jquery.min.js"></script>
   <script src="../../../server/jquery.tabletoCSV.js" type="text/javascript" charset="utf-8"></script>
   <script src="../../../server/jquery.csv.js"></script>
   <script>
+  /*
+  Function finds location of element on the page.
+  */
   function FindPosition(oElement)
   {
     if(typeof( oElement.offsetParent ) != "undefined")
@@ -49,6 +55,11 @@
     }
   }
 
+  /*
+  Function gets current location of cursor.
+  Afterwards, it stores the x and y values into a table on the html page.
+  It also provides a prompt for the user to indicate/describe the node.
+  */
   function GetCoordinates(e)
   {
     var PosX = 0;
@@ -88,6 +99,7 @@
     var color = '#FF0000';
     var size = '5px';
 
+    // Use canvas element for drawing onto img tags.
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
     context.fillStyle="#FF0000";
@@ -95,6 +107,10 @@
     context.fillText(row.cells[2].innerHTML, PosX-15,PosY);
   }
 
+  /*
+  Function reads the rows of the table storing all the coordinates and then goes through each one, placing a red dot on to the image.
+  The design was to make it easy to replicate and reload points/nodes previously saved in csv.
+  */
   function ImportCoordinates()
   {
     var color = '#FF0000';
@@ -113,6 +129,9 @@
     }
   }
 
+  /*
+  jQuery to initialize all the functions to add listeners.
+  */
   $(function(){
     $("#export").click(function(){
       $("#coordinatesTable").tableToCSV();
@@ -133,9 +152,12 @@
   });
 
   $(document).ready(function() {
-      $('#files').bind('change', handleFileSelect);
+    $('#files').bind('change', handleFileSelect);
   });
 
+  /*
+  Function used to handle files loaded in via csv.
+  */
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     var file = files[0];
@@ -153,6 +175,9 @@
     $('#files').css(this.style.display = 'none');
   }
 
+  /*
+  Function to instantiate table headers.
+  */
   function checkTable() {
     var count = $('#coordinatesTable tr').length;
     if (count <= 0) {
@@ -160,6 +185,9 @@
     }
   }
 
+  /*
+  Function reads csv and loads each row into the table in the html. Again, for ease of access.
+  */
   function printTable(file) {
     var reader = new FileReader();
     reader.readAsText(file);
@@ -179,12 +207,16 @@
     };
     reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
   }
-</script>
+  </script>
 </head>
 
 <body>
   <div id="container">
+
     <img src="../../images/Waterloo Floor Plans/basic/RCH3.jpg" id="myImgId"
+
+    <!-- Change which floor plan is currently mapped here. -->
+    <img src="../../images/Waterloo Floor Plans/E21.png" id="myImgId"
     style="position: absolute; left: 0px; top:0px; z-index: 2;">
     <canvas id="myCanvas" width="1174" height="840"></canvas>
   </div>

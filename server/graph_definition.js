@@ -1,5 +1,4 @@
 'use strict'
-//Requires jQuery
 
 // Graph will always be undirected, as per our requirements.
 
@@ -14,10 +13,12 @@ function Graph() {
 
 Graph.prototype = {
 
+  // Return adjacent nodes.
   adjacent: function(node){
     return this._adjacency[node._id];
   },
 
+  // Cleanse the parentnode value as it can remain after pathfinding and cause problems.
   clearParents: function(graph){
     for (var key in graph._nodes) {
       if(graph._nodes[key]._parentNode != undefined){
@@ -26,6 +27,7 @@ Graph.prototype = {
     }
   },
 
+  // Addnode by adding the name as the key to the dictionary. Associated Array.
   addNode: function(graph, node) {
     var newName = node.properties.building_code + node.properties.id;
     var obj = graph._nodes[newName];
@@ -37,6 +39,8 @@ Graph.prototype = {
     }
   },
 
+  // Drop node, included only in the chance that it is required in the future.
+  // Also deletes any edges associated with the same node.
   dropNode: function(graph, id) {
     var target = graph._nodes[id];
 
@@ -50,7 +54,6 @@ Graph.prototype = {
         for (var i = 0; i < removeArray.length; i++)
         {
           graph.dropEdge(graph, target._id, removeArray[i].id);
-
         }
         delete this._adjacency[target._id];
       }
@@ -63,6 +66,7 @@ Graph.prototype = {
     }
   },
 
+  // Add edge between two nodes. Had to remove duplicate checking as the extra for loop was hitting the performance very hard.
   addEdge: function(graph, id1, id2) {
     //check if node exists
     var node1 = graph._nodes[id1];
@@ -105,6 +109,7 @@ Graph.prototype = {
     }
   },
 
+  // Included dropedge functionality on the off-chance that the graph needs to be used in more robust areas.
   dropEdge: function(graph, id1, id2) {
     var node1 = graph._nodes[id1];
     var node2 = graph._nodes[id2];
