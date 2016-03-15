@@ -1,12 +1,17 @@
+/*
+Angular app declaration here, noting all the modules that are being imported.
+*/
+
 var uNav = angular.module('uNav', ['ui', 'ui.utils', 'ngRoute', 'ui.bootstrap', 'uiGmapgoogle-maps', 'ngResource']).
 config(function($routeProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
   $locationProvider.hashPrefix('');
+  // Specific routing, by partial and controller
   $routeProvider.
-  when('/', { templateUrl : 'app/partials/home.html', controller  : 'mainController'}).
-  when('/navigate', {templateUrl : 'app/partials/navigate.html', controller  : 'navigateController'}).
-  when('/nearyou', { templateUrl : 'app/partials/nearyou.html', controller  : 'nearyouController'}).
-  when('/about', { templateUrl : 'app/partials/about.html'}).
-  when('/contact', { templateUrl : 'app/partials/contact.html', controller : 'contactController'});
+  when('/',         { templateUrl : 'app/partials/home.html',     controller: 'mainController'}).
+  when('/navigate', { templateUrl: 'app/partials/navigate.html',  controller: 'navigateController'}).
+  when('/nearyou',  { templateUrl: 'app/partials/nearyou.html',   controller: 'nearyouController'}).
+  when('/about',    { templateUrl: 'app/partials/about.html'}).
+  when('/contact',  { templateUrl: 'app/partials/contact.html',   controller: 'contactController'});
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyCYtcbfLrd9BGzJ8HPdvsxDEedBdh3F-z4',
@@ -21,6 +26,7 @@ $(document).on('click.nav','.navbar-collapse.in',function(e) {
   }
 });
 
+// Local controller, instantiate google maps API. Set styling to begin with.
 uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsReady) {
   // uiGmapGoogleMapApi is a promise.
   // The "then" callback function provides the google.maps object.
@@ -89,6 +95,7 @@ uNav.controller('mainController', function($scope, uiGmapGoogleMapApi, uiGmapIsR
 
 });
 
+// Navigate controller where all the search functionality is bundled together.
 uNav.controller('navigateController', function($scope, $q, $timeout, $resource, $location, RoomService, uiGmapIsReady) {
 
   // To reset the map between routing.
@@ -99,6 +106,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.map.zoom = 15;
   })
 
+  // Instantiate variables.
   $scope.stairs = false;
   $scope.elevator = false;
   $scope.load = false;
@@ -108,6 +116,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.transitOn = false;
   };
 
+  // Show infowindow for only the specific marker with id 1000.
   $scope.transitClick = function(e){
     if(e.m.id == 1000){
       $scope.transition = e.m;
@@ -119,6 +128,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     }
   }
 
+  // Toggle for the options from the frontend for avoidances in navigation.
   $scope.opt = function(util){
     if(util == "Stairs"){
       $scope.stairs = !$scope.stairs;
@@ -140,6 +150,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     if($scope.stairs){$("#stairIcon").addClass("btn-primary");}
     else{$("#stairIcon").removeClass("btn-primary");}
 
+    // Replot after user interacts with either of the buttons for avoidances.
     if($scope.dest != undefined){
       plot("dest").then(function(resp){
         if(resp._data.utility.length <= 0){$("#l2Details").text("Room");}
@@ -156,20 +167,26 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
   $scope.showSelect = true;
   var overlay;
 
+  // Hit the backend to request a list of all available buildings on campus, sorted.
   $.get('/api/buildings', function(obj){
     $scope.masterBuildings = JSON.parse(obj);
     $.each(Object.keys($scope.masterBuildings).sort(), function (idx, val) {
+      // Append each value to the dropdown.
       $("#buildingsInUW").append('<option value="' + val + '">' + val + ' - ' + $scope.masterBuildings[val].name + '</option>');
     });
+    // Call Chosen jQuery library for styling and searchability.
     $("#buildingsInUW").chosen({ width: "95%" });
   });
 
+  // When the user picks an option from the building dropdown, do the following.
   $( "#buildingsInUW" ).change(function() {
+    // Zoom to the chosen building.
     $scope.build = $("#buildingsInUW option:selected").val();
     $scope.map.center = {latitude: $scope.masterBuildings[$scope.build].coordinates[1], longitude: $scope.masterBuildings[$scope.build].coordinates[0]};
     $scope.map.zoom = 19;
     $scope.showSelect = false;
 
+    // If we have the building floor plans, map the floor plan overlay.
     if($scope.build == "RCH" || $scope.build == "E2"){
       if($scope.build == "RCH"){
         $scope.floorNum = 2;
@@ -199,6 +216,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
       }
 
+      // Overlay code modified from Google Maps, I believe.
       function DebugOverlay(bounds, image, map) {
         this.bounds_ = bounds;
         this.image_ = image;
@@ -208,7 +226,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
 
       DebugOverlay.prototype.onAdd = function() {
-
         var div = document.createElement('div');
         div.style.borderStyle = 'none';
         div.style.borderWidth = '0px';
@@ -246,16 +263,18 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         this.div_ = null;
       };
 
+      // Hit the backend to get a list of all available rooms in the graph.
+      // This is to populate the dropdown for the search locations.
       $.get('/api/graph/rooms/', function(obj){
         var count = 0;
-        var destAppendage;
-        // Assuming the floor start at 1.
-        var srcAppendage;
-        var build;
-        var buildOG;
+        var destAppendage; var srcAppendage; var build; var buildOG;
+
+        // If something is returned,
         if(obj != ''){
+          // Turn off the loading screen by setting showSelect to true.
           $scope.showSelect = true;
           $.each(JSON.parse(obj), function (idx, val) {
+            // On the first iteration, set original to match the regex expression for building code.
             if(build == undefined){
               buildOG = val.match(/(\w*)\s/)[1];
             }
@@ -263,24 +282,32 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
               buildOG = build;
             }
             var countOG = count;
+            // Find space in value returned, and take the first number of it (which is the floor number).
             count = parseInt(val.charAt(val.indexOf(" ") + 1));
             build = val.match(/(\w*)\s/)[1];
+            // We skip all of DC because we have not yet mapped all the edges and nodes for it.
             if(build != "DC"){
+              // Only want the specific starting location building to be provided for src locations.
               if(build == $scope.build){
+                // If the floor number has changed or the building has changed,
                 if (count > countOG || build != buildOG) {
+                  // Append a new optgroup if previous floor was not 0. We're skipping basement nodes.
                   if(countOG != 0){
                     destAppendage+='</optgroup>';
                     srcAppendage+='</optgroup>';
                     $("#roomSrc").append(srcAppendage);
                     $("#roomDest").append(destAppendage);
                   }
+                  // Create new optgroup labels for clarity.
                   destAppendage = '<optgroup label="' + build + ' Floor ' + count + '">';
                   srcAppendage = '<optgroup label="' + build + ' Floor ' + count + '">';
                 }
+                // Append value.
                 destAppendage+='<option value="' + val + '">' + val + '</option>';
                 srcAppendage+='<option value="' + val + '">' + val + '</option>';
               }
               else{
+                // Otherwise, only append values to the dest location.
                 if (count > countOG || build != buildOG) {
                   if(countOG != 0){
                     destAppendage+='</optgroup>';
@@ -292,18 +319,20 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
               }
             }
           });
-          //The last one.
+          //Closing off the iteration by closing the optgroup tag and then appending all to elements.
           destAppendage+='</optgroup>';
           srcAppendage+='</optgroup>';
           $("#roomSrc").append(srcAppendage);
           $("#roomDest").append(destAppendage);
 
+          // Call chosen library and trigger update.
           $("#roomSrc").chosen({ width: "50%" });
           $("#roomDest").chosen({ width: "50%" });
           $(".chosen-select").val('').trigger("chosen:updated");
         }
       });
     }
+    // Otherwise, tell the user there are no data points and then give them the option of restarting.
     else{
       $("#loadMessage").text("We have no data points here. Sorry!");
       $scope.load = true;
@@ -313,7 +342,9 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     },0);
   })
 
+  // Wipe out all the persisted data and let the user try again.
   $scope.restart = function(){
+    // Remove any overlays or polylines that exist.
     if($scope.flightPath != undefined){
       $.each($scope.flightPath, function(i){
         $scope.flightPath[i].setMap(null);
@@ -322,10 +353,10 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     }
     $scope.build = undefined;
     $scope.collapsed = true;
-    // $scope.ShowHide("reset");
     $scope.distDisplay = undefined;
     $scope.l1Dets = undefined;
     $scope.l2Dets = undefined;
+    // Needed to wipe out old rooms from previous buildings
     $("#roomSrc").empty();
     $scope.src = undefined;
     $scope.dest = undefined;
@@ -340,6 +371,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $(".chosen-select").val('').trigger("chosen:updated");
   }
 
+  // Special restart message if no data is available.
   $scope.retryOnFail = function(){
     $scope.build = undefined;
     $scope.map.center = {latitude: 43.4722854, longitude: -80.5448576};
@@ -349,13 +381,15 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $("#loadMessage").text("Loading ...");
   }
 
+  // If the source location is selected, plot the point on the map.
   $( "#roomSrc" ).change(function() {
     $scope.src = $("#roomSrc option:selected").val();
     plot("src").then(function(resp){
+      // Provide details of that room in the side bar.
       if(resp._data.utility.length <= 0 && resp._data.name == ""){$scope.l1Dets = "Room";}
       else if(resp._data.name != ""){$scope.l1Dets = resp._data.name;}
       else {$scope.l1Dets = resp._data.utility.toString().replace(/,/g, ', ');}
-      debugger;
+      // If both dest and src are defined, get the path and then draw the directions.
       if(typeof $scope.src !== 'undefined' && typeof $scope.dest !== 'undefined'){
         getPath($scope.src, $scope.dest).then(function(floorNum){
           drawDirections($scope.srcNode._data.building_code, floorNum);
@@ -364,6 +398,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     });
   });
 
+  // Same idea as above.
   $( "#roomDest" ).change(function() {
     $scope.dest = $("#roomDest option:selected").val();
     plot("dest").then(function(resp){
@@ -378,6 +413,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     });
   })
 
+  // Plotting function makes use of Promises as the process is Asynchronous and
+  // will not finish processing before the value is required.
   var plot = function(node) {
     return $q(function(resolve){
       var map = $scope.map;
@@ -387,7 +424,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         RoomService.getID($scope.src.replace(/\s+/g, '')).then(function(result){
           $scope.srcNode = result;
           for(var i = 0; i < mark.length; i++) {
-            // remove src and any stair markers
+            // remove src marker from before. Ensure only one available.
             if (mark[i].id == 0) {
               mark.splice(i, 1);
               break;
@@ -403,6 +440,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             options: options,
             icon: {url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', scaledSize: new google.maps.Size(40,40)}
           });
+          // Change floor to match the source node always.
           $scope.floor($scope.build, $scope.srcNode._z);
           resolve($scope.srcNode);
         })
@@ -416,6 +454,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
               break;
             }
           }
+          // If dest node is not on the same floor as src node, change opacity.
           if ($scope.destNode != $scope.floorNum){
             options = {'opacity':0.6};
           }
@@ -429,6 +468,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             name: $scope.dest,
             options: options
           });
+          // Always redraw the floor to align with the source node. That's where
+          // the user will be starting, for clarity.
           if($scope.srcNode != undefined){
             $scope.floor($scope.build, $scope.srcNode._z);
           }
@@ -438,10 +479,12 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     })
   };
 
+  // GetPath calls the A* algorithm from the backend and uses Promises.
   var getPath = function(src, sink) {
     return $q(function(resolve){
       // instantiate google map objects for directions
       var waypts = {};
+      // Set options for A* here.
       var handicap = "none";
       if($scope.stairs){
         handicap = "stairs";
@@ -449,11 +492,16 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       if($scope.elevator){
         handicap = "elevators";
       }
+      // A* output is one continuous path of markers.
+      // On the frontend, this is parsed into multiple arrays of paths dependent
+      // on building location, floor number.
       $.get('/api/astar/' + src.replace(/\s+/g, '') +'/'+ sink.replace(/\s+/g, '') + '/' + handicap, function(obj){
         var leng = obj.length;
         var start; var pathTemp; var pathNum; var tempNum; var buildId;
         var waypts = [];
         $.each(obj, function (idx, val) {
+          // For the last object, finish by setting the distance in time and
+          // then pushing the last path of points.
           if(idx == (leng-1)) {
             // https://en.wikipedia.org/wiki/Preferred_walking_speed to convert to time. Make them slower.
             // How to display to user:
@@ -513,12 +561,14 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     })
   };
 
+  // Function drawDirections uses Promises and draws the specific directions
+  // for the desired building and floor.
   var drawDirections = function(targetBuild, floor){
     return $q(function(resolve){
       $scope.transitOn = false;
       var mark = $scope.map.markers;
 
-      // To purge the extra markers!
+      // To purge the extra markers! There should only be one transition marker.
       while(mark.length > 2){
         for(var i = 0; i <= mark.length; i++) {
           // remove src and any stair markers
@@ -529,6 +579,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         }
       }
 
+      // Clear previous flight path if it wasn't already.
       if($scope.flightPath != undefined){
         $.each($scope.flightPath, function(i){
           $scope.flightPath[i].setMap(null);
@@ -539,6 +590,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       var pointer = 0;
       var options = {};
 
+      // Function to use promises to close the info window first before loading
+      // another one. Keeps to only having one correct info window at all times.
       var closeFirst = function(){
         return $q(function(resolve){
           $scope.transitOn = false;
@@ -546,8 +599,10 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
         })
       }
 
+      // For each path array in waypts.
       for (var i in $scope.waypts) {
         path = $scope.waypts[i].path;
+        // If path is the same floor and the same desired building, use 1 opacity.
         if($scope.waypts[i].alt == floor && $scope.waypts[i].buildId == targetBuild){
           var lineSymbol = {
             path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
@@ -556,11 +611,15 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           };
 
           pointer = parseInt(i) + 1;
+          // Check if there's another path after this.
           if($scope.waypts[pointer] == undefined){
             var counterOff = true;
+            // While counter is going:
             while(counterOff){
               for(var j = 0; j < mark.length; j++) {
                 // Leave a note on the destination marker!
+                // If we've reached the destination with multiple paths,
+                // Give the option for the user to restart.
                 if (mark[j].id == 1 && $scope.waypts.length > 1) {
                   content = "Click on me to restart route.";
                   mark[j].content = content;
@@ -576,15 +635,18 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
                   $scope.transitOn = true;
                   counterOff = false;
                 }
+                // Otherwise, remove extra marker icon for stairs/transitions.
                 else if (mark[j].id == 1000){
                   mark.splice(j, 1);
                 }
+                // If only one floor, one path, don't push info window and just close.
                 else if(mark[j].id == 1){
                   counterOff = false;
                 }
               }
             }
           }
+          // Else, plan for the next path by setting options for a transition marker.
           else{building = $scope.waypts[pointer].buildId; pointer = $scope.waypts[pointer].alt; options = {animation: google.maps.Animation.DROP};}
         }
         else{
@@ -600,24 +662,31 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           path.unshift($scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1]);
           var switchFloormarker = $scope.waypts[i-1].path[$scope.waypts[i-1].path.length - 1];
           $scope.transitOn = true;
+          // If the transition is not between floors but between buildings.
           if($scope.waypts[parseInt(i) - 1].alt == floor){
             if(building != $scope.waypts[i-1].buildId){
+              // If we're going to floor 0, say we're going down.
               if($scope.waypts[i].alt == 0){
                 content = "Click me. Going underground to " + building + "."
               }
+              // OW, say we're going outside.
               else{
                 content = "Click me. Going outside to " + building + ".";
               }
             }
+            // If it's a different floor that we're going on,
             else{
+              // Say we're going up if we are.
               if($scope.waypts[i].alt > floor){
                 content = "Click me. Going up to floor " + $scope.waypts[i].alt + ".";
               }
+              // OW, down.
               else if($scope.waypts[i].alt < floor){
                 content = "Click me. Going down to floor " + $scope.waypts[i].alt + ".";
               }
             }
 
+            // Transition marker is here, with special icon and function.
             newTarget = {
               id: 1000,
               coords: {latitude: switchFloormarker.lat, longitude: switchFloormarker.lng},
@@ -627,6 +696,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
               events: {
                 click: function () {
                   closeFirst().then(function(){
+                    // Transition floors/buildings on click.
                     $scope.floor(building, pointer);
                   })
                 }
@@ -642,6 +712,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             $scope.$apply();
           },0);
         }
+        // Draw polyline for the route of this path from $scope.waypts[i].
         $scope.flightPath.push(new google.maps.Polyline({
           map: $scope.map.control.getGMap(),
           icons: [{
@@ -654,7 +725,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
           strokeColor: '#FF0000',
         }));
 
-        // Figure out how we're going to change the floor function.
+        // Animate the line if we're on the desired floor and building.
         if(floor == $scope.waypts[i].alt && targetBuild == $scope.waypts[i].buildId){
           animateLine($scope.flightPath[i]);
         }
@@ -664,7 +735,9 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     })
   }
 
-
+  // Promise as timing is an issue. Animate the line by dividing the offset by 2.
+  // Makes it look like the arrows are actually going forward when they're not.
+  // Store the interval in a scope variable, so that it can be stopped later.
   var animateLine = function(line){
     return $q(function(resolve){
       var count = 0;
@@ -679,6 +752,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     })
   }
 
+  // Used to change the floor and building.
   $scope.floor = function(build, num){
     var swBound; var neBound; var srcImage;
     if(build == "RCH"){
@@ -702,7 +776,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
       }
     }
     if(build == "E2"){
-      // Because we ignore floor 0
+      // Because we ignore floor 0, and group 0 and 1 together.
       if(num >= 0){
         // 1st floor
         swBound = new google.maps.LatLng(43.46968368478908, -80.54181125662228);
@@ -717,14 +791,17 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     $scope.overlay.setMap(null);
     $scope.overlay = new DebugOverlay(bounds, srcImage, $scope.map);
 
+    //If src is not on the desired floor, change the opacity. OW, make it 1.
     if($scope.srcNode != undefined){
       if($scope.srcNode._z != num){$scope.map.markers[1].options = {'opacity': 0.6};}
       else{$scope.map.markers[1].options = {'opacity': 1.0}}
     }
+    //If dest is not on the desired floor, change the opacity. OW, make it 1.
     if($scope.destNode != undefined){
       if($scope.destNode._z != num){$scope.map.markers[0].options = {'opacity': 0.6};}
       else{$scope.map.markers[0].options = {'opacity': 1.0}}
     }
+    // Stop animating the polyline when no longer on the desired floor.
     if($scope.waypts != undefined){
       if($scope.waypts[1] != undefined)
       {
@@ -736,7 +813,6 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     // This is used to change the floors after the map has been plotted.
     drawDirections(build, num);
 
-    //OPTIMIZATION: Clean this up when you can make DebugOverlay global.
     function DebugOverlay(bounds, image, map) {
       this.bounds_ = bounds;
       this.image_ = image;
@@ -785,7 +861,8 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
     };
   };
 
-$scope.flipSidebar = function () {
+  // Flip Sidebar function is used to toggle the details on the RHS of nav page.
+  $scope.flipSidebar = function () {
     //If DIV is hidden it will be visible and vice versa.
     if(!$scope.collapsed){
       $("#searchButton").text(" Show Details");
@@ -798,15 +875,13 @@ $scope.flipSidebar = function () {
       $("#searchButton").addClass("glyphicon-chevron-right");
     }
     $scope.collapsed = !$scope.collapsed;
-    console.log($scope.distance);
   };
-
 });
 
-
-
+// Near you Controller.
 uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $anchorScroll, $location, uiGmapIsReady) {
 
+  // Check for geolocation.
   $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
   $scope.flipSidebar = function () {
@@ -821,15 +896,16 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
       $("#sidebar").removeClass("glyphicon-chevron-left");
       $("#sidebar").addClass("glyphicon-chevron-right");
     }
-
     $scope.collapsed = !$scope.collapsed;
   };
 
+  // UI snappishness.
   $scope.scrollTo=function(id){
     $location.hash(id);
     $anchorScroll();
   }
 
+  // Provided a utility, show the specific markers corresponding to the data.
   $scope.chose = function(util){
     $scope.util = util;
     if($scope.windowOptions.show){$scope.windowOptions.show = undefined;}
@@ -842,6 +918,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
     }));
   };
 
+  // Use promise for this function. Locate user and plot their position.
   var geoLocate = function(navi){
     return $q(function(resolve){
       if ($scope.geolocationAvailable) {
@@ -854,6 +931,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
             $scope.map.zoom = 19;
           }
 
+          // Show bouncing blue happiness for the user's location.
           $scope.map.markers.push({
             id: 9000,
             coords: {latitude: position.coords.latitude, longitude: position.coords.longitude},
@@ -866,7 +944,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
     })
   }
 
-  // Add Async over here to load later
+  // Use of promises to load markers. Hitting backend for list of amenities.
   var loadMarkers = function(util){
     return $q(function(resolve){
       $.get('/api/graph/amenities/' + util, function(result){
@@ -880,6 +958,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
           if(val._data.utility.indexOf("WC-M") > -1){
             util = "WC-M";
           }
+          // Use of switch to have different icons based on what utilities are requested.
           switch (util) {
             case "WC":
             labelContent = '<i class="fa fa-2x fa-female text-primary"></i><i class="fa fa-2x fa-male text-primary"></i>';
@@ -915,12 +994,15 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
             labelContent = '<i class="fa fa-2x fa-pencil text-primary"></i>';
             break;
           }
+          // For the info label, if there's a name, use it in the popup.
+          // If there isn't, insert the ID of the room.
           if(val._data.name != ""){
             input = val._data.name;
           }
           else{
             input = val._id;
           }
+          // Must use a marker, so use a super tiny blank pixel and have icons via label.
           $scope.map.markers.push({
             id: idx,
             coords: {
@@ -941,6 +1023,8 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
     visible: false
   };
 
+  // click action for markers. Don't show anything if you're the geolocated spot.
+  // OW, display info content, but there can only be one.
   $scope.onClick = function(e){
     if(e.m.id != 9000){
       if($scope.windowOptions.show == undefined){
@@ -962,6 +1046,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
     $scope.windowOptions.visible = false;
   };
 
+  // UI stylesss.
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("wrapper").toggleClass("active");
@@ -971,6 +1056,7 @@ uNav.controller('nearyouController', function($scope, $document, $q, $timeout, $
   $('body').scrollspy({ target: '#spy', offset:80});
 });
 
+// Factory service to hit backend for list of a specific room and it's details.
 uNav.factory('RoomService', function($q, $timeout, $http) {
   return {
     getID: function(id){
@@ -989,6 +1075,7 @@ uNav.factory('RoomService', function($q, $timeout, $http) {
   }
 });
 
+// Contact controller used to return e-mails.
 uNav.controller('contactController', function ($scope, $http){
 
   $scope.sendMail = function () {
