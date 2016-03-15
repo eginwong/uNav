@@ -148,7 +148,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540048,43.470542, 1 ]
+       "coordinates":  [ -80.540050,43.470542,  1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -447,7 +447,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54016507,43.47135933,1 ]
+       "coordinates":  [  -80.540198,43.471342,1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -460,7 +460,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54009414,43.47139014,1 ]
+       "coordinates":  [ -80.540105,43.471379, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -538,7 +538,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.540129,43.471126,  1 ]
+       "coordinates":  [ -80.540124,43.471120,  1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -993,7 +993,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54004603,43.47055717,1 ]
+       "coordinates":  [ -80.540057,43.470555, 1 ]
     },
     "properties": {
     "building_code":"E2",
@@ -1305,7 +1305,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -80.54002938,43.47140847,1 ]
+       "coordinates":  [ -80.539978,43.471407, 1 ]
     },
     "properties": {
     "building_code":"E2",
