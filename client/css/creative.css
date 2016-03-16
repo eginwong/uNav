@@ -620,6 +620,8 @@ body {
 }
 
 #sidebar-wrapper {
+    width: 160px;
+    height: 87%;
     z-index: 1000;
     position: absolute;
     right: 250px;
@@ -703,10 +705,6 @@ body {
     padding-top: 160px;
 }
 
-#sidebar-wrapper {
-        width: 160px;
-        height: 87%;
-    }
 
 @media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation: landscape) {
     #wrapper {
@@ -724,6 +722,7 @@ body {
 
     #wrapper.toggled #sidebar-wrapper {
         width: 0;
+        height: 74%;
     }
 
     #page-content-wrapper {
