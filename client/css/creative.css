@@ -718,7 +718,7 @@ body {
 
     #sidebar-wrapper {
         width: 160px;
-        height: 84%;
+        height: 75%;
     }
 
     #wrapper.toggled #sidebar-wrapper {
