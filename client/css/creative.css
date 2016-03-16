@@ -718,11 +718,7 @@ body {
 
     #sidebar-wrapper {
         width: 160px;
-        height: 76%;
-    }
-
-    #sidebar-nav{
-        height: 76%;
+        height: 84%;
     }
 
     #wrapper.toggled #sidebar-wrapper {
