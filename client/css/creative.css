@@ -719,7 +719,7 @@ body {
 
     #sidebar-wrapper {
         width: 160px;
-        height: 80%;
+        height: 75%;
     }
 
     #wrapper.toggled #sidebar-wrapper {
