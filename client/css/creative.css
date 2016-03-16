@@ -721,9 +721,12 @@ body {
         height: 76%;
     }
 
+    #sidebar-nav{
+        height: 76%;
+    }
+
     #wrapper.toggled #sidebar-wrapper {
         width: 0;
-        ;
     }
 
     #page-content-wrapper {
