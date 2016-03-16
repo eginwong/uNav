@@ -659,6 +659,7 @@ body {
 .sidebar-nav {
     position: absolute;
     width: 160px;
+    height: 100%;
     list-style: none;
     overflow-y: scroll;
 }
@@ -709,10 +710,12 @@ body {
 @media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation: landscape) {
     #wrapper {
         padding-left: 0px;
+        height: 74%;
     }
 
     #wrapper.toggled {
         padding-left: 0;
+        height: 74%;
     }
 
     #sidebar-wrapper {
@@ -728,11 +731,13 @@ body {
     #page-content-wrapper {
         padding: 20px;
         position: relative;
+        height: 74%;
     }
 
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+        height: 74%;
     }
   }
 
