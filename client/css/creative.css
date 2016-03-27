@@ -1,4 +1,4 @@
-/*!
+!
  * Creative v1.0.3 (http://startbootstrap.com/template-overviews/creative)
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
@@ -39,6 +39,7 @@ a:hover,
 a:focus {
   color: #eb3812;
 }
+/* Font styles */
 h1,
 h2,
 h3,
@@ -75,6 +76,8 @@ div label {
   padding-left: 540px;
   margin: 1em;
 }
+
+/* Navgiate page details styling */
 #searchWrapperOuter{
   overflow: hidden;
 }
@@ -88,7 +91,6 @@ div label {
   position: fixed;
   background-color: black;
   opacity: 0.6;
-
 }
 .roomDetails p{
   text-decoration: none;
@@ -140,6 +142,8 @@ div label {
   padding-bottom: 0px;
   height: 40px;
 }
+
+/* About us page styling */
 .aboutus h1{
   padding-top: 40px;
   font-size: 20px;
@@ -215,6 +219,7 @@ aside {
 .no-padding {
   padding: 0;
 }
+/* Top navgiation bar styling */
 .nav .navbar-nav .navbar-right{
   position: fixed;
 }
@@ -299,8 +304,9 @@ aside {
 }
 .ng-scope{
   padding: 0px;
-
 }
+
+/* Styling background image */
 #full-screen-background-image {
   z-index: -999;
   min-height: 100%;
@@ -314,6 +320,8 @@ aside {
   -moz-background-size: cover;
   -o-background-size: cover;
   }
+
+/* Top navgiation bar styling */
 .header-content {
   position: fixed;
   width: 100%;
@@ -350,6 +358,8 @@ aside {
   font-size: 10px;
   margin-bottom: 20px;
 }
+
+/*Media query for navigation bar content*/
 @media (min-width: 768px) {
   header {
     min-height: 100%;
@@ -382,6 +392,7 @@ aside {
   margin: 50px auto 0;
 
 }
+/*Media Query for about us page*/
 @media (min-width: 992px) {
   .service-box {
     margin: 20px auto 0;
@@ -402,7 +413,6 @@ aside {
   margin: 0 auto;
   padding-top: 30px;
 }
-
 .portfolio-box2 .portfolio-box-caption {
   color: white;
   opacity: 0;
@@ -461,6 +471,7 @@ aside {
   padding-right: 0;
   padding-left: 0;
 }
+/*Styling buttons*/
 .btn-default {
   color: #222222;
   background-color: #ffffff;
@@ -516,7 +527,6 @@ fieldset[disabled] .btn-default.active {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
-
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -598,27 +608,17 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #222222;
 }
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
 
-/* Toggle Styles */
-
-
+/* Sidebar details styles */
 #wrapper {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-
 }
-
 #wrapper.toggled {
     padding-right: 250px;
 }
-
 #sidebar-wrapper {
     width: 160px;
     height: 84%;
@@ -634,23 +634,18 @@ body {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
 #wrapper.toggled #sidebar-wrapper {
     width: 160px;
 }
-
 #page-content-wrapper {
     width: 100%;
     position: absolute;
     padding: 0px;
 }
-
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
     margin-right: -250px;
 }
-
-/* Sidebar Styles */
 
 .sidebar-nav a.ng-click-active, 
 .sidebar-nav a:active {
@@ -706,7 +701,7 @@ body {
     padding-top: 160px;
 }
 
-
+/*Media query for side bar details*/
 @media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation: landscape) {
     #wrapper {
         padding-left: 0px;
@@ -735,7 +730,6 @@ body {
         margin-right: 0;
     }
   }
-
   @media(min-width:268px) {
     #box {
     display: inline-block;
@@ -744,78 +738,3 @@ body {
     padding-left: 50px;
   }
 }
-/*@media only screen and (max-width: 49em) {
-    .resizeMap {
-        float:none;
-        width:100%;
-        margin-bottom:5px
-    }
-}
-@media screen and (max-width: 480px), screen and (max-width: 768px) {
-  .roomDetails{
-    display: inline-block;
-    height: 30%;
-    width: 100%;
-    position:absolute;
-    background-color: black;
-    opacity: 0.6;
-}
-  .room1Details{
-  top: 0;
-  left: 10px;
-  position: absolute;
-  height: 50px;
-  width: 100px;
-  padding-right: 0px;
-}
-.room2Details{
-  top: 77px;
-  left: 230px;
-  position: absolute;
-  height: 50px;
-  width: 100px;
-}
-.roomDetails p{
-  font-size: 10px;
-}
-.roomDetails h2{
-  font-size: 12px;
-}
-  }
-}*/
-/*@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-   .roomDetails{
-    display: inline-block;
-    height: 30%;
-    width: 100%;
-    position:absolute;
-    background-color: black;
-    opacity: 0.6;
-}
-  .room1Details{
-  top: 0;
-  left: 10px;
-  position: absolute;
-  height: 50px;
-  width: 100px;
-  padding-right: 0px;
-}
-.room2Details{
-  top: 77px;
-  position: absolute;
-  height: 50px;
-  width: 100px;
-}
-.roomDetails p{
-  font-size: 10px;
-}
-.roomDetails h2{
-  font-size: 12px;
-}*/
-/*.time {
-  position: center;
-  height: 20px;
-  width: 200px;
-}
-  }
-}*/
