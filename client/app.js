@@ -286,7 +286,7 @@ uNav.controller('navigateController', function($scope, $q, $timeout, $resource, 
             count = parseInt(val.charAt(val.indexOf(" ") + 1));
             build = val.match(/(\w*)\s/)[1];
             // We skip all of DC because we have not yet mapped all the edges and nodes for it.
-            if(build != "DC"){
+            if(build != "DC" && build != "E5"){
               // Only want the specific starting location building to be provided for src locations.
               if(build == $scope.build){
                 // If the floor number has changed or the building has changed,

@@ -195,6 +195,162 @@
     "id":"1818",
     "name":""
     }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539990,43.472767,2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["WC-W"],
+    "id":"2902",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539951, 43.472781,2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["WC-M"],
+    "id":"2901",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539985, 43.472787,2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Fountain"],
+    "id":"2811A",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539931, 43.472803,2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Elevator"],
+    "id":"2802",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539906, 43.472815,2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Elevator"],
+    "id":"2801",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539863, 43.472927,2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Exit"],
+    "id":"2101",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540102,43.472812, 2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Stairs"],
+    "id":"2808S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.540166, 43.472780, 2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Exit", "Ramp"],
+    "id":"2809",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539974, 43.472643, 2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Lab"],
+    "id":"2108",
+    "name":"Gear Lab"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.539692, 43.472698, 2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Stairs"],
+    "id":"2807S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [-80.539900, 43.472968, 2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Stairs"],
+    "id":"2804S",
+    "name":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [-80.540085, 43.473172, 2 ]
+    },
+    "properties": {
+    "building_code":"E5",
+    "utility":["Stairs"],
+    "id":"2806S",
+    "name":""
+    }
   }
 ]
 }
